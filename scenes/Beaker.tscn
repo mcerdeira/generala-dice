@@ -1,0 +1,62 @@
+[gd_scene load_steps=8 format=3 uid="uid://djocrijh1ceom"]
+
+[ext_resource type="Script" path="res://scenes/Beaker.gd" id="1_3qhnb"]
+[ext_resource type="Texture2D" uid="uid://dytig1jwdi4l1" path="res://sprites/beaker1.png" id="1_252vu"]
+[ext_resource type="Texture2D" uid="uid://d3tsnixp63x6v" path="res://sprites/beaker2.png" id="2_166ns"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hcnxi"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_252vu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_166ns")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vqdsi"]
+radius = 47.0
+
+[sub_resource type="Animation" id="Animation_sx0g5"]
+resource_name = "new_animation"
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.785398, -0.785398, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vd5po"]
+_data = {
+"new_animation": SubResource("Animation_sx0g5")
+}
+
+[node name="Beaker" type="Node2D"]
+script = ExtResource("1_3qhnb")
+
+[node name="sprite" type="AnimatedSprite2D" parent="."]
+rotation = -0.403208
+sprite_frames = SubResource("SpriteFrames_hcnxi")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="collider" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_vqdsi")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_vd5po")
+}
+
+[connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]
