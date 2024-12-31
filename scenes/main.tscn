@@ -16,35 +16,54 @@ script = ExtResource("1_wbabm")
 
 [node name="Beaker" parent="." node_paths=PackedStringArray("DiceMan") instance=ExtResource("1_7se6j")]
 z_index = -10
-position = Vector2(207, 466)
+position = Vector2(189, 420)
 scale = Vector2(3, 3)
 DiceMan = NodePath("..")
 
+[node name="dicemark1" type="Marker2D" parent="Beaker"]
+position = Vector2(3.66667, -23)
+
+[node name="dicemark2" type="Marker2D" parent="Beaker"]
+position = Vector2(29.3333, -4.66668)
+
+[node name="dicemark3" type="Marker2D" parent="Beaker"]
+position = Vector2(1, -1.33334)
+
+[node name="dicemark4" type="Marker2D" parent="Beaker"]
+position = Vector2(6, 21.6667)
+
+[node name="dicemark5" type="Marker2D" parent="Beaker"]
+position = Vector2(-22.3333, 7.66666)
+
 [node name="Dice" parent="." node_paths=PackedStringArray("DiceMan") instance=ExtResource("2_tcovt")]
-position = Vector2(171, 511)
-DiceMan = NodePath("..")
-
-[node name="Dice3" parent="." node_paths=PackedStringArray("DiceMan") instance=ExtResource("2_tcovt")]
-position = Vector2(155, 438)
-DiceMan = NodePath("..")
-
-[node name="Dice4" parent="." node_paths=PackedStringArray("DiceMan") instance=ExtResource("2_tcovt")]
-position = Vector2(274, 473)
-DiceMan = NodePath("..")
-
-[node name="Dice5" parent="." node_paths=PackedStringArray("DiceMan") instance=ExtResource("2_tcovt")]
-position = Vector2(234, 527)
+position = Vector2(691, 576)
+ttl_shot = 0.1
 DiceMan = NodePath("..")
 
 [node name="Dice2" parent="." node_paths=PackedStringArray("DiceMan") instance=ExtResource("2_tcovt")]
-position = Vector2(238, 410)
+position = Vector2(516, 573)
+ttl_shot = 0.1
+DiceMan = NodePath("..")
+
+[node name="Dice3" parent="." node_paths=PackedStringArray("DiceMan") instance=ExtResource("2_tcovt")]
+position = Vector2(598, 575)
+ttl_shot = 0.2
+DiceMan = NodePath("..")
+
+[node name="Dice4" parent="." node_paths=PackedStringArray("DiceMan") instance=ExtResource("2_tcovt")]
+position = Vector2(781, 577)
+ttl_shot = 0.3
+DiceMan = NodePath("..")
+
+[node name="Dice5" parent="." node_paths=PackedStringArray("DiceMan") instance=ExtResource("2_tcovt")]
+position = Vector2(866, 579)
+ttl_shot = 0.3
 DiceMan = NodePath("..")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(578.5, 8)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_d8rju")
 
 [node name="sprite" type="Sprite2D" parent="StaticBody2D/CollisionShape2D"]
@@ -54,7 +73,6 @@ texture = ExtResource("4_tp840")
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(608, 636)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_d8rju")
 
 [node name="sprite" type="Sprite2D" parent="StaticBody2D/CollisionShape2D3"]
