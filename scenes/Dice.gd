@@ -20,6 +20,7 @@ func _ready():
 	
 func initialize():
 	randomize()
+	ttl_bounce = 0.3
 	dir = 1
 	rolling = false
 	stoped = false

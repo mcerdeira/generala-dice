@@ -16,7 +16,7 @@ func _ready():
 	
 func initialize():
 	decided = false
-	speed = Global.pick_random([2, 3, 4, 5])
+	speed = 10#Global.pick_random([2, 3, 4, 5])
 	align_speed = speed
 	
 func _physics_process(delta):
