@@ -2,22 +2,19 @@ extends Area2D
 var velocity = Vector2.ZERO
 var angular_velocity = 0.0
 var friction = 0.98
-var rolling = true
-var launch_angle = deg_to_rad(-45)  # Ángulo de lanzamiento fijo
-var force_magnitude = randi_range(400, 600)
+var rolling = false
+var stoped = false
+var launch_angle = deg_to_rad(randi_range(-45, -55))  # Ángulo de lanzamiento fijo
+var force_magnitude = randi_range(600, 900)
 var initial_force = Vector2.RIGHT.rotated(launch_angle) * force_magnitude
 var initial_rotation = randi_range(-10, 10)
-var ttl_bounce = 0.8
-var ttl_change_frame_total = 1.1
-var ttl_change_frame = 0
+var ttl_bounce = 0.3
 @export var DiceMan : Node2D
 
 func _ready():
 	add_to_group("dices")
 	DiceMan.add_me(self)
 	randomize()
-	$sprite.rotation_degrees = randf_range(0, 360)
-	$sprite.frame = randi() % 6
 	# Lanza el dado desde el ángulo fijo (45 grados)
 	force_magnitude = randi_range(600, 1800)
 	initial_force = Vector2.RIGHT.rotated(launch_angle) * force_magnitude
@@ -33,22 +30,17 @@ func throw_dice(force: Vector2, rotation_force: float):
 
 func _physics_process(delta):
 	if rolling:
-		$sprite.rotation_degrees += 19 * delta
 		ttl_bounce -= 1 * delta
-		ttl_change_frame -= 1 * delta
 		position += velocity * delta
-		rotation += angular_velocity * delta
-		if ttl_change_frame <= 0:
-			$sprite.frame = randi() % 6
-			ttl_change_frame = ttl_change_frame_total
 		
 		# Simular fricción
 		velocity *= friction
 		angular_velocity *= friction
 		
 		# Detener el movimiento cuando es muy bajo
-		if velocity.length() < 10:
+		if velocity.length() < 30:
 			rolling = false
+			stoped = true
 			
 func _on_area_entered(area):
 	if area is Area2D and area.is_in_group("dices") and ttl_bounce <= 0:

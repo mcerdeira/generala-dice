@@ -15,3 +15,6 @@ func _on_area_2d_input_event(viewport, event, shape_idx):
 			$AnimationPlayer.stop()
 			$sprite.rotation_degrees = 45
 			DiceMan.throw()
+			await get_tree().create_timer(1).timeout
+			$AnimationPlayer2.play("new_animation")
+

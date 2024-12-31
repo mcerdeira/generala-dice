@@ -1,81 +1,32 @@
-[gd_scene load_steps=14 format=3 uid="uid://dufepst0w8rkr"]
+[gd_scene load_steps=5 format=3 uid="uid://dufepst0w8rkr"]
 
-[ext_resource type="Texture2D" uid="uid://ca8j68slnt0a6" path="res://sprites/dices/normal1.png" id="1_qaeaq"]
 [ext_resource type="Script" path="res://scenes/Dice.gd" id="1_r70iu"]
-[ext_resource type="Texture2D" uid="uid://dvc7iysbp63t7" path="res://sprites/dices/normal2.png" id="2_hjj0a"]
-[ext_resource type="Texture2D" uid="uid://kscsy1obkqau" path="res://sprites/dices/normal3.png" id="3_xngim"]
-[ext_resource type="Texture2D" uid="uid://o1qw2xsq0dsf" path="res://sprites/dices/normal4.png" id="4_apytl"]
-[ext_resource type="Texture2D" uid="uid://dvcoapf0n2dqv" path="res://sprites/dices/normal5.png" id="5_kvket"]
-[ext_resource type="Texture2D" uid="uid://dvu30axn3fd51" path="res://sprites/dices/normal6.png" id="6_b7vqd"]
-[ext_resource type="Script" path="res://scenes/Node3D.gd" id="8_2ntvo"]
+[ext_resource type="PackedScene" uid="uid://berhcc7novg7b" path="res://scenes/node_3d.tscn" id="2_lt8j6"]
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_k13vf"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_hmu5q"]
 viewport_path = NodePath("SubViewport")
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_vumy5"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("1_qaeaq")
-}, {
-"duration": 1.0,
-"texture": ExtResource("2_hjj0a")
-}, {
-"duration": 1.0,
-"texture": ExtResource("3_xngim")
-}, {
-"duration": 1.0,
-"texture": ExtResource("4_apytl")
-}, {
-"duration": 1.0,
-"texture": ExtResource("5_kvket")
-}, {
-"duration": 1.0,
-"texture": ExtResource("6_b7vqd")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x1lnw"]
-size = Vector2(32, 32)
-
-[sub_resource type="BoxMesh" id="BoxMesh_0tinb"]
-
-[sub_resource type="Environment" id="Environment_7uqoq"]
+size = Vector2(76, 69)
 
 [node name="Dice" type="Area2D"]
 script = ExtResource("1_r70iu")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(19, 12)
-scale = Vector2(0.199219, 0.195313)
-texture = SubResource("ViewportTexture_k13vf")
-
-[node name="sprite" type="AnimatedSprite2D" parent="."]
-visible = false
-sprite_frames = SubResource("SpriteFrames_vumy5")
+[node name="sprite" type="Sprite2D" parent="."]
+texture = SubResource("ViewportTexture_hmu5q")
 
 [node name="collider" type="CollisionShape2D" parent="."]
+position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_x1lnw")
 
 [node name="SubViewport" type="SubViewport" parent="."]
+own_world_3d = true
 transparent_bg = true
-snap_2d_transforms_to_pixel = true
-snap_2d_vertices_to_pixel = true
+size = Vector2i(96, 96)
+size_2d_override_stretch = true
 
-[node name="Node3D" type="Node3D" parent="SubViewport"]
-script = ExtResource("8_2ntvo")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewport/Node3D"]
-mesh = SubResource("BoxMesh_0tinb")
-
-[node name="Camera3D" type="Camera3D" parent="SubViewport/Node3D"]
-transform = Transform3D(-0.154245, 0, 0.988033, 0, 1, 0, -0.988033, 0, -0.154245, 2.00158, -0.299203, -0.773721)
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="SubViewport/Node3D"]
-environment = SubResource("Environment_7uqoq")
+[node name="Node3D" parent="SubViewport" node_paths=PackedStringArray("parent") instance=ExtResource("2_lt8j6")]
+parent = NodePath("../..")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

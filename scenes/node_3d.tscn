@@ -1,0 +1,28 @@
+[gd_scene load_steps=6 format=3 uid="uid://berhcc7novg7b"]
+
+[ext_resource type="Script" path="res://scenes/node_3d.gd" id="1_phk6g"]
+[ext_resource type="Script" path="res://scenes/dice3D.gd" id="2_nji25"]
+[ext_resource type="Texture2D" uid="uid://dia5it1atxhpf" path="res://sprites/dices/cube1.png" id="2_r022y"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hdg6k"]
+albedo_texture = ExtResource("2_r022y")
+
+[sub_resource type="BoxMesh" id="BoxMesh_0tinb"]
+resource_local_to_scene = true
+lightmap_size_hint = Vector2i(14, 21)
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_phk6g")
+
+[node name="dice3D" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_hdg6k")
+mesh = SubResource("BoxMesh_0tinb")
+script = ExtResource("2_nji25")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.59145)
+fov = 50.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.752)
+light_indirect_energy = 0.0
