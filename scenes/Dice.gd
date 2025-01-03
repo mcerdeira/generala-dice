@@ -14,6 +14,7 @@ var stop = 0
 var ttl_bounce = 0.3
 var dragged = false
 var dir = 1
+var currentvalue = null
 
 func _ready():
 	add_to_group("dices")
@@ -43,6 +44,7 @@ func throw_dice(force: Vector2, rotation_force: float):
 	stoped = false
 
 func _physics_process(delta):
+	what_ami()
 	if dragged:
 		global_position = get_global_mouse_position()
 	elif rolling:
@@ -59,6 +61,10 @@ func _physics_process(delta):
 				rolling = false
 				stoped = true
 			
+func what_ami():
+	currentvalue = $SubViewport/Node3D.what_ami()
+	$Label.text = str(currentvalue)
+				
 func _on_area_entered(area):
 	if area is Area2D and area.is_in_group("dices") and ttl_bounce <= 0:
 		var normal = (position - area.position).normalized()

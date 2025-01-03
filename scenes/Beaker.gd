@@ -4,6 +4,7 @@ var shaking = false
 
 func reset():
 	z_index = -10
+	$Label.visible = true
 	$Button.text = "AGITAR"
 	$sprite.frame = 0
 	$sprite.rotation_degrees = 0
@@ -13,21 +14,23 @@ func _physics_process(delta):
 	$Label.text = str(DiceMan.dices.size())
 
 func _on_button_pressed():
-	if !shaking:
-		DiceMan.arrange()
-		$Button.text = "TIRAR"
-		shaking = true
-		$sprite.frame = 1
-		z_index = 100
-		$AnimationPlayer.play("new_animation")
-	else:
-		$Button.text = "..."
-		shaking = false
-		$sprite.frame = 1
-		$AnimationPlayer.stop()
-		$sprite.rotation_degrees = 45
-		DiceMan.throw()
-		$AnimationPlayer2.play("new_animation")
+	if DiceMan.dices.size() == 5:
+		if !shaking:
+			DiceMan.arrange()
+			$Button.text = "TIRAR"
+			shaking = true
+			$Label.visible = false
+			$sprite.frame = 1
+			z_index = 100
+			$AnimationPlayer.play("new_animation")
+		else:
+			$Button.text = "..."
+			shaking = false
+			$sprite.frame = 1
+			$AnimationPlayer.stop()
+			$sprite.rotation_degrees = 45
+			DiceMan.throw()
+			$AnimationPlayer2.play("new_animation")
 
 func _on_area_2d_area_entered(area):
 	if $Button.text == "AGITAR":

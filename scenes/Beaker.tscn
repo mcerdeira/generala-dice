@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://djocrijh1ceom"]
+[gd_scene load_steps=11 format=3 uid="uid://djocrijh1ceom"]
 
 [ext_resource type="Script" path="res://scenes/Beaker.gd" id="1_3qhnb"]
 [ext_resource type="Texture2D" uid="uid://dytig1jwdi4l1" path="res://sprites/beaker1.png" id="1_252vu"]
 [ext_resource type="Texture2D" uid="uid://d3tsnixp63x6v" path="res://sprites/beaker2.png" id="2_166ns"]
+[ext_resource type="FontFile" uid="uid://qlhmfs1ahw63" path="res://fonts/prstartk.ttf" id="4_m2u8j"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_hcnxi"]
 animations = [{
@@ -85,18 +86,20 @@ libraries = {
 }
 
 [node name="Button" type="Button" parent="."]
-offset_left = -36.0
+offset_left = -50.0
 offset_top = 50.0
-offset_right = 36.0
+offset_right = 54.0
 offset_bottom = 81.0
 scale = Vector2(0.990936, 0.550103)
+theme_override_fonts/font = ExtResource("4_m2u8j")
 text = "AGITAR"
 
 [node name="Label" type="Label" parent="."]
-offset_left = -19.0
-offset_top = -61.0
-offset_right = 21.0
-offset_bottom = -38.0
+offset_left = -18.0
+offset_top = -63.0
+offset_right = 22.0
+offset_bottom = -47.0
+theme_override_fonts/font = ExtResource("4_m2u8j")
 text = "0"
 horizontal_alignment = 1
 

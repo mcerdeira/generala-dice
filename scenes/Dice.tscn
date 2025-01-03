@@ -28,6 +28,12 @@ size_2d_override_stretch = true
 [node name="Node3D" parent="SubViewport" node_paths=PackedStringArray("parent") instance=ExtResource("2_lt8j6")]
 parent = NodePath("../..")
 
+[node name="Label" type="Label" parent="."]
+offset_left = -38.0
+offset_top = 37.0
+offset_right = 39.0
+offset_bottom = 60.0
+
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="input_event" from="." to="." method="_on_input_event"]

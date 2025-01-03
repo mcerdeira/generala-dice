@@ -1,5 +1,22 @@
 extends Node
 
+enum Games {
+	ONE = 0,
+	TWO = 1,
+	THREE = 2,
+	FOUR = 3,
+	FIVE = 4,
+	SIX = 5,
+	DOUBLE = 6,
+	FLUSH = 7,
+	FULL = 8,
+	POKER = 9,
+	GENERALA = 10,
+	GENERALA2 = 11,
+}
+
+var points_normmal = [null, null, null, null, null, null, 10, 20, 30, 40, 50, 100] 
+var points_serve = [null, null, null, null, null, null, 15, 25, 35, 45, 55, null] 
 	
 func pick_random(container):
 	if typeof(container) == TYPE_DICTIONARY:

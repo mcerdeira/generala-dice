@@ -1,9 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://cp6k2aibvb5x0"]
+[gd_scene load_steps=9 format=3 uid="uid://cp6k2aibvb5x0"]
 
 [ext_resource type="PackedScene" uid="uid://djocrijh1ceom" path="res://scenes/Beaker.tscn" id="1_7se6j"]
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_wbabm"]
 [ext_resource type="PackedScene" uid="uid://dufepst0w8rkr" path="res://scenes/Dice.tscn" id="2_tcovt"]
 [ext_resource type="Texture2D" uid="uid://3s8wbw4jv3gl" path="res://sprites/wall.png" id="4_tp840"]
+[ext_resource type="FontFile" uid="uid://qlhmfs1ahw63" path="res://fonts/prstartk.ttf" id="5_ciusn"]
+[ext_resource type="Script" path="res://scenes/pointlist.gd" id="5_dx72g"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d8rju"]
 size = Vector2(1149, 20)
@@ -36,27 +38,27 @@ position = Vector2(6, 21.6667)
 position = Vector2(-22.3333, 7.66666)
 
 [node name="Dice" parent="." node_paths=PackedStringArray("DiceMan") instance=ExtResource("2_tcovt")]
-position = Vector2(691, 576)
+position = Vector2(877, 579)
 ttl_shot = 0.1
 DiceMan = NodePath("..")
 
 [node name="Dice2" parent="." node_paths=PackedStringArray("DiceMan") instance=ExtResource("2_tcovt")]
-position = Vector2(516, 573)
+position = Vector2(719, 579)
 ttl_shot = 0.1
 DiceMan = NodePath("..")
 
 [node name="Dice3" parent="." node_paths=PackedStringArray("DiceMan") instance=ExtResource("2_tcovt")]
-position = Vector2(598, 575)
+position = Vector2(798, 579)
 ttl_shot = 0.2
 DiceMan = NodePath("..")
 
 [node name="Dice4" parent="." node_paths=PackedStringArray("DiceMan") instance=ExtResource("2_tcovt")]
-position = Vector2(781, 577)
+position = Vector2(956, 579)
 ttl_shot = 0.3
 DiceMan = NodePath("..")
 
 [node name="Dice5" parent="." node_paths=PackedStringArray("DiceMan") instance=ExtResource("2_tcovt")]
-position = Vector2(866, 579)
+position = Vector2(1035, 579)
 ttl_shot = 0.3
 DiceMan = NodePath("..")
 
@@ -97,3 +99,81 @@ shape = SubResource("RectangleShape2D_3gqf6")
 position = Vector2(-13.75, -51)
 scale = Vector2(1.57813, 19.5625)
 texture = ExtResource("4_tp840")
+
+[node name="pointlist" type="Node2D" parent="."]
+position = Vector2(907, 31)
+script = ExtResource("5_dx72g")
+
+[node name="items" type="ItemList" parent="pointlist"]
+offset_left = -120.0
+offset_right = 52.0
+offset_bottom = 248.0
+theme_override_fonts/font = ExtResource("5_ciusn")
+allow_reselect = true
+allow_search = false
+auto_height = true
+item_count = 12
+item_0/text = "1"
+item_0/disabled = true
+item_1/text = "2"
+item_1/disabled = true
+item_2/text = "3"
+item_2/disabled = true
+item_3/text = "4"
+item_3/disabled = true
+item_4/text = "5"
+item_4/disabled = true
+item_5/text = "6"
+item_5/disabled = true
+item_6/text = "DOBLE"
+item_6/disabled = true
+item_7/text = "ESCALERA"
+item_7/disabled = true
+item_8/text = "FULL"
+item_8/disabled = true
+item_9/text = "POKER"
+item_9/disabled = true
+item_10/text = "GENERALA"
+item_10/disabled = true
+item_11/text = "GENERALAx2"
+item_11/disabled = true
+
+[node name="items2" type="ItemList" parent="pointlist"]
+offset_left = 53.0
+offset_right = 85.0
+offset_bottom = 248.0
+theme_override_fonts/font = ExtResource("5_ciusn")
+allow_search = false
+item_count = 12
+item_0/text = "-"
+item_0/selectable = false
+item_1/text = "-"
+item_1/selectable = false
+item_2/text = "-"
+item_2/selectable = false
+item_3/text = "-"
+item_3/selectable = false
+item_4/text = "-"
+item_4/selectable = false
+item_5/text = "-"
+item_5/selectable = false
+item_6/text = "-"
+item_6/selectable = false
+item_7/text = "-"
+item_7/selectable = false
+item_8/text = "-"
+item_8/selectable = false
+item_9/text = "-"
+item_9/selectable = false
+item_10/text = "-"
+item_10/selectable = false
+item_11/text = "-"
+item_11/selectable = false
+
+[node name="Button" type="Button" parent="pointlist"]
+offset_left = -120.0
+offset_top = 250.0
+offset_right = 85.0
+offset_bottom = 275.0
+theme_override_fonts/font = ExtResource("5_ciusn")
+text = "ANOTAR"

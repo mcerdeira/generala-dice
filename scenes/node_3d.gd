@@ -3,3 +3,6 @@ extends Node3D
 
 func initialize():
 	$dice3D.initialize()
+
+func what_ami():
+	return $dice3D.what_ami()
