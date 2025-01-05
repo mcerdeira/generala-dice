@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://djocrijh1ceom"]
+[gd_scene load_steps=12 format=3 uid="uid://djocrijh1ceom"]
 
 [ext_resource type="Script" path="res://scenes/Beaker.gd" id="1_3qhnb"]
 [ext_resource type="Texture2D" uid="uid://dytig1jwdi4l1" path="res://sprites/beaker1.png" id="1_252vu"]
@@ -64,6 +64,9 @@ _data = {
 "new_animation": SubResource("Animation_0ikd6")
 }
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_c8bau"]
+radius = 48.2701
+
 [node name="Beaker" type="Node2D"]
 script = ExtResource("1_3qhnb")
 
@@ -102,6 +105,12 @@ offset_bottom = -47.0
 theme_override_fonts/font = ExtResource("4_m2u8j")
 text = "0"
 horizontal_alignment = 1
+
+[node name="beakerbounce" type="StaticBody2D" parent="."]
+
+[node name="collider" type="CollisionShape2D" parent="beakerbounce"]
+shape = SubResource("CircleShape2D_c8bau")
+disabled = true
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]

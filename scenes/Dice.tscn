@@ -1,13 +1,22 @@
-[gd_scene load_steps=5 format=3 uid="uid://dufepst0w8rkr"]
+[gd_scene load_steps=8 format=3 uid="uid://dufepst0w8rkr"]
 
 [ext_resource type="Script" path="res://scenes/Dice.gd" id="1_r70iu"]
 [ext_resource type="PackedScene" uid="uid://berhcc7novg7b" path="res://scenes/node_3d.tscn" id="2_lt8j6"]
+[ext_resource type="Texture2D" uid="uid://dn5ybcewikek6" path="res://sprites/dices/enfasis.png" id="3_8jf7x"]
+[ext_resource type="Shader" path="res://scenes/enfasis.gdshader" id="3_fr77i"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_hmu5q"]
 viewport_path = NodePath("SubViewport")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x1lnw"]
 size = Vector2(76, 69)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ootyv"]
+shader = ExtResource("3_fr77i")
+shader_parameter/shine_color = Color(1, 1, 1, 1)
+shader_parameter/shine_speed = 3.0
+shader_parameter/shine_size = 0.01
+shader_parameter/white = null
 
 [node name="Dice" type="Area2D"]
 script = ExtResource("1_r70iu")
@@ -29,10 +38,17 @@ size_2d_override_stretch = true
 parent = NodePath("../..")
 
 [node name="Label" type="Label" parent="."]
+visible = false
 offset_left = -38.0
 offset_top = 37.0
 offset_right = 39.0
 offset_bottom = 60.0
+
+[node name="enfasis" type="Sprite2D" parent="."]
+visible = false
+material = SubResource("ShaderMaterial_ootyv")
+scale = Vector2(0.203557, 0.203557)
+texture = ExtResource("3_8jf7x")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

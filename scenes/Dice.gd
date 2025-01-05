@@ -21,6 +21,7 @@ func _ready():
 	
 func initialize():
 	randomize()
+	show_enfasis(false)
 	ttl_bounce = 0.3
 	dir = 1
 	rolling = false
@@ -31,6 +32,9 @@ func initialize():
 	initial_force = Vector2.RIGHT.rotated(launch_angle) * force_magnitude
 	initial_rotation = randi_range(-10, 10)
 	$SubViewport/Node3D.initialize()
+	
+func show_enfasis(value):
+	$enfasis.visible = value
 
 func throw():
 	dir = 1

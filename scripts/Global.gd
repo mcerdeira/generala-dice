@@ -15,7 +15,8 @@ enum Games {
 	GENERALA2 = 11,
 }
 
-var points_normmal = [null, null, null, null, null, null, 10, 20, 30, 40, 50, 100] 
+var point_list = null
+var points_normal = [null, null, null, null, null, null, 10, 20, 30, 40, 50, 100] 
 var points_serve = [null, null, null, null, null, null, 15, 25, 35, 45, 55, null] 
 	
 func pick_random(container):
