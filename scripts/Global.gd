@@ -1,4 +1,5 @@
 extends Node
+var dices_used = 0
 
 enum Games {
 	ONE = 0,
@@ -17,7 +18,7 @@ enum Games {
 
 var point_list = null
 var points_normal = [null, null, null, null, null, null, 10, 20, 30, 40, 50, 100] 
-var points_serve = [null, null, null, null, null, null, 15, 25, 35, 45, 55, null] 
+var points_serve = [null, null, null, null, null, null, 15, 25, 35, 45, 55, 200] 
 	
 func pick_random(container):
 	if typeof(container) == TYPE_DICTIONARY:

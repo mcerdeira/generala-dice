@@ -17,6 +17,7 @@ func _physics_process(delta):
 	$Label.text = str(DiceMan.dices.size())
 
 func _on_button_pressed():
+	Global.dices_used = DiceMan.dices.size()
 	if DiceMan.dices.size() > 0:
 		if !shaking:
 			DiceMan.arrange()

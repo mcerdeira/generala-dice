@@ -44,6 +44,8 @@ func fade_in():
 func reset_points_table():
 	for i in range(12):
 		$items.set_item_disabled(i, false)
+		if blocked_games.find(i) == -1:
+			$items2.set_item_text(i, "-")
 	
 func calc_posible_points():
 	current_points = null
@@ -273,6 +275,10 @@ func search_generala():
 		return []
 
 func item_selected_fake(index):
+	var points_calc = Global.points_normal
+	if Global.dices_used >= 5:
+		points_calc = Global.points_serve
+		
 	var points = ""
 	match index:
 		Global.Games.ONE:
@@ -288,17 +294,17 @@ func item_selected_fake(index):
 		Global.Games.SIX:
 			points = str(six.size() * 6)
 		Global.Games.DOUBLE:
-			points = str(Global.points_normal[Global.Games.DOUBLE])
+			points = str(points_calc[Global.Games.DOUBLE])
 		Global.Games.FLUSH:
-			points = str(Global.points_normal[Global.Games.FLUSH])
+			points = str(points_calc[Global.Games.FLUSH])
 		Global.Games.FULL:
-			points = str(Global.points_normal[Global.Games.FULL])
+			points = str(points_calc[Global.Games.FULL])
 		Global.Games.POKER:
-			points = str(Global.points_normal[Global.Games.POKER])
+			points = str(points_calc[Global.Games.POKER])
 		Global.Games.GENERALA:
-			points = str(Global.points_normal[Global.Games.GENERALA])
+			points = str(points_calc[Global.Games.GENERALA])
 		Global.Games.GENERALA2:
-			points = str(Global.points_normal[Global.Games.GENERALA2])
+			points = str(points_calc[Global.Games.GENERALA2])
 	
 	if points != "":
 		$items2.set_item_text(index, points)

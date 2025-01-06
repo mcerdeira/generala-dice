@@ -8,7 +8,7 @@
 [ext_resource type="Script" path="res://scenes/pointlist.gd" id="5_dx72g"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7tt2w"]
-size = Vector2(244, 322)
+size = Vector2(222, 307)
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_wbabm")
@@ -98,15 +98,15 @@ position = Vector2(1032, 48)
 script = ExtResource("5_dx72g")
 
 [node name="ColorRect" type="ColorRect" parent="pointlist"]
-offset_left = -142.0
+offset_left = -124.0
 offset_top = -26.0
 offset_right = 99.0
-offset_bottom = 292.0
+offset_bottom = 278.0
 mouse_filter = 1
 color = Color(0.0862745, 0.0901961, 0.117647, 0.670588)
 
 [node name="collider" type="CollisionShape2D" parent="pointlist"]
-position = Vector2(-22, 133)
+position = Vector2(-11, 125.5)
 shape = SubResource("RectangleShape2D_7tt2w")
 
 [node name="items" type="ItemList" parent="pointlist"]
@@ -131,7 +131,7 @@ item_4/text = "5"
 item_4/disabled = true
 item_5/text = "6"
 item_5/disabled = true
-item_6/text = "DOBLE"
+item_6/text = "PARES"
 item_6/disabled = true
 item_7/text = "ESCALERA"
 item_7/disabled = true

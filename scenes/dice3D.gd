@@ -81,13 +81,48 @@ func what_ami():
 func align_to_nearest():
 	var curr_rotx = rad_to_deg(rotation.x)
 	var curr_roty = rad_to_deg(rotation.y)
+	var num_dest = Global.pick_random([1, 2, 3, 4, 5, 6])
+	var resu = null
 	
-	x_pos = Global.pick_random([0.0, 90.0, 180.0, 270.0])
-	y_pos = Global.pick_random([0.0, 90.0, 180.0, 270.0])
-	#z_pos = Global.pick_random([0.0, 90.0, 180.0, 270.0])
+	match num_dest:
+		1:
+			resu = Global.pick_random([
+				[0.0, 0.0],
+			])
+		2:
+			resu = Global.pick_random([
+				[0.0, 270.0],
+				[90.0, 270.0],
+				[180.0, 270.0],
+				[270.0, 270.0],
+			])
+		3:
+			resu = Global.pick_random([
+				[0.0, 180.0],
+				[180.0, 0.0],
+			])
+		4:
+			resu = Global.pick_random([
+				[0.0, 90.0],
+				[90.0, 90.0],
+				[180.0, 90.0],
+				[270.0, 90.0],
+			])
+		5:
+			resu = Global.pick_random([
+				[90.0, 0.0],
+				[270.0, 180.0],
+			])
+		6:
+			resu = Global.pick_random([
+				[90.0, 180.0],
+				[270.0, 0.0],
+			])
+	
+	x_pos = resu[0]
+	y_pos = resu[1]
 	
 	target_rotation.x = deg_to_rad(x_pos)
 	target_rotation.y = deg_to_rad(y_pos)
-	#target_rotation.z = deg_to_rad(z_pos)
 	
 	decided = true
