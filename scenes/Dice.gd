@@ -16,6 +16,7 @@ var dragged = false
 var dir = 1
 var currentvalue = null
 var original_position =  null
+var shaking = false
 
 func _ready():
 	add_to_group("dices")
@@ -40,6 +41,9 @@ func initialize():
 	
 func show_enfasis(value):
 	$enfasis.visible = value
+	shaking = value
+	if !shaking:
+		rotation_degrees = 0
 
 func throw():
 	dir = 1
@@ -53,6 +57,9 @@ func throw_dice(force: Vector2, rotation_force: float):
 	stoped = false
 
 func _physics_process(delta):
+	if shaking:
+		rotation_degrees = randf_range(-4.0, 4.0)
+	
 	what_ami()
 	if dragged:
 		global_position = get_global_mouse_position()
@@ -86,22 +93,9 @@ func _on_body_entered(body):
 	if body is StaticBody2D:
 		var normal = (position - body.position).normalized()
 		dir *= -1
-		velocity = velocity.bounce(normal) * 0.5 * -1 # Rebote con pérdida de energía
+		velocity = velocity.bounce(normal) * -1 # Rebote con pérdida de energía
 		angular_velocity *= -0.5  # Invertir la rotación para dar realismo
 		
-func _on_input_event(viewport, event, shape_idx):
-	pass
-	#if !rolling:
-		#if DiceMan.cant_throw:
-			#if !dragged:
-				#if event is InputEventMouseButton && event.is_action_pressed("click"):
-					#dragged = true
-					#get_viewport().set_input_as_handled()
-			#if dragged:
-				#if event is InputEventMouseButton && event.is_action_released("click"):
-					#dragged = false
-
-
 func _on_control_gui_input(event):
 	if !rolling:
 		if DiceMan.cant_throw:

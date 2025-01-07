@@ -5,7 +5,7 @@ var shaking = false
 func reset():
 	z_index = -100
 	#$Label.visible = true
-	$Button.text = "AGITAR\n\n\n"
+	$Button.text = "AGITAR\n\n"
 	$sprite.frame = 0
 	$sprite.rotation_degrees = 0
 	$AnimationPlayer2.play_backwards("new_animation")
@@ -34,7 +34,7 @@ func _on_button_pressed():
 			
 			Global.Status = Global.Statuses.SHAKING
 			DiceMan.arrange()
-			$Button.text = "TIRAR\n\n\n"
+			$Button.text = "TIRAR\n\n"
 			shaking = true
 			#$Label.visible = false
 			$sprite.frame = 1

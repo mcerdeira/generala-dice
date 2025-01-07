@@ -14,12 +14,8 @@ size = Vector2(222, 307)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_uj0rc"]
 
 [node name="Main" type="Node2D"]
+position = Vector2(133, 61)
 script = ExtResource("1_wbabm")
-
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(-151, -76)
-anchor_mode = 0
-zoom = Vector2(0.8, 0.8)
 
 [node name="Beaker" parent="." node_paths=PackedStringArray("DiceMan") instance=ExtResource("1_7se6j")]
 z_index = -10
@@ -50,6 +46,7 @@ offset_bottom = 688.0
 theme_override_fonts/font = ExtResource("5_ciusn")
 theme_override_font_sizes/font_size = 24
 text = "<<"
+metadata/_edit_use_anchors_ = true
 
 [node name="NoplayZone" type="Sprite2D" parent="."]
 position = Vector2(603.75, 671.25)
@@ -88,7 +85,7 @@ scale = Vector2(1, 2)
 
 [node name="wall2" parent="." instance=ExtResource("4_rgh4a")]
 z_index = 1001
-position = Vector2(1273, -144)
+position = Vector2(1233, -144)
 scale = Vector2(-1, 2)
 
 [node name="wall3" parent="." instance=ExtResource("4_rgh4a")]
@@ -111,6 +108,7 @@ offset_bottom = -16.0
 theme_override_fonts/font = ExtResource("5_ciusn")
 theme_override_font_sizes/font_size = 24
 text = "NIVEL:"
+metadata/_edit_use_anchors_ = true
 
 [node name="lbl_points2" type="Label" parent="lbl_level"]
 layout_mode = 0
@@ -120,6 +118,7 @@ offset_bottom = 24.0
 theme_override_fonts/font = ExtResource("5_ciusn")
 theme_override_font_sizes/font_size = 24
 text = "0"
+metadata/_edit_use_anchors_ = true
 
 [node name="lbl_turn" type="Label" parent="."]
 offset_left = 624.0
@@ -129,6 +128,7 @@ offset_bottom = -17.0
 theme_override_fonts/font = ExtResource("5_ciusn")
 theme_override_font_sizes/font_size = 24
 text = "TURNO:"
+metadata/_edit_use_anchors_ = true
 
 [node name="lbl_points2" type="Label" parent="lbl_turn"]
 layout_mode = 0
@@ -138,6 +138,7 @@ offset_bottom = 24.0
 theme_override_fonts/font = ExtResource("5_ciusn")
 theme_override_font_sizes/font_size = 24
 text = "0"
+metadata/_edit_use_anchors_ = true
 
 [node name="lbl_points" type="Label" parent="."]
 offset_left = -112.0
@@ -147,6 +148,7 @@ offset_bottom = 19.0
 theme_override_fonts/font = ExtResource("5_ciusn")
 theme_override_font_sizes/font_size = 24
 text = "PUNTOS:"
+metadata/_edit_use_anchors_ = true
 
 [node name="lbl_points2" type="Label" parent="lbl_points"]
 layout_mode = 0
@@ -156,6 +158,7 @@ offset_bottom = 24.0
 theme_override_fonts/font = ExtResource("5_ciusn")
 theme_override_font_sizes/font_size = 24
 text = "0"
+metadata/_edit_use_anchors_ = true
 
 [node name="lbl_goal" type="Label" parent="."]
 offset_left = -113.0
@@ -165,6 +168,7 @@ offset_bottom = -20.0
 theme_override_fonts/font = ExtResource("5_ciusn")
 theme_override_font_sizes/font_size = 24
 text = "  GOAL:"
+metadata/_edit_use_anchors_ = true
 
 [node name="lbl_points2" type="Label" parent="lbl_goal"]
 layout_mode = 0
@@ -174,9 +178,10 @@ offset_bottom = 24.0
 theme_override_fonts/font = ExtResource("5_ciusn")
 theme_override_font_sizes/font_size = 24
 text = "0"
+metadata/_edit_use_anchors_ = true
 
 [node name="pointlist" type="Area2D" parent="."]
-position = Vector2(1148, -9)
+position = Vector2(1108, -9)
 script = ExtResource("5_dx72g")
 
 [node name="ColorRect" type="ColorRect" parent="pointlist"]
@@ -186,6 +191,7 @@ offset_right = 99.0
 offset_bottom = 278.0
 mouse_filter = 1
 color = Color(0.0862745, 0.0901961, 0.117647, 0.670588)
+metadata/_edit_use_anchors_ = true
 
 [node name="collider" type="CollisionShape2D" parent="pointlist"]
 position = Vector2(-11, 125.5)
@@ -195,7 +201,7 @@ shape = SubResource("RectangleShape2D_7tt2w")
 offset_left = -120.0
 offset_right = 52.0
 offset_bottom = 248.0
-theme_override_colors/font_selected_color = Color(0.811765, 0.882353, 0, 1)
+theme_override_colors/font_selected_color = Color(0.843137, 0.168627, 0.227451, 1)
 theme_override_fonts/font = ExtResource("5_ciusn")
 allow_reselect = true
 allow_search = false
@@ -259,6 +265,7 @@ item_10/text = "-"
 item_10/selectable = false
 item_11/text = "-"
 item_11/selectable = false
+metadata/_edit_use_anchors_ = true
 
 [node name="Button" type="Button" parent="pointlist"]
 offset_left = -120.0
@@ -267,6 +274,7 @@ offset_right = 96.0
 offset_bottom = 275.0
 theme_override_fonts/font = ExtResource("5_ciusn")
 text = "ANOTAR"
+metadata/_edit_use_anchors_ = true
 
 [node name="lbl_gameover" type="Label" parent="."]
 visible = false
