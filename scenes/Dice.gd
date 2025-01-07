@@ -15,9 +15,14 @@ var ttl_bounce = 0.3
 var dragged = false
 var dir = 1
 var currentvalue = null
+var original_position =  null
 
 func _ready():
 	add_to_group("dices")
+	original_position = global_position
+	
+func restart_position():
+	global_position = original_position
 	
 func initialize():
 	randomize()
@@ -66,6 +71,7 @@ func _physics_process(delta):
 				stoped = true
 			
 func what_ami():
+	z_index = global_position.y
 	currentvalue = $SubViewport/Node3D.what_ami()
 	$Label.text = str(currentvalue)
 				
@@ -84,11 +90,25 @@ func _on_body_entered(body):
 		angular_velocity *= -0.5  # Invertir la rotación para dar realismo
 		
 func _on_input_event(viewport, event, shape_idx):
+	pass
+	#if !rolling:
+		#if DiceMan.cant_throw:
+			#if !dragged:
+				#if event is InputEventMouseButton && event.is_action_pressed("click"):
+					#dragged = true
+					#get_viewport().set_input_as_handled()
+			#if dragged:
+				#if event is InputEventMouseButton && event.is_action_released("click"):
+					#dragged = false
+
+
+func _on_control_gui_input(event):
 	if !rolling:
 		if DiceMan.cant_throw:
 			if !dragged:
 				if event is InputEventMouseButton && event.is_action_pressed("click"):
 					dragged = true
+					#get_viewport().set_input_as_handled()
 			if dragged:
 				if event is InputEventMouseButton && event.is_action_released("click"):
 					dragged = false

@@ -21,6 +21,11 @@ shader_parameter/white = null
 [node name="Dice" type="Area2D"]
 script = ExtResource("1_r70iu")
 
+[node name="shadow" type="Sprite2D" parent="."]
+self_modulate = Color(0, 0, 0, 0.321569)
+position = Vector2(8, 6)
+texture = SubResource("ViewportTexture_hmu5q")
+
 [node name="sprite" type="Sprite2D" parent="."]
 texture = SubResource("ViewportTexture_hmu5q")
 
@@ -50,6 +55,15 @@ material = SubResource("ShaderMaterial_ootyv")
 scale = Vector2(0.203557, 0.203557)
 texture = ExtResource("3_8jf7x")
 
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -26.0
+offset_top = -26.0
+offset_right = 26.0
+offset_bottom = 26.0
+
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="input_event" from="." to="." method="_on_input_event"]
+[connection signal="gui_input" from="Control" to="." method="_on_control_gui_input"]

@@ -41,6 +41,10 @@ func fade_in():
 	reset_points_table()
 	calc_posible_points()
 	
+func next_level():
+	blocked_games = []
+	reset_points_table()
+	
 func reset_points_table():
 	for i in range(12):
 		$items.set_item_disabled(i, false)
@@ -308,9 +312,25 @@ func item_selected_fake(index):
 	
 	if points != "":
 		$items2.set_item_text(index, points)
+		
+func clearSelected():
+	for i in range($items.item_count):
+		$items.deselect(i)
 
 func _on_button_pressed():
+	Global.InternarlTurn = 0
+	Global.Points += current_points
+	current_points = null
+	
+	var dices = get_tree().get_nodes_in_group("dices")
+	for d in dices:
+		d.show_enfasis(false)
+		d.restart_position()
+	
 	blocked_games.append(current_index)
+	Global.CheckWin()
+	
+	fade_out()
 
 func _on_items_item_selected(index):
 	current_points = $items2.get_item_text(index)
@@ -344,8 +364,12 @@ func _on_items_item_selected(index):
 			show_enfasis(full_game, true)
 		Global.Games.POKER:
 			show_enfasis(poker_game, true)
-		Global.Games.GENERALA or Global.Games.GENERALA2:
-			show_enfasis(generala_game, true)
+		Global.Games.GENERALA:
+			if !go_for_double:
+				show_enfasis(generala_game, true)
+		Global.Games.GENERALA2:
+			if go_for_double:
+				show_enfasis(generala_game, true)
 
 	$"../lbl_points/lbl_points2".text = str(current_points)
 
