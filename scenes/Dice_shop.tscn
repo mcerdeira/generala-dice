@@ -1,0 +1,62 @@
+[gd_scene load_steps=8 format=3 uid="uid://dwiopwb2k0qtu"]
+
+[ext_resource type="Script" path="res://scenes/Dice_shop.gd" id="1_wyqml"]
+[ext_resource type="PackedScene" uid="uid://bx0wq56ijp6gw" path="res://scenes/node_3d_shop.tscn" id="2_c64jr"]
+[ext_resource type="Shader" path="res://scenes/enfasis.gdshader" id="3_wy7y5"]
+[ext_resource type="Texture2D" uid="uid://dn5ybcewikek6" path="res://sprites/dices/enfasis.png" id="4_jikcf"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_hmu5q"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_d33tk"]
+shader = ExtResource("3_wy7y5")
+shader_parameter/shine_color = Color(1, 1, 1, 1)
+shader_parameter/shine_speed = 3.0
+shader_parameter/shine_size = 0.01
+shader_parameter/white = null
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x1lnw"]
+size = Vector2(76, 69)
+
+[node name="Dice_shop" type="Area2D"]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_wyqml")
+
+[node name="shadow" type="Sprite2D" parent="."]
+self_modulate = Color(0, 0, 0, 0.321569)
+position = Vector2(8, 6)
+texture = SubResource("ViewportTexture_hmu5q")
+
+[node name="enfasis" type="Sprite2D" parent="."]
+visible = false
+material = SubResource("ShaderMaterial_d33tk")
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("4_jikcf")
+
+[node name="sprite" type="Sprite2D" parent="."]
+texture = SubResource("ViewportTexture_hmu5q")
+
+[node name="collider" type="CollisionShape2D" parent="."]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_x1lnw")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+own_world_3d = true
+transparent_bg = true
+size = Vector2i(96, 96)
+size_2d_override_stretch = true
+
+[node name="Node3D_shop" parent="SubViewport" instance=ExtResource("2_c64jr")]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -26.0
+offset_top = -26.0
+offset_right = 26.0
+offset_bottom = 26.0
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="gui_input" from="Control" to="." method="_on_control_gui_input"]

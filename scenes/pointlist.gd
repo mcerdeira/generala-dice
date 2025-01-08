@@ -30,6 +30,8 @@ func _ready():
 	Global.point_list = self
 	
 func _physics_process(delta):
+	$Button.disabled = Global.GameOver
+	
 	if dragged:
 		global_position = get_global_mouse_position()
 
@@ -395,3 +397,4 @@ func _on_input_event(viewport, event, shape_idx):
 		if dragged:
 			if event is InputEventMouseButton && event.is_action_released("click"):
 				dragged = false
+

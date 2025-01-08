@@ -49,7 +49,7 @@ var Beaker = null
 func Next():
 	Turn += 1
 	InternarlTurn += 1
-	if Turn == TurnMax:
+	if Turn > TurnMax:
 		if Points < Goal:
 			gameover(false)
 		else:
@@ -73,10 +73,10 @@ func gameover(win):
 		Global.GameOver = true
 
 func minforTurn():
-	if InternarlTurn == 1:
+	if Global.Beaker.first:
 		return 5
 	else:
-		return 0
+		return 1
 	
 func pick_random(container):
 	if typeof(container) == TYPE_DICTIONARY:

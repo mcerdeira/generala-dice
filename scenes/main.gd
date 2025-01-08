@@ -81,3 +81,6 @@ func _on_button_2_pressed():
 
 func clearSelected():
 	$pointlist.clearSelected()
+
+func _on_button_3_pressed():
+	$Shop.visible = !$Shop.visible

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cp6k2aibvb5x0"]
+[gd_scene load_steps=14 format=3 uid="uid://cp6k2aibvb5x0"]
 
 [ext_resource type="PackedScene" uid="uid://djocrijh1ceom" path="res://scenes/Beaker.tscn" id="1_7se6j"]
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_wbabm"]
@@ -7,11 +7,18 @@
 [ext_resource type="PackedScene" uid="uid://c1178aepiu4hq" path="res://scenes/wall_1.tscn" id="4_rgh4a"]
 [ext_resource type="FontFile" uid="uid://qlhmfs1ahw63" path="res://fonts/prstartk.ttf" id="5_ciusn"]
 [ext_resource type="Script" path="res://scenes/pointlist.gd" id="5_dx72g"]
+[ext_resource type="Script" path="res://scenes/Shop.gd" id="8_kl6mg"]
+[ext_resource type="Shader" path="res://scenes/FX.gdshader" id="8_nwidx"]
+[ext_resource type="PackedScene" uid="uid://dwiopwb2k0qtu" path="res://scenes/Dice_shop.tscn" id="9_4euou"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7tt2w"]
-size = Vector2(222, 307)
+size = Vector2(222, 156)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_uj0rc"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5rf6s"]
+shader = ExtResource("8_nwidx")
+shader_parameter/amount = 0.12
 
 [node name="Main" type="Node2D"]
 position = Vector2(133, 61)
@@ -48,6 +55,16 @@ theme_override_font_sizes/font_size = 24
 text = "<<"
 metadata/_edit_use_anchors_ = true
 
+[node name="Button3" type="Button" parent="."]
+offset_left = 800.0
+offset_top = 638.0
+offset_right = 883.0
+offset_bottom = 688.0
+theme_override_fonts/font = ExtResource("5_ciusn")
+theme_override_font_sizes/font_size = 24
+text = "$$"
+metadata/_edit_use_anchors_ = true
+
 [node name="NoplayZone" type="Sprite2D" parent="."]
 position = Vector2(603.75, 671.25)
 scale = Vector2(12.3281, 2.04687)
@@ -80,12 +97,12 @@ DiceMan = NodePath("..")
 
 [node name="wall1" parent="." instance=ExtResource("4_rgh4a")]
 z_index = 100
-position = Vector2(-136, -152)
+position = Vector2(-136, -227)
 scale = Vector2(1, 2)
 
 [node name="wall2" parent="." instance=ExtResource("4_rgh4a")]
 z_index = 1001
-position = Vector2(1233, -144)
+position = Vector2(1233, -219)
 scale = Vector2(-1, 2)
 
 [node name="wall3" parent="." instance=ExtResource("4_rgh4a")]
@@ -185,16 +202,15 @@ position = Vector2(1108, -9)
 script = ExtResource("5_dx72g")
 
 [node name="ColorRect" type="ColorRect" parent="pointlist"]
-offset_left = -124.0
-offset_top = -26.0
-offset_right = 99.0
-offset_bottom = 278.0
-mouse_filter = 1
+offset_left = -123.0
+offset_top = -28.0
+offset_right = 100.0
+offset_bottom = 279.0
+mouse_filter = 2
 color = Color(0.0862745, 0.0901961, 0.117647, 0.670588)
-metadata/_edit_use_anchors_ = true
 
 [node name="collider" type="CollisionShape2D" parent="pointlist"]
-position = Vector2(-11, 125.5)
+position = Vector2(-11, 50)
 shape = SubResource("RectangleShape2D_7tt2w")
 
 [node name="items" type="ItemList" parent="pointlist"]
@@ -289,7 +305,90 @@ theme_override_fonts/font = ExtResource("5_ciusn")
 theme_override_font_sizes/font_size = 80
 text = "PERDISTE!"
 
+[node name="Shop" type="Node2D" parent="."]
+z_index = 4095
+script = ExtResource("8_kl6mg")
+
+[node name="block" type="ColorRect" parent="Shop"]
+offset_left = -222.0
+offset_top = -177.0
+offset_right = 1324.0
+offset_bottom = 940.0
+color = Color(1, 1, 1, 0)
+
+[node name="ColorRect2" type="ColorRect" parent="Shop"]
+offset_left = -76.0
+offset_top = 30.0
+offset_right = 1202.0
+offset_bottom = 694.0
+color = Color(0.145098, 0.152941, 0.188235, 0.4)
+
+[node name="ColorRect" type="ColorRect" parent="Shop"]
+offset_left = -90.0
+offset_top = 22.0
+offset_right = 1188.0
+offset_bottom = 686.0
+color = Color(0.101961, 0.192157, 0.192157, 1)
+
+[node name="ColorRect3" type="ColorRect" parent="Shop"]
+offset_left = 324.0
+offset_top = 90.0
+offset_right = 775.0
+offset_bottom = 260.0
+color = Color(0.0509804, 0.113725, 0.113725, 1)
+
+[node name="Label" type="Label" parent="Shop"]
+offset_left = -76.0
+offset_top = 33.0
+offset_right = 164.0
+offset_bottom = 73.0
+theme_override_fonts/font = ExtResource("5_ciusn")
+theme_override_font_sizes/font_size = 40
+text = "TIENDA"
+
+[node name="Dice_shop" parent="Shop" instance=ExtResource("9_4euou")]
+position = Vector2(392, 137)
+
+[node name="Dice_shop2" parent="Shop" instance=ExtResource("9_4euou")]
+position = Vector2(496, 137)
+
+[node name="Dice_shop3" parent="Shop" instance=ExtResource("9_4euou")]
+position = Vector2(600, 137)
+
+[node name="Dice_shop4" parent="Shop" instance=ExtResource("9_4euou")]
+position = Vector2(704, 137)
+
+[node name="Button4" type="Button" parent="Shop"]
+offset_left = 1142.0
+offset_top = 28.0
+offset_right = 1180.0
+offset_bottom = 60.0
+theme_override_fonts/font = ExtResource("5_ciusn")
+theme_override_font_sizes/font_size = 24
+text = "X"
+
+[node name="Button5" type="Button" parent="Shop"]
+offset_left = 328.0
+offset_top = 569.0
+offset_right = 771.0
+offset_bottom = 671.0
+theme_override_fonts/font = ExtResource("5_ciusn")
+theme_override_font_sizes/font_size = 24
+text = "COMPRAR"
+
+[node name="FX" type="ColorRect" parent="."]
+z_index = 4096
+material = SubResource("ShaderMaterial_5rf6s")
+offset_left = -316.0
+offset_top = -111.0
+offset_right = 1453.0
+offset_bottom = 777.0
+mouse_filter = 2
+
 [connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]
+[connection signal="pressed" from="Button3" to="." method="_on_button_3_pressed"]
 [connection signal="input_event" from="pointlist" to="pointlist" method="_on_input_event"]
 [connection signal="item_selected" from="pointlist/items" to="pointlist" method="_on_items_item_selected"]
 [connection signal="pressed" from="pointlist/Button" to="pointlist" method="_on_button_pressed"]
+[connection signal="pressed" from="Shop/Button4" to="Shop" method="_on_button_4_pressed"]
+[connection signal="pressed" from="Shop/Button5" to="Shop" method="_on_button_5_pressed"]
