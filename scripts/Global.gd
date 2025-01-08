@@ -1,6 +1,12 @@
 extends Node
 var dices_used = 0
 var FULLSCREEN = false
+var Temardo = null
+var ShakeSFX = null
+var RollSFX = null
+var DiceclickSFX = null
+var ScoreSFX = null
+var ClickSFX = null
 
 enum Statuses {
 	IDLE,
@@ -31,37 +37,33 @@ var points_serve = [null, null, null, null, null, null, 15, 25, 35, 45, 55, 200]
 	
 var Level = 1
 var LevelMax = 8
-var Turn = 0
-var InternarlTurn = 0
+var Turn = 1
+var InternarlTurn = 1
 var TurnMax = 7
 var Points = 0
 var Goal = 45
-var Goals = [0, 45, 65, 75, 85, 95, 100, 150, 200]
+var Goals = [0, 45, 65, 85, 95, 100, 120, 150, 250]
 var GameOver = false
-
-func CheckWin():
-	if Points >= Goal:
-		NextLevel()
+var Beaker = null
 
 func Next():
 	Turn += 1
 	InternarlTurn += 1
-	if Turn > TurnMax:
+	if Turn == TurnMax:
 		if Points < Goal:
 			gameover(false)
 		else:
 			NextLevel()
-	else:
-		CheckWin()
 			
 func NextLevel():
 	Level += 1
 	if Level > LevelMax:
 		gameover(true)
 	else:
+		Global.Beaker.first = true
 		Global.Points = 0
-		Global.Turn = 0
-		Global.InternarlTurn = 0
+		Global.Turn = 1
+		Global.InternarlTurn = 1
 		Global.point_list.next_level()
 		Goal = Goals[Level]
 		
@@ -71,10 +73,10 @@ func gameover(win):
 		Global.GameOver = true
 
 func minforTurn():
-	if InternarlTurn == 0:
+	if InternarlTurn == 1:
 		return 5
 	else:
-		return 1
+		return 0
 	
 func pick_random(container):
 	if typeof(container) == TYPE_DICTIONARY:

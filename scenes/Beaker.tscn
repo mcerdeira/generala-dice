@@ -103,6 +103,7 @@ shape = SubResource("CircleShape2D_vqdsi")
 libraries = {
 "": SubResource("AnimationLibrary_vd5po")
 }
+speed_scale = 1.6
 
 [node name="AnimationPlayer2" type="AnimationPlayer" parent="."]
 libraries = {

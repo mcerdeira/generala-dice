@@ -317,9 +317,11 @@ func clearSelected():
 	for i in range($items.item_count):
 		$items.deselect(i)
 
-func _on_button_pressed():
-	Global.InternarlTurn = 0
+func _on_button_pressed(): #ANOTAR
+	Global.play_sound(Global.ScoreSFX)
+	Global.InternarlTurn = 1
 	Global.Points += current_points
+	Global.Beaker.first = true
 	current_points = null
 	
 	var dices = get_tree().get_nodes_in_group("dices")
@@ -328,17 +330,25 @@ func _on_button_pressed():
 		d.restart_position()
 	
 	blocked_games.append(current_index)
-	Global.CheckWin()
-	
 	fade_out()
+	Global.Next()
 
 func _on_items_item_selected(index):
+	if index == current_index:
+		current_index = -1
+		$items.deselect(index)
+		var dices = get_tree().get_nodes_in_group("dices")
+		show_enfasis(dices, false)
+		current_points = 0
+		return
+	
 	current_points = $items2.get_item_text(index)
 	current_index = index
 	if current_points == "-":
 		current_points = 0
 	else:
 		current_points = int(current_points)
+		Global.play_sound(Global.ClickSFX)
 		
 	var dices = get_tree().get_nodes_in_group("dices")
 	show_enfasis(dices, false)
