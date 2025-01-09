@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cp6k2aibvb5x0"]
+[gd_scene load_steps=15 format=3 uid="uid://cp6k2aibvb5x0"]
 
 [ext_resource type="PackedScene" uid="uid://djocrijh1ceom" path="res://scenes/Beaker.tscn" id="1_7se6j"]
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_wbabm"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://c1178aepiu4hq" path="res://scenes/wall_1.tscn" id="4_rgh4a"]
 [ext_resource type="FontFile" uid="uid://qlhmfs1ahw63" path="res://fonts/prstartk.ttf" id="5_ciusn"]
 [ext_resource type="Script" path="res://scenes/pointlist.gd" id="5_dx72g"]
+[ext_resource type="FontFile" uid="uid://bke1xm65inmdl" path="res://fonts/Thin sans.ttf" id="7_jk6n3"]
 [ext_resource type="Script" path="res://scenes/Shop.gd" id="8_kl6mg"]
 [ext_resource type="Shader" path="res://scenes/FX.gdshader" id="8_nwidx"]
 [ext_resource type="PackedScene" uid="uid://dwiopwb2k0qtu" path="res://scenes/Dice_shop.tscn" id="9_4euou"]
@@ -118,13 +119,13 @@ rotation = 1.5708
 scale = Vector2(-1, 3)
 
 [node name="lbl_level" type="Label" parent="."]
-offset_left = 312.0
-offset_top = -40.0
-offset_right = 480.0
-offset_bottom = -16.0
-theme_override_fonts/font = ExtResource("5_ciusn")
-theme_override_font_sizes/font_size = 24
-text = "NIVEL:"
+offset_left = 328.0
+offset_top = -34.0
+offset_right = 496.0
+offset_bottom = 10.0
+theme_override_fonts/font = ExtResource("7_jk6n3")
+theme_override_font_sizes/font_size = 60
+text = "Nivel:"
 metadata/_edit_use_anchors_ = true
 
 [node name="lbl_points2" type="Label" parent="lbl_level"]
@@ -132,18 +133,18 @@ layout_mode = 0
 offset_left = 168.0
 offset_right = 234.0
 offset_bottom = 24.0
-theme_override_fonts/font = ExtResource("5_ciusn")
-theme_override_font_sizes/font_size = 24
+theme_override_fonts/font = ExtResource("7_jk6n3")
+theme_override_font_sizes/font_size = 60
 text = "0"
 metadata/_edit_use_anchors_ = true
 
 [node name="lbl_turn" type="Label" parent="."]
-offset_left = 624.0
-offset_top = -41.0
-offset_right = 792.0
-offset_bottom = -17.0
-theme_override_fonts/font = ExtResource("5_ciusn")
-theme_override_font_sizes/font_size = 24
+offset_left = 640.0
+offset_top = -35.0
+offset_right = 808.0
+offset_bottom = 9.0
+theme_override_fonts/font = ExtResource("7_jk6n3")
+theme_override_font_sizes/font_size = 60
 text = "TURNO:"
 metadata/_edit_use_anchors_ = true
 
@@ -152,18 +153,18 @@ layout_mode = 0
 offset_left = 158.0
 offset_right = 224.0
 offset_bottom = 24.0
-theme_override_fonts/font = ExtResource("5_ciusn")
-theme_override_font_sizes/font_size = 24
+theme_override_fonts/font = ExtResource("7_jk6n3")
+theme_override_font_sizes/font_size = 60
 text = "0"
 metadata/_edit_use_anchors_ = true
 
 [node name="lbl_points" type="Label" parent="."]
-offset_left = -112.0
-offset_top = -5.0
-offset_right = 56.0
-offset_bottom = 19.0
-theme_override_fonts/font = ExtResource("5_ciusn")
-theme_override_font_sizes/font_size = 24
+offset_left = -96.0
+offset_top = 6.0
+offset_right = 72.0
+offset_bottom = 50.0
+theme_override_fonts/font = ExtResource("7_jk6n3")
+theme_override_font_sizes/font_size = 60
 text = "PUNTOS:"
 metadata/_edit_use_anchors_ = true
 
@@ -172,28 +173,32 @@ layout_mode = 0
 offset_left = 168.0
 offset_right = 234.0
 offset_bottom = 24.0
-theme_override_fonts/font = ExtResource("5_ciusn")
-theme_override_font_sizes/font_size = 24
+theme_override_fonts/font = ExtResource("7_jk6n3")
+theme_override_font_sizes/font_size = 60
 text = "0"
 metadata/_edit_use_anchors_ = true
 
 [node name="lbl_goal" type="Label" parent="."]
-offset_left = -113.0
-offset_top = -44.0
-offset_right = 55.0
-offset_bottom = -20.0
-theme_override_fonts/font = ExtResource("5_ciusn")
-theme_override_font_sizes/font_size = 24
+offset_left = -68.0
+offset_top = -38.0
+offset_right = 100.0
+offset_bottom = 6.0
+theme_override_fonts/font = ExtResource("7_jk6n3")
+theme_override_font_sizes/font_size = 60
 text = "  GOAL:"
 metadata/_edit_use_anchors_ = true
 
 [node name="lbl_points2" type="Label" parent="lbl_goal"]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.178571
+anchor_right = -0.178571
+anchor_bottom = 0.454545
 offset_left = 170.0
 offset_right = 252.0
 offset_bottom = 24.0
-theme_override_fonts/font = ExtResource("5_ciusn")
-theme_override_font_sizes/font_size = 24
+theme_override_fonts/font = ExtResource("7_jk6n3")
+theme_override_font_sizes/font_size = 60
 text = "0"
 metadata/_edit_use_anchors_ = true
 
@@ -205,7 +210,7 @@ script = ExtResource("5_dx72g")
 offset_left = -123.0
 offset_top = -28.0
 offset_right = 100.0
-offset_bottom = 279.0
+offset_bottom = 303.0
 mouse_filter = 2
 color = Color(0.0862745, 0.0901961, 0.117647, 0.670588)
 
@@ -216,9 +221,10 @@ shape = SubResource("RectangleShape2D_7tt2w")
 [node name="items" type="ItemList" parent="pointlist"]
 offset_left = -120.0
 offset_right = 52.0
-offset_bottom = 248.0
+offset_bottom = 272.0
 theme_override_colors/font_selected_color = Color(0.843137, 0.168627, 0.227451, 1)
-theme_override_fonts/font = ExtResource("5_ciusn")
+theme_override_fonts/font = ExtResource("7_jk6n3")
+theme_override_font_sizes/font_size = 24
 allow_reselect = true
 allow_search = false
 auto_height = true
@@ -247,14 +253,14 @@ item_10/text = "GENERALA"
 item_10/disabled = true
 item_11/text = "GENERALAx2"
 item_11/disabled = true
-metadata/_edit_use_anchors_ = true
 
 [node name="items2" type="ItemList" parent="pointlist"]
 layout_direction = 3
 offset_left = -96.0
 offset_right = -52.0
-offset_bottom = 248.0
-theme_override_fonts/font = ExtResource("5_ciusn")
+offset_bottom = 272.0
+theme_override_fonts/font = ExtResource("7_jk6n3")
+theme_override_font_sizes/font_size = 24
 allow_search = false
 item_count = 12
 item_0/text = "-"
@@ -281,16 +287,15 @@ item_10/text = "-"
 item_10/selectable = false
 item_11/text = "-"
 item_11/selectable = false
-metadata/_edit_use_anchors_ = true
 
 [node name="Button" type="Button" parent="pointlist"]
 offset_left = -120.0
-offset_top = 250.0
+offset_top = 273.0
 offset_right = 96.0
-offset_bottom = 275.0
-theme_override_fonts/font = ExtResource("5_ciusn")
+offset_bottom = 301.0
+theme_override_fonts/font = ExtResource("7_jk6n3")
+theme_override_font_sizes/font_size = 26
 text = "ANOTAR"
-metadata/_edit_use_anchors_ = true
 
 [node name="lbl_gameover" type="Label" parent="."]
 visible = false
@@ -301,12 +306,13 @@ offset_top = 226.0
 offset_right = 898.0
 offset_bottom = 306.0
 theme_override_colors/font_color = Color(1, 0, 0.364706, 1)
-theme_override_fonts/font = ExtResource("5_ciusn")
-theme_override_font_sizes/font_size = 80
+theme_override_fonts/font = ExtResource("7_jk6n3")
+theme_override_font_sizes/font_size = 186
 text = "PERDISTE!"
 
 [node name="Shop" type="Node2D" parent="."]
 z_index = 4095
+position = Vector2(0, -69)
 script = ExtResource("8_kl6mg")
 
 [node name="block" type="ColorRect" parent="Shop"]
@@ -320,60 +326,74 @@ color = Color(1, 1, 1, 0)
 offset_left = -76.0
 offset_top = 30.0
 offset_right = 1202.0
-offset_bottom = 694.0
+offset_bottom = 701.0
 color = Color(0.145098, 0.152941, 0.188235, 0.4)
 
 [node name="ColorRect" type="ColorRect" parent="Shop"]
 offset_left = -90.0
 offset_top = 22.0
 offset_right = 1188.0
-offset_bottom = 686.0
+offset_bottom = 691.0
 color = Color(0.101961, 0.192157, 0.192157, 1)
 
 [node name="ColorRect3" type="ColorRect" parent="Shop"]
 offset_left = 324.0
 offset_top = 90.0
 offset_right = 775.0
-offset_bottom = 260.0
+offset_bottom = 420.0
 color = Color(0.0509804, 0.113725, 0.113725, 1)
 
 [node name="Label" type="Label" parent="Shop"]
 offset_left = -76.0
-offset_top = 33.0
+offset_top = 45.0
 offset_right = 164.0
-offset_bottom = 73.0
-theme_override_fonts/font = ExtResource("5_ciusn")
-theme_override_font_sizes/font_size = 40
+offset_bottom = 107.0
+theme_override_fonts/font = ExtResource("7_jk6n3")
+theme_override_font_sizes/font_size = 86
 text = "TIENDA"
 
-[node name="Dice_shop" parent="Shop" instance=ExtResource("9_4euou")]
+[node name="lbl_item_desc" type="Label" parent="Shop"]
+offset_left = 351.0
+offset_top = 211.0
+offset_right = 747.0
+offset_bottom = 401.0
+theme_override_fonts/font = ExtResource("7_jk6n3")
+theme_override_font_sizes/font_size = 24
+autowrap_mode = 2
+
+[node name="Dice_shop" parent="Shop" node_paths=PackedStringArray("lbl_description") instance=ExtResource("9_4euou")]
 position = Vector2(392, 137)
+lbl_description = NodePath("../lbl_item_desc")
 
-[node name="Dice_shop2" parent="Shop" instance=ExtResource("9_4euou")]
+[node name="Dice_shop2" parent="Shop" node_paths=PackedStringArray("lbl_description") instance=ExtResource("9_4euou")]
 position = Vector2(496, 137)
+lbl_description = NodePath("../lbl_item_desc")
 
-[node name="Dice_shop3" parent="Shop" instance=ExtResource("9_4euou")]
+[node name="Dice_shop3" parent="Shop" node_paths=PackedStringArray("lbl_description") instance=ExtResource("9_4euou")]
 position = Vector2(600, 137)
+lbl_description = NodePath("../lbl_item_desc")
 
-[node name="Dice_shop4" parent="Shop" instance=ExtResource("9_4euou")]
+[node name="Dice_shop4" parent="Shop" node_paths=PackedStringArray("lbl_description") instance=ExtResource("9_4euou")]
 position = Vector2(704, 137)
+lbl_description = NodePath("../lbl_item_desc")
 
 [node name="Button4" type="Button" parent="Shop"]
-offset_left = 1142.0
+offset_left = 1121.0
 offset_top = 28.0
 offset_right = 1180.0
-offset_bottom = 60.0
+offset_bottom = 81.0
 theme_override_fonts/font = ExtResource("5_ciusn")
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 44
 text = "X"
+alignment = 2
 
 [node name="Button5" type="Button" parent="Shop"]
 offset_left = 328.0
 offset_top = 569.0
 offset_right = 771.0
 offset_bottom = 671.0
-theme_override_fonts/font = ExtResource("5_ciusn")
-theme_override_font_sizes/font_size = 24
+theme_override_fonts/font = ExtResource("7_jk6n3")
+theme_override_font_sizes/font_size = 86
 text = "COMPRAR"
 
 [node name="FX" type="ColorRect" parent="."]

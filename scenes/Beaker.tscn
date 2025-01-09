@@ -1,9 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://djocrijh1ceom"]
+[gd_scene load_steps=14 format=3 uid="uid://djocrijh1ceom"]
 
 [ext_resource type="Script" path="res://scenes/Beaker.gd" id="1_3qhnb"]
 [ext_resource type="Texture2D" uid="uid://dytig1jwdi4l1" path="res://sprites/beaker1.png" id="1_252vu"]
 [ext_resource type="Texture2D" uid="uid://d3tsnixp63x6v" path="res://sprites/beaker2.png" id="2_166ns"]
 [ext_resource type="FontFile" uid="uid://qlhmfs1ahw63" path="res://fonts/prstartk.ttf" id="4_m2u8j"]
+[ext_resource type="FontFile" uid="uid://bke1xm65inmdl" path="res://fonts/Thin sans.ttf" id="4_pkukr"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_hcnxi"]
 animations = [{
@@ -117,7 +118,8 @@ offset_right = 54.0
 offset_bottom = 101.0
 scale = Vector2(0.990936, 0.550103)
 theme_override_colors/font_disabled_color = Color(0.282353, 0.282353, 0.282353, 1)
-theme_override_fonts/font = ExtResource("4_m2u8j")
+theme_override_fonts/font = ExtResource("4_pkukr")
+theme_override_font_sizes/font_size = 26
 theme_override_styles/disabled = SubResource("StyleBoxFlat_0igcw")
 text = "AGITAR
 
