@@ -31,6 +31,40 @@ enum Games {
 	GENERALA2 = 11,
 }
 
+enum DiceIDs {
+	Normal,
+	Loaded,
+	PlusDice,
+	MultDice,
+	Copy,
+	D2,
+	D3,
+	TurnPlus,
+}
+
+var DiceTypes = {
+	Normal = {"id": DiceIDs.Normal, "price": 0, "texture": load("res://sprites/dices/cube1.png")},
+	Loaded = {"id": DiceIDs.Loaded, "price": 10, "texture": load("res://sprites/dices/loaded.png"), "title": "Dado cargado", "description": "Siempre sale un [color=red] 5[/color]"},
+	PlusDice = {"id": DiceIDs.PlusDice, "price": 6, "texture": load("res://sprites/dices/plusdice.png"), "title": "Dado plus", "description": "[color=red]Suma[/color] su valor al puntaje."},
+	MultDice = {"id": DiceIDs.MultDice, "price": 10, "texture": load("res://sprites/dices/muldice.png"), "title": "Dado multiplicador", "description": "El puntaje sera [color=red] X[/color] veces su valor."},
+	Copy = {"id": DiceIDs.Copy, "price": 10, "texture": load("res://sprites/dices/copy.png"), "title": "Dado copion", "description": "[color=red]Copia[/color] el valor de otro dado elegido."},
+	D2 = {"id": DiceIDs.D2, "price": 7, "texture": load("res://sprites/dices/dx2.png"), "title": "Dado D2", "description": "Solo tiene [color=red] 2[/color] valores."},
+	D3 = {"id": DiceIDs.D3, "price": 5, "texture": load("res://sprites/dices/dx3.png"), "title": "Dado D3", "description": "Solo tiene [color=red] 3[/color] valores."},
+	TurnPlus = {"id": DiceIDs.TurnPlus, "price": 6, "texture": load("res://sprites/dices/turnplus.png"), "title": "Dado +1 Turno", "description": "Tener este dado suma [color=red] 1[/color] turno a nuestras partidas."}
+}
+
+var DiceChances = [
+	DiceTypes.Loaded, 
+	DiceTypes.PlusDice, 
+	DiceTypes.MultDice, 
+	DiceTypes.Copy, 
+	DiceTypes.D2, 
+	DiceTypes.D3, 
+	DiceTypes.TurnPlus, 
+]
+
+var DiceChancesTmp = []
+
 var point_list = null
 var points_normal = [null, null, null, null, null, null, 10, 20, 30, 40, 50, 100] 
 var points_serve = [null, null, null, null, null, null, 15, 25, 35, 45, 55, 200] 
@@ -56,6 +90,7 @@ func Next():
 			NextLevel()
 			
 func NextLevel():
+	refreshPool()
 	Level += 1
 	if Level > LevelMax:
 		gameover(true)
@@ -66,6 +101,9 @@ func NextLevel():
 		Global.InternarlTurn = 1
 		Global.point_list.next_level()
 		Goal = Goals[Level]
+		
+func refreshPool():
+	DiceChancesTmp = [] + DiceChances
 		
 func gameover(win):
 	if !win:

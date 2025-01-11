@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dvu30axn3fd51"
-path="res://.godot/imported/normal6.png-3abc05f34874cb1f363a1e9bda6966aa.ctex"
+uid="uid://b2ykr4uo0eocq"
+path="res://.godot/imported/muldice.png-69da9430636273214fe7e815b24ee71b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/dices/normal6.png"
-dest_files=["res://.godot/imported/normal6.png-3abc05f34874cb1f363a1e9bda6966aa.ctex"]
+source_file="res://sprites/dices/muldice.png"
+dest_files=["res://.godot/imported/muldice.png-69da9430636273214fe7e815b24ee71b.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://o1qw2xsq0dsf"
-path="res://.godot/imported/normal4.png-904914b9d67b9f3f65bc5739bfc25c73.ctex"
+uid="uid://dxgxvsfj8bc80"
+path="res://.godot/imported/turnplus.png-9805e7c1690c36e4aaaf11dbcf721f6e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/dices/normal4.png"
-dest_files=["res://.godot/imported/normal4.png-904914b9d67b9f3f65bc5739bfc25c73.ctex"]
+source_file="res://sprites/dices/turnplus.png"
+dest_files=["res://.godot/imported/turnplus.png-9805e7c1690c36e4aaaf11dbcf721f6e.ctex"]
 
 [params]
 

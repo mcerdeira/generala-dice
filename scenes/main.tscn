@@ -330,7 +330,7 @@ offset_bottom = 701.0
 color = Color(0.145098, 0.152941, 0.188235, 0.4)
 
 [node name="ColorRect" type="ColorRect" parent="Shop"]
-offset_left = -90.0
+offset_left = -101.0
 offset_top = 22.0
 offset_right = 1188.0
 offset_bottom = 691.0
@@ -352,13 +352,16 @@ theme_override_fonts/font = ExtResource("7_jk6n3")
 theme_override_font_sizes/font_size = 86
 text = "TIENDA"
 
-[node name="lbl_item_desc" type="Label" parent="Shop"]
+[node name="lbl_item_desc" type="RichTextLabel" parent="Shop"]
 offset_left = 351.0
-offset_top = 211.0
+offset_top = 221.0
 offset_right = 747.0
 offset_bottom = 401.0
-theme_override_fonts/font = ExtResource("7_jk6n3")
-theme_override_font_sizes/font_size = 24
+theme_override_fonts/normal_font = ExtResource("7_jk6n3")
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "
+"
 autowrap_mode = 2
 
 [node name="Dice_shop" parent="Shop" node_paths=PackedStringArray("lbl_description") instance=ExtResource("9_4euou")]

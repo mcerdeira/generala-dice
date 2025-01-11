@@ -6,6 +6,10 @@ var y_pos = 0
 var decided = false
 var target_rotation = Vector3.ZERO
 var align_speed = 1  # Velocidad de alineación
+var DiceType = null
+var price = 0
+var description = ""
+var title = ""
 
 func _ready():
 	randomize()
@@ -16,6 +20,20 @@ func _ready():
 	rotation.y = deg_to_rad(y_pos)
 	#rotation.z = deg_to_rad(z_pos)
 	initialize()
+	if Global.DiceChancesTmp == null or Global.DiceChancesTmp == []:
+		Global.refreshPool()
+	Global.DiceChancesTmp.shuffle()
+	DiceType = Global.DiceChancesTmp.pop_at(0)
+	price = DiceType.price
+	description = DiceType.description
+	title = DiceType.title
+	setTexture()
+	
+func setTexture():
+	var material = get_active_material(0)
+	var texture = DiceType.texture
+	if material and material is StandardMaterial3D:
+		material.albedo_texture = texture
 	
 func initialize():
 	decided = false

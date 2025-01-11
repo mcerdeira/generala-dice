@@ -1,15 +1,21 @@
 extends Area2D
-var price = 0.0
-@export var lbl_description : Label
+@export var lbl_description : RichTextLabel
 
 func _ready():
-	price = Global.pick_random([5, 6, 10])
-	$Label.text = "$" + str(price)
+	add_to_group("diceshop")
+	$Label.text = "$" + str($SubViewport/Node3D_shop.price)
+	
+func unselect():
+	$enfasis.visible = false
 	
 func _on_control_gui_input(event):
 	if event is InputEventMouseButton && event.is_action_pressed("click"):
 		$enfasis.visible = !$enfasis.visible
 		if $enfasis.visible:
-			lbl_description.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
+			lbl_description.text = "\n" + $SubViewport/Node3D_shop.title + ":\n\n" + $SubViewport/Node3D_shop.description
+			var dices = get_tree().get_nodes_in_group("diceshop")
+			for d in dices:
+				if d != self:
+					d.unselect()
 		else:
 			lbl_description.text = ""
