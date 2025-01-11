@@ -17,6 +17,7 @@ var dir = 1
 var currentvalue = null
 var original_position =  null
 var shaking = false
+var DiceType = null
 
 func _ready():
 	add_to_group("dices")
@@ -39,8 +40,14 @@ func initialize():
 	initial_rotation = randi_range(-10, 10)
 	$SubViewport/Node3D.initialize()
 	
+func ChangeType(_DiceType):
+	DiceType = _DiceType
+	$SubViewport/Node3D.ChangeType(DiceType)
+	
 func show_enfasis(value):
 	$enfasis.visible = value
+	$lbl_add.visible = value
+	$lbl_add.text = Global.getDiceExtraText(DiceType, currentvalue)
 	shaking = value
 	if !shaking:
 		rotation_degrees = 0
@@ -59,7 +66,8 @@ func throw_dice(force: Vector2, rotation_force: float):
 func _physics_process(delta):
 	if shaking:
 		rotation_degrees = randf_range(-4.0, 4.0)
-	
+		$lbl_add.rotation_degrees = randf_range(-4.0, 4.0)
+		
 	what_ami()
 	if dragged:
 		global_position = get_global_mouse_position()
@@ -80,8 +88,9 @@ func _physics_process(delta):
 func what_ami():
 	z_index = global_position.y
 	currentvalue = $SubViewport/Node3D.what_ami()
+	DiceType = $SubViewport/Node3D.what_type()
 	$Label.text = str(currentvalue)
-				
+	
 func _on_area_entered(area):
 	if area is Area2D and area.is_in_group("dices") and ttl_bounce <= 0:
 		var normal = (position - area.position).normalized()

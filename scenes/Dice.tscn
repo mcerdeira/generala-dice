@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://dufepst0w8rkr"]
+[gd_scene load_steps=9 format=3 uid="uid://dufepst0w8rkr"]
 
 [ext_resource type="Script" path="res://scenes/Dice.gd" id="1_r70iu"]
 [ext_resource type="PackedScene" uid="uid://berhcc7novg7b" path="res://scenes/node_3d.tscn" id="2_lt8j6"]
 [ext_resource type="Texture2D" uid="uid://dn5ybcewikek6" path="res://sprites/dices/enfasis.png" id="3_8jf7x"]
 [ext_resource type="Shader" path="res://scenes/enfasis.gdshader" id="3_fr77i"]
+[ext_resource type="FontFile" uid="uid://bke1xm65inmdl" path="res://fonts/Thin sans.ttf" id="3_xq7bm"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_hmu5q"]
 viewport_path = NodePath("SubViewport")
@@ -48,6 +49,19 @@ offset_left = -38.0
 offset_top = 37.0
 offset_right = 39.0
 offset_bottom = 60.0
+
+[node name="lbl_add" type="Label" parent="."]
+visible = false
+offset_left = -23.0
+offset_top = 32.0
+offset_right = 25.0
+offset_bottom = 55.0
+pivot_offset = Vector2(23, 9)
+theme_override_colors/font_color = Color(0.745098, 0.14902, 0.2, 1)
+theme_override_fonts/font = ExtResource("3_xq7bm")
+theme_override_font_sizes/font_size = 24
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="enfasis" type="Sprite2D" parent="."]
 visible = false

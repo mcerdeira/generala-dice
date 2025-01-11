@@ -59,6 +59,7 @@ offset_right = 26.0
 offset_bottom = 26.0
 
 [node name="Label" type="Label" parent="."]
+visible = false
 offset_left = -16.0
 offset_top = 42.0
 offset_right = 24.0

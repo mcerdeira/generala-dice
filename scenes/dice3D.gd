@@ -19,6 +19,10 @@ func _ready():
 	initialize()
 	setTexture()
 	
+func ChangeType(_DiceType):
+	DiceType = _DiceType
+	setTexture()
+	
 func setTexture():
 	var material = get_active_material(0)
 	var texture = DiceType.texture

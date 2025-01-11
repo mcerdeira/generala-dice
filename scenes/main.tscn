@@ -326,59 +326,111 @@ color = Color(1, 1, 1, 0)
 offset_left = -76.0
 offset_top = 30.0
 offset_right = 1202.0
-offset_bottom = 701.0
+offset_bottom = 744.0
 color = Color(0.145098, 0.152941, 0.188235, 0.4)
 
 [node name="ColorRect" type="ColorRect" parent="Shop"]
 offset_left = -101.0
 offset_top = 22.0
 offset_right = 1188.0
-offset_bottom = 691.0
+offset_bottom = 767.0
 color = Color(0.101961, 0.192157, 0.192157, 1)
 
 [node name="ColorRect3" type="ColorRect" parent="Shop"]
 offset_left = 324.0
-offset_top = 90.0
+offset_top = 35.0
 offset_right = 775.0
-offset_bottom = 420.0
+offset_bottom = 291.0
+color = Color(0.0509804, 0.113725, 0.113725, 1)
+
+[node name="ColorRect4" type="ColorRect" parent="Shop"]
+offset_left = 299.0
+offset_top = 377.0
+offset_right = 810.0
+offset_bottom = 652.0
 color = Color(0.0509804, 0.113725, 0.113725, 1)
 
 [node name="Label" type="Label" parent="Shop"]
 offset_left = -76.0
-offset_top = 45.0
-offset_right = 164.0
-offset_bottom = 107.0
+offset_top = 48.0
+offset_right = 194.0
+offset_bottom = 288.0
 theme_override_fonts/font = ExtResource("7_jk6n3")
-theme_override_font_sizes/font_size = 86
-text = "TIENDA"
+theme_override_font_sizes/font_size = 109
+text = "TIENDA
+DE
+DADOS"
+horizontal_alignment = 2
 
 [node name="lbl_item_desc" type="RichTextLabel" parent="Shop"]
-offset_left = 351.0
-offset_top = 221.0
-offset_right = 747.0
-offset_bottom = 401.0
+offset_left = 333.0
+offset_top = 127.0
+offset_right = 762.0
+offset_bottom = 277.0
 theme_override_fonts/normal_font = ExtResource("7_jk6n3")
 theme_override_font_sizes/normal_font_size = 24
 bbcode_enabled = true
-text = "
-"
+autowrap_mode = 2
+
+[node name="lbl_item_desc2" type="RichTextLabel" parent="Shop"]
+offset_left = 314.0
+offset_top = 476.0
+offset_right = 800.0
+offset_bottom = 636.0
+theme_override_fonts/normal_font = ExtResource("7_jk6n3")
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
 autowrap_mode = 2
 
 [node name="Dice_shop" parent="Shop" node_paths=PackedStringArray("lbl_description") instance=ExtResource("9_4euou")]
-position = Vector2(392, 137)
+position = Vector2(392, 82)
 lbl_description = NodePath("../lbl_item_desc")
 
 [node name="Dice_shop2" parent="Shop" node_paths=PackedStringArray("lbl_description") instance=ExtResource("9_4euou")]
-position = Vector2(496, 137)
+position = Vector2(496, 82)
 lbl_description = NodePath("../lbl_item_desc")
 
 [node name="Dice_shop3" parent="Shop" node_paths=PackedStringArray("lbl_description") instance=ExtResource("9_4euou")]
-position = Vector2(600, 137)
+position = Vector2(600, 82)
 lbl_description = NodePath("../lbl_item_desc")
 
 [node name="Dice_shop4" parent="Shop" node_paths=PackedStringArray("lbl_description") instance=ExtResource("9_4euou")]
-position = Vector2(704, 137)
+position = Vector2(704, 82)
 lbl_description = NodePath("../lbl_item_desc")
+
+[node name="lbl_dicecurrent" type="Label" parent="Shop"]
+offset_left = 116.0
+offset_top = 416.0
+offset_right = 293.0
+offset_bottom = 452.0
+theme_override_fonts/font = ExtResource("7_jk6n3")
+theme_override_font_sizes/font_size = 50
+text = "ACTUALES:"
+
+[node name="Dice_current" parent="Shop" node_paths=PackedStringArray("lbl_description") instance=ExtResource("9_4euou")]
+position = Vector2(344, 431)
+current = true
+lbl_description = NodePath("../lbl_item_desc2")
+
+[node name="Dice_current2" parent="Shop" node_paths=PackedStringArray("lbl_description") instance=ExtResource("9_4euou")]
+position = Vector2(448, 431)
+current = true
+lbl_description = NodePath("../lbl_item_desc2")
+
+[node name="Dice_current3" parent="Shop" node_paths=PackedStringArray("lbl_description") instance=ExtResource("9_4euou")]
+position = Vector2(552, 431)
+current = true
+lbl_description = NodePath("../lbl_item_desc2")
+
+[node name="Dice_current4" parent="Shop" node_paths=PackedStringArray("lbl_description") instance=ExtResource("9_4euou")]
+position = Vector2(656, 431)
+current = true
+lbl_description = NodePath("../lbl_item_desc2")
+
+[node name="Dice_current5" parent="Shop" node_paths=PackedStringArray("lbl_description") instance=ExtResource("9_4euou")]
+position = Vector2(758, 431)
+current = true
+lbl_description = NodePath("../lbl_item_desc2")
 
 [node name="Button4" type="Button" parent="Shop"]
 offset_left = 1121.0
@@ -392,12 +444,36 @@ alignment = 2
 
 [node name="Button5" type="Button" parent="Shop"]
 offset_left = 328.0
-offset_top = 569.0
+offset_top = 663.0
 offset_right = 771.0
-offset_bottom = 671.0
+offset_bottom = 756.0
 theme_override_fonts/font = ExtResource("7_jk6n3")
 theme_override_font_sizes/font_size = 86
 text = "COMPRAR"
+
+[node name="lbl_points" type="Label" parent="Shop"]
+offset_left = 330.0
+offset_top = 316.0
+offset_right = 591.0
+offset_bottom = 360.0
+theme_override_fonts/font = ExtResource("7_jk6n3")
+theme_override_font_sizes/font_size = 60
+text = "DISPONIBLE:"
+metadata/_edit_use_anchors_ = true
+
+[node name="lbl_points2" type="Label" parent="Shop/lbl_points"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.429119
+anchor_right = 0.429119
+anchor_bottom = 0.454545
+offset_left = 168.0
+offset_right = 234.0
+offset_bottom = 24.0
+theme_override_fonts/font = ExtResource("7_jk6n3")
+theme_override_font_sizes/font_size = 60
+text = "0"
+metadata/_edit_use_anchors_ = true
 
 [node name="FX" type="ColorRect" parent="."]
 z_index = 4096

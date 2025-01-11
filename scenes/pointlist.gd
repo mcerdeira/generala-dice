@@ -24,6 +24,7 @@ var blocked_games = []
 var go_for_double = false
 var current_points = null
 var current_index = -1
+var current_dices = null
 
 func _ready():
 	fade_out()
@@ -55,6 +56,7 @@ func reset_points_table():
 	
 func calc_posible_points():
 	current_points = null
+	current_dices = null
 	current_index = -1
 	go_for_double = false
 	double_game = []
@@ -320,11 +322,21 @@ func clearSelected():
 		$items.deselect(i)
 
 func _on_button_pressed(): #ANOTAR
+	if current_dices.size() > 0:
+		for d in current_dices:
+			if d.DiceType == Global.DiceTypes.PlusDice:
+				current_points += d.currentvalue
+		
+		for d in current_dices:
+			if d.DiceType == Global.DiceTypes.MultDice:
+				current_points *= d.currentvalue
+	
 	Global.play_sound(Global.ScoreSFX)
 	Global.InternarlTurn = 1
 	Global.Points += current_points
 	Global.Beaker.first = true
 	current_points = null
+	current_dices = null
 	
 	var dices = get_tree().get_nodes_in_group("dices")
 	for d in dices:
@@ -342,6 +354,7 @@ func _on_items_item_selected(index):
 		var dices = get_tree().get_nodes_in_group("dices")
 		show_enfasis(dices, false)
 		current_points = 0
+		current_dices = null
 		return
 	
 	current_points = $items2.get_item_text(index)
@@ -357,30 +370,42 @@ func _on_items_item_selected(index):
 		
 	match index:
 		Global.Games.ONE:
+			current_dices = [] + one_game
 			show_enfasis(one_game, true)
 		Global.Games.TWO:
+			current_dices = [] + two_game
 			show_enfasis(two_game, true)
 		Global.Games.THREE:
+			current_dices = [] + three_game
 			show_enfasis(three_game, true)
 		Global.Games.FOUR:
+			current_dices = [] + four_game
 			show_enfasis(four_game, true)
 		Global.Games.FIVE:
+			current_dices = [] + five_game
 			show_enfasis(five_game, true)
 		Global.Games.SIX:
+			current_dices = [] + six_game
 			show_enfasis(six_game, true)
 		Global.Games.DOUBLE:
+			current_dices = [] + double_game
 			show_enfasis(double_game, true)
 		Global.Games.FLUSH:
+			current_dices = [] + flush_game
 			show_enfasis(flush_game, true)
 		Global.Games.FULL:
+			current_dices = [] + full_game
 			show_enfasis(full_game, true)
 		Global.Games.POKER:
+			current_dices = [] + poker_game
 			show_enfasis(poker_game, true)
 		Global.Games.GENERALA:
 			if !go_for_double:
+				current_dices = [] + generala_game
 				show_enfasis(generala_game, true)
 		Global.Games.GENERALA2:
 			if go_for_double:
+				current_dices = [] + generala_game
 				show_enfasis(generala_game, true)
 
 	$"../lbl_points/lbl_points2".text = str(current_points)

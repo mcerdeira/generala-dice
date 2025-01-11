@@ -8,8 +8,6 @@ var target_rotation = Vector3.ZERO
 var align_speed = 1  # Velocidad de alineación
 var DiceType = null
 var price = 0
-var description = ""
-var title = ""
 
 func _ready():
 	randomize()
@@ -25,8 +23,10 @@ func _ready():
 	Global.DiceChancesTmp.shuffle()
 	DiceType = Global.DiceChancesTmp.pop_at(0)
 	price = DiceType.price
-	description = DiceType.description
-	title = DiceType.title
+	setTexture()
+	
+func ChangeType(_DiceType):
+	DiceType = _DiceType
 	setTexture()
 	
 func setTexture():

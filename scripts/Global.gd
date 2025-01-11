@@ -43,14 +43,14 @@ enum DiceIDs {
 }
 
 var DiceTypes = {
-	Normal = {"id": DiceIDs.Normal, "price": 0, "texture": load("res://sprites/dices/cube1.png")},
-	Loaded = {"id": DiceIDs.Loaded, "price": 10, "texture": load("res://sprites/dices/loaded.png"), "title": "Dado cargado", "description": "Siempre sale un [color=red] 5[/color]"},
+	Normal = {"id": DiceIDs.Normal, "price": 0, "texture": load("res://sprites/dices/cube1.png"), "title": "Dado normal", "description": "Confiable dado de [color=red] 6[/color] lados."},
+	Loaded = {"id": DiceIDs.Loaded, "price": 10, "texture": load("res://sprites/dices/loaded.png"), "title": "Dado cargado", "description": "Siempre sale un [color=red] 5[/color]."},
 	PlusDice = {"id": DiceIDs.PlusDice, "price": 6, "texture": load("res://sprites/dices/plusdice.png"), "title": "Dado plus", "description": "[color=red]Suma[/color] su valor al puntaje."},
-	MultDice = {"id": DiceIDs.MultDice, "price": 10, "texture": load("res://sprites/dices/muldice.png"), "title": "Dado multiplicador", "description": "El puntaje sera [color=red] X[/color] veces su valor."},
-	Copy = {"id": DiceIDs.Copy, "price": 10, "texture": load("res://sprites/dices/copy.png"), "title": "Dado copion", "description": "[color=red]Copia[/color] el valor de otro dado elegido."},
+	MultDice = {"id": DiceIDs.MultDice, "price": 150, "texture": load("res://sprites/dices/muldice.png"), "title": "Dado multiplicador", "description": "[color=red]Multiplica[/color] el puntaje por su valor."},
+	Copy = {"id": DiceIDs.Copy, "price": 10, "texture": load("res://sprites/dices/copy.png"), "title": "Dado copion", "description": "[color=red]Copia[/color] el valor de otro dado al azar."},
 	D2 = {"id": DiceIDs.D2, "price": 7, "texture": load("res://sprites/dices/dx2.png"), "title": "Dado D2", "description": "Solo tiene [color=red] 2[/color] valores."},
 	D3 = {"id": DiceIDs.D3, "price": 5, "texture": load("res://sprites/dices/dx3.png"), "title": "Dado D3", "description": "Solo tiene [color=red] 3[/color] valores."},
-	TurnPlus = {"id": DiceIDs.TurnPlus, "price": 6, "texture": load("res://sprites/dices/turnplus.png"), "title": "Dado +1 Turno", "description": "Tener este dado suma [color=red] 1[/color] turno a nuestras partidas."}
+	TurnPlus = {"id": DiceIDs.TurnPlus, "price": 3, "texture": load("res://sprites/dices/turnplus.png"), "title": "Dado +1 Turno", "description": "Tener este dado suma [color=red] 1[/color] turno la partida."}
 }
 
 var DiceChances = [
@@ -74,9 +74,9 @@ var LevelMax = 8
 var Turn = 1
 var InternarlTurn = 1
 var TurnMax = 7
-var Points = 0
+var Points = 900
 var Goal = 45
-var Goals = [0, 45, 65, 85, 95, 100, 120, 150, 250]
+var Goals = [0, 45, 100, 120, 150, 250, 800, 1000, 2000]
 var GameOver = false
 var Beaker = null
 
@@ -115,6 +115,14 @@ func minforTurn():
 		return 5
 	else:
 		return 1
+		
+func getDiceExtraText(DiceType, currentvalue):
+	if DiceType == Global.DiceTypes.MultDice:
+		return "X" + str(currentvalue)
+	elif DiceType == Global.DiceTypes.PlusDice:
+		return "+" + str(currentvalue)
+	else:
+		return ""
 	
 func pick_random(container):
 	if typeof(container) == TYPE_DICTIONARY:
