@@ -10,6 +10,9 @@ var DiceType = null
 var price = 0
 
 func _ready():
+	randomize_dice()
+	
+func randomize_dice():
 	randomize()
 	x_pos = Global.pick_random([0.0, 90.0, 180.0, 270.0])
 	y_pos = Global.pick_random([0.0, 90.0, 180.0, 270.0])

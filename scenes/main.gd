@@ -9,7 +9,7 @@ func _ready():
 	Global.DiceclickSFX = preload("res://sfx/dice_click.wav")
 	Global.ScoreSFX = preload("res://sfx/score.wav")
 	Global.ClickSFX = preload("res://sfx/button_click.wav")
-	#Music.play(Global.Temardo)
+	Music.play(Global.Temardo)
 	
 func _physics_process(delta):
 	if Input.is_action_just_pressed("toggle_fullscreen"):

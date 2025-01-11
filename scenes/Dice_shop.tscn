@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dwiopwb2k0qtu"]
+[gd_scene load_steps=10 format=3 uid="uid://dwiopwb2k0qtu"]
 
 [ext_resource type="Script" path="res://scenes/Dice_shop.gd" id="1_wyqml"]
 [ext_resource type="PackedScene" uid="uid://bx0wq56ijp6gw" path="res://scenes/node_3d_shop.tscn" id="2_c64jr"]
@@ -13,6 +13,14 @@ viewport_path = NodePath("SubViewport")
 shader = ExtResource("3_wy7y5")
 shader_parameter/shine_color = Color(1, 1, 1, 1)
 shader_parameter/shine_speed = 3.0
+shader_parameter/shine_size = 0.01
+shader_parameter/white = null
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gclqe"]
+resource_local_to_scene = true
+shader = ExtResource("3_wy7y5")
+shader_parameter/shine_color = Color(1, 1, 1, 1)
+shader_parameter/shine_speed = 0.0
 shader_parameter/shine_size = 0.01
 shader_parameter/white = null
 
@@ -36,6 +44,7 @@ scale = Vector2(0.3, 0.3)
 texture = ExtResource("4_jikcf")
 
 [node name="sprite" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_gclqe")
 texture = SubResource("ViewportTexture_hmu5q")
 
 [node name="collider" type="CollisionShape2D" parent="."]

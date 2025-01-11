@@ -16,13 +16,20 @@ func _ready():
 		$Label.visible = true
 		$Label.text = "$" + str($SubViewport/Node3D_shop.price)
 		DiceType = $SubViewport/Node3D_shop.DiceType
+		if DiceType == Global.DiceTypes.Loaded:
+			$sprite.material.set_shader_parameter("shine_speed", 1)
 	else:
 		group = "diceshopcurrents"
 		add_to_group(group)
 		
+func randomize_dice():
+	$SubViewport/Node3D_shop.randomize_dice()
+		
 func ChangeType(_DiceType, real):
 	real_dice = real
 	DiceType = _DiceType
+	if DiceType == Global.DiceTypes.Loaded:
+		$sprite.material.set_shader_parameter("shine_speed", 1)
 	$SubViewport/Node3D_shop.ChangeType(DiceType)
 	
 func unselect():

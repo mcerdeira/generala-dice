@@ -82,7 +82,7 @@ var LevelMax = 8
 var Turn = 1
 var InternarlTurn = 1
 var TurnMax = 7
-var Points = 900
+var Points = 0
 var Goal = 45
 var Goals = [0, 45, 100, 120, 150, 250, 800, 1000, 2000]
 var GameOver = false
@@ -98,7 +98,7 @@ func Next():
 			NextLevel()
 			
 func NextLevel():
-	refreshPool()
+	refreshPool(true)
 	Level += 1
 	if Level > LevelMax:
 		gameover(true)
@@ -110,8 +110,13 @@ func NextLevel():
 		Global.point_list.next_level()
 		Goal = Goals[Level]
 		
-func refreshPool():
+func refreshPool(reroll = false):
 	DiceChancesTmp = [] + DiceChances
+	if reroll:
+		var dices = get_tree().get_nodes_in_group("diceshop")
+		for d in dices:
+			d.randomize_dice()
+		
 		
 func gameover(win):
 	if !win:

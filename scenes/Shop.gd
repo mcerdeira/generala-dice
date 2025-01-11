@@ -51,10 +51,12 @@ func _on_button_5_pressed(): #Comprar
 			
 	if reemplazo == null:
 		$lbl_item_desc2.text = prefix + "Selecciona un dado a reemplazar."
+		Global.shaker_obj.shake(6, 0.5)
 		return
 	
 	if nuevo == null:
 		$lbl_item_desc2.text = prefix + "Selecciona un dado a comprar."
+		Global.shaker_obj.shake(6, 0.5)
 		return
 		
 	if canBuy(nuevo.price):
@@ -70,3 +72,4 @@ func _on_button_5_pressed(): #Comprar
 		unselectall()
 	else:
 		$lbl_item_desc2.text = prefix +  "No tienes suficiente dinero."
+		Global.shaker_obj.shake(6, 0.5)
