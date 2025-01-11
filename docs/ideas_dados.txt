@@ -1,0 +1,5 @@
+- Dado de madera: Multiplica por 2
+- Dado de metal: Multiplica por 3
+- Dado de diamante: Multiplica por el numero que salio
+- Dado de 1 sola cara de madera: multiplica x 2 solo si sale 2
+- Dado de 1 sola cara de metal: multiplica x 3 solo si sale 3

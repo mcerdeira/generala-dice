@@ -64,6 +64,12 @@ func throw_dice(force: Vector2, rotation_force: float):
 	stoped = false
 
 func _physics_process(delta):
+	if DiceType == Global.DiceTypes.Rubber:
+		if stoped and !rolling:
+			$btn_flip.visible = true
+	else:
+		$btn_flip.visible = false
+	
 	if shaking:
 		rotation_degrees = randf_range(-4.0, 4.0)
 		$lbl_add.rotation_degrees = randf_range(-4.0, 4.0)
@@ -115,3 +121,8 @@ func _on_control_gui_input(event):
 			if dragged:
 				if event is InputEventMouseButton && event.is_action_released("click"):
 					dragged = false
+
+func _on_btn_flip_pressed():
+	if DiceType == Global.DiceTypes.Rubber:
+		$SubViewport/Node3D.flip(currentvalue)
+		Global.point_list.refresh()

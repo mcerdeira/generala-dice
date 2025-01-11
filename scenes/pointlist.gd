@@ -44,6 +44,10 @@ func fade_in():
 	reset_points_table()
 	calc_posible_points()
 	
+func refresh():
+	reset_points_table()
+	calc_posible_points()
+	
 func next_level():
 	blocked_games = []
 	reset_points_table()
@@ -322,14 +326,22 @@ func clearSelected():
 		$items.deselect(i)
 
 func _on_button_pressed(): #ANOTAR
+	Global.shaker_obj.shake(3, 1)
+	
 	if current_dices.size() > 0:
 		for d in current_dices:
 			if d.DiceType == Global.DiceTypes.PlusDice:
 				current_points += d.currentvalue
 		
+		var mult = 1
 		for d in current_dices:
 			if d.DiceType == Global.DiceTypes.MultDice:
-				current_points *= d.currentvalue
+				mult += d.currentvalue
+			if d.DiceType == Global.DiceTypes.MultDice2:
+				mult += 2
+		
+		if mult != 1:
+			current_points *= mult
 	
 	Global.play_sound(Global.ScoreSFX)
 	Global.InternarlTurn = 1

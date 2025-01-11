@@ -7,6 +7,7 @@ var RollSFX = null
 var DiceclickSFX = null
 var ScoreSFX = null
 var ClickSFX = null
+var shaker_obj = null
 
 enum Statuses {
 	IDLE,
@@ -40,17 +41,22 @@ enum DiceIDs {
 	D2,
 	D3,
 	TurnPlus,
+	Rubber,
+	MultDice2,
 }
 
 var DiceTypes = {
 	Normal = {"id": DiceIDs.Normal, "price": 0, "texture": load("res://sprites/dices/cube1.png"), "title": "Dado normal", "description": "Confiable dado de [color=red] 6[/color] lados."},
-	Loaded = {"id": DiceIDs.Loaded, "price": 10, "texture": load("res://sprites/dices/loaded.png"), "title": "Dado cargado", "description": "Siempre sale un [color=red] 5[/color]."},
+	Loaded = {"id": DiceIDs.Loaded, "price": 10, "texture": load("res://sprites/dices/loaded.png"), "title": "Dado cargado", "description": "Siempre sale un [color=red] 6[/color]."},
 	PlusDice = {"id": DiceIDs.PlusDice, "price": 6, "texture": load("res://sprites/dices/plusdice.png"), "title": "Dado plus", "description": "[color=red]Suma[/color] su valor al puntaje."},
 	MultDice = {"id": DiceIDs.MultDice, "price": 150, "texture": load("res://sprites/dices/muldice.png"), "title": "Dado multiplicador", "description": "[color=red]Multiplica[/color] el puntaje por su valor."},
+	MultDice2 = {"id": DiceIDs.MultDice2, "price": 10, "texture": load("res://sprites/dices/muldice2.png"), "title": "Dado x2", "description": "[color=red]Multiplica[/color] el puntaje por [color=red] 2[/color]."},
+	
 	Copy = {"id": DiceIDs.Copy, "price": 10, "texture": load("res://sprites/dices/copy.png"), "title": "Dado copion", "description": "[color=red]Copia[/color] el valor de otro dado al azar."},
 	D2 = {"id": DiceIDs.D2, "price": 7, "texture": load("res://sprites/dices/dx2.png"), "title": "Dado D2", "description": "Solo tiene [color=red] 2[/color] valores."},
 	D3 = {"id": DiceIDs.D3, "price": 5, "texture": load("res://sprites/dices/dx3.png"), "title": "Dado D3", "description": "Solo tiene [color=red] 3[/color] valores."},
-	TurnPlus = {"id": DiceIDs.TurnPlus, "price": 3, "texture": load("res://sprites/dices/turnplus.png"), "title": "Dado +1 Turno", "description": "Tener este dado suma [color=red] 1[/color] turno la partida."}
+	TurnPlus = {"id": DiceIDs.TurnPlus, "price": 3, "texture": load("res://sprites/dices/turnplus.png"), "title": "Dado +1 Turno", "description": "Tener este dado suma [color=red] 1[/color] turno la partida."},
+	Rubber = {"id": DiceIDs.Rubber, "price": 5, "texture": load("res://sprites/dices/rubber.png"), "title": "Dado de goma", "description": "Al tirarlo permite un [color=red] flip[/color] a su lado opuesto."},
 }
 
 var DiceChances = [
@@ -61,6 +67,8 @@ var DiceChances = [
 	DiceTypes.D2, 
 	DiceTypes.D3, 
 	DiceTypes.TurnPlus, 
+	DiceTypes.Rubber,
+	DiceTypes.MultDice2,
 ]
 
 var DiceChancesTmp = []
@@ -121,6 +129,8 @@ func getDiceExtraText(DiceType, currentvalue):
 		return "X" + str(currentvalue)
 	elif DiceType == Global.DiceTypes.PlusDice:
 		return "+" + str(currentvalue)
+	elif DiceType == Global.DiceTypes.MultDice2:
+		return "X" + str(2)
 	else:
 		return ""
 	

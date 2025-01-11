@@ -5,6 +5,9 @@ var DiceType = null
 func initialize():
 	$dice3D.initialize()
 	
+func flip(currentvalue):
+	$dice3D.flip(currentvalue)
+	
 func ChangeType(_DiceType):
 	DiceType = _DiceType
 	$dice3D.ChangeType(DiceType)

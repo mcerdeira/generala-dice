@@ -7,11 +7,16 @@ var decided = false
 var target_rotation = Vector3.ZERO
 var align_speed = 5  # Velocidad de alineación
 var DiceType = Global.DiceTypes.Normal
+var currentvalue = -1
 
 func _ready():
 	randomize()
 	x_pos = Global.pick_random([0.0, 90.0, 180.0, 270.0])
 	y_pos = Global.pick_random([0.0, 90.0, 180.0, 270.0])
+	if DiceType == Global.DiceTypes.Loaded:
+		x_pos = 90.0
+		y_pos = 180.0
+
 	#z_pos = Global.pick_random([0.0, 90.0, 180.0, 270.0])
 	rotation.x = deg_to_rad(x_pos)
 	rotation.y = deg_to_rad(y_pos)
@@ -88,14 +93,38 @@ func what_ami():
 		if x_pos == 270 and y_pos == 270:
 			return 2
 		
-			
+func flip(currentvalue):
+	if currentvalue == 1:
+		align_to_nearest(6)
+	elif currentvalue == 2:
+		align_to_nearest(5)
+	elif currentvalue == 3:
+		align_to_nearest(4)
+	elif currentvalue == 4:
+		align_to_nearest(3)
+	elif currentvalue == 5:
+		align_to_nearest(2)
+	elif currentvalue == 6:
+		align_to_nearest(1)
+	
 # Función para alinear a la posición más cercana
-func align_to_nearest():
+func align_to_nearest(_forcedvalue = null):
 	var curr_rotx = rad_to_deg(rotation.x)
 	var curr_roty = rad_to_deg(rotation.y)
-	var num_dest = Global.pick_random([1, 2, 3, 4, 5, 6])
+	var num_dest = -1
+	if DiceType == Global.DiceTypes.D2:
+		num_dest = Global.pick_random([1, 2])
+	elif DiceType == Global.DiceTypes.D3:
+		num_dest = Global.pick_random([1, 2, 3])
+	elif DiceType == Global.DiceTypes.Loaded:
+		num_dest = 6
+	else:
+		num_dest = Global.pick_random([1, 2, 3, 4, 5, 6])
+
+	if _forcedvalue != null:
+		num_dest = _forcedvalue
+		
 	var resu = null
-	
 	match num_dest:
 		1:
 			resu = Global.pick_random([

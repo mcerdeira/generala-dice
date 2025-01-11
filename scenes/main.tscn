@@ -1,8 +1,9 @@
-[gd_scene load_steps=15 format=3 uid="uid://cp6k2aibvb5x0"]
+[gd_scene load_steps=16 format=3 uid="uid://cp6k2aibvb5x0"]
 
 [ext_resource type="PackedScene" uid="uid://djocrijh1ceom" path="res://scenes/Beaker.tscn" id="1_7se6j"]
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_wbabm"]
 [ext_resource type="PackedScene" uid="uid://dufepst0w8rkr" path="res://scenes/Dice.tscn" id="2_tcovt"]
+[ext_resource type="PackedScene" path="res://scenes/shaker.tscn" id="2_wtsft"]
 [ext_resource type="Texture2D" uid="uid://3s8wbw4jv3gl" path="res://sprites/wall.png" id="4_36hgn"]
 [ext_resource type="PackedScene" uid="uid://c1178aepiu4hq" path="res://scenes/wall_1.tscn" id="4_rgh4a"]
 [ext_resource type="FontFile" uid="uid://qlhmfs1ahw63" path="res://fonts/prstartk.ttf" id="5_ciusn"]
@@ -24,6 +25,13 @@ shader_parameter/amount = 0.12
 [node name="Main" type="Node2D"]
 position = Vector2(133, 61)
 script = ExtResource("1_wbabm")
+
+[node name="Shaker" parent="." node_paths=PackedStringArray("camera") instance=ExtResource("2_wtsft")]
+camera = NodePath("../Camera2D")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(-130, -61)
+anchor_mode = 0
 
 [node name="Beaker" parent="." node_paths=PackedStringArray("DiceMan") instance=ExtResource("1_7se6j")]
 z_index = -10
