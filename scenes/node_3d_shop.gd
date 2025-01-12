@@ -3,11 +3,15 @@ var price = 0
 var DiceType = null
 
 func _ready():
+	initi()
+	
+func initi():
 	price = $dice3D.price
 	DiceType = $dice3D.DiceType
 
 func randomize_dice():
 	$dice3D.randomize_dice()
+	initi()
 
 func ChangeType(_DiceType):
 	DiceType = _DiceType

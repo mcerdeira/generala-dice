@@ -5,6 +5,12 @@ var DiceType = null
 func initialize():
 	$dice3D.initialize()
 	
+func set_final(target_rotation):
+	$dice3D.set_final(target_rotation)
+	
+func broadcast_to(_dice):
+	$dice3D.broadcast_to(_dice)
+	
 func flip(currentvalue):
 	$dice3D.flip(currentvalue)
 	

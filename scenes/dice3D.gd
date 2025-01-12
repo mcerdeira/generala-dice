@@ -8,6 +8,7 @@ var target_rotation = Vector3.ZERO
 var align_speed = 5  # Velocidad de alineación
 var DiceType = Global.DiceTypes.Normal
 var currentvalue = -1
+var broadcasted_dice = null
 
 func _ready():
 	randomize()
@@ -92,6 +93,9 @@ func what_ami():
 			return 5
 		if x_pos == 270 and y_pos == 270:
 			return 2
+			
+func broadcast_to(_dice):
+	broadcasted_dice = _dice
 		
 func flip(currentvalue):
 	if currentvalue == 1:
@@ -106,6 +110,10 @@ func flip(currentvalue):
 		align_to_nearest(2)
 	elif currentvalue == 6:
 		align_to_nearest(1)
+		
+func set_final(_target_rotation):
+	target_rotation = _target_rotation
+	decided = true
 	
 # Función para alinear a la posición más cercana
 func align_to_nearest(_forcedvalue = null):
@@ -167,3 +175,6 @@ func align_to_nearest(_forcedvalue = null):
 	target_rotation.y = deg_to_rad(y_pos)
 	
 	decided = true
+	
+	if broadcasted_dice != null:
+		broadcasted_dice.set_final(target_rotation)

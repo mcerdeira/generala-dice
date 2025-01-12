@@ -44,7 +44,6 @@ size_2d_override_stretch = true
 parent = NodePath("../..")
 
 [node name="Label" type="Label" parent="."]
-visible = false
 offset_left = -38.0
 offset_top = 37.0
 offset_right = 39.0
@@ -78,7 +77,6 @@ offset_right = 26.0
 offset_bottom = 26.0
 
 [node name="btn_flip" type="Button" parent="."]
-visible = false
 offset_left = 26.0
 offset_top = -24.0
 offset_right = 67.0
@@ -87,7 +85,29 @@ theme_override_fonts/font = ExtResource("3_xq7bm")
 theme_override_font_sizes/font_size = 18
 text = "FLIP!"
 
+[node name="btn_copy" type="Button" parent="."]
+visible = false
+offset_left = 26.0
+offset_top = -24.0
+offset_right = 67.0
+offset_bottom = -2.0
+theme_override_fonts/font = ExtResource("3_xq7bm")
+theme_override_font_sizes/font_size = 18
+text = "COPY!"
+
+[node name="lbl_copied" type="Label" parent="."]
+visible = false
+offset_left = 12.0
+offset_top = -31.0
+offset_right = 26.0
+offset_bottom = 4.0
+theme_override_colors/font_color = Color(0.00784314, 0.290196, 0.792157, 1)
+theme_override_font_sizes/font_size = 25
+text = "*"
+
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="gui_input" from="Control" to="." method="_on_control_gui_input"]
+[connection signal="mouse_entered" from="Control" to="." method="_on_control_mouse_entered"]
 [connection signal="pressed" from="btn_flip" to="." method="_on_btn_flip_pressed"]
+[connection signal="pressed" from="btn_copy" to="." method="_on_btn_copy_pressed"]

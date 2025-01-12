@@ -3,11 +3,12 @@ var done = false
 var prefix = "\n\n"
 
 func _ready():
+	$Button.text = "Re\nRoll:\n$" + str(Global.RerollCost)
 	visible = false
 
 func _process(delta):
+	$lbl_points/lbl_points2.text = "$" + str(Global.Points)
 	if visible and !done:
-		$lbl_points/lbl_points2.text = "$" + str(Global.Points)
 		var diceshopcurrent = get_tree().get_nodes_in_group("diceshopcurrents")
 		var dices_real = get_tree().get_nodes_in_group("dices")
 		for i in range(diceshopcurrent.size()):
@@ -70,6 +71,18 @@ func _on_button_5_pressed(): #Comprar
 			Global.TurnMax += 1
 			
 		unselectall()
+	else:
+		$lbl_item_desc2.text = prefix +  "No tienes suficiente dinero."
+		Global.shaker_obj.shake(6, 0.5)
+
+
+func _on_button_pressed():
+	unselectall()
+	if Global.Points >= Global.RerollCost:
+		Global.Points -= Global.RerollCost
+		Global.RerollCost += 5
+		$Button.text = "Re\nRoll:\n$" + str(Global.RerollCost)
+		Global.refreshPool(true)
 	else:
 		$lbl_item_desc2.text = prefix +  "No tienes suficiente dinero."
 		Global.shaker_obj.shake(6, 0.5)

@@ -333,14 +333,14 @@ func _on_button_pressed(): #ANOTAR
 			if d.DiceType == Global.DiceTypes.PlusDice:
 				current_points += d.currentvalue
 		
-		var mult = 1
+		var mult = 0
 		for d in current_dices:
 			if d.DiceType == Global.DiceTypes.MultDice:
 				mult += d.currentvalue
 			if d.DiceType == Global.DiceTypes.MultDice2:
 				mult += 2
 		
-		if mult != 1:
+		if mult > 0:
 			current_points *= mult
 	
 	Global.play_sound(Global.ScoreSFX)

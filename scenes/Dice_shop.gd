@@ -12,18 +12,24 @@ func _ready():
 	if !current:
 		group = "diceshop"
 		add_to_group(group)
-		price = $SubViewport/Node3D_shop.price
-		$Label.visible = true
-		$Label.text = "$" + str($SubViewport/Node3D_shop.price)
-		DiceType = $SubViewport/Node3D_shop.DiceType
-		if DiceType == Global.DiceTypes.Loaded:
-			$sprite.material.set_shader_parameter("shine_speed", 1)
+		initit()
 	else:
 		group = "diceshopcurrents"
 		add_to_group(group)
 		
+func initit():
+	price = $SubViewport/Node3D_shop.price
+	$Label.visible = true
+	$Label.text = "$" + str($SubViewport/Node3D_shop.price)
+	DiceType = $SubViewport/Node3D_shop.DiceType
+	if DiceType == Global.DiceTypes.Loaded:
+		$sprite.material.set_shader_parameter("shine_speed", 1)
+	else:
+		$sprite.material.set_shader_parameter("shine_speed", 0)	
+		
 func randomize_dice():
 	$SubViewport/Node3D_shop.randomize_dice()
+	initit()
 		
 func ChangeType(_DiceType, real):
 	real_dice = real

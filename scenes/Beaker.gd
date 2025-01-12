@@ -4,6 +4,11 @@ var shaking = false
 var first = true
 var trailing = "\n\n"
 var shaking_sfx = null
+@export var Mark1 : Marker2D
+@export var Mark2 : Marker2D
+@export var Mark3 : Marker2D
+@export var Mark4 : Marker2D
+@export var Mark5 : Marker2D
 
 func _ready():
 	Global.Beaker = self
@@ -51,6 +56,9 @@ func _on_button_pressed():
 			z_index = 1000
 			$AnimationPlayer.play("new_animation")
 		else:
+			if DiceMan.dices.size() < 5:
+				Global.gotoBase(DiceMan.dices, Mark1, Mark2, Mark3, Mark4, Mark5)
+			
 			if first:
 				first = false
 			else:

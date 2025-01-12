@@ -8,6 +8,8 @@ var DiceclickSFX = null
 var ScoreSFX = null
 var ClickSFX = null
 var shaker_obj = null
+var RerollCost = 2
+var CopyMode = null
 
 enum Statuses {
 	IDLE,
@@ -82,7 +84,7 @@ var LevelMax = 8
 var Turn = 1
 var InternarlTurn = 1
 var TurnMax = 7
-var Points = 0
+var Points = 900
 var Goal = 45
 var Goals = [0, 45, 100, 120, 150, 250, 800, 1000, 2000]
 var GameOver = false
@@ -117,6 +119,13 @@ func refreshPool(reroll = false):
 		for d in dices:
 			d.randomize_dice()
 		
+func gotoBase(DiceMan_dices, Mark1, Mark2, Mark3, Mark4, Mark5):
+	var marks = [Mark1, Mark2, Mark3, Mark4, Mark5]
+	var dices = get_tree().get_nodes_in_group("dices")
+	for d in dices:
+		if d not in DiceMan_dices:
+			var m = marks.pop_front()
+			d.global_position = m.global_position
 		
 func gameover(win):
 	if !win:

@@ -33,11 +33,16 @@ camera = NodePath("../Camera2D")
 position = Vector2(-130, -61)
 anchor_mode = 0
 
-[node name="Beaker" parent="." node_paths=PackedStringArray("DiceMan") instance=ExtResource("1_7se6j")]
+[node name="Beaker" parent="." node_paths=PackedStringArray("DiceMan", "Mark1", "Mark2", "Mark3", "Mark4", "Mark5") instance=ExtResource("1_7se6j")]
 z_index = -10
 position = Vector2(45, 462)
 scale = Vector2(3, 3)
 DiceMan = NodePath("..")
+Mark1 = NodePath("../DiceSlot1")
+Mark2 = NodePath("../DiceSlot2")
+Mark3 = NodePath("../DiceSlot3")
+Mark4 = NodePath("../DiceSlot4")
+Mark5 = NodePath("../DiceSlot5")
 
 [node name="dicemark1" type="Marker2D" parent="Beaker"]
 position = Vector2(3.66667, -23)
@@ -78,6 +83,26 @@ metadata/_edit_use_anchors_ = true
 position = Vector2(603.75, 671.25)
 scale = Vector2(12.3281, 2.04687)
 texture = ExtResource("4_36hgn")
+
+[node name="DiceSlot1" type="Marker2D" parent="."]
+position = Vector2(447, 666)
+scale = Vector2(12.3281, 2.04687)
+
+[node name="DiceSlot2" type="Marker2D" parent="."]
+position = Vector2(526, 666)
+scale = Vector2(12.3281, 2.04687)
+
+[node name="DiceSlot3" type="Marker2D" parent="."]
+position = Vector2(605, 666)
+scale = Vector2(12.3281, 2.04687)
+
+[node name="DiceSlot4" type="Marker2D" parent="."]
+position = Vector2(684, 666)
+scale = Vector2(12.3281, 2.04687)
+
+[node name="DiceSlot5" type="Marker2D" parent="."]
+position = Vector2(763, 666)
+scale = Vector2(12.3281, 2.04687)
 
 [node name="Dice" parent="." node_paths=PackedStringArray("DiceMan") instance=ExtResource("2_tcovt")]
 position = Vector2(605, 666)
@@ -319,6 +344,7 @@ theme_override_font_sizes/font_size = 186
 text = "PERDISTE!"
 
 [node name="Shop" type="Node2D" parent="."]
+visible = false
 z_index = 4095
 position = Vector2(0, -69)
 script = ExtResource("8_kl6mg")
@@ -459,6 +485,14 @@ theme_override_fonts/font = ExtResource("7_jk6n3")
 theme_override_font_sizes/font_size = 86
 text = "COMPRAR"
 
+[node name="Button" type="Button" parent="Shop"]
+offset_left = 775.0
+offset_top = 35.0
+offset_right = 852.0
+offset_bottom = 97.0
+theme_override_fonts/font = ExtResource("7_jk6n3")
+theme_override_font_sizes/font_size = 24
+
 [node name="lbl_points" type="Label" parent="Shop"]
 offset_left = 330.0
 offset_top = 316.0
@@ -499,3 +533,4 @@ mouse_filter = 2
 [connection signal="pressed" from="pointlist/Button" to="pointlist" method="_on_button_pressed"]
 [connection signal="pressed" from="Shop/Button4" to="Shop" method="_on_button_4_pressed"]
 [connection signal="pressed" from="Shop/Button5" to="Shop" method="_on_button_5_pressed"]
+[connection signal="pressed" from="Shop/Button" to="Shop" method="_on_button_pressed"]
