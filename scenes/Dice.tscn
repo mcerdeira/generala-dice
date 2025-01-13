@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dufepst0w8rkr"]
+[gd_scene load_steps=10 format=3 uid="uid://dufepst0w8rkr"]
 
 [ext_resource type="Script" path="res://scenes/Dice.gd" id="1_r70iu"]
 [ext_resource type="PackedScene" uid="uid://berhcc7novg7b" path="res://scenes/node_3d.tscn" id="2_lt8j6"]
@@ -8,6 +8,9 @@
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_hmu5q"]
 viewport_path = NodePath("SubViewport")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mt5yr"]
+resource_local_to_scene = true
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x1lnw"]
 size = Vector2(76, 69)
@@ -28,9 +31,11 @@ position = Vector2(8, 6)
 texture = SubResource("ViewportTexture_hmu5q")
 
 [node name="sprite" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_mt5yr")
 texture = SubResource("ViewportTexture_hmu5q")
 
 [node name="collider" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_x1lnw")
 
@@ -44,6 +49,7 @@ size_2d_override_stretch = true
 parent = NodePath("../..")
 
 [node name="Label" type="Label" parent="."]
+visible = false
 offset_left = -38.0
 offset_top = 37.0
 offset_right = 39.0
@@ -94,16 +100,6 @@ offset_bottom = -2.0
 theme_override_fonts/font = ExtResource("3_xq7bm")
 theme_override_font_sizes/font_size = 18
 text = "COPY!"
-
-[node name="lbl_copied" type="Label" parent="."]
-visible = false
-offset_left = 12.0
-offset_top = -31.0
-offset_right = 26.0
-offset_bottom = 4.0
-theme_override_colors/font_color = Color(0.00784314, 0.290196, 0.792157, 1)
-theme_override_font_sizes/font_size = 25
-text = "*"
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

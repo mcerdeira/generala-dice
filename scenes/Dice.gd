@@ -18,8 +18,11 @@ var currentvalue = null
 var original_position =  null
 var shaking = false
 var DiceType = null
+var destiny = null
+var copied = false
 
 func _ready():
+	$sprite.material.set_shader_parameter("waveAmplitude", 0)
 	add_to_group("dices")
 	original_position = global_position
 	
@@ -45,6 +48,8 @@ func ChangeType(_DiceType):
 	$SubViewport/Node3D.ChangeType(DiceType)
 	$btn_flip.visible = false
 	$btn_copy.visible = false
+	if DiceType == Global.DiceTypes.Copy:
+		$sprite.material.set_shader_parameter("waveAmplitude", 0.1)
 	
 func show_enfasis(value):
 	$enfasis.visible = value
@@ -89,6 +94,9 @@ func _physics_process(delta):
 		$lbl_add.rotation_degrees = randf_range(-4.0, 4.0)
 		
 	what_ami()
+	
+	queue_redraw()
+	
 	if dragged:
 		global_position = get_global_mouse_position()
 	elif rolling:
@@ -134,7 +142,8 @@ func _on_control_gui_input(event):
 					if Global.CopyMode == self:
 						Global.CopyMode = null
 					else:
-						$lbl_copied.visible = true
+						destiny = Global.CopyMode
+						copied = true
 						$SubViewport/Node3D.broadcast_to(Global.CopyMode)
 						Global.CopyMode = null
 			else:
@@ -178,7 +187,57 @@ func _on_control_mouse_entered():
 		if DiceType == Global.DiceTypes.Rubber:
 			if !rolling:
 				$btn_flip.visible = true
-				print("a")
 		elif DiceType == Global.DiceTypes.Copy:
 			if !rolling:
 				$btn_copy.visible = true
+
+
+func _draw():
+	if copied and destiny:
+		# Convertimos las posiciones globales de origen y destino a locales
+		var origin_pos = to_local(global_position)  # Posición del nodo actual
+		var destiny_pos = to_local(destiny.global_position)  # Posición de "destiny"
+		
+		# Variables iniciales
+		var xx = origin_pos.x
+		var yy = origin_pos.y
+		var last_x = xx
+		var last_y = yy
+		var amount
+		var dir
+		var segment_length = 10  # Distancia entre segmentos
+		var randomness_min = 6   # Mínimo de variación aleatoria
+		var randomness_max = 12  # Máximo de variación aleatoria
+
+		# Ángulo inicial desde el origen hacia el destino
+		dir = Vector2(xx, yy).angle_to_point(destiny_pos)
+
+		# Calculamos el número de segmentos necesarios
+		var distance = Vector2(xx, yy).distance_to(destiny_pos)
+		var num_segments = int(distance / segment_length) + 1
+
+		# Dibujamos los segmentos
+		for i in range(num_segments):
+			# Calculamos la dirección hacia el destino
+			dir = Vector2(xx, yy).angle_to_point(destiny_pos)
+
+			# Avanzamos en la dirección del destino
+			xx += cos(dir) * segment_length
+			yy += sin(dir) * segment_length
+
+			# Aplicamos una variación aleatoria perpendicular
+			amount = randomness_min + randf_range(0, randomness_max - randomness_min)
+			var perpendicular_dir = dir + PI / 2
+			xx += cos(perpendicular_dir) * randf_range(-amount, amount)
+			yy += sin(perpendicular_dir) * randf_range(-amount, amount)
+
+			# Dibujamos el segmento
+			draw_line(Vector2(last_x, last_y), Vector2(xx, yy), Color8(255, 255, 255), 1)
+
+			# Actualizamos la posición del último punto
+			last_x = xx
+			last_y = yy
+
+		# Conectamos el último segmento directamente al destino
+		draw_line(Vector2(last_x, last_y), destiny_pos, Color8(255, 255, 255), 1)
+
