@@ -1,7 +1,8 @@
 extends Node2D
 var started = false
-var start_ttl = 3
+var start_ttl = 3.5
 var resol = 0.4
+var kelvin = 1000
 
 func _ready():
 	Music.play(Global.Temardo)
@@ -9,7 +10,10 @@ func _ready():
 func _process(delta):
 	if started:
 		resol = lerp(resol, 0.01, 0.05)
+		kelvin =+ 100 * delta
 		$ColorRect.material.set_shader_parameter("resolution", resol)
+		$ColorRect.material.set_shader_parameter("kelvin", kelvin)
+		
 		start_ttl -= 1 * delta
 		if start_ttl <= 0:
 			get_tree().change_scene_to_file("res://scenes/main.tscn")

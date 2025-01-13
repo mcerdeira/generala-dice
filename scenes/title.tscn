@@ -23,9 +23,11 @@ script = ExtResource("1_8qod5")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_heaix")
-offset_left = 7.0
-offset_right = 1363.0
-offset_bottom = 767.0
+offset_left = -22.0
+offset_top = -29.0
+offset_right = 1327.0
+offset_bottom = 824.0
+scale = Vector2(1.04766, 0.953692)
 
 [node name="Dice_shop" parent="." node_paths=PackedStringArray("Title") instance=ExtResource("1_41gwa")]
 position = Vector2(676, 541)

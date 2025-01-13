@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://cp6k2aibvb5x0"]
+[gd_scene load_steps=18 format=3 uid="uid://cp6k2aibvb5x0"]
 
 [ext_resource type="PackedScene" uid="uid://djocrijh1ceom" path="res://scenes/Beaker.tscn" id="1_7se6j"]
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_wbabm"]
@@ -13,6 +13,170 @@
 [ext_resource type="Shader" path="res://scenes/FX.gdshader" id="8_nwidx"]
 [ext_resource type="PackedScene" uid="uid://dwiopwb2k0qtu" path="res://scenes/Dice_shop.tscn" id="9_4euou"]
 
+[sub_resource type="Animation" id="Animation_uthfs"]
+resource_name = "new_animation"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Beaker:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(45, 1200), Vector2(45, 462)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("lbl_level:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(328, -200), Vector2(328, -34)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("lbl_turn:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(640, -200), Vector2(640, -35)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("lbl_goal:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-68, -200), Vector2(-68, -38)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("lbl_points:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-360, 6), Vector2(-96, 6)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("NoplayZone:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(603.75, 1200), Vector2(603.75, 671.25)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Button2:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-300, 638), Vector2(327, 638)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Button3:position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1300, 638), Vector2(800, 638)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Dice:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(605, 1200), Vector2(605, 666)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Dice2:position")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-1200, 666), Vector2(447, 666)]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Dice3:position")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(526, -1200), Vector2(526, 666)]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("Dice4:position")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1300, 666), Vector2(684, 666)]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("Dice5:position")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(763, 1500), Vector2(763, 666)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_76dam"]
+_data = {
+"new_animation": SubResource("Animation_uthfs")
+}
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7tt2w"]
 size = Vector2(222, 156)
 
@@ -26,6 +190,12 @@ shader_parameter/amount = 0.12
 position = Vector2(133, 61)
 script = ExtResource("1_wbabm")
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_76dam")
+}
+autoplay = "new_animation"
+
 [node name="Shaker" parent="." node_paths=PackedStringArray("camera") instance=ExtResource("2_wtsft")]
 camera = NodePath("../Camera2D")
 
@@ -35,7 +205,7 @@ anchor_mode = 0
 
 [node name="Beaker" parent="." node_paths=PackedStringArray("DiceMan", "Mark1", "Mark2", "Mark3", "Mark4", "Mark5") instance=ExtResource("1_7se6j")]
 z_index = -10
-position = Vector2(45, 462)
+position = Vector2(45, 1200)
 scale = Vector2(3, 3)
 DiceMan = NodePath("..")
 Mark1 = NodePath("../DiceSlot1")
@@ -60,9 +230,9 @@ position = Vector2(6, 21.6667)
 position = Vector2(-22.3333, 7.66666)
 
 [node name="Button2" type="Button" parent="."]
-offset_left = 327.0
+offset_left = -300.0
 offset_top = 638.0
-offset_right = 410.0
+offset_right = -217.0
 offset_bottom = 688.0
 theme_override_fonts/font = ExtResource("5_ciusn")
 theme_override_font_sizes/font_size = 24
@@ -70,9 +240,9 @@ text = "<<"
 metadata/_edit_use_anchors_ = true
 
 [node name="Button3" type="Button" parent="."]
-offset_left = 800.0
+offset_left = 1300.0
 offset_top = 638.0
-offset_right = 883.0
+offset_right = 1383.0
 offset_bottom = 688.0
 theme_override_fonts/font = ExtResource("5_ciusn")
 theme_override_font_sizes/font_size = 24
@@ -80,7 +250,7 @@ text = "$$"
 metadata/_edit_use_anchors_ = true
 
 [node name="NoplayZone" type="Sprite2D" parent="."]
-position = Vector2(603.75, 671.25)
+position = Vector2(603.75, 1200)
 scale = Vector2(12.3281, 2.04687)
 texture = ExtResource("4_36hgn")
 
@@ -105,27 +275,27 @@ position = Vector2(763, 666)
 scale = Vector2(12.3281, 2.04687)
 
 [node name="Dice" parent="." node_paths=PackedStringArray("DiceMan") instance=ExtResource("2_tcovt")]
-position = Vector2(605, 666)
+position = Vector2(605, 1200)
 ttl_shot = 0.1
 DiceMan = NodePath("..")
 
 [node name="Dice2" parent="." node_paths=PackedStringArray("DiceMan") instance=ExtResource("2_tcovt")]
-position = Vector2(447, 666)
+position = Vector2(-1200, 666)
 ttl_shot = 0.1
 DiceMan = NodePath("..")
 
 [node name="Dice3" parent="." node_paths=PackedStringArray("DiceMan") instance=ExtResource("2_tcovt")]
-position = Vector2(526, 666)
+position = Vector2(526, -1200)
 ttl_shot = 0.2
 DiceMan = NodePath("..")
 
 [node name="Dice4" parent="." node_paths=PackedStringArray("DiceMan") instance=ExtResource("2_tcovt")]
-position = Vector2(684, 666)
+position = Vector2(1300, 666)
 ttl_shot = 0.3
 DiceMan = NodePath("..")
 
 [node name="Dice5" parent="." node_paths=PackedStringArray("DiceMan") instance=ExtResource("2_tcovt")]
-position = Vector2(763, 666)
+position = Vector2(763, 1500)
 ttl_shot = 0.3
 DiceMan = NodePath("..")
 
@@ -153,9 +323,9 @@ scale = Vector2(-1, 3)
 
 [node name="lbl_level" type="Label" parent="."]
 offset_left = 328.0
-offset_top = -34.0
+offset_top = -200.0
 offset_right = 496.0
-offset_bottom = 10.0
+offset_bottom = -156.0
 theme_override_fonts/font = ExtResource("7_jk6n3")
 theme_override_font_sizes/font_size = 60
 text = "Nivel:"
@@ -173,9 +343,9 @@ metadata/_edit_use_anchors_ = true
 
 [node name="lbl_turn" type="Label" parent="."]
 offset_left = 640.0
-offset_top = -35.0
+offset_top = -200.0
 offset_right = 808.0
-offset_bottom = 9.0
+offset_bottom = -156.0
 theme_override_fonts/font = ExtResource("7_jk6n3")
 theme_override_font_sizes/font_size = 60
 text = "TURNO:"
@@ -192,9 +362,9 @@ text = "0"
 metadata/_edit_use_anchors_ = true
 
 [node name="lbl_points" type="Label" parent="."]
-offset_left = -96.0
+offset_left = -360.0
 offset_top = 6.0
-offset_right = 72.0
+offset_right = -192.0
 offset_bottom = 50.0
 theme_override_fonts/font = ExtResource("7_jk6n3")
 theme_override_font_sizes/font_size = 60
@@ -213,9 +383,9 @@ metadata/_edit_use_anchors_ = true
 
 [node name="lbl_goal" type="Label" parent="."]
 offset_left = -68.0
-offset_top = -38.0
+offset_top = -200.0
 offset_right = 100.0
-offset_bottom = 6.0
+offset_bottom = -156.0
 theme_override_fonts/font = ExtResource("7_jk6n3")
 theme_override_font_sizes/font_size = 60
 text = "  GOAL:"
