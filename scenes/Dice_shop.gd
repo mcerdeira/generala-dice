@@ -5,17 +5,20 @@ var price = 0
 var group = "diceshop"
 var available = true
 var real_dice = null
+@export var inTitle = false
 @export var current = false
 @export var lbl_description : RichTextLabel
+@export var Title : Node2D
 
 func _ready():
 	if !current:
 		group = "diceshop"
-		add_to_group(group)
+		if !inTitle:
+			add_to_group(group)
 		initit()
 	else:
 		group = "diceshopcurrents"
-		add_to_group(group)
+		add_to_group(group)	
 		
 func initit():
 	price = $SubViewport/Node3D_shop.price
@@ -50,18 +53,22 @@ func buy():
 func _on_control_gui_input(event):
 	if available:
 		if event is InputEventMouseButton && event.is_action_pressed("click"):
-			$enfasis.visible = !$enfasis.visible
-			if $enfasis.visible:
-				selected = true
-				if !current:
-					DiceType = $SubViewport/Node3D_shop.getType()
-					
-				lbl_description.text = "\n\n" + DiceType.title + ":\n" + DiceType.description
-				
-				var dices = get_tree().get_nodes_in_group(group)
-				for d in dices:
-					if d != self:
-						d.unselect()
+			if inTitle:
+				Title.Start()
+				$SubViewport/Node3D_shop.do_scale_speed()
 			else:
-				unselect()
-				lbl_description.text = ""
+				$enfasis.visible = !$enfasis.visible
+				if $enfasis.visible:
+					selected = true
+					if !current:
+						DiceType = $SubViewport/Node3D_shop.getType()
+						
+					lbl_description.text = "\n\n" + DiceType.title + ":\n" + DiceType.description
+					
+					var dices = get_tree().get_nodes_in_group(group)
+					for d in dices:
+						if d != self:
+							d.unselect()
+				else:
+					unselect()
+					lbl_description.text = ""

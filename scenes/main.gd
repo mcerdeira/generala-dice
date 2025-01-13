@@ -2,15 +2,6 @@ extends Node2D
 var dices = []
 var cant_throw = true
 
-func _ready():
-	Global.Temardo = preload("res://music/dados.wav")
-	Global.ShakeSFX = preload("res://sfx/shaking.wav")
-	Global.RollSFX = preload("res://sfx/roll.wav")
-	Global.DiceclickSFX = preload("res://sfx/dice_click.wav")
-	Global.ScoreSFX = preload("res://sfx/score.wav")
-	Global.ClickSFX = preload("res://sfx/button_click.wav")
-	Music.play(Global.Temardo)
-	
 func _physics_process(delta):
 	if Input.is_action_just_pressed("toggle_fullscreen"):
 		Global.FULLSCREEN = !Global.FULLSCREEN

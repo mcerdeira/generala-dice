@@ -8,6 +8,7 @@ var target_rotation = Vector3.ZERO
 var align_speed = 1  # Velocidad de alineación
 var DiceType = null
 var price = 0
+var scale_speed = false
 
 func _ready():
 	randomize_dice()
@@ -43,11 +44,16 @@ func initialize():
 	speed = 1
 	align_speed = speed
 	
+func do_scale_speed():
+	scale_speed = true
+	
 func _physics_process(delta):
+	if scale_speed:
+		speed += 5 * delta
+	
 	rotation.x += (speed * delta) 
 	rotation.y += (speed * delta)
 	rotation.z += (speed * delta) 
-
 		
 func what_ami():
 	if !decided:

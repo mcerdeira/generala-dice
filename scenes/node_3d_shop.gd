@@ -8,6 +8,9 @@ func _ready():
 func initi():
 	price = $dice3D.price
 	DiceType = $dice3D.DiceType
+	
+func do_scale_speed():
+	$dice3D.do_scale_speed()
 
 func randomize_dice():
 	$dice3D.randomize_dice()

@@ -1,0 +1,44 @@
+[gd_scene load_steps=6 format=3 uid="uid://k02f4hcqt0bo"]
+
+[ext_resource type="Script" path="res://scenes/title.gd" id="1_8qod5"]
+[ext_resource type="PackedScene" uid="uid://dwiopwb2k0qtu" path="res://scenes/Dice_shop.tscn" id="1_41gwa"]
+[ext_resource type="FontFile" uid="uid://bke1xm65inmdl" path="res://fonts/Thin sans.ttf" id="2_xa0vq"]
+[ext_resource type="Shader" path="res://scenes/Loco.gdshader" id="4_gqc6m"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_heaix"]
+shader = ExtResource("4_gqc6m")
+shader_parameter/kelvin = 1000.0
+shader_parameter/red_colour = 24.0
+shader_parameter/green_colour = 22.6
+shader_parameter/blue_colour = 4.0
+shader_parameter/time_factor = 1.5
+shader_parameter/move = false
+shader_parameter/resolution = 0.4
+shader_parameter/sin_roll = 0.25
+shader_parameter/cos_roll = 0.25
+shader_parameter/alpha = 1.0
+
+[node name="Title" type="Node2D"]
+script = ExtResource("1_8qod5")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_heaix")
+offset_left = 7.0
+offset_right = 1363.0
+offset_bottom = 767.0
+
+[node name="Dice_shop" parent="." node_paths=PackedStringArray("Title") instance=ExtResource("1_41gwa")]
+position = Vector2(676, 541)
+scale = Vector2(5, 5)
+inTitle = true
+current = true
+Title = NodePath("..")
+
+[node name="Label" type="Label" parent="."]
+offset_top = 114.0
+offset_right = 1366.0
+offset_bottom = 330.0
+theme_override_fonts/font = ExtResource("2_xa0vq")
+theme_override_font_sizes/font_size = 306
+text = "DADOS"
+horizontal_alignment = 1

@@ -90,6 +90,14 @@ var Goals = [0, 45, 100, 120, 150, 250, 800, 1000, 2000]
 var GameOver = false
 var Beaker = null
 
+func _ready():
+	Global.Temardo = preload("res://music/dados.wav")
+	Global.ShakeSFX = preload("res://sfx/shaking.wav")
+	Global.RollSFX = preload("res://sfx/roll.wav")
+	Global.DiceclickSFX = preload("res://sfx/dice_click.wav")
+	Global.ScoreSFX = preload("res://sfx/score.wav")
+	Global.ClickSFX = preload("res://sfx/button_click.wav")
+
 func Next():
 	Turn += 1
 	InternarlTurn += 1
