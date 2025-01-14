@@ -37,10 +37,11 @@ current = true
 Title = NodePath("..")
 
 [node name="Label" type="Label" parent="."]
+offset_left = 14.0
 offset_top = 114.0
-offset_right = 1366.0
+offset_right = 1380.0
 offset_bottom = 330.0
 theme_override_fonts/font = ExtResource("2_xa0vq")
-theme_override_font_sizes/font_size = 306
-text = "DADOS"
+theme_override_font_sizes/font_size = 281
+text = "LaGenerala++"
 horizontal_alignment = 1

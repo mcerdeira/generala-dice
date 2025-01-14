@@ -15,7 +15,7 @@ var ttl_bounce = 0.3
 var dragged = false
 var dir = 1
 var currentvalue = null
-var original_position =  null
+@export var original_position : Marker2D = null
 var shaking = false
 var DiceType = null
 var destiny = null
@@ -24,10 +24,9 @@ var copied = false
 func _ready():
 	$sprite.material.set_shader_parameter("waveAmplitude", 0)
 	add_to_group("dices")
-	original_position = global_position
 	
 func restart_position():
-	global_position = original_position
+	global_position = original_position.global_position
 	
 func initialize():
 	randomize()

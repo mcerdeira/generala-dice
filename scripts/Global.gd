@@ -114,7 +114,7 @@ func NextLevel():
 		gameover(true)
 	else:
 		Global.Beaker.first = true
-		Global.Points = 0
+		Global.Points -=  Goals[Level - 1]
 		Global.Turn = 1
 		Global.InternarlTurn = 1
 		Global.point_list.next_level()
