@@ -1,5 +1,7 @@
 extends Node
 
+var _pitch_tween : Tween
+
 func _ready():
 	process_mode = Node.PROCESS_MODE_ALWAYS
 
@@ -93,3 +95,15 @@ func _stop_track(track : AudioStreamPlayer, fade_duration := 1.0):
 
 func tween_callback_queue_free(track):
 	track.queue_free()
+	
+	
+func pitch_to(_pitch, _speed = 2.0) -> Tween:
+	if _pitch_tween:
+		_pitch_tween.kill()
+		
+	_pitch_tween = create_tween()
+	_pitch_tween.set_trans(Tween.TRANS_QUINT)
+	_pitch_tween.set_ease(Tween.EASE_IN_OUT)
+	_pitch_tween.tween_property(_current_track, "pitch_scale", _pitch, _speed)
+
+	return _pitch_tween

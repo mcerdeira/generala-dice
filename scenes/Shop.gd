@@ -16,6 +16,7 @@ func _process(delta):
 			done = true
 
 func _on_button_4_pressed(): #Cerrar
+	Music.pitch_to(1.0)
 	visible = !visible
 	done = false
 	unselectall()

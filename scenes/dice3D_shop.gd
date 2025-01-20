@@ -1,5 +1,6 @@
 extends MeshInstance3D
-var speed = 1
+var speed = 1.0
+var speed_max = 15.0
 var x_pos = 0
 var y_pos = 0
 #var z_pos = 0 
@@ -41,7 +42,7 @@ func setTexture():
 	
 func initialize():
 	decided = false
-	speed = 1
+	speed = 1.0
 	align_speed = speed
 	
 func do_scale_speed():
@@ -49,11 +50,13 @@ func do_scale_speed():
 	
 func _physics_process(delta):
 	if scale_speed:
-		speed += 5 * delta
-	
-	rotation.x += (speed * delta) 
-	rotation.y += (speed * delta)
-	rotation.z += (speed * delta) 
+		speed = lerp(speed, speed_max, 0.2)
+		rotation.x += (speed * delta) 
+		rotation.y += (speed * delta)	
+	else:	
+		rotation.x += (speed * delta) 
+		rotation.y += (speed * delta)
+		rotation.z += (speed * delta) 
 		
 func what_ami():
 	if !decided:

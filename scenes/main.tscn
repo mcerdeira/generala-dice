@@ -109,7 +109,7 @@ tracks/7/keys = {
 "times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(800, 638), Vector2(800, 638)]
+"values": [Vector2(1800, 638), Vector2(800, 638)]
 }
 tracks/8/type = "value"
 tracks/8/imported = false
@@ -171,6 +171,48 @@ tracks/12/keys = {
 "update": 0,
 "values": [Vector2(763, -500), Vector2(763, 666)]
 }
+tracks/13/type = "method"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("Beaker")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"set_original_position"
+}]
+}
+tracks/14/type = "method"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath(".")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"initial_shake"
+}]
+}
+tracks/15/type = "method"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath(".")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = {
+"times": PackedFloat32Array(0.9),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"force_emit_all"
+}]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_76dam"]
 _data = {
@@ -205,7 +247,7 @@ anchor_mode = 0
 
 [node name="Beaker" parent="." node_paths=PackedStringArray("DiceMan", "Mark1", "Mark2", "Mark3", "Mark4", "Mark5") instance=ExtResource("1_7se6j")]
 z_index = -10
-position = Vector2(45, 462)
+position = Vector2(45, 1200)
 scale = Vector2(3, 3)
 DiceMan = NodePath("..")
 Mark1 = NodePath("../DiceSlot1")
@@ -230,9 +272,9 @@ position = Vector2(6, 21.6667)
 position = Vector2(-22.3333, 7.66666)
 
 [node name="Button2" type="Button" parent="."]
-offset_left = 327.0
+offset_left = -300.0
 offset_top = 638.0
-offset_right = 410.0
+offset_right = -217.0
 offset_bottom = 688.0
 theme_override_fonts/font = ExtResource("5_ciusn")
 theme_override_font_sizes/font_size = 24
@@ -240,9 +282,9 @@ text = "<<"
 metadata/_edit_use_anchors_ = true
 
 [node name="Button3" type="Button" parent="."]
-offset_left = 800.0
+offset_left = 1800.0
 offset_top = 638.0
-offset_right = 883.0
+offset_right = 1883.0
 offset_bottom = 688.0
 theme_override_fonts/font = ExtResource("5_ciusn")
 theme_override_font_sizes/font_size = 24
@@ -250,7 +292,7 @@ text = "$$"
 metadata/_edit_use_anchors_ = true
 
 [node name="NoplayZone" type="Sprite2D" parent="."]
-position = Vector2(603.75, 671.25)
+position = Vector2(603.75, 1200)
 scale = Vector2(12.3281, 2.04687)
 texture = ExtResource("4_36hgn")
 
@@ -275,31 +317,31 @@ position = Vector2(763, 666)
 scale = Vector2(12.3281, 2.04687)
 
 [node name="Dice2" parent="." node_paths=PackedStringArray("DiceMan", "original_position") instance=ExtResource("2_tcovt")]
-position = Vector2(447, 666)
+position = Vector2(447, -2500)
 ttl_shot = 0.1
 DiceMan = NodePath("..")
 original_position = NodePath("../DiceSlot1")
 
 [node name="Dice3" parent="." node_paths=PackedStringArray("DiceMan", "original_position") instance=ExtResource("2_tcovt")]
-position = Vector2(526, 666)
+position = Vector2(526, -2000)
 ttl_shot = 0.2
 DiceMan = NodePath("..")
 original_position = NodePath("../DiceSlot2")
 
 [node name="Dice" parent="." node_paths=PackedStringArray("DiceMan", "original_position") instance=ExtResource("2_tcovt")]
-position = Vector2(605, 666)
+position = Vector2(605, -1500)
 ttl_shot = 0.1
 DiceMan = NodePath("..")
 original_position = NodePath("../DiceSlot3")
 
 [node name="Dice4" parent="." node_paths=PackedStringArray("DiceMan", "original_position") instance=ExtResource("2_tcovt")]
-position = Vector2(684, 666)
+position = Vector2(684, -1000)
 ttl_shot = 0.3
 DiceMan = NodePath("..")
 original_position = NodePath("../DiceSlot4")
 
 [node name="Dice5" parent="." node_paths=PackedStringArray("DiceMan", "original_position") instance=ExtResource("2_tcovt")]
-position = Vector2(763, 666)
+position = Vector2(763, -500)
 ttl_shot = 0.3
 DiceMan = NodePath("..")
 original_position = NodePath("../DiceSlot5")
@@ -328,9 +370,9 @@ scale = Vector2(-1, 3)
 
 [node name="lbl_level" type="Label" parent="."]
 offset_left = 328.0
-offset_top = -34.0
+offset_top = -200.0
 offset_right = 496.0
-offset_bottom = 10.0
+offset_bottom = -156.0
 theme_override_fonts/font = ExtResource("7_jk6n3")
 theme_override_font_sizes/font_size = 60
 text = "Nivel:"
@@ -348,9 +390,9 @@ metadata/_edit_use_anchors_ = true
 
 [node name="lbl_turn" type="Label" parent="."]
 offset_left = 640.0
-offset_top = -35.0
+offset_top = -200.0
 offset_right = 808.0
-offset_bottom = 9.0
+offset_bottom = -156.0
 theme_override_fonts/font = ExtResource("7_jk6n3")
 theme_override_font_sizes/font_size = 60
 text = "TURNO:"
@@ -367,9 +409,9 @@ text = "0"
 metadata/_edit_use_anchors_ = true
 
 [node name="lbl_points" type="Label" parent="."]
-offset_left = -96.0
+offset_left = -360.0
 offset_top = 6.0
-offset_right = 72.0
+offset_right = -192.0
 offset_bottom = 50.0
 theme_override_fonts/font = ExtResource("7_jk6n3")
 theme_override_font_sizes/font_size = 60
@@ -388,9 +430,9 @@ metadata/_edit_use_anchors_ = true
 
 [node name="lbl_goal" type="Label" parent="."]
 offset_left = -68.0
-offset_top = -38.0
+offset_top = -200.0
 offset_right = 100.0
-offset_bottom = 6.0
+offset_bottom = -156.0
 theme_override_fonts/font = ExtResource("7_jk6n3")
 theme_override_font_sizes/font_size = 60
 text = "  GOAL:"

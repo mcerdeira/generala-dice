@@ -10,6 +10,7 @@ var ClickSFX = null
 var shaker_obj = null
 var RerollCost = 2
 var CopyMode = null
+var particle = preload("res://scenes/particle2.tscn")
 
 enum Statuses {
 	IDLE,
@@ -133,7 +134,8 @@ func gotoBase(DiceMan_dices, Mark1, Mark2, Mark3, Mark4, Mark5):
 	for d in dices:
 		if d not in DiceMan_dices:
 			var m = marks.pop_front()
-			d.global_position = m.global_position
+			await d.move_to(m.global_position).finished
+			d.minigrow()
 		
 func gameover(win):
 	if !win:
@@ -155,6 +157,17 @@ func getDiceExtraText(DiceType, currentvalue):
 		return "X" + str(2)
 	else:
 		return ""
+		
+func emit(_global_position, count, particle_obj = null, size = 1):
+	var part = particle
+	if particle_obj:
+		part = particle_obj
+	
+	for i in range(count):
+		var p = part.instantiate()
+		p.global_position = _global_position
+		p.size = size
+		add_child(p)
 	
 func pick_random(container):
 	if typeof(container) == TYPE_DICTIONARY:

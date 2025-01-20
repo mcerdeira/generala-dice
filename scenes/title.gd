@@ -1,11 +1,13 @@
 extends Node2D
 var started = false
-var start_ttl = 3.5
+var start_ttl = 2.5
 var resol = 0.4
 var kelvin = 1000
+var ThemeSong = null
 
 func _ready():
 	Music.play(Global.Temardo)
+	ThemeSong = Music._current_track
 
 func _process(delta):
 	if started:
@@ -30,6 +32,7 @@ func _process(delta):
 func Start():
 	if !started:
 		started = true
+		$AnimationPlayer.play("new_animation")
 		Global.play_sound(Global.ScoreSFX)
 		await get_tree().create_timer(0.3).timeout
 		Global.play_sound(Global.RollSFX)

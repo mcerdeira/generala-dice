@@ -21,12 +21,49 @@ var DiceType = null
 var destiny = null
 var copied = false
 
+var rotation_speed : float = 20.0 # Velocidad de la oscilación
+var max_rotation : float = 10.0 # Máxima rotación en grados
+var _movement_tween : Tween
+var _growing_tween : Tween
+var current_angle = 0.0
+var direction : int = 1 # Dirección de la oscilación (1 o -1)
+
+func move_to(new_position : Vector2, _speed = 0.1) -> Tween:
+	#if new_position.is_equal_approx(global_position):
+		#return
+	
+	if _movement_tween:
+		_movement_tween.kill()
+		
+	_movement_tween = create_tween()
+	_movement_tween.set_trans(Tween.TRANS_QUINT)
+	_movement_tween.set_ease(Tween.EASE_IN_OUT)
+	_movement_tween.tween_property(self, "global_position", new_position, _speed)
+
+	return _movement_tween
+	
+func grow_to(scale :Vector2, _speed = 0.1):
+	if _growing_tween:
+		_growing_tween.kill()
+		
+	_growing_tween = create_tween()
+	_growing_tween.set_trans(Tween.TRANS_QUINT)
+	_growing_tween.set_ease(Tween.EASE_IN_OUT)
+	_growing_tween.tween_property(self, "scale", scale, _speed)
+
+	return _growing_tween
+
 func _ready():
 	$sprite.material.set_shader_parameter("waveAmplitude", 0)
 	add_to_group("dices")
 	
 func restart_position():
-	global_position = original_position.global_position
+	await move_to(original_position.global_position, 0.05).finished
+	minigrow()
+	
+func force_emit():
+	await get_tree().create_timer(0.1).timeout
+	Global.emit(global_position, 1)
 	
 func initialize():
 	randomize()
@@ -54,9 +91,6 @@ func show_enfasis(value):
 	$enfasis.visible = value
 	$lbl_add.visible = value
 	$lbl_add.text = Global.getDiceExtraText(DiceType, currentvalue)
-	shaking = value
-	if !shaking:
-		rotation_degrees = 0
 
 func throw():
 	dir = 1
@@ -89,8 +123,16 @@ func _physics_process(delta):
 			$btn_copy.visible = false
 	
 	if shaking:
-		rotation_degrees = randf_range(-4.0, 4.0)
-		$lbl_add.rotation_degrees = randf_range(-4.0, 4.0)
+		# Calcula el nuevo ángulo usando un movimiento suave
+		current_angle += rotation_speed * delta * direction
+		
+		# Cambia de dirección al alcanzar los límites
+		if abs(current_angle) >= max_rotation:
+			direction *= -1
+		
+		# Aplica la rotación al nodo hijo
+		rotation_degrees = current_angle
+		$lbl_add.rotation_degrees = current_angle
 		
 	what_ami()
 	
@@ -111,6 +153,13 @@ func _physics_process(delta):
 			if velocity.length() < stop:
 				rolling = false
 				stoped = true
+				minigrow()
+				
+func minigrow(_emit = true):
+	if _emit:
+		force_emit()
+	await grow_to(Vector2(1.3, 1.3)).finished
+	grow_to(Vector2(1, 1))
 			
 func what_ami():
 	z_index = global_position.y
@@ -182,6 +231,10 @@ func _on_btn_copy_pressed():
 		Global.CopyMode = self
 
 func _on_control_mouse_entered():
+	if !rolling:
+		shaking = true
+		Global.emit(get_global_mouse_position(), 1)
+		grow_to(Vector2(1.5, 1.5))
 	if Global.CopyMode == null:
 		if DiceType == Global.DiceTypes.Rubber:
 			if !rolling:
@@ -190,6 +243,11 @@ func _on_control_mouse_entered():
 			if !rolling:
 				$btn_copy.visible = true
 
+func _on_control_mouse_exited():
+	Global.emit(get_global_mouse_position(), 1)
+	grow_to(Vector2(1, 1))
+	shaking = false
+	rotation_degrees = 0
 
 func _draw():
 	if copied and destiny:

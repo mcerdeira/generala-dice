@@ -1,5 +1,15 @@
 - Dado de madera: Multiplica por 2
 - Dado de metal: Multiplica por 3
-- Dado de diamante: Multiplica por el numero que salio
 - Dado de 1 sola cara de madera: multiplica x 2 solo si sale 2
 - Dado de 1 sola cara de metal: multiplica x 3 solo si sale 3
+
+Dado de Schrödinger: cambia de número constantemente, cuando lo seleccionás para armar la jugada y lo commiteás, toma un valor random. Si ese valor justo sirve para armar un juego, todo puntúa x6
+Dado Mitosis: cuando lo jugás se divide en 2 dados con el mismo valor
+Dado Viral: Sumás 1 dado más al cubilete, El dado viral está 1 turno incubando, 1 turno “enfermo” donde contagia el virus al dado más cercano en el tablero, al turno siguiente se destruye. El dado contagiado se comporta igual.
+Dado Guiño Guiño: Si lo jugás parte de una jugada, no te la inhabilita, pero luego se destruye
+
+Dadon’t: es un 0, no puntua nada. Si ganás una ronda (o lo que sea como se organice) en el próximo store tenés algún beneficio (más plata, todos los dados son gratis, etc)
+Dadolete: es un dado consumible que cuando lo tirás y aterriza tira otros daditos chiquitos que tiene adentro, siendo la cantidad el número que salió originalmente. Tipo aterriza en 5, salen 5 daditos chiquitos con numeros random y el dadolete se destruye. Los daditos chiquitos no se pueden reutilizar, solo te sirven en esa jugada.
+DaDosDados: Un dado que después de puntuar se transforma en dos dados. (pensando en que puedas tener una cantidad variable de dados)
+Dado influencer, hace que los otros dados roten una cara en cualquier dirección
+DaDos Manos: Es un par de dados, si ambos puntúan juntos aplican un x2

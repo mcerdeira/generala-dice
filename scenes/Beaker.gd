@@ -1,9 +1,11 @@
 extends Node2D
 var shaking = false
+var shake_time = 0.0
 @export var DiceMan : Node2D
 var first = true
 var trailing = "\n\n"
 var shaking_sfx = null
+var original_position = null
 @export var Mark1 : Marker2D
 @export var Mark2 : Marker2D
 @export var Mark3 : Marker2D
@@ -12,6 +14,9 @@ var shaking_sfx = null
 
 func _ready():
 	Global.Beaker = self
+	
+func shake(_time):
+	shake_time = _time
 
 func reset():
 	z_index = -100
@@ -24,8 +29,22 @@ func reset():
 	await get_tree().create_timer(1).timeout
 	Global.Status = Global.Statuses.IDLE
 	Global.point_list.fade_in()
+	
+func set_original_position():
+	original_position = global_position
 
 func _physics_process(delta):
+	if shake_time > 0:
+		shake_time -= 1 * delta
+		global_position.x = original_position.x + randf_range(-3.0, 3.0)
+		global_position.y = original_position.y + randf_range(-3.0, 3.0)
+		scale.x = 3 + randf_range(-0.1, 0.1)
+		scale.y = 3 + randf_range(-0.1, 0.1)
+		if shake_time <= 0:
+			scale.x = 3
+			scale.y = 3
+			global_position = original_position
+	
 	$shadow.frame = $sprite.frame
 	$shadow.rotation = $sprite.rotation
 	#$Label.text = str(DiceMan.dices.size())
@@ -36,8 +55,12 @@ func _physics_process(delta):
 
 func _on_button_pressed():
 	Global.dices_used = DiceMan.dices.size()
+	shake_time = 0.0
 	if DiceMan.dices.size() >= Global.minforTurn():
 		if !shaking:
+			if DiceMan.dices.size() < 5:
+				Global.gotoBase(DiceMan.dices, Mark1, Mark2, Mark3, Mark4, Mark5)
+			
 			shaking_sfx = Global.play_sound(Global.ShakeSFX)
 			DiceMan.clearSelected()
 			var dices = get_tree().get_nodes_in_group("dices")
@@ -48,7 +71,7 @@ func _on_button_pressed():
 				d.initialize()
 			
 			Global.Status = Global.Statuses.SHAKING
-			DiceMan.arrange()
+			DiceMan.arrange(false)
 			$Button.text = "TIRAR" + trailing
 			shaking = true
 			#$Label.visible = false
@@ -56,9 +79,6 @@ func _on_button_pressed():
 			z_index = 1000
 			$AnimationPlayer.play("new_animation")
 		else:
-			if DiceMan.dices.size() < 5:
-				Global.gotoBase(DiceMan.dices, Mark1, Mark2, Mark3, Mark4, Mark5)
-			
 			if first:
 				first = false
 			else:
@@ -86,6 +106,7 @@ func _on_area_2d_area_entered(area):
 	if Global.Status == Global.Statuses.IDLE:
 		if area.is_in_group("dices"):
 			DiceMan.add_me(area)
+			shake(0.05)
 
 func _on_area_2d_area_exited(area):
 	if Global.Status == Global.Statuses.IDLE:

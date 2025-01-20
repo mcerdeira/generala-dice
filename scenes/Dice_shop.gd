@@ -15,10 +15,14 @@ func _ready():
 		group = "diceshop"
 		if !inTitle:
 			add_to_group(group)
+
 		initit()
 	else:
-		group = "diceshopcurrents"
-		add_to_group(group)	
+		if inTitle:
+			$SubViewport/Node3D_shop.ChangeType(Global.DiceTypes.Rubber)
+		else:	 
+			group = "diceshopcurrents"
+			add_to_group(group)
 		
 func initit():
 	price = $SubViewport/Node3D_shop.price
@@ -50,12 +54,14 @@ func buy():
 	$Label.text = "--"
 	visible = false
 	
+func do_scale_speed():
+	$SubViewport/Node3D_shop.do_scale_speed()
+	
 func _on_control_gui_input(event):
 	if available:
 		if event is InputEventMouseButton && event.is_action_pressed("click"):
 			if inTitle:
 				Title.Start()
-				$SubViewport/Node3D_shop.do_scale_speed()
 			else:
 				$enfasis.visible = !$enfasis.visible
 				if $enfasis.visible:
