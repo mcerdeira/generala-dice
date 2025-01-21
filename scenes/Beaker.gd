@@ -60,7 +60,15 @@ func _on_button_pressed():
 		if !shaking:
 			if DiceMan.dices.size() < 5:
 				Global.gotoBase(DiceMan.dices, Mark1, Mark2, Mark3, Mark4, Mark5)
-			
+				Global.uncopyAll() #Quitamos la copia de todos
+				
+			#Copiar un dado random si hay dados copiones
+			for d in DiceMan.dices:
+				if d.DiceType == Global.DiceTypes.Copy:
+					var dic_cp = Global.getRandomDiceToCopy(d, DiceMan.dices)
+					if dic_cp:
+						dic_cp.copyMe(d)
+
 			shaking_sfx = Global.play_sound(Global.ShakeSFX)
 			DiceMan.clearSelected()
 			var dices = get_tree().get_nodes_in_group("dices")
@@ -69,6 +77,7 @@ func _on_button_pressed():
 				
 			for d in DiceMan.dices:
 				d.initialize()
+				d.visible = false
 			
 			Global.Status = Global.Statuses.SHAKING
 			DiceMan.arrange(false)

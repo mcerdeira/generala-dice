@@ -327,69 +327,107 @@ func clearSelected():
 
 func _on_button_pressed(): #ANOTAR
 	Global.shaker_obj.shake(3, 1)
-	
 	var add = 0
 	var mult = 0
+	if current_dices and current_dices.size() > 0:
 	
-	if current_dices.size() > 0:
-		for d in current_dices:
-			if d.DiceType == Global.DiceTypes.PlusDice:
-				add += d.currentvalue
-				current_points += d.currentvalue
+		#Calculos de puntos
+		if current_dices.size() > 0:
+			for d in current_dices:
+				if d.DiceType == Global.DiceTypes.PlusDice:
+					add += d.currentvalue
+					current_points += d.currentvalue
+			
+			for d in current_dices:
+				if d.DiceType == Global.DiceTypes.MultDice:
+					mult += d.currentvalue
+				if d.DiceType == Global.DiceTypes.MultDice2:
+					mult += 2
+			
+			if mult > 0:
+				current_points *= mult 
 		
-		for d in current_dices:
-			if d.DiceType == Global.DiceTypes.MultDice:
-				mult += d.currentvalue
-			if d.DiceType == Global.DiceTypes.MultDice2:
-				mult += 2
+		Global.play_sound(Global.ScoreSFX)
+		$"../PointsShow".visible = true
 		
+		#Traer los dados participes de la jugada
+		var dices = get_tree().get_nodes_in_group("dices")
+		for d in dices:
+			if d.enfasis_visible():
+				d.restart_position()
+		
+		#Armar jugada visualmente
+		var jugadita = trad_name(current_points, $items.get_item_text(current_index)) + "!"
+		var texto_jugadita = "[center][wave]\n" + jugadita + "[/wave][/center]"
+		$"../PointsShow/lbl_points".text = texto_jugadita
+		
+		#Armar jugada visualmente II
+		var local_points = Global.Points + current_points 
+		var base_points = $items2.get_item_text(current_index)
+		var add_txt = ""
+		var mult_txt = ""
+		if add > 0:
+			add_txt = " x [color=yellow]" + str(add) + "[/color]"
 		if mult > 0:
-			current_points *= mult 
-	
-	Global.play_sound(Global.ScoreSFX)
-	Global.InternarlTurn = 1
-	$"../PointsShow".visible = true
-	
-	var jugadita = $items.get_item_text(current_index) + "!"
-	var texto_jugadita = "[center][wave]\n" + jugadita + "[/wave][/center]"
-	$"../PointsShow/lbl_points".text = texto_jugadita
-	
-	var base_points = $items2.get_item_text(current_index)
-	var add_txt = ""
-	var mult_txt = ""
-	if add > 0:
-		add_txt = " x [color=yellow]" + str(add) + "[/color]"
-	if mult > 0:
-		mult_txt = " x [color=red]" + str(mult) + "[/color]"
+			mult_txt = " x [color=red]" + str(mult) + "[/color]"
+			
+		var rest = " = [color=blue]" + str(current_points) + "[/color]"
+		 
+		$"../PointsShow/lbl_points_calc".text = "[center]\n" + str(base_points) + add_txt + mult_txt + rest + "[/center]"
 		
-	var rest = " = [color=blue]" + str(current_points) + "[/color]"
-	 
-	$"../PointsShow/lbl_points_calc".text = "\n" + str(base_points) + add_txt + mult_txt + rest
-	
-	await points_to(current_points).finished
-	
-	Global.Beaker.first = true
-	current_points = null
-	current_dices = null
-	
-	var dices = get_tree().get_nodes_in_group("dices")
-	for d in dices:
-		d.show_enfasis(false)
-		d.restart_position()
-	
-	blocked_games.append(current_index)
-	fade_out()
-	Global.Next()
-	
-	await get_tree().create_timer(1.0).timeout
-	$"../PointsShow".visible = false
-	
+		for d in dices:
+			d.minigrow()
+		
+		#Reseteo de variables
+		Global.InternarlTurn = 1
+		Global.Beaker.first = true
+		current_points = null
+		current_dices = null
+		
+		#Bloquear jugada que ya se hizo
+		#TODO: Revisar si tenemos el dado que no bloquea jugada
+		blocked_games.append(current_index)
+		
+		#Ocultar dialogo de puntos en 3 segundos y sumar puntos con tween
+		await get_tree().create_timer(3.0).timeout
+		$"../PointsShow".visible = false
+		await points_to(local_points).finished
+		
+		#Reseteo de dados y estados restantes
+		for d in dices:
+			d.show_enfasis(false)
+			d.restart_position()
+		
+		fade_out()
+		Global.Next()
+
+func trad_name(points, val):
+	if val == "6" or val == "5" or val == "4" or val == "3" or val == "2" or val == "1":
+		return str(points) + " al " + trad_number(val)
+	else:
+		return val
+		
+func trad_number(val):
+	if val == "6":
+		return "SEIS"
+	elif val == "5":
+		return "CINCO"
+	elif val == "4":
+		return "CUATRO"
+	elif val == "3":
+		return "TRES"
+	elif val == "2":
+		return "DOS"
+	elif val == "1":
+		return "UNO"
+	else:
+		return ""
 	
 func points_to(points, _speed = 1.0):
 	var _tween = create_tween()
 	_tween.set_trans(Tween.TRANS_QUINT)
 	_tween.set_ease(Tween.EASE_IN_OUT)
-	_tween.tween_property(Global, "Points", current_points, _speed)
+	_tween.tween_property(Global, "Points", points, _speed)
 	return _tween
 
 func _on_items_item_selected(index):

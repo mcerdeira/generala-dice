@@ -65,6 +65,7 @@ func arrange2():
 
 func throw():
 	for d in dices:
+		d.visible = true
 		d.throw()
 		d.force_emit()
 	

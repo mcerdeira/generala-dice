@@ -83,10 +83,12 @@ func ChangeType(_DiceType):
 	DiceType = _DiceType
 	$SubViewport/Node3D.ChangeType(DiceType)
 	$btn_flip.visible = false
-	$btn_copy.visible = false
 	if DiceType == Global.DiceTypes.Copy:
 		$sprite.material.set_shader_parameter("waveAmplitude", 0.1)
 	
+func enfasis_visible():
+	return $enfasis.visible
+
 func show_enfasis(value):
 	$enfasis.visible = value
 	$lbl_add.visible = value
@@ -107,21 +109,13 @@ func _physics_process(delta):
 	if DiceType == Global.DiceTypes.Rubber:
 		if rolling:
 			$btn_flip.visible = false
-	elif DiceType == Global.DiceTypes.Copy:
-		if rolling:
-			$btn_copy.visible = false
 	else:
 		$btn_flip.visible = false
-		$btn_copy.visible = false
 		
 	if $btn_flip.visible:
 		if abs(global_position.distance_to(get_global_mouse_position())) >=96:
 			$btn_flip.visible = false
 			
-	if $btn_copy.visible:
-		if abs(global_position.distance_to(get_global_mouse_position())) >=96:
-			$btn_copy.visible = false
-	
 	if shaking:
 		# Calcula el nuevo ángulo usando un movimiento suave
 		current_angle += rotation_speed * delta * direction
@@ -182,26 +176,26 @@ func _on_body_entered(body):
 		velocity = velocity.bounce(normal) * -1 # Rebote con pérdida de energía
 		angular_velocity *= -0.5  # Invertir la rotación para dar realismo
 		
+func unCopyMe():
+	copied = false
+	destiny = null
+	$SubViewport/Node3D.broadcast_to(null)
+	
+func copyMe(_fromdice):
+	copied = true
+	destiny = _fromdice
+	$SubViewport/Node3D.broadcast_to(_fromdice)
+		
 func _on_control_gui_input(event):
 	if !rolling:
 		if DiceMan.cant_throw:
-			if Global.CopyMode != null:
+			if !dragged:
 				if event is InputEventMouseButton && event.is_action_pressed("click"):
-					if Global.CopyMode == self:
-						Global.CopyMode = null
-					else:
-						destiny = Global.CopyMode
-						copied = true
-						$SubViewport/Node3D.broadcast_to(Global.CopyMode)
-						Global.CopyMode = null
-			else:
-				if !dragged:
-					if event is InputEventMouseButton && event.is_action_pressed("click"):
-						dragged = true
-						#get_viewport().set_input_as_handled()
-				if dragged:
-					if event is InputEventMouseButton && event.is_action_released("click"):
-						dragged = false
+					dragged = true
+					#get_viewport().set_input_as_handled()
+			if dragged:
+				if event is InputEventMouseButton && event.is_action_released("click"):
+					dragged = false
 						
 func set_final(target_rotation):
 	$SubViewport/Node3D.set_final(target_rotation)
@@ -226,22 +220,14 @@ func local_flip():
 	elif currentvalue == 6:
 		currentvalue = 1
 
-func _on_btn_copy_pressed():
-	if DiceType == Global.DiceTypes.Copy:
-		Global.CopyMode = self
-
 func _on_control_mouse_entered():
 	if !rolling:
 		shaking = true
 		Global.emit(get_global_mouse_position(), 1)
 		grow_to(Vector2(1.5, 1.5))
-	if Global.CopyMode == null:
-		if DiceType == Global.DiceTypes.Rubber:
-			if !rolling:
-				$btn_flip.visible = true
-		elif DiceType == Global.DiceTypes.Copy:
-			if !rolling:
-				$btn_copy.visible = true
+	if DiceType == Global.DiceTypes.Rubber:
+		if !rolling:
+			$btn_flip.visible = true
 
 func _on_control_mouse_exited():
 	Global.emit(get_global_mouse_position(), 1)

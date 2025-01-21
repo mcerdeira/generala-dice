@@ -9,7 +9,6 @@ var ScoreSFX = null
 var ClickSFX = null
 var shaker_obj = null
 var RerollCost = 2
-var CopyMode = null
 var particle = preload("res://scenes/particle2.tscn")
 
 enum Statuses {
@@ -55,7 +54,7 @@ var DiceTypes = {
 	MultDice = {"id": DiceIDs.MultDice, "price": 150, "texture": load("res://sprites/dices/muldice.png"), "title": "Dado multiplicador", "description": "[color=red]Multiplica[/color] el puntaje por su valor."},
 	MultDice2 = {"id": DiceIDs.MultDice2, "price": 10, "texture": load("res://sprites/dices/muldice2.png"), "title": "Dado x2", "description": "[color=red]Multiplica[/color] el puntaje por [color=red] 2[/color]."},
 	
-	Copy = {"id": DiceIDs.Copy, "price": 10, "texture": load("res://sprites/dices/copy.png"), "title": "Dado copion", "description": "[color=red]Copia[/color] el valor de otro dado seleccionado."},
+	Copy = {"id": DiceIDs.Copy, "price": 10, "texture": load("res://sprites/dices/copy.png"), "title": "Dado copion", "description": "[color=red]Copia[/color] el valor de otro dado al azar."},
 	D2 = {"id": DiceIDs.D2, "price": 7, "texture": load("res://sprites/dices/dx2.png"), "title": "Dado D2", "description": "Solo tiene [color=red] 2[/color] valores ([color=red]1, 2[/color])."},
 	D3 = {"id": DiceIDs.D3, "price": 5, "texture": load("res://sprites/dices/dx3.png"), "title": "Dado D3", "description": "Solo tiene [color=red] 3[/color] valores ([color=red]1, 2, 3[/color])."},
 	TurnPlus = {"id": DiceIDs.TurnPlus, "price": 3, "texture": load("res://sprites/dices/turnplus.png"), "title": "Dado +1 Turno", "description": "Tener este dado suma [color=red] 1[/color] turno la partida."},
@@ -127,6 +126,20 @@ func refreshPool(reroll = false):
 		var dices = get_tree().get_nodes_in_group("diceshop")
 		for d in dices:
 			d.randomize_dice()
+			
+func uncopyAll():
+	var dices = get_tree().get_nodes_in_group("dices")
+	for d in dices:
+		d.unCopyMe()
+		
+func getRandomDiceToCopy(me, DiceMan_dices):
+	var dices_list = [] + DiceMan_dices
+	dices_list.shuffle()
+	for d in dices_list:
+		if d != me and d.DiceType != Global.DiceTypes.Copy:
+			return d
+			
+	return null
 		
 func gotoBase(DiceMan_dices, Mark1, Mark2, Mark3, Mark4, Mark5):
 	var marks = [Mark1, Mark2, Mark3, Mark4, Mark5]
