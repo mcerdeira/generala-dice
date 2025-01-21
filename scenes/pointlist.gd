@@ -328,12 +328,15 @@ func clearSelected():
 func _on_button_pressed(): #ANOTAR
 	Global.shaker_obj.shake(3, 1)
 	
+	var add = 0
+	var mult = 0
+	
 	if current_dices.size() > 0:
 		for d in current_dices:
 			if d.DiceType == Global.DiceTypes.PlusDice:
+				add += d.currentvalue
 				current_points += d.currentvalue
 		
-		var mult = 0
 		for d in current_dices:
 			if d.DiceType == Global.DiceTypes.MultDice:
 				mult += d.currentvalue
@@ -341,11 +344,30 @@ func _on_button_pressed(): #ANOTAR
 				mult += 2
 		
 		if mult > 0:
-			current_points *= mult
+			current_points *= mult 
 	
 	Global.play_sound(Global.ScoreSFX)
 	Global.InternarlTurn = 1
-	Global.Points += current_points
+	$"../PointsShow".visible = true
+	
+	var jugadita = $items.get_item_text(current_index) + "!"
+	var texto_jugadita = "[center][wave]\n" + jugadita + "[/wave][/center]"
+	$"../PointsShow/lbl_points".text = texto_jugadita
+	
+	var base_points = $items2.get_item_text(current_index)
+	var add_txt = ""
+	var mult_txt = ""
+	if add > 0:
+		add_txt = " x [color=yellow]" + str(add) + "[/color]"
+	if mult > 0:
+		mult_txt = " x [color=red]" + str(mult) + "[/color]"
+		
+	var rest = " = [color=blue]" + str(current_points) + "[/color]"
+	 
+	$"../PointsShow/lbl_points_calc".text = "\n" + str(base_points) + add_txt + mult_txt + rest
+	
+	await points_to(current_points).finished
+	
 	Global.Beaker.first = true
 	current_points = null
 	current_dices = null
@@ -358,6 +380,17 @@ func _on_button_pressed(): #ANOTAR
 	blocked_games.append(current_index)
 	fade_out()
 	Global.Next()
+	
+	await get_tree().create_timer(1.0).timeout
+	$"../PointsShow".visible = false
+	
+	
+func points_to(points, _speed = 1.0):
+	var _tween = create_tween()
+	_tween.set_trans(Tween.TRANS_QUINT)
+	_tween.set_ease(Tween.EASE_IN_OUT)
+	_tween.tween_property(Global, "Points", current_points, _speed)
+	return _tween
 
 func _on_items_item_selected(index):
 	if index == current_index:

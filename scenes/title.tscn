@@ -83,15 +83,17 @@ inTitle = true
 current = true
 Title = NodePath("..")
 
-[node name="Label" type="Label" parent="."]
-offset_left = 14.0
-offset_top = 114.0
-offset_right = 1380.0
-offset_bottom = 330.0
-theme_override_fonts/font = ExtResource("2_xa0vq")
-theme_override_font_sizes/font_size = 281
-text = "LaGenerala!"
-horizontal_alignment = 1
+[node name="Label" type="RichTextLabel" parent="."]
+offset_left = -1.0
+offset_top = -107.0
+offset_right = 1370.0
+offset_bottom = 511.0
+theme_override_fonts/normal_font = ExtResource("2_xa0vq")
+theme_override_font_sizes/normal_font_size = 280
+bbcode_enabled = true
+text = "[center]
+[wave]LaGenerala![/wave]
+[/center]"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

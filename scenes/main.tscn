@@ -219,10 +219,10 @@ _data = {
 "new_animation": SubResource("Animation_uthfs")
 }
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_uj0rc"]
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7tt2w"]
 size = Vector2(222, 156)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_uj0rc"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5rf6s"]
 shader = ExtResource("8_nwidx")
@@ -451,6 +451,49 @@ theme_override_fonts/font = ExtResource("7_jk6n3")
 theme_override_font_sizes/font_size = 60
 text = "0"
 metadata/_edit_use_anchors_ = true
+
+[node name="PointsShow" type="Node2D" parent="."]
+visible = false
+z_index = 4096
+position = Vector2(1108, -9)
+
+[node name="ColorRect2" type="ColorRect" parent="PointsShow"]
+offset_left = -974.0
+offset_top = 189.0
+offset_right = -170.0
+offset_bottom = 525.0
+color = Color(0.145098, 0.152941, 0.188235, 0.4)
+
+[node name="ColorRect" type="ColorRect" parent="PointsShow"]
+offset_left = -978.0
+offset_top = 173.0
+offset_right = -184.0
+offset_bottom = 509.0
+mouse_filter = 2
+color = Color(0.101961, 0.192157, 0.192157, 1)
+
+[node name="lbl_points" type="RichTextLabel" parent="PointsShow"]
+z_index = 4096
+material = SubResource("ShaderMaterial_uj0rc")
+offset_left = -976.0
+offset_top = 125.0
+offset_right = -192.0
+offset_bottom = 397.0
+theme_override_colors/default_color = Color(1, 0, 0.364706, 1)
+theme_override_fonts/normal_font = ExtResource("7_jk6n3")
+theme_override_font_sizes/normal_font_size = 186
+bbcode_enabled = true
+text = "
+POKER!"
+
+[node name="lbl_points_calc" type="RichTextLabel" parent="PointsShow"]
+offset_left = -976.0
+offset_top = 395.0
+offset_right = -78.0
+offset_bottom = 508.0
+theme_override_fonts/normal_font = ExtResource("7_jk6n3")
+theme_override_font_sizes/normal_font_size = 68
+bbcode_enabled = true
 
 [node name="pointlist" type="Area2D" parent="."]
 position = Vector2(1108, -9)
