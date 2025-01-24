@@ -329,11 +329,17 @@ func _on_button_pressed(): #ANOTAR
 	Global.shaker_obj.shake(3, 1)
 	var add = 0
 	var mult = 0
+	var block = true
+	var blocker_dice = null
 	if current_dices and current_dices.size() > 0:
 	
 		#Calculos de puntos
 		if current_dices.size() > 0:
 			for d in current_dices:
+				if d.DiceType == Global.DiceTypes.OneMoreChance:
+					block = false
+					blocker_dice = d
+				
 				if d.DiceType == Global.DiceTypes.PlusDice:
 					add += d.currentvalue
 					current_points += d.currentvalue
@@ -385,8 +391,10 @@ func _on_button_pressed(): #ANOTAR
 		current_dices = null
 		
 		#Bloquear jugada que ya se hizo
-		#TODO: Revisar si tenemos el dado que no bloquea jugada
-		blocked_games.append(current_index)
+		if block:
+			blocked_games.append(current_index)
+		else:
+			blocker_dice.agotar()
 		
 		#Ocultar dialogo de puntos en 3 segundos y sumar puntos con tween
 		await get_tree().create_timer(3.0).timeout

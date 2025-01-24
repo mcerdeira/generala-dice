@@ -1,16 +1,66 @@
-[gd_scene load_steps=10 format=3 uid="uid://dufepst0w8rkr"]
+[gd_scene load_steps=25 format=3 uid="uid://dufepst0w8rkr"]
 
 [ext_resource type="Script" path="res://scenes/Dice.gd" id="1_r70iu"]
+[ext_resource type="Shader" path="res://scenes/disolve.gdshader" id="2_3mtty"]
 [ext_resource type="PackedScene" uid="uid://berhcc7novg7b" path="res://scenes/node_3d.tscn" id="2_lt8j6"]
 [ext_resource type="Texture2D" uid="uid://dn5ybcewikek6" path="res://sprites/dices/enfasis.png" id="3_8jf7x"]
 [ext_resource type="Shader" path="res://scenes/enfasis.gdshader" id="3_fr77i"]
+[ext_resource type="Shader" path="res://scenes/video.gdshader" id="3_fswfd"]
 [ext_resource type="FontFile" uid="uid://bke1xm65inmdl" path="res://fonts/Thin sans.ttf" id="3_xq7bm"]
+[ext_resource type="Texture2D" uid="uid://cvjufkponefkr" path="res://sprites/smoke.png" id="8_00hkv"]
+[ext_resource type="Texture2D" uid="uid://c2h7pr788bsc4" path="res://sprites/dices/holo.png" id="9_qtrmc"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_hmu5q"]
 viewport_path = NodePath("SubViewport")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_mt5yr"]
+[sub_resource type="Gradient" id="Gradient_qskld"]
 resource_local_to_scene = true
+colors = PackedColorArray(0.0941176, 0.329412, 1, 0.105882, 1, 1, 1, 0.0941176)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_1bd3k"]
+gradient = SubResource("Gradient_qskld")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_rta5u"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ol0ii"]
+noise = SubResource("FastNoiseLite_rta5u")
+
+[sub_resource type="Gradient" id="Gradient_njv6t"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_v7c2c"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_d33px"]
+color_ramp = SubResource("Gradient_njv6t")
+noise = SubResource("FastNoiseLite_v7c2c")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pgna6"]
+resource_local_to_scene = true
+shader = ExtResource("3_fswfd")
+shader_parameter/scroll1 = Vector2(0.1, 0)
+shader_parameter/scroll2 = Vector2(-0.1, 0)
+shader_parameter/distortion_strength = -0.077
+shader_parameter/scrollpixel = Vector2(-0.01, 0.01)
+shader_parameter/noise1 = SubResource("NoiseTexture2D_ol0ii")
+shader_parameter/noise2 = SubResource("NoiseTexture2D_d33px")
+shader_parameter/hologrampixel = ExtResource("8_00hkv")
+shader_parameter/gradient = SubResource("GradientTexture2D_1bd3k")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_r2k4o"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_1op02"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_iahen"]
+noise = SubResource("FastNoiseLite_1op02")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_s03cj"]
+resource_local_to_scene = true
+shader = ExtResource("2_3mtty")
+shader_parameter/dissolve_value = 1.0
+shader_parameter/burn_size = 0.1
+shader_parameter/burn_color = Color(0.866667, 0.690196, 0, 1)
+shader_parameter/dissolve_texture = SubResource("NoiseTexture2D_iahen")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x1lnw"]
 size = Vector2(76, 69)
@@ -30,8 +80,20 @@ self_modulate = Color(0, 0, 0, 0.321569)
 position = Vector2(8, 6)
 texture = SubResource("ViewportTexture_hmu5q")
 
+[node name="holosprite" type="Sprite2D" parent="."]
+visible = false
+material = SubResource("ShaderMaterial_pgna6")
+position = Vector2(6, -72)
+texture = SubResource("ViewportTexture_r2k4o")
+offset = Vector2(-8, -25)
+
+[node name="Holo" type="Sprite2D" parent="holosprite"]
+use_parent_material = true
+position = Vector2(-8, 19)
+texture = ExtResource("9_qtrmc")
+
 [node name="sprite" type="Sprite2D" parent="."]
-material = SubResource("ShaderMaterial_mt5yr")
+material = SubResource("ShaderMaterial_s03cj")
 texture = SubResource("ViewportTexture_hmu5q")
 
 [node name="collider" type="CollisionShape2D" parent="."]

@@ -52,9 +52,17 @@ func grow_to(scale :Vector2, _speed = 0.1):
 	_growing_tween.tween_property(self, "scale", scale, _speed)
 
 	return _growing_tween
+	
+func disolve():
+	var _disolve_tween: Tween
+	_disolve_tween = create_tween()
+	_disolve_tween.set_trans(Tween.TRANS_QUINT)
+	_disolve_tween.set_ease(Tween.EASE_IN_OUT)
+	_disolve_tween.tween_property($sprite.material, "shader_parameter/dissolve_value", 0.0, 3.0)
+
+	return _disolve_tween
 
 func _ready():
-	$sprite.material.set_shader_parameter("waveAmplitude", 0)
 	add_to_group("dices")
 	
 func restart_position():
@@ -79,12 +87,17 @@ func initialize():
 	initial_rotation = randi_range(-10, 10)
 	$SubViewport/Node3D.initialize()
 	
+func agotar():
+	$shadow.visible = false
+	await disolve().finished
+	ChangeType(Global.DiceTypes.Normal)
+	$sprite.material.set_shader_parameter("dissolve_value", 1)
+	$shadow.visible = true
+	
 func ChangeType(_DiceType):
 	DiceType = _DiceType
 	$SubViewport/Node3D.ChangeType(DiceType)
 	$btn_flip.visible = false
-	if DiceType == Global.DiceTypes.Copy:
-		$sprite.material.set_shader_parameter("waveAmplitude", 0.1)
 	
 func enfasis_visible():
 	return $enfasis.visible
@@ -148,6 +161,8 @@ func _physics_process(delta):
 				rolling = false
 				stoped = true
 				minigrow()
+				if DiceType == Global.DiceTypes.Hologram:
+					$holosprite.visible = true
 				
 func minigrow(_emit = true):
 	if _emit:
