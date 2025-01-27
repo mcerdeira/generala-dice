@@ -10,6 +10,7 @@ var ClickSFX = null
 var shaker_obj = null
 var RerollCost = 2
 var particle = preload("res://scenes/particle2.tscn")
+var preventSelect = false
 
 enum Statuses {
 	IDLE,
@@ -93,7 +94,7 @@ var LevelMax = 8
 var Turn = 1
 var InternarlTurn = 1
 var TurnMax = 7
-var Points = 90
+var Points = 0
 var Goal = 45
 var Goals = [0, 45, 100, 120, 150, 250, 800, 1000, 2000]
 var GameOver = false

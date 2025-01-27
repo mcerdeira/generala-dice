@@ -53,15 +53,28 @@ func arrange(_emit = true):
 		
 func arrange2():
 	Global.play_sound(Global.DiceclickSFX)
+	var validate_selected = false
 	var e = 1
 	var speeds = [0, 0.1, 0.1, 0.2, 0.3, 0.3]
 	var _dices = get_tree().get_nodes_in_group("dices")
 	for d in _dices:
-		await d.move_to(get_node("Beaker/dicemark" + str(e)).global_position).finished
-		d.minigrow()
-		Global.emit(d.global_position, 1)
-		d.ttl_shot = speeds[e]
-		e += 1
+		if d.selected:
+			validate_selected = true
+	
+	for d in _dices:
+		var move = false
+		if validate_selected: 
+			if d.selected:
+				move = true
+		else:
+			move = true
+			
+		if move:
+			await d.move_to(get_node("Beaker/dicemark" + str(e)).global_position).finished
+			d.minigrow()
+			Global.emit(d.global_position, 1)
+			d.ttl_shot = speeds[e]
+			e += 1
 
 func throw():
 	for d in dices:

@@ -114,6 +114,7 @@ func _on_button_pressed():
 func _on_area_2d_area_entered(area):
 	if Global.Status == Global.Statuses.IDLE:
 		if area.is_in_group("dices"):
+			area.select(false)
 			DiceMan.add_me(area)
 			shake(0.05)
 

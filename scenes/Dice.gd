@@ -20,6 +20,7 @@ var shaking = false
 var DiceType = null
 var destiny = null
 var copied = false
+var selected = false
 
 var rotation_speed : float = 20.0 # Velocidad de la oscilación
 var max_rotation : float = 10.0 # Máxima rotación en grados
@@ -101,6 +102,10 @@ func ChangeType(_DiceType):
 	
 func enfasis_visible():
 	return $enfasis.visible
+	
+func select(val):
+	$selected.visible = val
+	selected = val
 
 func show_enfasis(value):
 	$enfasis.visible = value
@@ -146,6 +151,7 @@ func _physics_process(delta):
 	queue_redraw()
 	
 	if dragged:
+		Global.preventSelect = true
 		global_position = get_global_mouse_position()
 	elif rolling:
 		ttl_shot -= 1 * delta
@@ -207,10 +213,12 @@ func _on_control_gui_input(event):
 			if !dragged:
 				if event is InputEventMouseButton && event.is_action_pressed("click"):
 					dragged = true
+					Global.preventSelect = true
 					#get_viewport().set_input_as_handled()
 			if dragged:
 				if event is InputEventMouseButton && event.is_action_released("click"):
 					dragged = false
+					Global.preventSelect = false
 						
 func set_final(target_rotation):
 	$SubViewport/Node3D.set_final(target_rotation)
@@ -236,6 +244,7 @@ func local_flip():
 		currentvalue = 1
 
 func _on_control_mouse_entered():
+	Global.preventSelect = true
 	if !rolling:
 		shaking = true
 		Global.emit(get_global_mouse_position(), 1)
@@ -245,6 +254,7 @@ func _on_control_mouse_entered():
 			$btn_flip.visible = true
 
 func _on_control_mouse_exited():
+	Global.preventSelect = false
 	Global.emit(get_global_mouse_position(), 1)
 	grow_to(Vector2(1, 1))
 	shaking = false

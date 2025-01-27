@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://c1keqcnqpjd1w"]
+
+[ext_resource type="Script" path="res://scenes/SelectableObj.gd" id="1_ewstr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nikmw"]
+
+[node name="SelectableObject" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ewstr")
+
+[node name="selection_rect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0.105882, 1, 1, 0.0862745)
+
+[node name="selection_area" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="selection_area"]
+shape = SubResource("RectangleShape2D_nikmw")
+
+[connection signal="area_entered" from="selection_area" to="." method="_on_selection_area_area_entered"]
+[connection signal="area_exited" from="selection_area" to="." method="_on_selection_area_area_exited"]
