@@ -131,7 +131,6 @@ size_2d_override_stretch = true
 parent = NodePath("../..")
 
 [node name="Label" type="Label" parent="."]
-visible = false
 offset_left = -38.0
 offset_top = 37.0
 offset_right = 39.0

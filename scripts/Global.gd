@@ -49,6 +49,7 @@ enum DiceIDs {
 	OneMoreChance,
 	Cheese,
 	Hologram,
+	Fake,
 }
 
 var DiceTypes = {
@@ -64,8 +65,9 @@ var DiceTypes = {
 	TurnPlus = {"id": DiceIDs.TurnPlus, "price": 3, "texture": load("res://sprites/dices/turnplus.png"), "title": "La vida", "description": "Tener este dado suma [color=red] 1[/color] turno la partida."},
 	Rubber = {"id": DiceIDs.Rubber, "price": 5, "texture": load("res://sprites/dices/rubber.png"), "title": "Panqueque", "description": "Al tirarlo permite hacer [color=red] flip[/color] a su lado opuesto."},
 	OneMoreChance = {"id": DiceIDs.OneMoreChance, "price": 10, "texture": load("res://sprites/dices/onemore.png"), "title": "El ensayo", "description": "No consume la jugada al usarlo. Al usarse se [color=red] agota[/color]."},
-	Cheese = {"id": DiceIDs.Cheese, "price": 5, "texture": load("res://sprites/dices/cheese.png"), "title": "Quesito", "description": "Es un dado extra por fuera del [color=blue]cubilete[/color]. Si se usa en una jugada se [color=red] agota[/color]."},
+	Cheese = {"id": DiceIDs.Cheese, "price": 15, "texture": load("res://sprites/dices/cheese.png"), "title": "Quesito", "description": "Es un dado extra por fuera del [color=blue]cubilete[/color]. El dado extra se [color=red]agota[/color] siempre despues de la tirada."},
 	Hologram = {"id": DiceIDs.Cheese, "price": 10, "texture": load("res://sprites/dices/hologram.png"), "title": "Holo-Dado", "description": "El dado proyecta un holograma de si mismo con identico [color=red]valor[/color]."},
+	Fake = {"id": DiceIDs.Fake, "price": 0, "texture": load("res://sprites/dices/fake.png"), "title": "Fake", "description": "Fake"},
 }
 
 var DiceChances = [
@@ -94,7 +96,7 @@ var LevelMax = 8
 var Turn = 1
 var InternarlTurn = 1
 var TurnMax = 7
-var Points = 0
+var Points = 900
 var Goal = 45
 var Goals = [0, 45, 100, 120, 150, 250, 800, 1000, 2000]
 var GameOver = false

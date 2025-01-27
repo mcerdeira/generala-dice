@@ -39,10 +39,13 @@ func _physics_process(delta):
 func fade_out():
 	visible = false
 
-func fade_in():
-	visible = true
+func recalc_forced():
 	reset_points_table()
 	calc_posible_points()
+
+func fade_in():
+	visible = true
+	recalc_forced()
 	
 func refresh():
 	reset_points_table()
@@ -83,7 +86,11 @@ func calc_posible_points():
 	five = []
 	six = []
 	
+	var extra_dices = get_tree().get_nodes_in_group("dices_extra")
 	var dices = get_tree().get_nodes_in_group("dices")
+	
+	dices.append_array(extra_dices)
+	
 	for dice in dices:
 		if dice.currentvalue != null:
 			if dice.currentvalue == 1:
@@ -405,6 +412,8 @@ func _on_button_pressed(): #ANOTAR
 		for d in dices:
 			d.show_enfasis(false)
 			d.restart_position()
+			if d.DiceType == Global.DiceTypes.Fake:
+				d.agotar()
 		
 		fade_out()
 		Global.Next()

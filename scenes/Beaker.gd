@@ -60,10 +60,11 @@ func _on_button_pressed():
 		if !shaking:
 			if DiceMan.dices.size() < 5:
 				Global.gotoBase(DiceMan.dices, Mark1, Mark2, Mark3, Mark4, Mark5)
-				Global.uncopyAll() #Quitamos la copia de todos
 				
+			Global.uncopyAll() #Quitamos la copia de todos
 			#Copiar un dado random si hay dados copiones
 			for d in DiceMan.dices:
+				d.holohide()
 				if d.DiceType == Global.DiceTypes.Copy:
 					var dic_cp = Global.getRandomDiceToCopy(d, DiceMan.dices)
 					if dic_cp:
@@ -74,6 +75,8 @@ func _on_button_pressed():
 			var dices = get_tree().get_nodes_in_group("dices")
 			for d in dices:
 				d.show_enfasis(false)
+				if d.DiceType == Global.DiceTypes.Fake:
+					d.destruir()
 				
 			for d in DiceMan.dices:
 				d.initialize()
@@ -114,8 +117,12 @@ func _on_button_pressed():
 func _on_area_2d_area_entered(area):
 	if Global.Status == Global.Statuses.IDLE:
 		if area.is_in_group("dices"):
-			area.select(false)
-			DiceMan.add_me(area)
+			if area.DiceType == Global.DiceTypes.Fake:
+				area.destruir()
+			else:
+				area.select(false)
+				DiceMan.add_me(area)
+			
 			shake(0.05)
 
 func _on_area_2d_area_exited(area):

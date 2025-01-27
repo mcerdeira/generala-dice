@@ -67,7 +67,9 @@ func _ready():
 	add_to_group("dices")
 	
 func restart_position():
-	await move_to(original_position.global_position, 0.05).finished
+	if DiceType != Global.DiceTypes.Fake:
+		await move_to(original_position.global_position, 0.05).finished
+	
 	minigrow()
 	
 func force_emit():
@@ -95,8 +97,19 @@ func agotar():
 	$sprite.material.set_shader_parameter("dissolve_value", 1)
 	$shadow.visible = true
 	
+func destruir():
+	$shadow.visible = false
+	remove_from_group("dices")
+	Global.point_list.recalc_forced()
+	await disolve().finished
+	queue_free()
+	
 func ChangeType(_DiceType):
+	remove_from_group("dices_extra")
 	DiceType = _DiceType
+	if DiceType == Global.DiceTypes.Hologram:
+		add_to_group("dices_extra")
+		
 	$SubViewport/Node3D.ChangeType(DiceType)
 	$btn_flip.visible = false
 	
@@ -111,6 +124,9 @@ func show_enfasis(value):
 	$enfasis.visible = value
 	$lbl_add.visible = value
 	$lbl_add.text = Global.getDiceExtraText(DiceType, currentvalue)
+	
+func holohide():
+	$holosprite.visible = false
 
 func throw():
 	dir = 1
@@ -161,7 +177,6 @@ func _physics_process(delta):
 			# Simular fricción
 			velocity *= friction
 			angular_velocity *= friction
-
 			# Detener el movimiento cuando es muy bajo
 			if velocity.length() < stop:
 				rolling = false
@@ -220,8 +235,8 @@ func _on_control_gui_input(event):
 					dragged = false
 					Global.preventSelect = false
 						
-func set_final(target_rotation):
-	$SubViewport/Node3D.set_final(target_rotation)
+func set_final(target_rotation, _x_pos, _y_pos):
+	$SubViewport/Node3D.set_final(target_rotation, _x_pos, _y_pos)
 
 func _on_btn_flip_pressed():
 	if DiceType == Global.DiceTypes.Rubber:
@@ -300,7 +315,7 @@ func _draw():
 			yy += sin(perpendicular_dir) * randf_range(-amount, amount)
 
 			# Dibujamos el segmento
-			draw_line(Vector2(last_x, last_y), Vector2(xx, yy), Color8(255, 255, 255), 1)
+			draw_line(Vector2(last_x, last_y), Vector2(xx, yy), Color8(255, 255, 255), randf_range(0.5, 3.1))
 
 			# Actualizamos la posición del último punto
 			last_x = xx

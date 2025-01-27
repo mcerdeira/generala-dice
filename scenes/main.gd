@@ -1,6 +1,7 @@
 extends Node2D
 var dices = []
 var cant_throw = true
+var dice_obj = preload("res://scenes/Dice.tscn")
 
 func _physics_process(delta):
 	if Input.is_action_just_pressed("toggle_fullscreen"):
@@ -44,12 +45,15 @@ func arrange(_emit = true):
 	var e = 1
 	var speeds = [0, 0.1, 0.1, 0.2, 0.3, 0.3]
 	for d in dices:
-		await d.move_to(get_node("Beaker/dicemark" + str(e)).global_position).finished
-		d.minigrow(_emit)
-		if _emit:
-			Global.emit(d.global_position, 1)
-		d.ttl_shot = speeds[e]
-		e += 1
+		if d.DiceType == Global.DiceTypes.Fake:
+			d.destruir()
+		else:
+			await d.move_to(get_node("Beaker/dicemark" + str(e)).global_position).finished
+			d.minigrow(_emit)
+			if _emit:
+				Global.emit(d.global_position, 1)
+			d.ttl_shot = speeds[e]
+			e += 1
 		
 func arrange2():
 	Global.play_sound(Global.DiceclickSFX)
@@ -63,26 +67,50 @@ func arrange2():
 	
 	for d in _dices:
 		var move = false
-		if validate_selected: 
-			if d.selected:
-				move = true
+		if d.DiceType == Global.DiceTypes.Fake:
+			d.destruir()
 		else:
-			move = true
-			
-		if move:
-			await d.move_to(get_node("Beaker/dicemark" + str(e)).global_position).finished
-			d.minigrow()
-			Global.emit(d.global_position, 1)
-			d.ttl_shot = speeds[e]
-			e += 1
+			if validate_selected: 
+				if d.selected:
+					move = true
+			else:
+				move = true
+				
+			if move:
+				await d.move_to(get_node("Beaker/dicemark" + str(e)).global_position).finished
+				d.minigrow()
+				Global.emit(d.global_position, 1)
+				d.ttl_shot = speeds[e]
+				e += 1
 
 func throw():
 	for d in dices:
 		d.visible = true
 		d.throw()
 		d.force_emit()
-	
+		
 	cant_throw = false
+		
+	await get_tree().create_timer(2.1).timeout
+	
+	var cheeses = 0
+	var _dices = get_tree().get_nodes_in_group("dices")
+	for d in _dices:
+		if d.DiceType == Global.DiceTypes.Cheese:
+			cheeses += 1
+	
+	for i in range(cheeses):
+		var extra = dice_obj.instantiate()
+		add_me(extra)
+		extra.global_position = $Beaker/dicemark1.global_position
+		extra.ChangeType(Global.DiceTypes.Fake)
+		extra.ttl_shot = 0.1
+		extra.initialize()
+		extra.DiceMan = self
+		add_child(extra)
+		extra.add_to_group("dices")
+		extra.throw()
+		extra.force_emit()
 
 func add_me(_dice):
 	dices.append(_dice)

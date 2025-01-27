@@ -111,7 +111,9 @@ func flip(currentvalue):
 	elif currentvalue == 6:
 		align_to_nearest(1)
 		
-func set_final(_target_rotation):
+func set_final(_target_rotation, _x_pos, _y_pos):
+	x_pos = _x_pos
+	y_pos = _y_pos
 	target_rotation = _target_rotation
 	decided = true
 	
@@ -177,4 +179,4 @@ func align_to_nearest(_forcedvalue = null):
 	decided = true
 	
 	if broadcasted_dice != null:
-		broadcasted_dice.set_final(target_rotation)
+		broadcasted_dice.set_final(target_rotation, x_pos, y_pos)
