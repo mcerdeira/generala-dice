@@ -16,6 +16,7 @@ func _process(delta):
 			done = true
 
 func _on_button_4_pressed(): #Cerrar
+	Global.play_sound(Global.ButtonSFX)
 	Music.pitch_to(1.0)
 	visible = !visible
 	done = false
@@ -62,6 +63,8 @@ func _on_button_5_pressed(): #Comprar
 		return
 		
 	if canBuy(nuevo.price):
+		Global.play_sound(Global.BuySFX)
+		
 		if reemplazo.DiceType == Global.DiceTypes.TurnPlus:
 			Global.TurnMax -= 1
 		
@@ -76,10 +79,11 @@ func _on_button_5_pressed(): #Comprar
 		$lbl_item_desc2.text = prefix +  "No tienes suficiente dinero."
 		Global.shaker_obj.shake(6, 0.5)
 
-
 func _on_button_pressed():
 	unselectall()
+	Global.play_sound(Global.ButtonSFX)
 	if Global.Points >= Global.RerollCost:
+		Global.play_sound(Global.BuySFX)
 		Global.Points -= Global.RerollCost
 		Global.RerollCost += 5
 		$Button.text = "Re\nRoll:\n$" + str(Global.RerollCost)

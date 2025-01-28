@@ -602,18 +602,31 @@ theme_override_fonts/font = ExtResource("7_jk6n3")
 theme_override_font_sizes/font_size = 26
 text = "ANOTAR"
 
-[node name="lbl_gameover" type="Label" parent="."]
+[node name="lbl_gameover" type="RichTextLabel" parent="."]
 visible = false
 z_index = 4096
 material = SubResource("ShaderMaterial_uj0rc")
-offset_left = 210.0
-offset_top = 226.0
-offset_right = 930.0
-offset_bottom = 358.0
-theme_override_colors/font_color = Color(1, 0, 0.364706, 1)
+offset_left = -125.0
+offset_top = 7.0
+offset_right = 1225.0
+offset_bottom = 997.0
+theme_override_colors/default_color = Color(1, 0, 0.364706, 1)
+theme_override_fonts/normal_font = ExtResource("7_jk6n3")
+theme_override_font_sizes/normal_font_size = 296
+bbcode_enabled = true
+text = "
+[wave][center]PERDISTE![/center][/wave]
+"
+
+[node name="Button" type="Button" parent="lbl_gameover"]
+layout_mode = 0
+offset_left = 467.0
+offset_top = 393.0
+offset_right = 857.0
+offset_bottom = 506.0
 theme_override_fonts/font = ExtResource("7_jk6n3")
-theme_override_font_sizes/font_size = 186
-text = "PERDISTE!"
+theme_override_font_sizes/font_size = 101
+text = "VOLVER"
 
 [node name="Shop" type="Node2D" parent="."]
 visible = false
@@ -801,8 +814,10 @@ mouse_filter = 2
 [connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]
 [connection signal="pressed" from="Button3" to="." method="_on_button_3_pressed"]
 [connection signal="input_event" from="pointlist" to="pointlist" method="_on_input_event"]
+[connection signal="mouse_exited" from="pointlist" to="pointlist" method="_on_mouse_exited"]
 [connection signal="item_selected" from="pointlist/items" to="pointlist" method="_on_items_item_selected"]
 [connection signal="pressed" from="pointlist/Button" to="pointlist" method="_on_button_pressed"]
+[connection signal="pressed" from="lbl_gameover/Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="Shop/Button4" to="Shop" method="_on_button_4_pressed"]
 [connection signal="pressed" from="Shop/Button5" to="Shop" method="_on_button_5_pressed"]
 [connection signal="pressed" from="Shop/Button" to="Shop" method="_on_button_pressed"]

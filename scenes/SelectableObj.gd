@@ -11,6 +11,10 @@ func _ready():
 	# Vinculamos el RectangleShape2D al CollisionShape2D
 	collision_shape.shape = rectangle_shape
 	selection_rect.visible = false
+	
+func _physics_process(delta):
+	if selecting and Global.preventSelect:
+		selecting = false
 
 func _input(event: InputEvent):
 	if !Global.preventSelect:
@@ -57,12 +61,10 @@ func _to_local(global_position: Vector2) -> Vector2:
 	# Convierte coordenadas globales a locales relativas al Control
 	return global_position - get_global_position()
 
-
 func _on_selection_area_area_entered(area):
 	if selecting:
 		if area.is_in_group("dices"):
 			area.select(true)
-
 
 func _on_selection_area_area_exited(area):
 	if selecting:

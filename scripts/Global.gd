@@ -7,6 +7,9 @@ var RollSFX = null
 var DiceclickSFX = null
 var ScoreSFX = null
 var ClickSFX = null
+var FlameSfx = null
+var ButtonSFX = null
+var BuySFX = null
 var shaker_obj = null
 var RerollCost = 2
 var particle = preload("res://scenes/particle2.tscn")
@@ -96,9 +99,9 @@ var LevelMax = 8
 var Turn = 1
 var InternarlTurn = 1
 var TurnMax = 7
-var Points = 900
-var Goal = 45
-var Goals = [0, 45, 100, 120, 150, 250, 800, 1000, 2000]
+var Points = 0
+var Goals = [0, 45, 90, 180, 195, 250, 500, 1000, 2000]
+var Goal = Goals[1]
 var GameOver = false
 var Beaker = null
 
@@ -109,6 +112,9 @@ func _ready():
 	Global.DiceclickSFX = preload("res://sfx/dice_click.wav")
 	Global.ScoreSFX = preload("res://sfx/score.wav")
 	Global.ClickSFX = preload("res://sfx/button_click.wav")
+	Global.FlameSfx = preload("res://sfx/flamesfx.wav")
+	Global.BuySFX = preload("res://sfx/buysfx.wav")
+	Global.ButtonSFX = preload("res://sfx/buttonclick.wav")
 
 func Next():
 	Turn += 1
@@ -205,7 +211,7 @@ func pick_random(container):
 	return container[randi() % container.size()]
 	
 
-func play_sound(stream: AudioStream, options:= {}, _global_position = null) -> AudioStreamPlayer:
+func play_sound(stream: AudioStream, options:= {}, _global_position = null, delay = 0.0) -> AudioStreamPlayer:
 	var audio_stream_player = AudioStreamPlayer.new()
 	audio_stream_player.process_mode = Node.PROCESS_MODE_ALWAYS
 
@@ -215,8 +221,17 @@ func play_sound(stream: AudioStream, options:= {}, _global_position = null) -> A
 	
 	for prop in options.keys():
 		audio_stream_player.set(prop, options[prop])
-	
-	audio_stream_player.play()
+		
+	if delay > 0.0:
+		var timer = Timer.new()
+		timer.wait_time = delay
+		timer.one_shot = true
+		timer.connect("timeout", audio_stream_player.play)
+		add_child(timer)
+		timer.start()
+	else:
+		audio_stream_player.play()
+		
 	audio_stream_player.finished.connect(kill.bind(audio_stream_player))
 	
 	return audio_stream_player

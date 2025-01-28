@@ -54,6 +54,7 @@ func _physics_process(delta):
 		$Button.disabled = (DiceMan.dices.size() >= Global.minforTurn() and Global.Status == Global.Statuses.THROWING)
 
 func _on_button_pressed():
+	Global.play_sound(Global.ButtonSFX)
 	Global.dices_used = DiceMan.dices.size()
 	shake_time = 0.0
 	if DiceMan.dices.size() >= Global.minforTurn():

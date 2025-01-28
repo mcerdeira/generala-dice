@@ -92,6 +92,7 @@ func initialize():
 	
 func agotar():
 	$shadow.visible = false
+	Global.play_sound(Global.FlameSfx, {}, null, 2.0)
 	await disolve().finished
 	ChangeType(Global.DiceTypes.Normal)
 	$sprite.material.set_shader_parameter("dissolve_value", 1)
@@ -101,6 +102,7 @@ func destruir():
 	$shadow.visible = false
 	remove_from_group("dices")
 	Global.point_list.recalc_forced()
+	Global.play_sound(Global.FlameSfx, {}, null, 2.0)
 	await disolve().finished
 	queue_free()
 	
@@ -259,7 +261,6 @@ func local_flip():
 		currentvalue = 1
 
 func _on_control_mouse_entered():
-	Global.preventSelect = true
 	if !rolling:
 		shaking = true
 		Global.emit(get_global_mouse_position(), 1)

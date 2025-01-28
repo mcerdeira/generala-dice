@@ -18,6 +18,7 @@ func _physics_process(delta):
 		$Button2.disabled = true
 	else:
 		$Button2.disabled = Global.Status != Global.Statuses.IDLE
+		$Button3.disabled = Global.Status != Global.Statuses.IDLE
 	
 	
 	$lbl_goal/lbl_points2.text = str(Global.Goal)
@@ -124,13 +125,19 @@ func force_emit_all():
 		d.minigrow()
 
 func _on_button_2_pressed():
+	Global.play_sound(Global.ButtonSFX)
 	arrange2()
 
 func clearSelected():
 	$pointlist.clearSelected()
 
 func _on_button_3_pressed():
+	Global.play_sound(Global.ButtonSFX)
 	$Shop.visible = !$Shop.visible
 	if visible:
 		Music.pitch_to(0.5)
 
+func _on_button_pressed():
+	Global.play_sound(Global.ButtonSFX)
+	await get_tree().create_timer(2.1).timeout
+	get_tree().change_scene_to_file("res://scenes/title.tscn")

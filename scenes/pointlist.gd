@@ -34,6 +34,7 @@ func _physics_process(delta):
 	$Button.disabled = Global.GameOver
 	
 	if dragged:
+		Global.preventSelect = true
 		global_position = get_global_mouse_position()
 
 func fade_out():
@@ -333,6 +334,7 @@ func clearSelected():
 		$items.deselect(i)
 
 func _on_button_pressed(): #ANOTAR
+	Global.play_sound(Global.ButtonSFX)
 	Global.shaker_obj.shake(3, 1)
 	var add = 0
 	var mult = 0
@@ -380,7 +382,7 @@ func _on_button_pressed(): #ANOTAR
 		var add_txt = ""
 		var mult_txt = ""
 		if add > 0:
-			add_txt = " x [color=yellow]" + str(add) + "[/color]"
+			add_txt = " + [color=yellow]" + str(add) + "[/color]"
 		if mult > 0:
 			mult_txt = " x [color=red]" + str(mult) + "[/color]"
 			
@@ -413,7 +415,7 @@ func _on_button_pressed(): #ANOTAR
 			d.show_enfasis(false)
 			d.restart_position()
 			if d.DiceType == Global.DiceTypes.Fake:
-				d.agotar()
+				d.destruir()
 		
 		fade_out()
 		Global.Next()
@@ -519,7 +521,11 @@ func _on_input_event(viewport, event, shape_idx):
 		if !dragged:
 			if event is InputEventMouseButton && event.is_action_pressed("click"):
 				dragged = true
+				Global.preventSelect = true
 		if dragged:
 			if event is InputEventMouseButton && event.is_action_released("click"):
 				dragged = false
 
+func _on_mouse_exited():
+	if !dragged:
+		Global.preventSelect = false
