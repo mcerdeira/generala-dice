@@ -1,8 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://djocrijh1ceom"]
+[gd_scene load_steps=16 format=3 uid="uid://djocrijh1ceom"]
 
 [ext_resource type="Script" path="res://scenes/Beaker.gd" id="1_3qhnb"]
 [ext_resource type="Texture2D" uid="uid://dytig1jwdi4l1" path="res://sprites/beaker1.png" id="1_252vu"]
 [ext_resource type="Texture2D" uid="uid://d3tsnixp63x6v" path="res://sprites/beaker2.png" id="2_166ns"]
+[ext_resource type="Texture2D" uid="uid://ci5ebbhxayojl" path="res://sprites/beaker3.png" id="4_5jcd0"]
 [ext_resource type="FontFile" uid="uid://qlhmfs1ahw63" path="res://fonts/prstartk.ttf" id="4_m2u8j"]
 [ext_resource type="FontFile" uid="uid://bke1xm65inmdl" path="res://fonts/Thin sans.ttf" id="4_pkukr"]
 
@@ -14,6 +15,20 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": ExtResource("2_166ns")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_u71n5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": null
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_5jcd0")
 }],
 "loop": true,
 "name": &"default",
@@ -93,6 +108,12 @@ sprite_frames = SubResource("SpriteFrames_hcnxi")
 
 [node name="sprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_hcnxi")
+
+[node name="beaker_part" type="AnimatedSprite2D" parent="sprite"]
+z_index = -999
+z_as_relative = false
+position = Vector2(0, -43)
+sprite_frames = SubResource("SpriteFrames_u71n5")
 
 [node name="Area2D" type="Area2D" parent="."]
 visible = false

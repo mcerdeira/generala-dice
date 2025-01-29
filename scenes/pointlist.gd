@@ -25,8 +25,23 @@ var go_for_double = false
 var current_points = null
 var current_index = -1
 var current_dices = null
+var TimerSpeed = 0
 var OriginalPitchScale = 2.0
 var PitchScale = OriginalPitchScale
+
+func _on_btn_sound_pressed():
+	var val = $btn_sound/txtval.text
+	testSound(val)
+
+func testSound(val):
+	var local_points = int(val)
+	PitchScale = OriginalPitchScale
+	TimerSpeed = Global.get_timer_value(local_points)
+	$Timer.wait_time = TimerSpeed
+	$Timer.start()
+	Global.points_to(0, 1.0, "VisualPoints")
+	await Global.points_to(local_points).finished
+	$Timer.stop()
 
 func _ready():
 	fade_out()
@@ -383,7 +398,7 @@ func _on_button_pressed(): #ANOTAR
 		
 		#Armar jugada visualmente II
 		var local_points = Global.Points + current_points 
-		Global.VisualPoints = local_points
+		Global.VisualPoints = current_points
 		Global.VisualPointsSign = "+"
 		
 		var base_points = $items2.get_item_text(current_index)
@@ -416,6 +431,8 @@ func _on_button_pressed(): #ANOTAR
 		PitchScale = OriginalPitchScale
 		#Ocultar dialogo de puntos en 3 segundos y sumar puntos con tween
 		await get_tree().create_timer(3.0).timeout
+		TimerSpeed = Global.get_timer_value(local_points)
+		$Timer.wait_time = TimerSpeed
 		$Timer.start()
 		Global.points_to(0, 1.0, "VisualPoints")
 		await Global.points_to(local_points).finished
@@ -542,3 +559,5 @@ func _on_input_event(viewport, event, shape_idx):
 func _on_mouse_exited():
 	if !dragged:
 		Global.preventSelect = false
+
+

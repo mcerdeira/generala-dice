@@ -543,6 +543,20 @@ wait_time = 0.3
 position = Vector2(1108, -9)
 script = ExtResource("5_dx72g")
 
+[node name="btn_sound" type="Button" parent="pointlist"]
+visible = false
+offset_left = -926.0
+offset_top = 141.0
+offset_right = -787.0
+offset_bottom = 193.0
+text = "TEST SND"
+
+[node name="txtval" type="TextEdit" parent="pointlist/btn_sound"]
+layout_mode = 0
+offset_top = 58.0
+offset_right = 137.0
+offset_bottom = 106.0
+
 [node name="ColorRect" type="ColorRect" parent="pointlist"]
 offset_left = -123.0
 offset_top = -28.0
@@ -867,6 +881,7 @@ mouse_filter = 2
 [connection signal="timeout" from="PointsShow/Timer" to="PointsShow" method="_on_timer_timeout"]
 [connection signal="input_event" from="pointlist" to="pointlist" method="_on_input_event"]
 [connection signal="mouse_exited" from="pointlist" to="pointlist" method="_on_mouse_exited"]
+[connection signal="pressed" from="pointlist/btn_sound" to="pointlist" method="_on_btn_sound_pressed"]
 [connection signal="item_selected" from="pointlist/items" to="pointlist" method="_on_items_item_selected"]
 [connection signal="pressed" from="pointlist/Button" to="pointlist" method="_on_button_pressed"]
 [connection signal="timeout" from="pointlist/Timer" to="pointlist" method="_on_timer_timeout"]

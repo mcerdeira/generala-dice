@@ -106,7 +106,6 @@ func throw():
 	for d in dices:
 		d.visible = true
 		d.throw()
-		d.force_emit()
 		
 	cant_throw = false
 		
@@ -164,3 +163,5 @@ func _on_button_pressed():
 	await get_tree().create_timer(0.7).timeout
 	Music.pitch_to(1.0)
 	get_tree().change_scene_to_file("res://scenes/title.tscn")
+
+

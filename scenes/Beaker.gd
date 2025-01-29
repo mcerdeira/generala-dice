@@ -23,6 +23,7 @@ func reset():
 	#$Label.visible = true
 	$Button.text = "AGITAR" + trailing
 	$sprite.frame = 0
+	$sprite/beaker_part.frame = $sprite.frame
 	$sprite.rotation_degrees = 0
 	$AnimationPlayer2.play_backwards("new_animation")
 	$beakerbounce/collider.set_deferred("disabled", true)
@@ -46,6 +47,7 @@ func _physics_process(delta):
 			global_position = original_position
 	
 	$shadow.frame = $sprite.frame
+	$sprite/beaker_part.frame = $sprite.frame
 	$shadow.rotation = $sprite.rotation
 	#$Label.text = str(DiceMan.dices.size())
 	if Global.GameOver:
@@ -90,6 +92,7 @@ func _on_button_pressed():
 			shaking = true
 			#$Label.visible = false
 			$sprite.frame = 1
+			$sprite/beaker_part.frame = $sprite.frame
 			z_index = 1000
 			$AnimationPlayer.play("new_animation")
 		else:
@@ -107,11 +110,12 @@ func _on_button_pressed():
 			$Button.text = "..." + trailing
 			shaking = false
 			$sprite.frame = 1
+			$sprite/beaker_part.frame = $sprite.frame
 			$AnimationPlayer.stop()
 			$sprite.rotation_degrees = 45
 			DiceMan.throw()
-			$AnimationPlayer2.play("new_animation")
 			await get_tree().create_timer(0.5).timeout
+			$AnimationPlayer2.play("new_animation")
 			Global.play_sound(Global.RollSFX)
 			await get_tree().create_timer(0.5).timeout
 			$beakerbounce/collider.set_deferred("disabled", false) 

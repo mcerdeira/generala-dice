@@ -124,6 +124,10 @@ func _ready():
 	Global.GlassSFX = preload("res://sfx/glass.wav")
 	Global.ShepardSFX = preload("res://sfx/shepard.wav")
 	Global.VictorySFX = preload("res://sfx/victory.wav")
+	
+func get_timer_value(score: int, max_time: float = 2.5, min_time: float = 0.05, scaling_factor: float = 5.0) -> float:
+	var timer_value = scaling_factor / (score + 1)
+	return clamp(timer_value, min_time, max_time)
 
 func Next(PointsShow = null):
 	Turn += 1
