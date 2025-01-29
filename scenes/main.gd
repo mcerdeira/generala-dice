@@ -27,8 +27,8 @@ func _physics_process(delta):
 	
 	if Global.VisualPoints != 0:
 		
-		$lbl_points/lbl_points3.text = str(abs(Global.VisualPoints))
-		$lbl_points/lbl_points4.text = Global.VisualPointsSign
+		$lbl_points/lbl_points3.text = "[wave]\n" + str(abs(Global.VisualPoints)) + "[/wave]"
+		$lbl_points/lbl_points4.text = "[wave]" + Global.VisualPointsSign + "[/wave]"
 		if Global.VisualPointsSign == "+":
 			$lbl_points/lbl_points3.set_modulate(Color(0, 0, 1, 1)) 
 			$lbl_points/lbl_points4.set_modulate(Color(0, 0, 1, 1)) 
@@ -143,6 +143,7 @@ func force_emit_all():
 		d.minigrow()
 
 func _on_button_2_pressed():
+	Global.emit(get_global_mouse_position(), 1)
 	Global.Status = Global.Statuses.WARPING
 	Global.play_sound(Global.ButtonSFX)
 	arrange2()
@@ -151,12 +152,14 @@ func clearSelected():
 	$pointlist.clearSelected()
 
 func _on_button_3_pressed():
+	Global.emit(get_global_mouse_position(), 1)
 	Global.play_sound(Global.ButtonSFX)
 	$Shop.visible = !$Shop.visible
 	if visible:
 		Music.pitch_to(0.5)
 
 func _on_button_pressed():
+	Global.emit(get_global_mouse_position(), 1)
 	Global.play_sound(Global.ButtonSFX)
 	await get_tree().create_timer(0.7).timeout
 	Music.pitch_to(1.0)

@@ -20,6 +20,8 @@ func _input(event: InputEvent):
 	if !Global.preventSelect:
 		if event is InputEventMouseButton:
 			if event.button_index == MOUSE_BUTTON_LEFT:
+				Global.emit(get_global_mouse_position(), 1)
+				
 				if event.pressed:
 					# Inicia el drag
 					start_position = _to_local(event.position)

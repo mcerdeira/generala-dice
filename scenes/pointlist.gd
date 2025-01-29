@@ -336,6 +336,8 @@ func clearSelected():
 		$items.deselect(i)
 
 func _on_button_pressed(): #ANOTAR
+	Global.emit(get_global_mouse_position(), 1)
+	Global.shaker_obj.shake(1.8, 3.5)
 	Music.stop()
 	Global.play_sound(Global.ButtonSFX)
 	Music.play(Global.VictorySFX)
@@ -345,7 +347,6 @@ func _on_button_pressed(): #ANOTAR
 	var block = true
 	var blocker_dice = null
 	if current_dices and current_dices.size() > 0:
-	
 		#Calculos de puntos
 		if current_dices.size() > 0:
 			for d in current_dices:

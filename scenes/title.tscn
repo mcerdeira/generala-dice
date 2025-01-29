@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://k02f4hcqt0bo"]
+[gd_scene load_steps=9 format=3 uid="uid://k02f4hcqt0bo"]
 
 [ext_resource type="Script" path="res://scenes/title.gd" id="1_8qod5"]
 [ext_resource type="PackedScene" uid="uid://dwiopwb2k0qtu" path="res://scenes/Dice_shop.tscn" id="1_41gwa"]
 [ext_resource type="FontFile" uid="uid://bke1xm65inmdl" path="res://fonts/Thin sans.ttf" id="2_xa0vq"]
 [ext_resource type="Shader" path="res://scenes/Loco.gdshader" id="4_gqc6m"]
+[ext_resource type="Script" path="res://scenes/clickTitle.gd" id="5_vpda2"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_heaix"]
 shader = ExtResource("4_gqc6m")
@@ -99,3 +100,10 @@ text = "[center]
 libraries = {
 "": SubResource("AnimationLibrary_tiplw")
 }
+
+[node name="clickTitle" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("5_vpda2")

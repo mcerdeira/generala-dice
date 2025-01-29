@@ -432,30 +432,33 @@ theme_override_font_sizes/font_size = 60
 text = "0"
 metadata/_edit_use_anchors_ = true
 
-[node name="lbl_points3" type="Label" parent="lbl_points"]
+[node name="lbl_points3" type="RichTextLabel" parent="lbl_points"]
 layout_mode = 1
 anchors_preset = -1
-anchor_top = 1.02273
-anchor_bottom = 1.47727
+anchor_top = 0.0909091
+anchor_right = 0.571429
+anchor_bottom = 1.59091
 offset_left = 168.0
 offset_right = 234.0
 offset_bottom = 24.0
-theme_override_fonts/font = ExtResource("7_jk6n3")
-theme_override_font_sizes/font_size = 60
+theme_override_fonts/normal_font = ExtResource("7_jk6n3")
+theme_override_font_sizes/normal_font_size = 60
+bbcode_enabled = true
 metadata/_edit_use_anchors_ = true
 
-[node name="lbl_points4" type="Label" parent="lbl_points"]
+[node name="lbl_points4" type="RichTextLabel" parent="lbl_points"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = -0.184524
 anchor_top = 1.02273
-anchor_right = -0.184524
-anchor_bottom = 1.47727
+anchor_right = -0.0357143
+anchor_bottom = 1.63636
 offset_left = 168.0
 offset_right = 234.0
 offset_bottom = 24.0
-theme_override_fonts/font = ExtResource("7_jk6n3")
-theme_override_font_sizes/font_size = 60
+theme_override_fonts/normal_font = ExtResource("7_jk6n3")
+theme_override_font_sizes/normal_font_size = 60
+bbcode_enabled = true
 metadata/_edit_use_anchors_ = true
 
 [node name="lbl_goal" type="Label" parent="."]

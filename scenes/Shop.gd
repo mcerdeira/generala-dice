@@ -16,6 +16,7 @@ func _process(delta):
 			done = true
 
 func _on_button_4_pressed(): #Cerrar
+	Global.emit(get_global_mouse_position(), 1)
 	Global.play_sound(Global.ButtonSFX)
 	Music.pitch_to(1.0)
 	visible = !visible
@@ -40,6 +41,7 @@ func canBuy(price):
 		return false
 
 func _on_button_5_pressed(): #Comprar
+	Global.emit(get_global_mouse_position(), 1)
 	var reemplazo = null
 	var nuevo = null
 	var diceshopcurrent = get_tree().get_nodes_in_group("diceshopcurrents")
@@ -83,6 +85,7 @@ func _on_button_5_pressed(): #Comprar
 		Global.shaker_obj.shake(6, 0.5)
 
 func _on_button_pressed():
+	Global.emit(get_global_mouse_position(), 1)
 	unselectall()
 	Global.play_sound(Global.ButtonSFX)
 	if Global.Points >= Global.RerollCost:
