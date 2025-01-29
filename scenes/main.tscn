@@ -486,7 +486,6 @@ text = "0"
 metadata/_edit_use_anchors_ = true
 
 [node name="PointsShow" type="Node2D" parent="."]
-visible = false
 z_index = 4096
 position = Vector2(1108, -9)
 script = ExtResource("9_ejhtj")

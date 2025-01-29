@@ -67,6 +67,7 @@ func arrange(_emit = true):
 		else:
 			await d.move_to(get_node("Beaker/dicemark" + str(e)).global_position).finished
 			d.minigrow(_emit)
+			d.selected = false
 			if _emit:
 				Global.emit(d.global_position, 1)
 			d.ttl_shot = speeds[e]
@@ -95,6 +96,7 @@ func arrange2():
 				
 			if move:
 				await d.move_to(get_node("Beaker/dicemark" + str(e)).global_position).finished
+				d.selected = false
 				d.minigrow()
 				Global.emit(d.global_position, 1)
 				d.ttl_shot = speeds[e]
@@ -106,6 +108,7 @@ func throw():
 	for d in dices:
 		d.visible = true
 		d.throw()
+		d.selected = false
 		
 	cant_throw = false
 		

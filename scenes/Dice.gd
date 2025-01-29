@@ -142,6 +142,7 @@ func throw_dice(force: Vector2, rotation_force: float):
 	stoped = false
 
 func _physics_process(delta):
+	$selected.visible = selected
 	if DiceType == Global.DiceTypes.Rubber:
 		if rolling:
 			$btn_flip.visible = false

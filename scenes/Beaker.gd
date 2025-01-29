@@ -50,10 +50,13 @@ func _physics_process(delta):
 	$sprite/beaker_part.frame = $sprite.frame
 	$shadow.rotation = $sprite.rotation
 	#$Label.text = str(DiceMan.dices.size())
-	if Global.GameOver:
+	if Global.LastTurn:
 		$Button.disabled = true
 	else:
-		$Button.disabled = (DiceMan.dices.size() >= Global.minforTurn() and Global.Status == Global.Statuses.THROWING)
+		if Global.GameOver:
+			$Button.disabled = true
+		else:
+			$Button.disabled = (DiceMan.dices.size() >= Global.minforTurn() and Global.Status == Global.Statuses.THROWING)
 
 func _on_button_pressed():
 	Global.emit(get_global_mouse_position(), 1)

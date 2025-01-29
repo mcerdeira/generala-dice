@@ -383,7 +383,7 @@ func _on_button_pressed(): #ANOTAR
 				current_points *= mult 
 		
 		Global.play_sound(Global.ScoreSFX)
-		$"../PointsShow".showme()
+		Global.PointsShow.showme()
 		
 		#Traer los dados participes de la jugada
 		var dices = get_tree().get_nodes_in_group("dices")
@@ -449,9 +449,7 @@ func _on_button_pressed(): #ANOTAR
 		
 		fade_out()
 		Music.play(Global.Temardo)
-		Global.Next($"../PointsShow")
-		await get_tree().create_timer(1.4).timeout
-		$"../PointsShow".hideme()
+		Global.Next()
 		
 func _on_timer_timeout():
 	PitchScale += 0.1

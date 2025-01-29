@@ -17,6 +17,8 @@ var shaker_obj = null
 var RerollCost = 2
 var particle = preload("res://scenes/particle2.tscn")
 var preventSelect = false
+var PointsShow = null
+var LastTurn = false
 
 enum Statuses {
 	IDLE,
@@ -125,11 +127,14 @@ func _ready():
 	Global.ShepardSFX = preload("res://sfx/shepard.wav")
 	Global.VictorySFX = preload("res://sfx/victory.wav")
 	
+func _process(delta):
+	Global.LastTurn = (Turn == TurnMax)
+	
 func get_timer_value(score: int, max_time: float = 2.5, min_time: float = 0.05, scaling_factor: float = 5.0) -> float:
 	var timer_value = scaling_factor / (score + 1)
 	return clamp(timer_value, min_time, max_time)
 
-func Next(PointsShow = null):
+func Next():
 	Turn += 1
 	InternarlTurn += 1
 	if Turn > TurnMax:
@@ -139,6 +144,9 @@ func Next(PointsShow = null):
 			RentCalculate()
 		else:
 			NextLevel()
+	else:
+		await get_tree().create_timer(1.4).timeout
+		PointsShow.hideme()
 			
 func NextLevel():
 	refreshPool(true, true)
@@ -147,18 +155,27 @@ func NextLevel():
 		gameover(true)
 	else:
 		Global.Beaker.first = true
+		Global.shaker_obj.shake(7, 1)
+		PointsShow.showme(true)
+		PointsShow.set_title("NIVEL " + str(Level-1) +  " COMPLETO!!")
+		Music.stop()
+		Music.play(Global.VictorySFX)
+		await get_tree().create_timer(5.0).timeout
 		RentCalculate()
+		await get_tree().create_timer(3.0).timeout
 		Global.Turn = 1
 		Global.InternarlTurn = 1
 		Global.point_list.next_level()
 		Goal = Goals[Level]
+		Music.play(Global.Temardo)
+		PointsShow.hideme()
 		
 func RentCalculate():
 	var local_points = Goals[Level - 1]
 	Global.VisualPoints = local_points
 	Global.VisualPointsSign = "-"
-	points_to(0, 1.0, "VisualPoints")
-	await points_to(local_points).finished
+	points_to(0, 0.1, "VisualPoints")
+	await points_to(local_points, 0.1).finished
 	Global.VisualPointsSign = ""
 	Global.VisualPoints = 0
 		
