@@ -14,12 +14,13 @@ func _physics_process(delta):
 			return
 			
 	if Global.GameOver:
+		if !$lbl_gameover.visible:
+			Music.pitch_to(0.2)
 		$lbl_gameover.visible = true
 		$Button2.disabled = true
 	else:
 		$Button2.disabled = Global.Status != Global.Statuses.IDLE
 		$Button3.disabled = Global.Status != Global.Statuses.IDLE
-	
 	
 	$lbl_goal/lbl_points2.text = str(Global.Goal)
 	$lbl_points/lbl_points2.text = str(Global.Points)
@@ -83,6 +84,8 @@ func arrange2():
 				Global.emit(d.global_position, 1)
 				d.ttl_shot = speeds[e]
 				e += 1
+				
+	Global.Status = Global.Statuses.IDLE
 
 func throw():
 	for d in dices:
@@ -125,6 +128,7 @@ func force_emit_all():
 		d.minigrow()
 
 func _on_button_2_pressed():
+	Global.Status = Global.Statuses.WARPING
 	Global.play_sound(Global.ButtonSFX)
 	arrange2()
 
@@ -139,5 +143,6 @@ func _on_button_3_pressed():
 
 func _on_button_pressed():
 	Global.play_sound(Global.ButtonSFX)
-	await get_tree().create_timer(2.1).timeout
+	await get_tree().create_timer(0.7).timeout
+	Music.pitch_to(1.0)
 	get_tree().change_scene_to_file("res://scenes/title.tscn")

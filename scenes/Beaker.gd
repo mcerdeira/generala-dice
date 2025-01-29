@@ -116,7 +116,7 @@ func _on_button_pressed():
 			$beakerbounce/collider.set_deferred("disabled", false) 
 
 func _on_area_2d_area_entered(area):
-	if Global.Status == Global.Statuses.IDLE:
+	if Global.Status == Global.Statuses.IDLE or Global.Status == Global.Statuses.WARPING:
 		if area.is_in_group("dices"):
 			if area.DiceType == Global.DiceTypes.Fake:
 				area.destruir()

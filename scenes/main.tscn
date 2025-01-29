@@ -507,6 +507,9 @@ theme_override_fonts/normal_font = ExtResource("7_jk6n3")
 theme_override_font_sizes/normal_font_size = 68
 bbcode_enabled = true
 
+[node name="Timer" type="Timer" parent="PointsShow"]
+wait_time = 0.3
+
 [node name="pointlist" type="Area2D" parent="."]
 position = Vector2(1108, -9)
 script = ExtResource("5_dx72g")
@@ -602,14 +605,33 @@ theme_override_fonts/font = ExtResource("7_jk6n3")
 theme_override_font_sizes/font_size = 26
 text = "ANOTAR"
 
-[node name="lbl_gameover" type="RichTextLabel" parent="."]
+[node name="Timer" type="Timer" parent="pointlist"]
+wait_time = 0.3
+
+[node name="lbl_gameover" type="Node2D" parent="."]
 visible = false
+position = Vector2(-125, 7)
+
+[node name="ColorRect2" type="ColorRect" parent="lbl_gameover"]
+offset_left = 267.0
+offset_top = 192.0
+offset_right = 1342.0
+offset_bottom = 528.0
+color = Color(0.145098, 0.152941, 0.188235, 0.4)
+
+[node name="ColorRect" type="ColorRect" parent="lbl_gameover"]
+offset_left = 21.0
+offset_top = 108.0
+offset_right = 1331.0
+offset_bottom = 512.0
+mouse_filter = 2
+color = Color(0.101961, 0.192157, 0.192157, 1)
+
+[node name="lbl_gameover" type="RichTextLabel" parent="lbl_gameover"]
 z_index = 4096
 material = SubResource("ShaderMaterial_uj0rc")
-offset_left = -125.0
-offset_top = 7.0
-offset_right = 1225.0
-offset_bottom = 997.0
+offset_right = 1350.0
+offset_bottom = 990.0
 theme_override_colors/default_color = Color(1, 0, 0.364706, 1)
 theme_override_fonts/normal_font = ExtResource("7_jk6n3")
 theme_override_font_sizes/normal_font_size = 296
@@ -618,7 +640,7 @@ text = "
 [wave][center]PERDISTE![/center][/wave]
 "
 
-[node name="Button" type="Button" parent="lbl_gameover"]
+[node name="Button" type="Button" parent="lbl_gameover/lbl_gameover"]
 layout_mode = 0
 offset_left = 467.0
 offset_top = 393.0
@@ -813,11 +835,13 @@ mouse_filter = 2
 
 [connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]
 [connection signal="pressed" from="Button3" to="." method="_on_button_3_pressed"]
+[connection signal="timeout" from="PointsShow/Timer" to="PointsShow" method="_on_timer_timeout"]
 [connection signal="input_event" from="pointlist" to="pointlist" method="_on_input_event"]
 [connection signal="mouse_exited" from="pointlist" to="pointlist" method="_on_mouse_exited"]
 [connection signal="item_selected" from="pointlist/items" to="pointlist" method="_on_items_item_selected"]
 [connection signal="pressed" from="pointlist/Button" to="pointlist" method="_on_button_pressed"]
-[connection signal="pressed" from="lbl_gameover/Button" to="." method="_on_button_pressed"]
+[connection signal="timeout" from="pointlist/Timer" to="pointlist" method="_on_timer_timeout"]
+[connection signal="pressed" from="lbl_gameover/lbl_gameover/Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="Shop/Button4" to="Shop" method="_on_button_4_pressed"]
 [connection signal="pressed" from="Shop/Button5" to="Shop" method="_on_button_5_pressed"]
 [connection signal="pressed" from="Shop/Button" to="Shop" method="_on_button_pressed"]

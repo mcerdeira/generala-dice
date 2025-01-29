@@ -53,11 +53,13 @@ func _on_button_5_pressed(): #Comprar
 			nuevo = d
 			
 	if reemplazo == null:
+		Global.play_sound(Global.GlassSFX)
 		$lbl_item_desc2.text = prefix + "Selecciona un dado a reemplazar."
 		Global.shaker_obj.shake(6, 0.5)
 		return
 	
 	if nuevo == null:
+		Global.play_sound(Global.GlassSFX)
 		$lbl_item_desc2.text = prefix + "Selecciona un dado a comprar."
 		Global.shaker_obj.shake(6, 0.5)
 		return
@@ -76,6 +78,7 @@ func _on_button_5_pressed(): #Comprar
 			
 		unselectall()
 	else:
+		Global.play_sound(Global.GlassSFX)
 		$lbl_item_desc2.text = prefix +  "No tienes suficiente dinero."
 		Global.shaker_obj.shake(6, 0.5)
 
@@ -89,5 +92,6 @@ func _on_button_pressed():
 		$Button.text = "Re\nRoll:\n$" + str(Global.RerollCost)
 		Global.refreshPool(true)
 	else:
+		Global.play_sound(Global.GlassSFX)
 		$lbl_item_desc2.text = prefix +  "No tienes suficiente dinero."
 		Global.shaker_obj.shake(6, 0.5)

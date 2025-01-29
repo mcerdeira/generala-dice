@@ -10,6 +10,9 @@ var ClickSFX = null
 var FlameSfx = null
 var ButtonSFX = null
 var BuySFX = null
+var GlassSFX = null
+var ShepardSFX = null
+var VictorySFX = null
 var shaker_obj = null
 var RerollCost = 2
 var particle = preload("res://scenes/particle2.tscn")
@@ -19,6 +22,7 @@ enum Statuses {
 	IDLE,
 	SHAKING,
 	THROWING,
+	WARPING,
 }
 
 var Status = Statuses.IDLE
@@ -115,34 +119,49 @@ func _ready():
 	Global.FlameSfx = preload("res://sfx/flamesfx.wav")
 	Global.BuySFX = preload("res://sfx/buysfx.wav")
 	Global.ButtonSFX = preload("res://sfx/buttonclick.wav")
+	Global.GlassSFX = preload("res://sfx/glass.wav")
+	Global.ShepardSFX = preload("res://sfx/shepard.wav")
+	Global.VictorySFX = preload("res://sfx/victory.wav")
 
-func Next():
+func Next(PointsShow = null):
 	Turn += 1
 	InternarlTurn += 1
 	if Turn > TurnMax:
 		if Points < Goal:
+			PointsShow.hideme()
 			gameover(false)
 		else:
 			NextLevel()
 			
 func NextLevel():
-	refreshPool(true)
+	refreshPool(true, true)
 	Level += 1
 	if Level > LevelMax:
 		gameover(true)
 	else:
 		Global.Beaker.first = true
-		Global.Points -=  Goals[Level - 1]
+		var local_points = Goals[Level - 1]
+		await points_to(local_points).finished
 		Global.Turn = 1
 		Global.InternarlTurn = 1
 		Global.point_list.next_level()
 		Goal = Goals[Level]
 		
-func refreshPool(reroll = false):
+func points_to(points, _speed = 1.0):
+	var _tween = create_tween()
+	_tween.set_trans(Tween.TRANS_QUINT)
+	_tween.set_ease(Tween.EASE_IN_OUT)
+	_tween.tween_property(Global, "Points", points, _speed)
+	return _tween
+		
+func refreshPool(reroll = false, restart = false):
 	DiceChancesTmp = [] + DiceChances
 	if reroll:
 		var dices = get_tree().get_nodes_in_group("diceshop")
 		for d in dices:
+			if restart:
+				d.available = true
+				d.visible = true
 			d.randomize_dice()
 			
 func uncopyAll():
@@ -209,7 +228,6 @@ func pick_random(container):
 			TYPE_PACKED_VECTOR2_ARRAY, TYPE_PACKED_VECTOR3_ARRAY
 			], "ERROR: pick_random" )
 	return container[randi() % container.size()]
-	
 
 func play_sound(stream: AudioStream, options:= {}, _global_position = null, delay = 0.0) -> AudioStreamPlayer:
 	var audio_stream_player = AudioStreamPlayer.new()

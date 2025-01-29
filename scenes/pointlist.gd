@@ -25,6 +25,8 @@ var go_for_double = false
 var current_points = null
 var current_index = -1
 var current_dices = null
+var OriginalPitchScale = 2.0
+var PitchScale = OriginalPitchScale
 
 func _ready():
 	fade_out()
@@ -334,7 +336,9 @@ func clearSelected():
 		$items.deselect(i)
 
 func _on_button_pressed(): #ANOTAR
+	Music.stop()
 	Global.play_sound(Global.ButtonSFX)
+	Music.play(Global.VictorySFX)
 	Global.shaker_obj.shake(3, 1)
 	var add = 0
 	var mult = 0
@@ -363,7 +367,7 @@ func _on_button_pressed(): #ANOTAR
 				current_points *= mult 
 		
 		Global.play_sound(Global.ScoreSFX)
-		$"../PointsShow".visible = true
+		$"../PointsShow".showme()
 		
 		#Traer los dados participes de la jugada
 		var dices = get_tree().get_nodes_in_group("dices")
@@ -405,10 +409,12 @@ func _on_button_pressed(): #ANOTAR
 		else:
 			blocker_dice.agotar()
 		
+		PitchScale = OriginalPitchScale
 		#Ocultar dialogo de puntos en 3 segundos y sumar puntos con tween
 		await get_tree().create_timer(3.0).timeout
-		$"../PointsShow".visible = false
+		$Timer.start()
 		await points_to(local_points).finished
+		$Timer.stop()
 		
 		#Reseteo de dados y estados restantes
 		for d in dices:
@@ -418,7 +424,14 @@ func _on_button_pressed(): #ANOTAR
 				d.destruir()
 		
 		fade_out()
-		Global.Next()
+		Music.play(Global.Temardo)
+		Global.Next($"../PointsShow")
+		await get_tree().create_timer(1.4).timeout
+		$"../PointsShow".hideme()
+		
+func _on_timer_timeout():
+	PitchScale += 0.1
+	Global.play_sound(Global.ShepardSFX, {"pitch_scale": PitchScale})
 
 func trad_name(points, val):
 	if val == "6" or val == "5" or val == "4" or val == "3" or val == "2" or val == "1":
