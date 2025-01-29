@@ -31,7 +31,6 @@ func _input(event: InputEvent):
 					# Finaliza el drag
 					selection_rect.visible = false
 					selecting = false
-					_select_nodes_in_area()
 
 		elif event is InputEventMouseMotion and selecting:
 			# Actualiza el área de selección
@@ -50,12 +49,6 @@ func _input(event: InputEvent):
 			selection_rect.size = size.abs()
 			rectangle_shape.extents = selection_rect.size / 2
 			collision_shape.position = selection_rect.position + selection_rect.size / 2
-
-func _select_nodes_in_area():
-	# Detectar nodos dentro del área de selección
-	for body in $selection_area.get_overlapping_bodies():
-		if body is Node2D: # Cambiar según el tipo de nodo a seleccionar
-			body.set_modulate(Color(0.5, 1.0, 0.5))  # Ejemplo de cambio visual
 
 func _to_local(global_position: Vector2) -> Vector2:
 	# Convierte coordenadas globales a locales relativas al Control

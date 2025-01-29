@@ -382,6 +382,9 @@ func _on_button_pressed(): #ANOTAR
 		
 		#Armar jugada visualmente II
 		var local_points = Global.Points + current_points 
+		Global.VisualPoints = local_points
+		Global.VisualPointsSign = "+"
+		
 		var base_points = $items2.get_item_text(current_index)
 		var add_txt = ""
 		var mult_txt = ""
@@ -413,8 +416,11 @@ func _on_button_pressed(): #ANOTAR
 		#Ocultar dialogo de puntos en 3 segundos y sumar puntos con tween
 		await get_tree().create_timer(3.0).timeout
 		$Timer.start()
-		await points_to(local_points).finished
+		Global.points_to(0, 1.0, "VisualPoints")
+		await Global.points_to(local_points).finished
 		$Timer.stop()
+		Global.VisualPointsSign = ""
+		Global.VisualPoints = 0
 		
 		#Reseteo de dados y estados restantes
 		for d in dices:
@@ -455,13 +461,6 @@ func trad_number(val):
 	else:
 		return ""
 	
-func points_to(points, _speed = 1.0):
-	var _tween = create_tween()
-	_tween.set_trans(Tween.TRANS_QUINT)
-	_tween.set_ease(Tween.EASE_IN_OUT)
-	_tween.tween_property(Global, "Points", points, _speed)
-	return _tween
-
 func _on_items_item_selected(index):
 	if index == current_index:
 		current_index = -1

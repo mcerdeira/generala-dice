@@ -25,6 +25,21 @@ func _physics_process(delta):
 	$lbl_goal/lbl_points2.text = str(Global.Goal)
 	$lbl_points/lbl_points2.text = str(Global.Points)
 	
+	if Global.VisualPoints != 0:
+		
+		$lbl_points/lbl_points3.text = str(abs(Global.VisualPoints))
+		$lbl_points/lbl_points4.text = Global.VisualPointsSign
+		if Global.VisualPointsSign == "+":
+			$lbl_points/lbl_points3.set_modulate(Color(0, 0, 1, 1)) 
+			$lbl_points/lbl_points4.set_modulate(Color(0, 0, 1, 1)) 
+		else:
+			$lbl_points/lbl_points3.set_modulate(Color(1, 0, 0, 1)) 
+			$lbl_points/lbl_points4.set_modulate(Color(1, 0, 0, 1)) 
+		
+	else:
+		$lbl_points/lbl_points3.text = ""
+		$lbl_points/lbl_points4.text = ""
+	
 	$lbl_level/lbl_points2.text = str(Global.Level) + "/" + str(Global.LevelMax)
 	$lbl_turn/lbl_points2.text = str(Global.Turn) + "/" + str(Global.TurnMax)
 	

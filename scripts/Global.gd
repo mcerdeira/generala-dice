@@ -104,6 +104,8 @@ var Turn = 1
 var InternarlTurn = 1
 var TurnMax = 7
 var Points = 0
+var VisualPoints = 0
+var VisualPointsSign = ""
 var Goals = [0, 45, 90, 180, 195, 250, 500, 1000, 2000]
 var Goal = Goals[1]
 var GameOver = false
@@ -130,6 +132,7 @@ func Next(PointsShow = null):
 		if Points < Goal:
 			PointsShow.hideme()
 			gameover(false)
+			RentCalculate()
 		else:
 			NextLevel()
 			
@@ -140,18 +143,26 @@ func NextLevel():
 		gameover(true)
 	else:
 		Global.Beaker.first = true
-		var local_points = Goals[Level - 1]
-		await points_to(local_points).finished
+		RentCalculate()
 		Global.Turn = 1
 		Global.InternarlTurn = 1
 		Global.point_list.next_level()
 		Goal = Goals[Level]
 		
-func points_to(points, _speed = 1.0):
+func RentCalculate():
+	var local_points = Goals[Level - 1]
+	Global.VisualPoints = local_points
+	Global.VisualPointsSign = "-"
+	points_to(0, 1.0, "VisualPoints")
+	await points_to(local_points).finished
+	Global.VisualPointsSign = ""
+	Global.VisualPoints = 0
+		
+func points_to(points, _speed = 1.0, property = "Points"):
 	var _tween = create_tween()
 	_tween.set_trans(Tween.TRANS_QUINT)
 	_tween.set_ease(Tween.EASE_IN_OUT)
-	_tween.tween_property(Global, "Points", points, _speed)
+	_tween.tween_property(Global, property, points, _speed)
 	return _tween
 		
 func refreshPool(reroll = false, restart = false):
