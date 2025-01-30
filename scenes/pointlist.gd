@@ -351,105 +351,109 @@ func clearSelected():
 		$items.deselect(i)
 
 func _on_button_pressed(): #ANOTAR
-	Global.emit(get_global_mouse_position(), 1)
-	Global.shaker_obj.shake(1.8, 3.5)
-	Music.stop()
-	Global.play_sound(Global.ButtonSFX)
-	Music.play(Global.VictorySFX)
-	Global.shaker_obj.shake(3, 1)
-	var add = 0
-	var mult = 0
-	var block = true
-	var blocker_dice = null
-	if current_dices and current_dices.size() > 0:
-		#Calculos de puntos
-		if current_dices.size() > 0:
-			for d in current_dices:
-				if d.DiceType == Global.DiceTypes.OneMoreChance:
-					block = false
-					blocker_dice = d
+	if $items2.get_item_text(current_index) and $items2.get_item_text(current_index) != "-":
+		Global.emit(get_global_mouse_position(), 1)
+		Global.shaker_obj.shake(1.8, 3.5)
+		Music.stop()
+		Global.play_sound(Global.ButtonSFX)
+		Music.play(Global.VictorySFX)
+		Global.shaker_obj.shake(3, 1)
+		var add = 0
+		var mult = 0
+		var block = true
+		var blocker_dice = null
+		if current_dices and current_dices.size() > 0:
+			#Calculos de puntos
+			if current_dices.size() > 0:
+				for d in current_dices:
+					if d.DiceType == Global.DiceTypes.OneMoreChance:
+						block = false
+						blocker_dice = d
+					
+					if d.DiceType == Global.DiceTypes.PlusDice:
+						add += d.currentvalue
+						current_points += d.currentvalue
 				
-				if d.DiceType == Global.DiceTypes.PlusDice:
-					add += d.currentvalue
-					current_points += d.currentvalue
+				for d in current_dices:
+					if d.DiceType == Global.DiceTypes.MultDice:
+						mult += d.currentvalue
+					if d.DiceType == Global.DiceTypes.MultDice2:
+						mult += 2
+				
+				if mult > 0:
+					current_points *= mult 
 			
-			for d in current_dices:
-				if d.DiceType == Global.DiceTypes.MultDice:
-					mult += d.currentvalue
-				if d.DiceType == Global.DiceTypes.MultDice2:
-					mult += 2
+			Global.play_sound(Global.ScoreSFX)
+			Global.PointsShow.showme()
 			
+			#Traer los dados participes de la jugada
+			var dices = get_tree().get_nodes_in_group("dices")
+			for d in dices:
+				if d.enfasis_visible():
+					d.restart_position()
+			
+			#Armar jugada visualmente
+			var jugadita = trad_name(current_points, $items.get_item_text(current_index)) + "!"
+			var texto_jugadita = "[center][wave]\n" + jugadita + "[/wave][/center]"
+			$"../PointsShow/lbl_points".text = texto_jugadita
+			
+			#Armar jugada visualmente II
+			var local_points = Global.Points + current_points 
+			Global.VisualPoints = current_points
+			Global.VisualPointsSign = "+"
+			
+			var base_points = $items2.get_item_text(current_index)
+			var add_txt = ""
+			var mult_txt = ""
+			if add > 0:
+				add_txt = " + [color=yellow]" + str(add) + "[/color]"
 			if mult > 0:
-				current_points *= mult 
-		
-		Global.play_sound(Global.ScoreSFX)
-		Global.PointsShow.showme()
-		
-		#Traer los dados participes de la jugada
-		var dices = get_tree().get_nodes_in_group("dices")
-		for d in dices:
-			if d.enfasis_visible():
-				d.restart_position()
-		
-		#Armar jugada visualmente
-		var jugadita = trad_name(current_points, $items.get_item_text(current_index)) + "!"
-		var texto_jugadita = "[center][wave]\n" + jugadita + "[/wave][/center]"
-		$"../PointsShow/lbl_points".text = texto_jugadita
-		
-		#Armar jugada visualmente II
-		var local_points = Global.Points + current_points 
-		Global.VisualPoints = current_points
-		Global.VisualPointsSign = "+"
-		
-		var base_points = $items2.get_item_text(current_index)
-		var add_txt = ""
-		var mult_txt = ""
-		if add > 0:
-			add_txt = " + [color=yellow]" + str(add) + "[/color]"
-		if mult > 0:
-			mult_txt = " x [color=red]" + str(mult) + "[/color]"
+				mult_txt = " x [color=red]" + str(mult) + "[/color]"
+				
+			var rest = " = [color=blue]" + str(current_points) + "[/color]"
+			 
+			$"../PointsShow/lbl_points_calc".text = "[center]\n" + str(base_points) + add_txt + mult_txt + rest + "[/center]"
 			
-		var rest = " = [color=blue]" + str(current_points) + "[/color]"
-		 
-		$"../PointsShow/lbl_points_calc".text = "[center]\n" + str(base_points) + add_txt + mult_txt + rest + "[/center]"
-		
-		for d in dices:
-			d.minigrow()
-		
-		#Reseteo de variables
-		Global.InternarlTurn = 1
-		Global.Beaker.first = true
-		current_points = null
-		current_dices = null
-		
-		#Bloquear jugada que ya se hizo
-		if block:
-			blocked_games.append(current_index)
-		else:
-			blocker_dice.agotar()
-		
-		PitchScale = OriginalPitchScale
-		#Ocultar dialogo de puntos en 3 segundos y sumar puntos con tween
-		await get_tree().create_timer(3.0).timeout
-		TimerSpeed = Global.get_timer_value(local_points)
-		$Timer.wait_time = TimerSpeed
-		$Timer.start()
-		Global.points_to(0, 1.0, "VisualPoints")
-		await Global.points_to(local_points).finished
-		$Timer.stop()
-		Global.VisualPointsSign = ""
-		Global.VisualPoints = 0
-		
-		#Reseteo de dados y estados restantes
-		for d in dices:
-			d.show_enfasis(false)
-			d.restart_position()
-			if d.DiceType == Global.DiceTypes.Fake:
-				d.destruir()
-		
-		fade_out()
-		Music.play(Global.Temardo)
-		Global.Next()
+			for d in dices:
+				d.minigrow()
+			
+			#Reseteo de variables
+			Global.InternarlTurn = 1
+			Global.Beaker.first = true
+			current_points = null
+			current_dices = null
+			
+			#Bloquear jugada que ya se hizo
+			if block:
+				blocked_games.append(current_index)
+			else:
+				blocker_dice.agotar()
+			
+			PitchScale = OriginalPitchScale
+			#Ocultar dialogo de puntos en 3 segundos y sumar puntos con tween
+			await get_tree().create_timer(3.0).timeout
+			TimerSpeed = Global.get_timer_value(local_points)
+			$Timer.wait_time = TimerSpeed
+			$Timer.start()
+			Global.points_to(0, 1.0, "VisualPoints")
+			await Global.points_to(local_points).finished
+			$Timer.stop()
+			Global.VisualPointsSign = ""
+			Global.VisualPoints = 0
+			
+			#Reseteo de dados y estados restantes
+			for d in dices:
+				d.show_enfasis(false)
+				d.restart_position()
+				if d.DiceType == Global.DiceTypes.Fake:
+					d.destruir()
+			
+			fade_out()
+			Music.play(Global.Temardo)
+			Global.Next()
+	else:
+		Global.play_sound(Global.GlassSFX)
+		Global.shaker_obj.shake(6, 0.5)
 		
 func _on_timer_timeout():
 	PitchScale += 0.1
