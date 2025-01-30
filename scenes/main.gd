@@ -1,7 +1,7 @@
 extends Node2D
 var dices = []
 var cant_throw = true
-var dice_obj = preload("res://scenes/Dice.tscn")
+var dice_obj =  preload("res://scenes/Dice.tscn")
 
 func _physics_process(delta):
 	if Input.is_action_just_pressed("toggle_fullscreen"):

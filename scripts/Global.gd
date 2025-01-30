@@ -63,21 +63,21 @@ enum DiceIDs {
 }
 
 var DiceTypes = {
-	Normal = {"id": DiceIDs.Normal, "price": 0, "texture": load("res://sprites/dices/cube1.png"), "title": "Dado normal", "description": "Confiable dado de [color=red] 6[/color] lados."},
-	Loaded = {"id": DiceIDs.Loaded, "price": 10, "texture": load("res://sprites/dices/loaded.png"), "title": "Dado cargado", "description": "Siempre sale un [color=red] 6[/color]."},
-	PlusDice = {"id": DiceIDs.PlusDice, "price": 6, "texture": load("res://sprites/dices/plusdice.png"), "title": "Dado plus", "description": "[color=red]Suma[/color] su valor al puntaje."},
-	MultDice = {"id": DiceIDs.MultDice, "price": 50, "texture": load("res://sprites/dices/muldice.png"), "title": "Dado multiplicador", "description": "[color=red]Multiplica[/color] el puntaje por su valor."},
-	MultDice2 = {"id": DiceIDs.MultDice2, "price": 10, "texture": load("res://sprites/dices/muldice2.png"), "title": "Dado x2", "description": "[color=red]Multiplica[/color] el puntaje por [color=red] 2[/color]."},
+	Normal = {"id": DiceIDs.Normal, "price": 0, "texture": preload("res://sprites/dices/cube1.png"), "title": "Dado normal", "description": "Confiable dado de [color=red] 6[/color] lados."},
+	Loaded = {"id": DiceIDs.Loaded, "price": 10, "texture": preload("res://sprites/dices/loaded.png"), "title": "Dado cargado", "description": "Siempre sale un [color=red] 6[/color]."},
+	PlusDice = {"id": DiceIDs.PlusDice, "price": 6, "texture": preload("res://sprites/dices/plusdice.png"), "title": "Dado plus", "description": "[color=red]Suma[/color] su valor al puntaje."},
+	MultDice = {"id": DiceIDs.MultDice, "price": 50, "texture": preload("res://sprites/dices/muldice.png"), "title": "Dado multiplicador", "description": "[color=red]Multiplica[/color] el puntaje por su valor."},
+	MultDice2 = {"id": DiceIDs.MultDice2, "price": 10, "texture": preload("res://sprites/dices/muldice2.png"), "title": "Dado x2", "description": "[color=red]Multiplica[/color] el puntaje por [color=red] 2[/color]."},
 	
-	Copy = {"id": DiceIDs.Copy, "price": 10, "texture": load("res://sprites/dices/copy.png"), "title": "El Copion", "description": "[color=red]Copia[/color] el valor de otro dado al azar."},
-	D2 = {"id": DiceIDs.D2, "price": 7, "texture": load("res://sprites/dices/dx2.png"), "title": "Dado D2", "description": "Solo tiene [color=red] 2[/color] valores ([color=red]1, 2[/color])."},
-	D3 = {"id": DiceIDs.D3, "price": 5, "texture": load("res://sprites/dices/dx3.png"), "title": "Dado D3", "description": "Solo tiene [color=red] 3[/color] valores ([color=red]1, 2, 3[/color])."},
-	TurnPlus = {"id": DiceIDs.TurnPlus, "price": 3, "texture": load("res://sprites/dices/turnplus.png"), "title": "La vida", "description": "Tener este dado suma [color=red] 1[/color] turno la partida."},
-	Rubber = {"id": DiceIDs.Rubber, "price": 5, "texture": load("res://sprites/dices/rubber.png"), "title": "Panqueque", "description": "Al tirarlo permite hacer [color=red] flip[/color] a su lado opuesto."},
-	OneMoreChance = {"id": DiceIDs.OneMoreChance, "price": 10, "texture": load("res://sprites/dices/onemore.png"), "title": "El ensayo", "description": "No consume la jugada al usarlo. Al usarse se [color=red] agota[/color]."},
-	Cheese = {"id": DiceIDs.Cheese, "price": 15, "texture": load("res://sprites/dices/cheese.png"), "title": "Quesito", "description": "Es un dado extra por fuera del [color=blue]cubilete[/color]. El dado extra se [color=red]agota[/color] siempre despues de la tirada."},
-	Hologram = {"id": DiceIDs.Cheese, "price": 10, "texture": load("res://sprites/dices/hologram.png"), "title": "Holo-Dado", "description": "El dado proyecta un holograma de si mismo con identico [color=red]valor[/color]."},
-	Fake = {"id": DiceIDs.Fake, "price": 0, "texture": load("res://sprites/dices/fake.png"), "title": "Fake", "description": "Fake"},
+	Copy = {"id": DiceIDs.Copy, "price": 10, "texture": preload("res://sprites/dices/copy.png"), "title": "El Copion", "description": "[color=red]Copia[/color] el valor de otro dado al azar."},
+	D2 = {"id": DiceIDs.D2, "price": 7, "texture": preload("res://sprites/dices/dx2.png"), "title": "Dado D2", "description": "Solo tiene [color=red] 2[/color] valores ([color=red]1, 2[/color])."},
+	D3 = {"id": DiceIDs.D3, "price": 5, "texture": preload("res://sprites/dices/dx3.png"), "title": "Dado D3", "description": "Solo tiene [color=red] 3[/color] valores ([color=red]1, 2, 3[/color])."},
+	TurnPlus = {"id": DiceIDs.TurnPlus, "price": 3, "texture": preload("res://sprites/dices/turnplus.png"), "title": "La vida", "description": "Tener este dado suma [color=red] 1[/color] turno la partida."},
+	Rubber = {"id": DiceIDs.Rubber, "price": 5, "texture": preload("res://sprites/dices/rubber.png"), "title": "Panqueque", "description": "Al tirarlo permite hacer [color=red] flip[/color] a su lado opuesto."},
+	OneMoreChance = {"id": DiceIDs.OneMoreChance, "price": 10, "texture": preload("res://sprites/dices/onemore.png"), "title": "El ensayo", "description": "No consume la jugada al usarlo. Al usarse se [color=red] agota[/color]."},
+	Cheese = {"id": DiceIDs.Cheese, "price": 15, "texture": preload("res://sprites/dices/cheese.png"), "title": "Quesito", "description": "Es un dado extra por fuera del [color=blue]cubilete[/color]. El dado extra se [color=red]agota[/color] siempre despues de la tirada."},
+	Hologram = {"id": DiceIDs.Cheese, "price": 10, "texture": preload("res://sprites/dices/hologram.png"), "title": "Holo-Dado", "description": "El dado proyecta un holograma de si mismo con identico [color=red]valor[/color]."},
+	Fake = {"id": DiceIDs.Fake, "price": 0, "texture": preload("res://sprites/dices/fake.png"), "title": "Fake", "description": "Fake"},
 }
 
 var DiceChances = [
