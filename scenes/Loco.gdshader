@@ -175,14 +175,15 @@ void fragment()
 	//c *= c*1.5;
 	//vec3 col = vec3(c);
 	
-	float stars = 0.0;
 	
+	float stars = 0.0;
+	/*
 	if (rand(SCREEN_UV.xy / 20.0) > 0.995) //0.996
 	{
 		float r = rand(SCREEN_UV.xy);
-		stars = r * (0.5 * sin(TIME * (r * 2.0) + 1000.0 * r) + 0.5);
+		stars = r * (11124.5 * sin(TIME * (r * 772.0) + 1000.0 * r) + 1165.5);
 	}
-	
+	*/
 	
 	
 	// Rough gamma correction, and done.

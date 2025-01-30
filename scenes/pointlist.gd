@@ -558,4 +558,16 @@ func _on_mouse_exited():
 	if !dragged:
 		Global.preventSelect = false
 
-
+func _on_button_2_pressed():
+	Global.emit(get_global_mouse_position(), 1)
+	Global.shaker_obj.shake(0.5, 1.5)
+	Global.play_sound(Global.ButtonSFX)
+	
+	#Reseteo de dados y estados restantes
+	var dices = get_tree().get_nodes_in_group("dices")
+	for d in dices:
+		if d.DiceType == Global.DiceTypes.Fake:
+			d.destruir()
+		
+	fade_out()
+	Global.Next()

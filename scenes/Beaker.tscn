@@ -94,6 +94,7 @@ _data = {
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0igcw"]
 bg_color = Color(0.145098, 0.152941, 0.188235, 1)
 shadow_color = Color(0.145098, 0.152941, 0.188235, 1)
+anti_aliasing = false
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_c8bau"]
 radius = 48.2701
@@ -138,6 +139,7 @@ offset_top = 56.0
 offset_right = 54.0
 offset_bottom = 101.0
 scale = Vector2(0.990936, 0.550103)
+focus_mode = 0
 theme_override_colors/font_disabled_color = Color(0.282353, 0.282353, 0.282353, 1)
 theme_override_fonts/font = ExtResource("4_pkukr")
 theme_override_font_sizes/font_size = 26

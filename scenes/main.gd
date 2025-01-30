@@ -19,7 +19,7 @@ func _physics_process(delta):
 		$lbl_gameover.visible = true
 		$Button2.disabled = true
 	else:
-		$Button2.disabled = Global.Status != Global.Statuses.IDLE
+		$Button2.disabled = Global.Status != Global.Statuses.IDLE or Global.TurnUsed
 		$Button3.disabled = Global.Status != Global.Statuses.IDLE
 	
 	$lbl_goal/lbl_points2.text = str(Global.Goal)
@@ -41,7 +41,7 @@ func _physics_process(delta):
 		$lbl_points/lbl_points4.text = ""
 	
 	$lbl_level/lbl_points2.text = str(Global.Level) + "/" + str(Global.LevelMax)
-	$lbl_turn/lbl_points2.text = str(Global.Turn) + "/" + str(Global.TurnMax)
+	$lbl_turn/lbl_points2.text = str(min(Global.Turn, Global.TurnMax)) + "/" + str(Global.TurnMax)
 	
 	if !cant_throw:
 		var done = true
@@ -166,5 +166,3 @@ func _on_button_pressed():
 	await get_tree().create_timer(0.7).timeout
 	Music.pitch_to(1.0)
 	get_tree().change_scene_to_file("res://scenes/title.tscn")
-
-

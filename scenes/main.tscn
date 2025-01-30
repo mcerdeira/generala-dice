@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://cp6k2aibvb5x0"]
+[gd_scene load_steps=26 format=3 uid="uid://cp6k2aibvb5x0"]
 
 [ext_resource type="PackedScene" uid="uid://djocrijh1ceom" path="res://scenes/Beaker.tscn" id="1_7se6j"]
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_wbabm"]
@@ -221,10 +221,39 @@ _data = {
 "new_animation": SubResource("Animation_uthfs")
 }
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uu10w"]
+bg_color = Color(0.305882, 0.6, 1, 1)
+corner_radius_bottom_left = 30
+anti_aliasing = false
+anti_aliasing_size = 0.01
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vjjk1"]
+bg_color = Color(0.278431, 0.278431, 0.278431, 1)
+corner_radius_bottom_left = 30
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0iqx5"]
+bg_color = Color(0, 0.701961, 0.568627, 1)
+corner_radius_bottom_right = 30
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_txmjj"]
+bg_color = Color(0.278431, 0.278431, 0.278431, 1)
+corner_radius_bottom_right = 30
+anti_aliasing = false
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_uj0rc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7tt2w"]
 size = Vector2(222, 156)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3tg4j"]
+bg_color = Color(0.305882, 0.6, 1, 1)
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kl2dv"]
+bg_color = Color(0.968627, 0.317647, 0.607843, 1)
+anti_aliasing = false
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5rf6s"]
 shader = ExtResource("8_nwidx")
@@ -277,21 +306,27 @@ position = Vector2(-22.3333, 7.66666)
 
 [node name="Button2" type="Button" parent="."]
 offset_left = 327.0
-offset_top = 638.0
+offset_top = 639.0
 offset_right = 410.0
-offset_bottom = 688.0
+offset_bottom = 689.0
+focus_mode = 0
 theme_override_fonts/font = ExtResource("5_ciusn")
 theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_uu10w")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_vjjk1")
 text = "<<"
 metadata/_edit_use_anchors_ = true
 
 [node name="Button3" type="Button" parent="."]
 offset_left = 800.0
-offset_top = 638.0
+offset_top = 639.0
 offset_right = 883.0
-offset_bottom = 688.0
+offset_bottom = 689.0
+focus_mode = 0
 theme_override_fonts/font = ExtResource("5_ciusn")
 theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_0iqx5")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_txmjj")
 text = "$$"
 metadata/_edit_use_anchors_ = true
 
@@ -486,6 +521,7 @@ text = "0"
 metadata/_edit_use_anchors_ = true
 
 [node name="PointsShow" type="Node2D" parent="."]
+visible = false
 z_index = 4096
 position = Vector2(1108, -9)
 script = ExtResource("9_ejhtj")
@@ -641,11 +677,24 @@ item_11/selectable = false
 [node name="Button" type="Button" parent="pointlist"]
 offset_left = -120.0
 offset_top = 273.0
-offset_right = 96.0
+offset_right = 12.0
 offset_bottom = 301.0
+focus_mode = 0
 theme_override_fonts/font = ExtResource("7_jk6n3")
 theme_override_font_sizes/font_size = 26
+theme_override_styles/normal = SubResource("StyleBoxFlat_3tg4j")
 text = "ANOTAR"
+
+[node name="Button2" type="Button" parent="pointlist"]
+offset_left = 15.0
+offset_top = 273.0
+offset_right = 96.0
+offset_bottom = 301.0
+focus_mode = 0
+theme_override_fonts/font = ExtResource("7_jk6n3")
+theme_override_font_sizes/font_size = 26
+theme_override_styles/normal = SubResource("StyleBoxFlat_kl2dv")
+text = "OMITIR"
 
 [node name="Timer" type="Timer" parent="pointlist"]
 wait_time = 0.3
@@ -688,6 +737,7 @@ offset_left = 467.0
 offset_top = 393.0
 offset_right = 857.0
 offset_bottom = 506.0
+focus_mode = 0
 theme_override_fonts/font = ExtResource("7_jk6n3")
 theme_override_font_sizes/font_size = 101
 text = "VOLVER"
@@ -820,6 +870,7 @@ offset_left = 1121.0
 offset_top = 28.0
 offset_right = 1180.0
 offset_bottom = 81.0
+focus_mode = 0
 theme_override_fonts/font = ExtResource("5_ciusn")
 theme_override_font_sizes/font_size = 44
 text = "X"
@@ -830,6 +881,7 @@ offset_left = 328.0
 offset_top = 663.0
 offset_right = 771.0
 offset_bottom = 756.0
+focus_mode = 0
 theme_override_fonts/font = ExtResource("7_jk6n3")
 theme_override_font_sizes/font_size = 86
 text = "COMPRAR"
@@ -839,6 +891,7 @@ offset_left = 775.0
 offset_top = 35.0
 offset_right = 852.0
 offset_bottom = 97.0
+focus_mode = 0
 theme_override_fonts/font = ExtResource("7_jk6n3")
 theme_override_font_sizes/font_size = 24
 
@@ -883,6 +936,7 @@ mouse_filter = 2
 [connection signal="pressed" from="pointlist/btn_sound" to="pointlist" method="_on_btn_sound_pressed"]
 [connection signal="item_selected" from="pointlist/items" to="pointlist" method="_on_items_item_selected"]
 [connection signal="pressed" from="pointlist/Button" to="pointlist" method="_on_button_pressed"]
+[connection signal="pressed" from="pointlist/Button2" to="pointlist" method="_on_button_2_pressed"]
 [connection signal="timeout" from="pointlist/Timer" to="pointlist" method="_on_timer_timeout"]
 [connection signal="pressed" from="lbl_gameover/lbl_gameover/Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="Shop/Button4" to="Shop" method="_on_button_4_pressed"]

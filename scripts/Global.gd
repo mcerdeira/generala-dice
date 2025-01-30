@@ -19,6 +19,7 @@ var particle = preload("res://scenes/particle2.tscn")
 var preventSelect = false
 var PointsShow = null
 var LastTurn = false
+var TurnUsed = false
 
 enum Statuses {
 	IDLE,
@@ -137,6 +138,7 @@ func get_timer_value(score: int, max_time: float = 2.5, min_time: float = 0.05, 
 func Next():
 	Turn += 1
 	InternarlTurn += 1
+	Global.TurnUsed = false
 	if Turn > TurnMax:
 		if Points < Goal:
 			PointsShow.hideme()
