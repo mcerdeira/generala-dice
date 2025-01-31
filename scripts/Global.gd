@@ -116,6 +116,7 @@ var BeatTheGame = false
 var Beaker = null
 
 func init_vars():
+	DiceChancesTmp = []
 	Level = 1
 	LevelMax = 8
 	Turn = 1
