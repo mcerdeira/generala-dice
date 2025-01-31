@@ -20,12 +20,12 @@ func _physics_process(delta):
 		$Button2.disabled = true
 	else:
 		$Button2.disabled = Global.Status != Global.Statuses.IDLE
-		$Button3.disabled = Global.Status != Global.Statuses.IDLE
+		$Button3.disabled = Global.Status != Global.Statuses.IDLE or Global.TurnUsed
 	
 	$lbl_goal/lbl_points2.text = str(Global.Goal)
 	$lbl_points/lbl_points2.text = str(Global.Points)
 	if Global.Points < 0:
-		$lbl_points/lbl_points2.set_modulate(Color(1, 0, 0, 1)) 
+		$lbl_points/lbl_points2.set_modulate(Color(1, 0, 0, 1))
 	
 	if Global.VisualPoints != 0:
 		
