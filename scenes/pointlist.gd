@@ -352,8 +352,8 @@ func clearSelected():
 
 func _on_button_pressed(): #ANOTAR
 	if $items2.get_item_text(current_index) and $items2.get_item_text(current_index) != "-":
+		fade_out()
 		Global.emit(get_global_mouse_position(), 1)
-		Global.shaker_obj.shake(1.8, 3.5)
 		Music.stop()
 		Global.play_sound(Global.ButtonSFX)
 		Music.play(Global.VictorySFX)
@@ -391,11 +391,12 @@ func _on_button_pressed(): #ANOTAR
 			for d in dices:
 				if d.enfasis_visible():
 					d.restart_position()
+				else:
+					d.visible = false
 			
 			#Armar jugada visualmente
 			var jugadita = trad_name(current_points, $items.get_item_text(current_index)) + "!"
-			var texto_jugadita = "[center][wave]\n" + jugadita + "[/wave][/center]"
-			$"../PointsShow/lbl_points".text = texto_jugadita
+			Global.PointsShow.set_title(jugadita)
 			
 			#Armar jugada visualmente II
 			var local_points = Global.Points + current_points 
@@ -445,10 +446,10 @@ func _on_button_pressed(): #ANOTAR
 			for d in dices:
 				d.show_enfasis(false)
 				d.restart_position()
+				d.visible = true
 				if d.DiceType == Global.DiceTypes.Fake:
 					d.destruir()
 			
-			fade_out()
 			Music.play(Global.Temardo)
 			Global.Next()
 	else:
@@ -563,6 +564,9 @@ func _on_mouse_exited():
 		Global.preventSelect = false
 
 func _on_button_2_pressed():
+	skip()
+
+func skip():
 	Global.emit(get_global_mouse_position(), 1)
 	Global.shaker_obj.shake(0.5, 1.5)
 	Global.play_sound(Global.ButtonSFX)

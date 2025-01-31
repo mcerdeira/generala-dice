@@ -50,7 +50,7 @@ func _physics_process(delta):
 	$sprite/beaker_part.frame = $sprite.frame
 	$shadow.rotation = $sprite.rotation
 	#$Label.text = str(DiceMan.dices.size())
-	if Global.TurnUsed:
+	if Global.TurnUsed and Global.LastTurn:
 		$Button.disabled = true
 	else:
 		if Global.GameOver:
@@ -65,6 +65,9 @@ func _on_button_pressed():
 	shake_time = 0.0
 	if DiceMan.dices.size() >= Global.minforTurn():
 		if !shaking:
+			if Global.TurnUsed:
+				Global.point_list.skip()
+			
 			if DiceMan.dices.size() < 5:
 				Global.gotoBase(DiceMan.dices, Mark1, Mark2, Mark3, Mark4, Mark5)
 				

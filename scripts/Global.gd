@@ -143,7 +143,9 @@ func Next():
 		if Points < Goal:
 			PointsShow.hideme()
 			gameover(false)
-			RentCalculate()
+			var local_points = Goals[Level]
+			Global.VisualPoints = local_points
+			RentCalculate(true)
 		else:
 			NextLevel()
 	else:
@@ -156,6 +158,8 @@ func NextLevel():
 	if Level > LevelMax:
 		gameover(true)
 	else:
+		var local_points = Goals[Level - 1]
+		Global.VisualPoints = local_points
 		Global.Beaker.first = true
 		Global.shaker_obj.shake(7, 1)
 		PointsShow.showme(true)
@@ -172,13 +176,19 @@ func NextLevel():
 		Music.play(Global.Temardo)
 		PointsShow.hideme()
 		
-func RentCalculate():
-	var local_points = Goals[Level - 1]
+func RentCalculate(loser = false):
+	var local_points = 0
+	if !loser:
+		local_points = Goals[Level - 1]
+	else:
+		local_points = Goals[Level]
+		
 	Global.VisualPoints = local_points
 	Global.VisualPointsSign = "-"
-	points_to(0, 0.1, "VisualPoints")
-	await points_to(local_points, 0.1).finished
-	Global.VisualPointsSign = ""
+	points_to(0, 1.0, "VisualPoints")
+	var points = Global.Points - local_points
+	await points_to(points, 1.0).finished
+	Global.VisualPointsSign = "-"
 	Global.VisualPoints = 0
 		
 func points_to(points, _speed = 1.0, property = "Points"):
@@ -225,6 +235,10 @@ func gameover(win):
 	if !win:
 		Global.point_list.fade_in()
 		Global.GameOver = true
+		var dices = get_tree().get_nodes_in_group("dices")
+		for d in dices:
+			d.restart_position()
+			d.destruir()
 
 func minforTurn():
 	if Global.Beaker.first:

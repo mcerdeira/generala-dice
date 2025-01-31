@@ -15,6 +15,8 @@
 [ext_resource type="PackedScene" uid="uid://dwiopwb2k0qtu" path="res://scenes/Dice_shop.tscn" id="9_4euou"]
 [ext_resource type="Script" path="res://scenes/PointsShow.gd" id="9_ejhtj"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_uj0rc"]
+
 [sub_resource type="Animation" id="Animation_uthfs"]
 resource_name = "new_animation"
 tracks/0/type = "value"
@@ -242,8 +244,6 @@ bg_color = Color(0.278431, 0.278431, 0.278431, 1)
 corner_radius_bottom_right = 30
 anti_aliasing = false
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_uj0rc"]
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7tt2w"]
 size = Vector2(222, 156)
 
@@ -262,6 +262,51 @@ shader_parameter/amount = 0.12
 [node name="Main" type="Node2D"]
 position = Vector2(133, 61)
 script = ExtResource("1_wbabm")
+
+[node name="PointsShow" type="Node2D" parent="."]
+visible = false
+position = Vector2(1108, -9)
+script = ExtResource("9_ejhtj")
+
+[node name="ColorRect2" type="ColorRect" parent="PointsShow"]
+offset_left = -974.0
+offset_top = 189.0
+offset_right = 101.0
+offset_bottom = 525.0
+color = Color(0.145098, 0.152941, 0.188235, 0.4)
+
+[node name="ColorRect" type="ColorRect" parent="PointsShow"]
+offset_left = -1220.0
+offset_top = 105.0
+offset_right = 90.0
+offset_bottom = 509.0
+mouse_filter = 2
+color = Color(0.101961, 0.192157, 0.192157, 1)
+
+[node name="lbl_points" type="RichTextLabel" parent="PointsShow"]
+material = SubResource("ShaderMaterial_uj0rc")
+offset_left = -1214.0
+offset_top = 72.0
+offset_right = 87.0
+offset_bottom = 949.0
+theme_override_colors/default_color = Color(1, 0, 0.364706, 1)
+theme_override_fonts/normal_font = ExtResource("7_jk6n3")
+theme_override_font_sizes/normal_font_size = 186
+bbcode_enabled = true
+text = "
+[center][wave]POKER![/wave][/center]"
+
+[node name="lbl_points_calc" type="RichTextLabel" parent="PointsShow"]
+offset_left = -1218.0
+offset_top = 395.0
+offset_right = 81.0
+offset_bottom = 508.0
+theme_override_fonts/normal_font = ExtResource("7_jk6n3")
+theme_override_font_sizes/normal_font_size = 68
+bbcode_enabled = true
+
+[node name="Timer" type="Timer" parent="PointsShow"]
+wait_time = 0.3
 
 [node name="SelectableObject" parent="." instance=ExtResource("2_e5mr0")]
 
@@ -519,59 +564,6 @@ theme_override_fonts/font = ExtResource("7_jk6n3")
 theme_override_font_sizes/font_size = 60
 text = "0"
 metadata/_edit_use_anchors_ = true
-
-[node name="PointsShow" type="Node2D" parent="."]
-visible = false
-z_index = 4096
-position = Vector2(1108, -9)
-script = ExtResource("9_ejhtj")
-
-[node name="block" type="ColorRect" parent="PointsShow"]
-offset_left = -222.0
-offset_top = -177.0
-offset_right = 1324.0
-offset_bottom = 940.0
-color = Color(1, 1, 1, 0)
-
-[node name="ColorRect2" type="ColorRect" parent="PointsShow"]
-offset_left = -974.0
-offset_top = 189.0
-offset_right = 101.0
-offset_bottom = 525.0
-color = Color(0.145098, 0.152941, 0.188235, 0.4)
-
-[node name="ColorRect" type="ColorRect" parent="PointsShow"]
-offset_left = -1220.0
-offset_top = 105.0
-offset_right = 90.0
-offset_bottom = 509.0
-mouse_filter = 2
-color = Color(0.101961, 0.192157, 0.192157, 1)
-
-[node name="lbl_points" type="RichTextLabel" parent="PointsShow"]
-material = SubResource("ShaderMaterial_uj0rc")
-offset_left = -1214.0
-offset_top = 72.0
-offset_right = 87.0
-offset_bottom = 949.0
-theme_override_colors/default_color = Color(1, 0, 0.364706, 1)
-theme_override_fonts/normal_font = ExtResource("7_jk6n3")
-theme_override_font_sizes/normal_font_size = 186
-bbcode_enabled = true
-text = "
-POKER!"
-
-[node name="lbl_points_calc" type="RichTextLabel" parent="PointsShow"]
-offset_left = -1218.0
-offset_top = 395.0
-offset_right = 81.0
-offset_bottom = 508.0
-theme_override_fonts/normal_font = ExtResource("7_jk6n3")
-theme_override_font_sizes/normal_font_size = 68
-bbcode_enabled = true
-
-[node name="Timer" type="Timer" parent="PointsShow"]
-wait_time = 0.3
 
 [node name="pointlist" type="Area2D" parent="."]
 position = Vector2(1108, -9)
@@ -927,9 +919,9 @@ offset_right = 1453.0
 offset_bottom = 777.0
 mouse_filter = 2
 
+[connection signal="timeout" from="PointsShow/Timer" to="PointsShow" method="_on_timer_timeout"]
 [connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]
 [connection signal="pressed" from="Button3" to="." method="_on_button_3_pressed"]
-[connection signal="timeout" from="PointsShow/Timer" to="PointsShow" method="_on_timer_timeout"]
 [connection signal="input_event" from="pointlist" to="pointlist" method="_on_input_event"]
 [connection signal="mouse_exited" from="pointlist" to="pointlist" method="_on_mouse_exited"]
 [connection signal="pressed" from="pointlist/btn_sound" to="pointlist" method="_on_btn_sound_pressed"]
