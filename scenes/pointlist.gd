@@ -421,6 +421,7 @@ func _on_button_pressed(): #ANOTAR
 			#Reseteo de variables
 			Global.InternarlTurn = 1
 			Global.Beaker.first = true
+			var points_for_timer = current_points
 			current_points = null
 			current_dices = null
 			
@@ -433,7 +434,7 @@ func _on_button_pressed(): #ANOTAR
 			PitchScale = OriginalPitchScale
 			#Ocultar dialogo de puntos en 3 segundos y sumar puntos con tween
 			await get_tree().create_timer(3.0).timeout
-			TimerSpeed = Global.get_timer_value(local_points)
+			TimerSpeed = Global.get_timer_value(points_for_timer)
 			$Timer.wait_time = TimerSpeed
 			$Timer.start()
 			Global.points_to(0, 1.0, "VisualPoints")

@@ -8,7 +8,8 @@ var ThemeSong = null
 func _ready():
 	Music.play(Global.Temardo)
 	ThemeSong = Music._current_track
-
+	Global.init_vars()
+	
 func _process(delta):
 	if started:
 		resol = lerp(resol, 0.01, 0.05)

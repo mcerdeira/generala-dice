@@ -17,7 +17,7 @@ func _physics_process(delta):
 		selecting = false
 
 func _input(event: InputEvent):
-	if !Global.preventSelect:
+	if !Global.preventSelect and Global.Status == Global.Statuses.IDLE:
 		if event is InputEventMouseButton:
 			if event.button_index == MOUSE_BUTTON_LEFT:
 				Global.emit(get_global_mouse_position(), 1)

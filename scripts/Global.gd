@@ -112,7 +112,23 @@ var VisualPointsSign = ""
 var Goals = [0, 45, 90, 180, 250, 500, 800, 1000, 2000]
 var Goal = Goals[1]
 var GameOver = false
+var BeatTheGame = false
 var Beaker = null
+
+func init_vars():
+	Level = 1
+	LevelMax = 8
+	Turn = 1
+	InternarlTurn = 1
+	TurnMax = 7
+	Points = 0
+	VisualPoints = 0
+	VisualPointsSign = ""
+	Goals = [0, 45, 90, 180, 250, 500, 800, 1000, 2000]
+	Goal = Goals[1]
+	GameOver = false
+	BeatTheGame = false
+	Beaker = null
 
 func _ready():
 	Global.Temardo = preload("res://music/dados.wav")
@@ -232,13 +248,16 @@ func gotoBase(DiceMan_dices, Mark1, Mark2, Mark3, Mark4, Mark5):
 			d.minigrow()
 		
 func gameover(win):
-	if !win:
-		Global.point_list.fade_in()
-		Global.GameOver = true
-		var dices = get_tree().get_nodes_in_group("dices")
-		for d in dices:
-			d.restart_position()
-			d.destruir()
+	Global.BeatTheGame = win
+	if win:
+		Global.shaker_obj.shake(7, 7)
+		PointsShow.showme(true)
+	Global.point_list.fade_in()
+	Global.GameOver = true
+	var dices = get_tree().get_nodes_in_group("dices")
+	for d in dices:
+		d.restart_position()
+		d.destruir()
 
 func minforTurn():
 	if Global.Beaker.first:

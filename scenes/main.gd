@@ -18,6 +18,8 @@ func _physics_process(delta):
 			Music.pitch_to(0.2)
 		$lbl_gameover.visible = true
 		$Button2.disabled = true
+		if Global.BeatTheGame:
+			$lbl_gameover/lbl_gameover.text = "\n[wave][center]GANASTE![/center][/wave]"
 	else:
 		$Button2.disabled = Global.Status != Global.Statuses.IDLE
 		$Button3.disabled = Global.Status != Global.Statuses.IDLE or Global.TurnUsed

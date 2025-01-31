@@ -12,7 +12,10 @@ func set_title(title):
 
 func showme(_lococonfeti = false):
 	lococonfeti = _lococonfeti
-	visible = true
+	if !Global.BeatTheGame:
+		visible = true
+	else:
+		visible = false
 	$Timer.start()
 	
 func hideme():
