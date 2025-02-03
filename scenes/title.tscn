@@ -109,8 +109,9 @@ offset_bottom = 40.0
 script = ExtResource("5_vpda2")
 
 [node name="Label2" type="Label" parent="."]
-offset_left = 1277.0
+offset_left = 1218.0
 offset_top = 742.0
-offset_right = 1361.0
+offset_right = 1365.0
 offset_bottom = 765.0
-text = "version 0.1"
+text = "version 0.1.1"
+horizontal_alignment = 2

@@ -101,6 +101,9 @@ var point_list = null
 var points_normal = [null, null, null, null, null, null, 10, 20, 30, 40, 50, 100] 
 var points_serve = [null, null, null, null, null, null, 15, 25, 35, 45, 55, 200] 
 	
+var Levels = [ 1, 1, 1, 1, 1, 1]
+var LevelPrices = [5, 5, 5, 5, 5, 5]
+	
 var Level = 1
 var LevelMax = 8
 var Turn = 1

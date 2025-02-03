@@ -5,6 +5,30 @@ var prefix = "\n\n"
 func _ready():
 	$Button.text = "Re\nRoll:\n$" + str(Global.RerollCost)
 	visible = false
+	
+func showme(val):
+	visible = val
+	showlevels()
+	
+func showlevels():
+	var i = 0
+	for l in Global.Levels:
+		$items2.set_item_text(i, "Niv " + str(l))
+		$items4.set_item_text(i, str(Global.points_normal[i + 6]))
+		$items3.set_item_text(i, "$" + str(Global.LevelPrices[i]))
+		i += 1
+
+func _on_items_2_item_selected(index):
+	if canBuy(Global.LevelPrices[index]):
+		Global.play_sound(Global.BuySFX)
+		Global.Levels[index] += 1
+		Global.points_normal[index + 6] += 5
+		Global.LevelPrices[index] += 5
+		showlevels()
+	else:
+		Global.play_sound(Global.GlassSFX)
+		$lbl_item_desc2.text = prefix +  "No tienes suficiente dinero."
+		Global.shaker_obj.shake(6, 0.5)
 
 func _process(delta):
 	$lbl_points/lbl_points2.text = "$" + str(Global.Points)
@@ -98,3 +122,4 @@ func _on_button_pressed():
 		Global.play_sound(Global.GlassSFX)
 		$lbl_item_desc2.text = prefix +  "No tienes suficiente dinero."
 		Global.shaker_obj.shake(6, 0.5)
+

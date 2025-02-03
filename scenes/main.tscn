@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://cp6k2aibvb5x0"]
+[gd_scene load_steps=27 format=3 uid="uid://cp6k2aibvb5x0"]
 
 [ext_resource type="PackedScene" uid="uid://djocrijh1ceom" path="res://scenes/Beaker.tscn" id="1_7se6j"]
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_wbabm"]
@@ -254,6 +254,9 @@ anti_aliasing = false
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kl2dv"]
 bg_color = Color(0.968627, 0.317647, 0.607843, 1)
 anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_63jac"]
+bg_color = Color(0.305882, 0.6, 1, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5rf6s"]
 shader = ExtResource("8_nwidx")
@@ -910,6 +913,116 @@ theme_override_font_sizes/font_size = 60
 text = "0"
 metadata/_edit_use_anchors_ = true
 
+[node name="ColorRect5" type="ColorRect" parent="Shop"]
+offset_left = 868.0
+offset_top = 377.0
+offset_right = 1136.0
+offset_bottom = 554.0
+mouse_filter = 2
+color = Color(0.0862745, 0.0901961, 0.117647, 0.670588)
+
+[node name="lbl_dicecurrent2" type="Label" parent="Shop"]
+offset_left = 873.0
+offset_top = 383.0
+offset_right = 1050.0
+offset_bottom = 409.0
+theme_override_fonts/font = ExtResource("7_jk6n3")
+theme_override_font_sizes/font_size = 35
+text = "Subir nivel"
+
+[node name="items" type="ItemList" parent="Shop"]
+offset_left = 871.0
+offset_top = 410.0
+offset_right = 984.0
+offset_bottom = 550.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("7_jk6n3")
+theme_override_font_sizes/font_size = 24
+allow_reselect = true
+allow_search = false
+auto_height = true
+item_count = 6
+item_0/text = "PARES"
+item_0/disabled = true
+item_1/text = "ESCALERA"
+item_1/disabled = true
+item_2/text = "FULL"
+item_2/disabled = true
+item_3/text = "POKER"
+item_3/disabled = true
+item_4/text = "GENERALA"
+item_4/disabled = true
+item_5/text = "GENERALAx2"
+item_5/disabled = true
+
+[node name="items4" type="ItemList" parent="Shop"]
+offset_left = 985.0
+offset_top = 410.0
+offset_right = 1024.0
+offset_bottom = 550.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("7_jk6n3")
+theme_override_font_sizes/font_size = 24
+allow_search = false
+auto_height = true
+item_count = 6
+item_0/text = ""
+item_0/disabled = true
+item_1/text = ""
+item_1/disabled = true
+item_2/text = ""
+item_2/disabled = true
+item_3/text = ""
+item_3/disabled = true
+item_4/text = ""
+item_4/disabled = true
+item_5/text = ""
+item_5/disabled = true
+
+[node name="items2" type="ItemList" parent="Shop"]
+layout_direction = 3
+offset_left = -1087.0
+offset_top = 410.0
+offset_right = -1025.0
+offset_bottom = 550.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("7_jk6n3")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/panel = SubResource("StyleBoxFlat_63jac")
+allow_reselect = true
+allow_search = false
+item_count = 6
+item_0/text = "-"
+item_1/text = "-"
+item_2/text = "-"
+item_3/text = "-"
+item_4/text = "-"
+item_5/text = "-"
+
+[node name="items3" type="ItemList" parent="Shop"]
+layout_direction = 3
+offset_left = -1133.0
+offset_top = 410.0
+offset_right = -1089.0
+offset_bottom = 550.0
+theme_override_colors/font_color = Color(0.894118, 0.788235, 0, 1)
+theme_override_fonts/font = ExtResource("7_jk6n3")
+theme_override_font_sizes/font_size = 24
+allow_search = false
+item_count = 6
+item_0/text = "-"
+item_0/selectable = false
+item_1/text = "-"
+item_1/selectable = false
+item_2/text = "-"
+item_2/selectable = false
+item_3/text = "-"
+item_3/selectable = false
+item_4/text = "-"
+item_4/selectable = false
+item_5/text = "-"
+item_5/selectable = false
+
 [node name="FX" type="ColorRect" parent="."]
 z_index = 4096
 material = SubResource("ShaderMaterial_5rf6s")
@@ -933,3 +1046,4 @@ mouse_filter = 2
 [connection signal="pressed" from="Shop/Button4" to="Shop" method="_on_button_4_pressed"]
 [connection signal="pressed" from="Shop/Button5" to="Shop" method="_on_button_5_pressed"]
 [connection signal="pressed" from="Shop/Button" to="Shop" method="_on_button_pressed"]
+[connection signal="item_selected" from="Shop/items2" to="Shop" method="_on_items_2_item_selected"]

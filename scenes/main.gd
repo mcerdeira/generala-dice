@@ -160,7 +160,7 @@ func clearSelected():
 func _on_button_3_pressed():
 	Global.emit(get_global_mouse_position(), 1)
 	Global.play_sound(Global.ButtonSFX)
-	$Shop.visible = !$Shop.visible
+	$Shop.showme(!$Shop.visible)
 	if visible:
 		Music.pitch_to(0.5)
 
