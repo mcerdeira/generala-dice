@@ -21,6 +21,7 @@ var DiceType = null
 var destiny = null
 var copied = false
 var selected = false
+@export var id = -1
 
 var rotation_speed : float = 20.0 # Velocidad de la oscilación
 var max_rotation : float = 10.0 # Máxima rotación en grados
@@ -85,7 +86,7 @@ func initialize():
 	stoped = false
 	stop = Global.pick_random([10, 30, 20, 15])
 	# Lanza el dado desde el ángulo fijo (45 grados)
-	force_magnitude = randi_range(600, 1800)
+	force_magnitude = randi_range(600, 1000)
 	initial_force = Vector2.RIGHT.rotated(launch_angle) * force_magnitude
 	initial_rotation = randi_range(-10, 10)
 	$SubViewport/Node3D.initialize()
@@ -207,7 +208,7 @@ func _on_area_entered(area):
 		velocity = velocity.bounce(normal) * -1  # Rebote con pérdida de energía
 		angular_velocity *= -0.5  # Invertir la rotación para dar realismo
 		position += normal * 5  # Mueve el dado ligeramente fuera del otro
-		#ttl_bounce = 100
+		ttl_bounce = 0.3
 
 func _on_body_entered(body):
 	if body is StaticBody2D:

@@ -69,7 +69,7 @@ func arrange(_emit = true):
 		if d.DiceType == Global.DiceTypes.Fake:
 			d.destruir()
 		else:
-			await d.move_to(get_node("Beaker/dicemark" + str(e)).global_position).finished
+			await d.move_to(get_node("Beaker/dicemark" + str(d.id)).global_position).finished
 			d.minigrow(_emit)
 			d.selected = false
 			if _emit:
@@ -86,6 +86,7 @@ func arrange2():
 	for d in _dices:
 		if d.selected:
 			validate_selected = true
+			break
 	
 	for d in _dices:
 		var move = false
@@ -99,7 +100,7 @@ func arrange2():
 				move = true
 				
 			if move:
-				await d.move_to(get_node("Beaker/dicemark" + str(e)).global_position).finished
+				await d.move_to(get_node("Beaker/dicemark" + str(d.id)).global_position).finished
 				d.selected = false
 				d.minigrow()
 				Global.emit(d.global_position, 1)

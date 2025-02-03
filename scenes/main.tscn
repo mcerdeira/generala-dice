@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_wbabm"]
 [ext_resource type="PackedScene" uid="uid://c1keqcnqpjd1w" path="res://scenes/selectable_object.tscn" id="2_e5mr0"]
 [ext_resource type="PackedScene" uid="uid://dufepst0w8rkr" path="res://scenes/Dice.tscn" id="2_tcovt"]
-[ext_resource type="PackedScene" uid="uid://ba2tdpbkss4pb" path="res://scenes/shaker.tscn" id="2_wtsft"]
+[ext_resource type="PackedScene" path="res://scenes/shaker.tscn" id="2_wtsft"]
 [ext_resource type="Texture2D" uid="uid://3s8wbw4jv3gl" path="res://sprites/wall.png" id="4_36hgn"]
 [ext_resource type="PackedScene" uid="uid://c1178aepiu4hq" path="res://scenes/wall_1.tscn" id="4_rgh4a"]
 [ext_resource type="FontFile" uid="uid://qlhmfs1ahw63" path="res://fonts/prstartk.ttf" id="5_ciusn"]
@@ -408,30 +408,35 @@ position = Vector2(447, 666)
 ttl_shot = 0.1
 DiceMan = NodePath("..")
 original_position = NodePath("../DiceSlot1")
+id = 2
 
 [node name="Dice3" parent="." node_paths=PackedStringArray("DiceMan", "original_position") instance=ExtResource("2_tcovt")]
 position = Vector2(526, 666)
 ttl_shot = 0.2
 DiceMan = NodePath("..")
 original_position = NodePath("../DiceSlot2")
+id = 3
 
 [node name="Dice" parent="." node_paths=PackedStringArray("DiceMan", "original_position") instance=ExtResource("2_tcovt")]
 position = Vector2(605, 666)
 ttl_shot = 0.1
 DiceMan = NodePath("..")
 original_position = NodePath("../DiceSlot3")
+id = 1
 
 [node name="Dice4" parent="." node_paths=PackedStringArray("DiceMan", "original_position") instance=ExtResource("2_tcovt")]
 position = Vector2(684, 666)
 ttl_shot = 0.3
 DiceMan = NodePath("..")
 original_position = NodePath("../DiceSlot4")
+id = 4
 
 [node name="Dice5" parent="." node_paths=PackedStringArray("DiceMan", "original_position") instance=ExtResource("2_tcovt")]
 position = Vector2(763, 666)
 ttl_shot = 0.3
 DiceMan = NodePath("..")
 original_position = NodePath("../DiceSlot5")
+id = 5
 
 [node name="wall1" parent="." instance=ExtResource("4_rgh4a")]
 z_index = 100
