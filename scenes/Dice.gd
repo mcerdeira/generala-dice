@@ -206,7 +206,8 @@ func _on_area_entered(area):
 		dir *= -1
 		velocity = velocity.bounce(normal) * -1  # Rebote con pérdida de energía
 		angular_velocity *= -0.5  # Invertir la rotación para dar realismo
-		ttl_bounce = 100
+		position += normal * 5  # Mueve el dado ligeramente fuera del otro
+		#ttl_bounce = 100
 
 func _on_body_entered(body):
 	if body is StaticBody2D:
