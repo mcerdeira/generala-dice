@@ -327,4 +327,3 @@ func _draw():
 
 		# Conectamos el último segmento directamente al destino
 		draw_line(Vector2(last_x, last_y), destiny_pos, Color8(255, 255, 255), 1)
-

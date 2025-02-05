@@ -122,4 +122,3 @@ func _on_button_pressed():
 		Global.play_sound(Global.GlassSFX)
 		$lbl_item_desc2.text = prefix +  "No tienes suficiente dinero."
 		Global.shaker_obj.shake(6, 0.5)
-

@@ -65,4 +65,3 @@ func _on_selection_area_area_exited(area):
 	if selecting:
 		if area.is_in_group("dices"):
 			area.select(false)
-

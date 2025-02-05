@@ -223,24 +223,24 @@ _data = {
 "new_animation": SubResource("Animation_uthfs")
 }
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vjjk1"]
+bg_color = Color(0.278431, 0.278431, 0.278431, 1)
+corner_radius_bottom_left = 30
+anti_aliasing = false
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uu10w"]
 bg_color = Color(0.305882, 0.6, 1, 1)
 corner_radius_bottom_left = 30
 anti_aliasing = false
 anti_aliasing_size = 0.01
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vjjk1"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_txmjj"]
 bg_color = Color(0.278431, 0.278431, 0.278431, 1)
-corner_radius_bottom_left = 30
+corner_radius_bottom_right = 30
 anti_aliasing = false
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0iqx5"]
 bg_color = Color(0, 0.701961, 0.568627, 1)
-corner_radius_bottom_right = 30
-anti_aliasing = false
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_txmjj"]
-bg_color = Color(0.278431, 0.278431, 0.278431, 1)
 corner_radius_bottom_right = 30
 anti_aliasing = false
 
@@ -360,8 +360,8 @@ offset_bottom = 689.0
 focus_mode = 0
 theme_override_fonts/font = ExtResource("5_ciusn")
 theme_override_font_sizes/font_size = 24
-theme_override_styles/normal = SubResource("StyleBoxFlat_uu10w")
 theme_override_styles/disabled = SubResource("StyleBoxFlat_vjjk1")
+theme_override_styles/normal = SubResource("StyleBoxFlat_uu10w")
 text = "<<"
 metadata/_edit_use_anchors_ = true
 
@@ -373,8 +373,8 @@ offset_bottom = 689.0
 focus_mode = 0
 theme_override_fonts/font = ExtResource("5_ciusn")
 theme_override_font_sizes/font_size = 24
-theme_override_styles/normal = SubResource("StyleBoxFlat_0iqx5")
 theme_override_styles/disabled = SubResource("StyleBoxFlat_txmjj")
+theme_override_styles/normal = SubResource("StyleBoxFlat_0iqx5")
 text = "$$"
 metadata/_edit_use_anchors_ = true
 
@@ -971,17 +971,11 @@ theme_override_font_sizes/font_size = 24
 allow_search = false
 auto_height = true
 item_count = 6
-item_0/text = ""
 item_0/disabled = true
-item_1/text = ""
 item_1/disabled = true
-item_2/text = ""
 item_2/disabled = true
-item_3/text = ""
 item_3/disabled = true
-item_4/text = ""
 item_4/disabled = true
-item_5/text = ""
 item_5/disabled = true
 
 [node name="items2" type="ItemList" parent="Shop"]
