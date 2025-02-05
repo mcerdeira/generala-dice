@@ -3,6 +3,9 @@ var dices = []
 var cant_throw = true
 var dice_obj =  preload("res://scenes/Dice.tscn")
 
+func _ready():
+	Global.DiceMan = self
+
 func _physics_process(delta):
 	if Input.is_action_just_pressed("toggle_fullscreen"):
 		Global.FULLSCREEN = !Global.FULLSCREEN
@@ -18,14 +21,16 @@ func _physics_process(delta):
 			Music.pitch_to(0.2)
 		$lbl_gameover.visible = true
 		$Button2.disabled = true
+		$Button3/cosito.visible = false
 		if Global.BeatTheGame:
 			$lbl_gameover/lbl_gameover.text = "\n[wave][center]GANASTE![/center][/wave]"
 	else:
 		$Button2.disabled = Global.Status != Global.Statuses.IDLE
 		$Button3.disabled = Global.Status != Global.Statuses.IDLE or Global.TurnUsed
+		$Button3/cosito.visible = Global.Points > 0
 	
-	$lbl_goal/lbl_points2.text = str(Global.Goal)
-	$lbl_points/lbl_points2.text = str(Global.Points)
+	$lbl_goal/lbl_points2.text = "$" + str(Global.Goal)
+	$lbl_points/lbl_points2.text = "$" + str(Global.Points)
 	if Global.Points < 0:
 		$lbl_points/lbl_points2.set_modulate(Color(1, 0, 0, 1))
 	
@@ -79,35 +84,30 @@ func arrange(_emit = true):
 		
 func arrange2():
 	Global.play_sound(Global.DiceclickSFX)
-	var validate_selected = false
 	var e = 1
+	var dicem_index = 1
 	var speeds = [0, 0.1, 0.1, 0.2, 0.3, 0.3]
 	var _dices = get_tree().get_nodes_in_group("dices")
-	for d in _dices:
-		if d.selected:
-			validate_selected = true
-			break
+	
+	_dices.sort_custom(func(a, b): return a.currentvalue > b.currentvalue)
 	
 	for d in _dices:
 		var move = false
 		if d.DiceType == Global.DiceTypes.Fake:
 			d.destruir()
 		else:
-			if validate_selected: 
-				if d.selected:
-					move = true
-			else:
-				move = true
-				
-			if move:
-				await d.move_to(get_node("Beaker/dicemark" + str(d.id)).global_position).finished
-				d.selected = false
-				d.minigrow()
-				Global.emit(d.global_position, 1)
-				d.ttl_shot = speeds[e]
-				e += 1
+			move_one_dice(d, dicem_index)
+			d.ttl_shot = speeds[e]
+			e += 1
+			dicem_index += 1
 				
 	Global.Status = Global.Statuses.IDLE
+	
+func move_one_dice(d, dicem_index):
+	await d.move_to(get_node("Beaker/dicemark" + str(dicem_index)).global_position).finished
+	d.selected = false
+	d.minigrow()
+	Global.emit(d.global_position, 1)
 
 func throw():
 	for d in dices:

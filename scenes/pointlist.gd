@@ -353,11 +353,11 @@ func clearSelected():
 func _on_button_pressed(): #ANOTAR
 	if $items2.get_item_text(current_index) and $items2.get_item_text(current_index) != "-":
 		fade_out()
+		Global.shaker_obj.shake(8, 2.3)
 		Global.emit(get_global_mouse_position(), 1)
-		Music.stop()
+		Music.pause()
 		Global.play_sound(Global.ButtonSFX)
-		Music.play(Global.VictorySFX)
-		Global.shaker_obj.shake(3, 1)
+		Global.play_sound(Global.VictorySFX)
 		var add = 0
 		var mult = 0
 		var block = true
@@ -388,9 +388,13 @@ func _on_button_pressed(): #ANOTAR
 			
 			#Traer los dados participes de la jugada
 			var dices = get_tree().get_nodes_in_group("dices")
+			dices.sort_custom(func(a, b): return a.currentvalue > b.currentvalue)
+			
+			var marks = [$"../DiceSlot1", $"../DiceSlot2", $"../DiceSlot3", $"../DiceSlot4", $"../DiceSlot5"]
 			for d in dices:
 				if d.enfasis_visible():
-					d.restart_position()
+					var m = marks.pop_front()
+					d.move_to(m.global_position)
 				else:
 					d.visible = false
 			
@@ -446,12 +450,11 @@ func _on_button_pressed(): #ANOTAR
 			#Reseteo de dados y estados restantes
 			for d in dices:
 				d.show_enfasis(false)
-				d.restart_position()
 				d.visible = true
 				if d.DiceType == Global.DiceTypes.Fake:
 					d.destruir()
 			
-			Music.play(Global.Temardo)
+			Music.resume()
 			Global.Next()
 	else:
 		Global.play_sound(Global.GlassSFX)
@@ -460,6 +463,7 @@ func _on_button_pressed(): #ANOTAR
 func _on_timer_timeout():
 	PitchScale += 0.1
 	Global.play_sound(Global.ShepardSFX, {"pitch_scale": PitchScale})
+	Global.shaker_obj.shake(PitchScale, 0.1)
 
 func trad_name(points, val):
 	if val == "6" or val == "5" or val == "4" or val == "3" or val == "2" or val == "1":
@@ -579,4 +583,4 @@ func skip():
 			d.destruir()
 		
 	fade_out()
-	Global.Next()
+	Global.Next(true)

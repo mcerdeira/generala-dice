@@ -55,44 +55,41 @@ func _physics_process(delta):
 		#rotation.z = lerp_angle(rotation.z, target_rotation.z, align_speed * delta)
 		
 func what_ami():
-	if !decided:
-		return null
-	else:
-		if x_pos == 0 and y_pos == 0:
-			return 1
-		if x_pos == 0 and y_pos == 90:
-			return 4
-		if x_pos == 0 and y_pos == 180:
-			return 3	
-		if x_pos == 0 and y_pos == 270:
-			return 2
+	if x_pos == 0 and y_pos == 0:
+		return 1
+	if x_pos == 0 and y_pos == 90:
+		return 4
+	if x_pos == 0 and y_pos == 180:
+		return 3	
+	if x_pos == 0 and y_pos == 270:
+		return 2
+	
+	if x_pos == 90 and y_pos == 0:
+		return 5
+	if x_pos == 90 and y_pos == 90:
+		return 4
+	if x_pos == 90 and y_pos == 180:
+		return 6
+	if x_pos == 90 and y_pos == 270:
+		return 2	
 		
-		if x_pos == 90 and y_pos == 0:
-			return 5
-		if x_pos == 90 and y_pos == 90:
-			return 4
-		if x_pos == 90 and y_pos == 180:
-			return 6
-		if x_pos == 90 and y_pos == 270:
-			return 2	
-			
-		if x_pos == 180 and y_pos == 0:
-			return 3
-		if x_pos == 180 and y_pos == 90:
-			return 4
-		if x_pos == 180 and y_pos == 180:
-			return 1
-		if x_pos == 180 and y_pos == 270:
-			return 2
-			
-		if x_pos == 270 and y_pos == 0:
-			return 6
-		if x_pos == 270 and y_pos == 90:
-			return 4
-		if x_pos == 270 and y_pos == 180:
-			return 5
-		if x_pos == 270 and y_pos == 270:
-			return 2
+	if x_pos == 180 and y_pos == 0:
+		return 3
+	if x_pos == 180 and y_pos == 90:
+		return 4
+	if x_pos == 180 and y_pos == 180:
+		return 1
+	if x_pos == 180 and y_pos == 270:
+		return 2
+		
+	if x_pos == 270 and y_pos == 0:
+		return 6
+	if x_pos == 270 and y_pos == 90:
+		return 4
+	if x_pos == 270 and y_pos == 180:
+		return 5
+	if x_pos == 270 and y_pos == 270:
+		return 2
 			
 func broadcast_to(_dice):
 	broadcasted_dice = _dice

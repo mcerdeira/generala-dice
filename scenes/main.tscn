@@ -1,19 +1,22 @@
-[gd_scene load_steps=27 format=3 uid="uid://cp6k2aibvb5x0"]
+[gd_scene load_steps=32 format=3 uid="uid://cp6k2aibvb5x0"]
 
 [ext_resource type="PackedScene" uid="uid://djocrijh1ceom" path="res://scenes/Beaker.tscn" id="1_7se6j"]
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_wbabm"]
-[ext_resource type="PackedScene" uid="uid://c1keqcnqpjd1w" path="res://scenes/selectable_object.tscn" id="2_e5mr0"]
 [ext_resource type="PackedScene" uid="uid://dufepst0w8rkr" path="res://scenes/Dice.tscn" id="2_tcovt"]
-[ext_resource type="PackedScene" path="res://scenes/shaker.tscn" id="2_wtsft"]
+[ext_resource type="PackedScene" uid="uid://ba2tdpbkss4pb" path="res://scenes/shaker.tscn" id="2_wtsft"]
 [ext_resource type="Texture2D" uid="uid://3s8wbw4jv3gl" path="res://sprites/wall.png" id="4_36hgn"]
 [ext_resource type="PackedScene" uid="uid://c1178aepiu4hq" path="res://scenes/wall_1.tscn" id="4_rgh4a"]
 [ext_resource type="FontFile" uid="uid://qlhmfs1ahw63" path="res://fonts/prstartk.ttf" id="5_ciusn"]
 [ext_resource type="Script" path="res://scenes/pointlist.gd" id="5_dx72g"]
+[ext_resource type="Texture2D" uid="uid://bviaytm5fcwuu" path="res://sprites/dices/dice_icon.png" id="7_2pu0i"]
 [ext_resource type="FontFile" uid="uid://bke1xm65inmdl" path="res://fonts/Thin sans.ttf" id="7_jk6n3"]
+[ext_resource type="Texture2D" uid="uid://clidro25u5wls" path="res://sprites/cosito1.png" id="8_jsh8q"]
 [ext_resource type="Script" path="res://scenes/Shop.gd" id="8_kl6mg"]
 [ext_resource type="Shader" path="res://scenes/FX.gdshader" id="8_nwidx"]
 [ext_resource type="PackedScene" uid="uid://dwiopwb2k0qtu" path="res://scenes/Dice_shop.tscn" id="9_4euou"]
 [ext_resource type="Script" path="res://scenes/PointsShow.gd" id="9_ejhtj"]
+[ext_resource type="Texture2D" uid="uid://degd1air14cea" path="res://sprites/cosito2.png" id="9_on7pr"]
+[ext_resource type="Texture2D" uid="uid://x2jamiu0da35" path="res://sprites/cosito3.png" id="10_2ki66"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_uj0rc"]
 
@@ -101,7 +104,7 @@ tracks/6/keys = {
 "times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(-300, 638), Vector2(327, 638)]
+"values": [Vector2(-300, 630), Vector2(204, 630)]
 }
 tracks/7/type = "value"
 tracks/7/imported = false
@@ -113,75 +116,15 @@ tracks/7/keys = {
 "times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(1800, 638), Vector2(800, 638)]
+"values": [Vector2(1800, 629), Vector2(1050, 629)]
 }
-tracks/8/type = "value"
+tracks/8/type = "method"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("Dice:position")
+tracks/8/path = NodePath("Beaker")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(605, -1500), Vector2(605, 666)]
-}
-tracks/9/type = "value"
-tracks/9/imported = false
-tracks/9/enabled = true
-tracks/9/path = NodePath("Dice2:position")
-tracks/9/interp = 1
-tracks/9/loop_wrap = true
-tracks/9/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(447, -2500), Vector2(447, 666)]
-}
-tracks/10/type = "value"
-tracks/10/imported = false
-tracks/10/enabled = true
-tracks/10/path = NodePath("Dice3:position")
-tracks/10/interp = 1
-tracks/10/loop_wrap = true
-tracks/10/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(526, -2000), Vector2(526, 666)]
-}
-tracks/11/type = "value"
-tracks/11/imported = false
-tracks/11/enabled = true
-tracks/11/path = NodePath("Dice4:position")
-tracks/11/interp = 1
-tracks/11/loop_wrap = true
-tracks/11/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(684, -1000), Vector2(684, 666)]
-}
-tracks/12/type = "value"
-tracks/12/imported = false
-tracks/12/enabled = true
-tracks/12/path = NodePath("Dice5:position")
-tracks/12/interp = 1
-tracks/12/loop_wrap = true
-tracks/12/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(763, -500), Vector2(763, 666)]
-}
-tracks/13/type = "method"
-tracks/13/imported = false
-tracks/13/enabled = true
-tracks/13/path = NodePath("Beaker")
-tracks/13/interp = 1
-tracks/13/loop_wrap = true
-tracks/13/keys = {
 "times": PackedFloat32Array(1),
 "transitions": PackedFloat32Array(1),
 "values": [{
@@ -189,13 +132,13 @@ tracks/13/keys = {
 "method": &"set_original_position"
 }]
 }
-tracks/14/type = "method"
-tracks/14/imported = false
-tracks/14/enabled = true
-tracks/14/path = NodePath(".")
-tracks/14/interp = 1
-tracks/14/loop_wrap = true
-tracks/14/keys = {
+tracks/9/type = "method"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath(".")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
 "times": PackedFloat32Array(1),
 "transitions": PackedFloat32Array(1),
 "values": [{
@@ -203,18 +146,32 @@ tracks/14/keys = {
 "method": &"initial_shake"
 }]
 }
-tracks/15/type = "method"
-tracks/15/imported = false
-tracks/15/enabled = true
-tracks/15/path = NodePath(".")
-tracks/15/interp = 1
-tracks/15/loop_wrap = true
-tracks/15/keys = {
+tracks/10/type = "method"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath(".")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
 "times": PackedFloat32Array(0.9),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
 "method": &"force_emit_all"
+}]
+}
+tracks/11/type = "method"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath(".")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"arrange2"
 }]
 }
 
@@ -225,27 +182,40 @@ _data = {
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vjjk1"]
 bg_color = Color(0.278431, 0.278431, 0.278431, 1)
-corner_radius_bottom_left = 30
 anti_aliasing = false
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uu10w"]
 bg_color = Color(0.305882, 0.6, 1, 1)
-corner_radius_bottom_left = 30
 anti_aliasing = false
 anti_aliasing_size = 0.01
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_txmjj"]
 bg_color = Color(0.278431, 0.278431, 0.278431, 1)
-corner_radius_bottom_right = 30
 anti_aliasing = false
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0iqx5"]
 bg_color = Color(0, 0.701961, 0.568627, 1)
-corner_radius_bottom_right = 30
 anti_aliasing = false
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_u1jtp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_jsh8q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_on7pr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_2ki66")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7tt2w"]
-size = Vector2(222, 156)
+size = Vector2(244, 156)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3tg4j"]
 bg_color = Color(0.305882, 0.6, 1, 1)
@@ -254,6 +224,9 @@ anti_aliasing = false
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kl2dv"]
 bg_color = Color(0.968627, 0.317647, 0.607843, 1)
 anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a1232"]
+bg_color = Color(0.305882, 0.6, 1, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_63jac"]
 bg_color = Color(0.305882, 0.6, 1, 1)
@@ -311,8 +284,6 @@ bbcode_enabled = true
 [node name="Timer" type="Timer" parent="PointsShow"]
 wait_time = 0.3
 
-[node name="SelectableObject" parent="." instance=ExtResource("2_e5mr0")]
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_76dam")
@@ -353,86 +324,94 @@ position = Vector2(6, 21.6667)
 position = Vector2(-22.3333, 7.66666)
 
 [node name="Button2" type="Button" parent="."]
-offset_left = 327.0
-offset_top = 639.0
-offset_right = 410.0
-offset_bottom = 689.0
+offset_left = 204.0
+offset_top = 630.0
+offset_right = 287.0
+offset_bottom = 701.0
 focus_mode = 0
 theme_override_fonts/font = ExtResource("5_ciusn")
 theme_override_font_sizes/font_size = 24
 theme_override_styles/disabled = SubResource("StyleBoxFlat_vjjk1")
 theme_override_styles/normal = SubResource("StyleBoxFlat_uu10w")
 text = "<<"
-metadata/_edit_use_anchors_ = true
 
 [node name="Button3" type="Button" parent="."]
-offset_left = 800.0
-offset_top = 639.0
-offset_right = 883.0
-offset_bottom = 689.0
+offset_left = 1050.0
+offset_top = 629.0
+offset_right = 1202.0
+offset_bottom = 700.0
 focus_mode = 0
 theme_override_fonts/font = ExtResource("5_ciusn")
 theme_override_font_sizes/font_size = 24
 theme_override_styles/disabled = SubResource("StyleBoxFlat_txmjj")
 theme_override_styles/normal = SubResource("StyleBoxFlat_0iqx5")
 text = "$$"
-metadata/_edit_use_anchors_ = true
+icon = ExtResource("7_2pu0i")
+
+[node name="cosito" type="AnimatedSprite2D" parent="Button3"]
+visible = false
+position = Vector2(74, -36)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_u1jtp")
+autoplay = "default"
+frame_progress = 0.610511
 
 [node name="NoplayZone" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(603.75, 671.25)
 scale = Vector2(12.3281, 2.04687)
 texture = ExtResource("4_36hgn")
 
 [node name="DiceSlot1" type="Marker2D" parent="."]
-position = Vector2(447, 666)
+position = Vector2(375, 667)
 scale = Vector2(12.3281, 2.04687)
 
 [node name="DiceSlot2" type="Marker2D" parent="."]
-position = Vector2(526, 666)
+position = Vector2(454, 667)
 scale = Vector2(12.3281, 2.04687)
 
 [node name="DiceSlot3" type="Marker2D" parent="."]
-position = Vector2(605, 666)
+position = Vector2(533, 667)
 scale = Vector2(12.3281, 2.04687)
 
 [node name="DiceSlot4" type="Marker2D" parent="."]
-position = Vector2(684, 666)
+position = Vector2(612, 667)
 scale = Vector2(12.3281, 2.04687)
 
 [node name="DiceSlot5" type="Marker2D" parent="."]
-position = Vector2(763, 666)
+position = Vector2(691, 667)
 scale = Vector2(12.3281, 2.04687)
 
 [node name="Dice2" parent="." node_paths=PackedStringArray("DiceMan", "original_position") instance=ExtResource("2_tcovt")]
-position = Vector2(447, 666)
+position = Vector2(-754, 129)
 ttl_shot = 0.1
 DiceMan = NodePath("..")
 original_position = NodePath("../DiceSlot1")
 id = 2
 
 [node name="Dice3" parent="." node_paths=PackedStringArray("DiceMan", "original_position") instance=ExtResource("2_tcovt")]
-position = Vector2(526, 666)
+position = Vector2(448, -278)
 ttl_shot = 0.2
 DiceMan = NodePath("..")
 original_position = NodePath("../DiceSlot2")
 id = 3
 
 [node name="Dice" parent="." node_paths=PackedStringArray("DiceMan", "original_position") instance=ExtResource("2_tcovt")]
-position = Vector2(605, 666)
+position = Vector2(-546, -230)
 ttl_shot = 0.1
 DiceMan = NodePath("..")
 original_position = NodePath("../DiceSlot3")
 id = 1
 
 [node name="Dice4" parent="." node_paths=PackedStringArray("DiceMan", "original_position") instance=ExtResource("2_tcovt")]
-position = Vector2(684, 666)
+position = Vector2(1425, -291)
 ttl_shot = 0.3
 DiceMan = NodePath("..")
 original_position = NodePath("../DiceSlot4")
 id = 4
 
 [node name="Dice5" parent="." node_paths=PackedStringArray("DiceMan", "original_position") instance=ExtResource("2_tcovt")]
-position = Vector2(763, 666)
+position = Vector2(1666, 100)
 ttl_shot = 0.3
 DiceMan = NodePath("..")
 original_position = NodePath("../DiceSlot5")
@@ -487,11 +466,15 @@ offset_right = 808.0
 offset_bottom = 9.0
 theme_override_fonts/font = ExtResource("7_jk6n3")
 theme_override_font_sizes/font_size = 60
-text = "TURNO:"
+text = "TIRADA:"
 metadata/_edit_use_anchors_ = true
 
 [node name="lbl_points2" type="Label" parent="lbl_turn"]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0238095
+anchor_right = 0.0238095
+anchor_bottom = 0.454545
 offset_left = 158.0
 offset_right = 224.0
 offset_bottom = 24.0
@@ -574,7 +557,7 @@ text = "0"
 metadata/_edit_use_anchors_ = true
 
 [node name="pointlist" type="Area2D" parent="."]
-position = Vector2(1108, -9)
+position = Vector2(1086, -11)
 script = ExtResource("5_dx72g")
 
 [node name="btn_sound" type="Button" parent="pointlist"]
@@ -592,24 +575,24 @@ offset_right = 137.0
 offset_bottom = 106.0
 
 [node name="ColorRect" type="ColorRect" parent="pointlist"]
-offset_left = -123.0
+offset_left = -142.0
 offset_top = -28.0
-offset_right = 100.0
-offset_bottom = 303.0
+offset_right = 110.0
+offset_bottom = 388.0
 mouse_filter = 2
 color = Color(0.0862745, 0.0901961, 0.117647, 0.670588)
 
 [node name="collider" type="CollisionShape2D" parent="pointlist"]
-position = Vector2(-11, 50)
+position = Vector2(-17, 50)
 shape = SubResource("RectangleShape2D_7tt2w")
 
 [node name="items" type="ItemList" parent="pointlist"]
-offset_left = -120.0
-offset_right = 52.0
-offset_bottom = 272.0
+offset_left = -137.0
+offset_right = 48.0
+offset_bottom = 344.0
 theme_override_colors/font_selected_color = Color(0.843137, 0.168627, 0.227451, 1)
 theme_override_fonts/font = ExtResource("7_jk6n3")
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 34
 allow_reselect = true
 allow_search = false
 auto_height = true
@@ -641,11 +624,11 @@ item_11/disabled = true
 
 [node name="items2" type="ItemList" parent="pointlist"]
 layout_direction = 3
-offset_left = -96.0
+offset_left = -104.0
 offset_right = -52.0
-offset_bottom = 272.0
+offset_bottom = 344.0
 theme_override_fonts/font = ExtResource("7_jk6n3")
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 34
 allow_search = false
 item_count = 12
 item_0/text = "-"
@@ -674,24 +657,24 @@ item_11/text = "-"
 item_11/selectable = false
 
 [node name="Button" type="Button" parent="pointlist"]
-offset_left = -120.0
-offset_top = 273.0
-offset_right = 12.0
-offset_bottom = 301.0
+offset_left = -135.0
+offset_top = 348.0
+offset_right = -5.0
+offset_bottom = 383.0
 focus_mode = 0
 theme_override_fonts/font = ExtResource("7_jk6n3")
-theme_override_font_sizes/font_size = 26
+theme_override_font_sizes/font_size = 34
 theme_override_styles/normal = SubResource("StyleBoxFlat_3tg4j")
 text = "ANOTAR"
 
 [node name="Button2" type="Button" parent="pointlist"]
-offset_left = 15.0
-offset_top = 273.0
-offset_right = 96.0
-offset_bottom = 301.0
+offset_left = -2.0
+offset_top = 348.0
+offset_right = 103.0
+offset_bottom = 383.0
 focus_mode = 0
 theme_override_fonts/font = ExtResource("7_jk6n3")
-theme_override_font_sizes/font_size = 26
+theme_override_font_sizes/font_size = 34
 theme_override_styles/normal = SubResource("StyleBoxFlat_kl2dv")
 text = "OMITIR"
 
@@ -754,25 +737,18 @@ offset_right = 1324.0
 offset_bottom = 940.0
 color = Color(1, 1, 1, 0)
 
-[node name="ColorRect2" type="ColorRect" parent="Shop"]
-offset_left = -76.0
-offset_top = 30.0
-offset_right = 1202.0
-offset_bottom = 744.0
-color = Color(0.145098, 0.152941, 0.188235, 0.4)
-
 [node name="ColorRect" type="ColorRect" parent="Shop"]
-offset_left = -101.0
+offset_left = -120.0
 offset_top = 22.0
-offset_right = 1188.0
-offset_bottom = 767.0
+offset_right = 1216.0
+offset_bottom = 769.0
 color = Color(0.101961, 0.192157, 0.192157, 1)
 
 [node name="ColorRect3" type="ColorRect" parent="Shop"]
-offset_left = 324.0
-offset_top = 35.0
-offset_right = 775.0
-offset_bottom = 291.0
+offset_left = 299.0
+offset_top = 107.0
+offset_right = 811.0
+offset_bottom = 363.0
 color = Color(0.0509804, 0.113725, 0.113725, 1)
 
 [node name="ColorRect4" type="ColorRect" parent="Shop"]
@@ -795,10 +771,10 @@ DADOS"
 horizontal_alignment = 2
 
 [node name="lbl_item_desc" type="RichTextLabel" parent="Shop"]
-offset_left = 333.0
-offset_top = 127.0
-offset_right = 762.0
-offset_bottom = 277.0
+offset_left = 313.0
+offset_top = 204.0
+offset_right = 801.0
+offset_bottom = 354.0
 theme_override_fonts/normal_font = ExtResource("7_jk6n3")
 theme_override_font_sizes/normal_font_size = 24
 bbcode_enabled = true
@@ -815,19 +791,23 @@ bbcode_enabled = true
 autowrap_mode = 2
 
 [node name="Dice_shop" parent="Shop" node_paths=PackedStringArray("lbl_description") instance=ExtResource("9_4euou")]
-position = Vector2(392, 82)
+position = Vector2(345, 154)
 lbl_description = NodePath("../lbl_item_desc")
 
 [node name="Dice_shop2" parent="Shop" node_paths=PackedStringArray("lbl_description") instance=ExtResource("9_4euou")]
-position = Vector2(496, 82)
+position = Vector2(449, 154)
 lbl_description = NodePath("../lbl_item_desc")
 
 [node name="Dice_shop3" parent="Shop" node_paths=PackedStringArray("lbl_description") instance=ExtResource("9_4euou")]
-position = Vector2(600, 82)
+position = Vector2(553, 154)
 lbl_description = NodePath("../lbl_item_desc")
 
 [node name="Dice_shop4" parent="Shop" node_paths=PackedStringArray("lbl_description") instance=ExtResource("9_4euou")]
-position = Vector2(704, 82)
+position = Vector2(657, 154)
+lbl_description = NodePath("../lbl_item_desc")
+
+[node name="Dice_shop5" parent="Shop" node_paths=PackedStringArray("lbl_description") instance=ExtResource("9_4euou")]
+position = Vector2(758, 154)
 lbl_description = NodePath("../lbl_item_desc")
 
 [node name="lbl_dicecurrent" type="Label" parent="Shop"]
@@ -840,22 +820,22 @@ theme_override_font_sizes/font_size = 50
 text = "ACTUALES:"
 
 [node name="Dice_current" parent="Shop" node_paths=PackedStringArray("lbl_description") instance=ExtResource("9_4euou")]
-position = Vector2(344, 431)
+position = Vector2(345, 431)
 current = true
 lbl_description = NodePath("../lbl_item_desc2")
 
 [node name="Dice_current2" parent="Shop" node_paths=PackedStringArray("lbl_description") instance=ExtResource("9_4euou")]
-position = Vector2(448, 431)
+position = Vector2(449, 431)
 current = true
 lbl_description = NodePath("../lbl_item_desc2")
 
 [node name="Dice_current3" parent="Shop" node_paths=PackedStringArray("lbl_description") instance=ExtResource("9_4euou")]
-position = Vector2(552, 431)
+position = Vector2(553, 431)
 current = true
 lbl_description = NodePath("../lbl_item_desc2")
 
 [node name="Dice_current4" parent="Shop" node_paths=PackedStringArray("lbl_description") instance=ExtResource("9_4euou")]
-position = Vector2(656, 431)
+position = Vector2(657, 431)
 current = true
 lbl_description = NodePath("../lbl_item_desc2")
 
@@ -883,22 +863,23 @@ offset_bottom = 756.0
 focus_mode = 0
 theme_override_fonts/font = ExtResource("7_jk6n3")
 theme_override_font_sizes/font_size = 86
+theme_override_styles/normal = SubResource("StyleBoxFlat_a1232")
 text = "COMPRAR"
 
 [node name="Button" type="Button" parent="Shop"]
-offset_left = 775.0
-offset_top = 35.0
-offset_right = 852.0
-offset_bottom = 97.0
+offset_left = 812.0
+offset_top = 107.0
+offset_right = 889.0
+offset_bottom = 169.0
 focus_mode = 0
 theme_override_fonts/font = ExtResource("7_jk6n3")
 theme_override_font_sizes/font_size = 24
 
 [node name="lbl_points" type="Label" parent="Shop"]
-offset_left = 330.0
-offset_top = 316.0
-offset_right = 591.0
-offset_bottom = 360.0
+offset_left = 401.0
+offset_top = 46.0
+offset_right = 662.0
+offset_bottom = 90.0
 theme_override_fonts/font = ExtResource("7_jk6n3")
 theme_override_font_sizes/font_size = 60
 text = "DISPONIBLE:"
@@ -919,26 +900,26 @@ text = "0"
 metadata/_edit_use_anchors_ = true
 
 [node name="ColorRect5" type="ColorRect" parent="Shop"]
-offset_left = 868.0
+offset_left = 870.0
 offset_top = 377.0
-offset_right = 1136.0
+offset_right = 1145.0
 offset_bottom = 554.0
 mouse_filter = 2
 color = Color(0.0862745, 0.0901961, 0.117647, 0.670588)
 
 [node name="lbl_dicecurrent2" type="Label" parent="Shop"]
-offset_left = 873.0
+offset_left = 875.0
 offset_top = 383.0
-offset_right = 1050.0
+offset_right = 1052.0
 offset_bottom = 409.0
 theme_override_fonts/font = ExtResource("7_jk6n3")
 theme_override_font_sizes/font_size = 35
 text = "Subir nivel"
 
 [node name="items" type="ItemList" parent="Shop"]
-offset_left = 871.0
+offset_left = 873.0
 offset_top = 410.0
-offset_right = 984.0
+offset_right = 986.0
 offset_bottom = 550.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("7_jk6n3")
@@ -961,9 +942,9 @@ item_5/text = "GENERALAx2"
 item_5/disabled = true
 
 [node name="items4" type="ItemList" parent="Shop"]
-offset_left = 985.0
+offset_left = 987.0
 offset_top = 410.0
-offset_right = 1024.0
+offset_right = 1026.0
 offset_bottom = 550.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("7_jk6n3")
@@ -980,9 +961,9 @@ item_5/disabled = true
 
 [node name="items2" type="ItemList" parent="Shop"]
 layout_direction = 3
-offset_left = -1087.0
+offset_left = -1089.0
 offset_top = 410.0
-offset_right = -1025.0
+offset_right = -1027.0
 offset_bottom = 550.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("7_jk6n3")
@@ -1000,9 +981,9 @@ item_5/text = "-"
 
 [node name="items3" type="ItemList" parent="Shop"]
 layout_direction = 3
-offset_left = -1133.0
+offset_left = -1142.0
 offset_top = 410.0
-offset_right = -1089.0
+offset_right = -1091.0
 offset_bottom = 550.0
 theme_override_colors/font_color = Color(0.894118, 0.788235, 0, 1)
 theme_override_fonts/font = ExtResource("7_jk6n3")

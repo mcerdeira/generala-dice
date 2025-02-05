@@ -66,12 +66,13 @@ func disolve():
 
 func _ready():
 	add_to_group("dices")
+	what_ami()
 	
-func restart_position():
-	if DiceType != Global.DiceTypes.Fake:
-		await move_to(original_position.global_position, 0.05).finished
-	
-	minigrow()
+#func restart_position():
+	#if DiceType != Global.DiceTypes.Fake:
+		#await move_to(original_position.global_position, 0.05).finished
+	#
+	#minigrow()
 	
 func force_emit():
 	await get_tree().create_timer(0.1).timeout
@@ -209,7 +210,7 @@ func _on_area_entered(area):
 		angular_velocity *= -0.5  # Invertir la rotación para dar realismo
 		position += normal * 5  # Mueve el dado ligeramente fuera del otro
 		ttl_bounce = 0.3
-
+		
 func _on_body_entered(body):
 	if body is StaticBody2D:
 		var normal = (position - body.position).normalized()
@@ -231,13 +232,22 @@ func _on_control_gui_input(event):
 	if !rolling:
 		if DiceMan.cant_throw:
 			if !dragged:
-				if event is InputEventMouseButton && event.is_action_pressed("click"):
+				if event is InputEventMouseButton and event.is_double_click():
+					Global.DiceMan.move_one_dice(self, id)
+				
+				elif event is InputEventMouseButton and event.is_action_pressed("click"):
 					dragged = true
 					Global.preventSelect = true
+					shaking = true
+					Global.emit(get_global_mouse_position(), 1)
+					grow_to(Vector2(1.5, 1.5))
 					#get_viewport().set_input_as_handled()
 			if dragged:
 				if event is InputEventMouseButton && event.is_action_released("click"):
+					grow_to(Vector2(1, 1))
+					Global.emit(get_global_mouse_position(), 1)
 					dragged = false
+					shaking = false
 					Global.preventSelect = false
 						
 func set_final(target_rotation, _x_pos, _y_pos):
@@ -267,17 +277,17 @@ func _on_control_mouse_entered():
 	if !rolling:
 		shaking = true
 		Global.emit(get_global_mouse_position(), 1)
-		grow_to(Vector2(1.5, 1.5))
 	if DiceType == Global.DiceTypes.Rubber:
 		if !rolling:
 			$btn_flip.visible = true
 
 func _on_control_mouse_exited():
-	Global.preventSelect = false
-	Global.emit(get_global_mouse_position(), 1)
-	grow_to(Vector2(1, 1))
-	shaking = false
-	rotation_degrees = 0
+	if !dragged:
+		Global.preventSelect = false
+		Global.emit(get_global_mouse_position(), 1)
+		grow_to(Vector2(1, 1))
+		shaking = false
+		rotation_degrees = 0
 
 func _draw():
 	if copied and destiny:

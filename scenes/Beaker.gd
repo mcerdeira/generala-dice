@@ -3,9 +3,11 @@ var shaking = false
 var shake_time = 0.0
 @export var DiceMan : Node2D
 var first = true
-var trailing = "\n\n"
+var trailing = "\n"
 var shaking_sfx = null
 var original_position = null
+var auto_throw_total = 0.3
+var auto_throw = auto_throw_total
 @export var Mark1 : Marker2D
 @export var Mark2 : Marker2D
 @export var Mark3 : Marker2D
@@ -14,6 +16,11 @@ var original_position = null
 
 func _ready():
 	Global.Beaker = self
+	Global.Mark1 = Mark1
+	Global.Mark2 = Mark2
+	Global.Mark3 = Mark3
+	Global.Mark4 = Mark4
+	Global.Mark5 = Mark5
 	
 func shake(_time):
 	shake_time = _time
@@ -21,7 +28,7 @@ func shake(_time):
 func reset():
 	z_index = -100
 	#$Label.visible = true
-	$Button.text = "AGITAR" + trailing
+	$Button.text = "Agitar" + trailing
 	$sprite.frame = 0
 	$sprite/beaker_part.frame = $sprite.frame
 	$sprite.rotation_degrees = 0
@@ -35,6 +42,12 @@ func set_original_position():
 	original_position = global_position
 
 func _physics_process(delta):
+	if shaking:
+		auto_throw -= 1 * delta
+		if auto_throw <= 0:
+			botonito(true)
+			auto_throw = auto_throw_total
+	
 	if shake_time > 0:
 		shake_time -= 1 * delta
 		global_position.x = original_position.x + randf_range(-3.0, 3.0)
@@ -59,12 +72,18 @@ func _physics_process(delta):
 			$Button.disabled = (DiceMan.dices.size() >= Global.minforTurn() and Global.Status == Global.Statuses.THROWING)
 
 func _on_button_pressed():
+	botonito()
+	
+func botonito(noclick = false):
 	Global.emit(get_global_mouse_position(), 1)
-	Global.play_sound(Global.ButtonSFX)
+	if !noclick:
+		Global.play_sound(Global.ButtonSFX)
 	Global.dices_used = DiceMan.dices.size()
 	shake_time = 0.0
 	if DiceMan.dices.size() >= Global.minforTurn():
 		if !shaking:
+			auto_throw = auto_throw_total
+			
 			if Global.TurnUsed:
 				Global.point_list.skip()
 			
@@ -94,7 +113,7 @@ func _on_button_pressed():
 			
 			Global.Status = Global.Statuses.SHAKING
 			DiceMan.arrange(false)
-			$Button.text = "TIRAR" + trailing
+			$Button.text = "Tirar" + trailing
 			shaking = true
 			#$Label.visible = false
 			$sprite.frame = 1

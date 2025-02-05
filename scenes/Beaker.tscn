@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://djocrijh1ceom"]
+[gd_scene load_steps=17 format=3 uid="uid://djocrijh1ceom"]
 
 [ext_resource type="Script" path="res://scenes/Beaker.gd" id="1_3qhnb"]
 [ext_resource type="Texture2D" uid="uid://dytig1jwdi4l1" path="res://sprites/beaker1.png" id="1_252vu"]
@@ -96,6 +96,10 @@ bg_color = Color(0.145098, 0.152941, 0.188235, 1)
 shadow_color = Color(0.145098, 0.152941, 0.188235, 1)
 anti_aliasing = false
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f0x1q"]
+bg_color = Color(0.145098, 0.152941, 0.188235, 1)
+anti_aliasing = false
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_c8bau"]
 radius = 48.2701
 
@@ -117,7 +121,6 @@ position = Vector2(0, -43)
 sprite_frames = SubResource("SpriteFrames_u71n5")
 
 [node name="Area2D" type="Area2D" parent="."]
-visible = false
 
 [node name="collider" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_vqdsi")
@@ -144,8 +147,8 @@ theme_override_colors/font_disabled_color = Color(0.282353, 0.282353, 0.282353, 
 theme_override_fonts/font = ExtResource("4_pkukr")
 theme_override_font_sizes/font_size = 26
 theme_override_styles/disabled = SubResource("StyleBoxFlat_0igcw")
-text = "AGITAR
-
+theme_override_styles/normal = SubResource("StyleBoxFlat_f0x1q")
+text = "Agitar
 "
 
 [node name="Label" type="Label" parent="."]

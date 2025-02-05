@@ -20,6 +20,12 @@ var preventSelect = false
 var PointsShow = null
 var LastTurn = false
 var TurnUsed = false
+var DiceMan = null
+var Mark1 = null
+var Mark2 = null
+var Mark3 = null
+var Mark4 = null
+var Mark5 = null
 
 enum Statuses {
 	IDLE,
@@ -72,7 +78,7 @@ var DiceTypes = {
 	Copy = {"id": DiceIDs.Copy, "price": 10, "texture": preload("res://sprites/dices/copy.png"), "title": "El Copion", "description": "[color=red]Copia[/color] el valor de otro dado al azar."},
 	D2 = {"id": DiceIDs.D2, "price": 7, "texture": preload("res://sprites/dices/dx2.png"), "title": "Dado D2", "description": "Solo tiene [color=red] 2[/color] valores ([color=red]1, 2[/color])."},
 	D3 = {"id": DiceIDs.D3, "price": 5, "texture": preload("res://sprites/dices/dx3.png"), "title": "Dado D3", "description": "Solo tiene [color=red] 3[/color] valores ([color=red]1, 2, 3[/color])."},
-	TurnPlus = {"id": DiceIDs.TurnPlus, "price": 3, "texture": preload("res://sprites/dices/turnplus.png"), "title": "La vida", "description": "Tener este dado suma [color=red] 1[/color] turno la partida."},
+	TurnPlus = {"id": DiceIDs.TurnPlus, "price": 3, "texture": preload("res://sprites/dices/turnplus.png"), "title": "La vida", "description": "Tener este dado suma [color=red] 1[/color] tirada a la partida."},
 	Rubber = {"id": DiceIDs.Rubber, "price": 5, "texture": preload("res://sprites/dices/rubber.png"), "title": "Panqueque", "description": "Al tirarlo permite hacer [color=red] flip[/color] a su lado opuesto."},
 	OneMoreChance = {"id": DiceIDs.OneMoreChance, "price": 10, "texture": preload("res://sprites/dices/onemore.png"), "title": "El ensayo", "description": "No consume la jugada al usarlo. Al usarse se [color=red] agota[/color]."},
 	Cheese = {"id": DiceIDs.Cheese, "price": 15, "texture": preload("res://sprites/dices/cheese.png"), "title": "Quesito", "description": "Es un dado extra por fuera del [color=blue]cubilete[/color]. El dado extra se [color=red]agota[/color] siempre despues de la tirada."},
@@ -155,7 +161,7 @@ func get_timer_value(score: int, max_time: float = 2.5, min_time: float = 0.05, 
 	var timer_value = scaling_factor / (score + 1)
 	return clamp(timer_value, min_time, max_time)
 
-func Next():
+func Next(skiped = false):
 	Turn += 1
 	InternarlTurn += 1
 	Global.TurnUsed = false
@@ -171,6 +177,8 @@ func Next():
 	else:
 		await get_tree().create_timer(1.4).timeout
 		PointsShow.hideme()
+		if !skiped:
+			Global.DiceMan.arrange2()
 			
 func NextLevel():
 	refreshPool(true, true)
@@ -181,11 +189,11 @@ func NextLevel():
 		var local_points = Goals[Level - 1]
 		Global.VisualPoints = local_points
 		Global.Beaker.first = true
-		Global.shaker_obj.shake(7, 1)
+		Global.shaker_obj.shake(10, 2.9)
 		PointsShow.showme(true)
 		PointsShow.set_title("NIVEL " + str(Level-1) +  " COMPLETO!!")
-		Music.stop()
-		Music.play(Global.VictorySFX)
+		Music.pause()
+		Global.play_sound(Global.VictorySFX)
 		await get_tree().create_timer(5.0).timeout
 		RentCalculate()
 		await get_tree().create_timer(3.0).timeout
@@ -193,7 +201,7 @@ func NextLevel():
 		Global.InternarlTurn = 1
 		Global.point_list.next_level()
 		Goal = Goals[Level]
-		Music.play(Global.Temardo)
+		Music.resume()
 		PointsShow.hideme()
 		
 func RentCalculate(loser = false):
@@ -245,6 +253,9 @@ func getRandomDiceToCopy(me, DiceMan_dices):
 func gotoBase(DiceMan_dices, Mark1, Mark2, Mark3, Mark4, Mark5):
 	var marks = [Mark1, Mark2, Mark3, Mark4, Mark5]
 	var dices = get_tree().get_nodes_in_group("dices")
+	
+	dices.sort_custom(func(a, b): return a.currentvalue > b.currentvalue)
+	
 	for d in dices:
 		if d not in DiceMan_dices:
 			var m = marks.pop_front()
@@ -259,8 +270,11 @@ func gameover(win):
 	Global.point_list.fade_in()
 	Global.GameOver = true
 	var dices = get_tree().get_nodes_in_group("dices")
+	dices.sort_custom(func(a, b): return a.currentvalue > b.currentvalue)
+	var marks = [Global.Mark1, Global.Mark2, Global.Mark3, Global.Mark4, Global.Mark5]
 	for d in dices:
-		d.restart_position()
+		var m = marks.pop_front()
+		await d.move_to(m.global_position).finished
 		d.destruir()
 
 func minforTurn():

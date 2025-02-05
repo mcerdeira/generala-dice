@@ -9,8 +9,8 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_heaix"]
 shader = ExtResource("4_gqc6m")
 shader_parameter/kelvin = 1000.0
-shader_parameter/red_colour = 24.0
-shader_parameter/green_colour = 22.6
+shader_parameter/red_colour = 7.7
+shader_parameter/green_colour = 24.0
 shader_parameter/blue_colour = 4.0
 shader_parameter/time_factor = 1.5
 shader_parameter/move = false
