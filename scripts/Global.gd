@@ -134,7 +134,7 @@ func init_vars():
 	Turn = 1
 	InternarlTurn = 1
 	TurnMax = 7
-	Points = 90
+	Points = 0
 	VisualPoints = 0
 	VisualPointsSign = ""
 	Goals = [0, 45, 90, 180, 250, 500, 800, 1000, 2000]

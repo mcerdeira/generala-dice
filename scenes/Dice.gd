@@ -277,7 +277,7 @@ func local_flip():
 		currentvalue = 1
 
 func _on_control_mouse_entered():
-	if !rolling:
+	if !rolling and !Global.preventSelect:
 		$Sign.visible = true
 		$Sign/lbl_item_desc.text = "\n" + DiceType.title + ":\n" + DiceType.description
 		
