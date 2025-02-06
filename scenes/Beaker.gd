@@ -28,7 +28,6 @@ func shake(_time):
 func reset():
 	z_index = -100
 	#$Label.visible = true
-	$Button.text = "Agitar" + trailing
 	$sprite.frame = 0
 	$sprite/beaker_part.frame = $sprite.frame
 	$sprite.rotation_degrees = 0
@@ -113,7 +112,6 @@ func botonito(noclick = false):
 			
 			Global.Status = Global.Statuses.SHAKING
 			DiceMan.arrange(false)
-			$Button.text = "Tirar" + trailing
 			shaking = true
 			#$Label.visible = false
 			$sprite.frame = 1
@@ -132,7 +130,6 @@ func botonito(noclick = false):
 
 			Global.Status = Global.Statuses.THROWING
 			Global.point_list.fade_out()
-			$Button.text = "..." + trailing
 			shaking = false
 			$sprite.frame = 1
 			$sprite/beaker_part.frame = $sprite.frame

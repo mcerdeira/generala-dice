@@ -148,7 +148,7 @@ theme_override_fonts/font = ExtResource("4_pkukr")
 theme_override_font_sizes/font_size = 26
 theme_override_styles/disabled = SubResource("StyleBoxFlat_0igcw")
 theme_override_styles/normal = SubResource("StyleBoxFlat_f0x1q")
-text = "Agitar
+text = "Tirar
 "
 
 [node name="Label" type="Label" parent="."]

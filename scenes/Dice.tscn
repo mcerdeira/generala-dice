@@ -1,7 +1,8 @@
-[gd_scene load_steps=29 format=3 uid="uid://dufepst0w8rkr"]
+[gd_scene load_steps=30 format=3 uid="uid://dufepst0w8rkr"]
 
 [ext_resource type="Script" path="res://scenes/Dice.gd" id="1_r70iu"]
 [ext_resource type="Shader" path="res://scenes/disolve.gdshader" id="2_3mtty"]
+[ext_resource type="Script" path="res://scenes/sign.gd" id="2_7gb4l"]
 [ext_resource type="PackedScene" uid="uid://berhcc7novg7b" path="res://scenes/node_3d.tscn" id="2_lt8j6"]
 [ext_resource type="Texture2D" uid="uid://dn5ybcewikek6" path="res://sprites/dices/enfasis.png" id="3_8jf7x"]
 [ext_resource type="Shader" path="res://scenes/enfasis.gdshader" id="3_fr77i"]
@@ -94,6 +95,28 @@ animations = [{
 
 [node name="Dice" type="Area2D"]
 script = ExtResource("1_r70iu")
+
+[node name="Sign" type="Node2D" parent="."]
+top_level = true
+position = Vector2(0, -116)
+script = ExtResource("2_7gb4l")
+
+[node name="ColorRect" type="ColorRect" parent="Sign"]
+offset_left = -202.0
+offset_top = -66.0
+offset_right = 211.0
+offset_bottom = 60.0
+color = Color(0.0509804, 0.113725, 0.113725, 1)
+
+[node name="lbl_item_desc" type="RichTextLabel" parent="Sign"]
+offset_left = -173.0
+offset_top = -53.0
+offset_right = 176.0
+offset_bottom = 42.0
+theme_override_fonts/normal_font = ExtResource("3_xq7bm")
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+autowrap_mode = 2
 
 [node name="shadow" type="Sprite2D" parent="."]
 self_modulate = Color(0, 0, 0, 0.321569)

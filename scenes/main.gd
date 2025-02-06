@@ -27,7 +27,13 @@ func _physics_process(delta):
 	else:
 		$Button2.disabled = Global.Status != Global.Statuses.IDLE
 		$Button3.disabled = Global.Status != Global.Statuses.IDLE or Global.TurnUsed
-		$Button3/cosito.visible = Global.Points > 0
+		if Global.TurnUsed and Global.LastTurn:
+			$Button2.disabled = true
+		
+		if !$Button3.disabled:
+			$Button3/cosito.visible = Global.Points > 0
+		else:
+			$Button3/cosito.visible = false
 	
 	$lbl_goal/lbl_points2.text = "$" + str(Global.Goal)
 	$lbl_points/lbl_points2.text = "$" + str(Global.Points)

@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://djocrijh1ceom" path="res://scenes/Beaker.tscn" id="1_7se6j"]
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_wbabm"]
 [ext_resource type="PackedScene" uid="uid://dufepst0w8rkr" path="res://scenes/Dice.tscn" id="2_tcovt"]
-[ext_resource type="PackedScene" uid="uid://ba2tdpbkss4pb" path="res://scenes/shaker.tscn" id="2_wtsft"]
+[ext_resource type="PackedScene" path="res://scenes/shaker.tscn" id="2_wtsft"]
 [ext_resource type="Texture2D" uid="uid://3s8wbw4jv3gl" path="res://sprites/wall.png" id="4_36hgn"]
 [ext_resource type="PackedScene" uid="uid://c1178aepiu4hq" path="res://scenes/wall_1.tscn" id="4_rgh4a"]
 [ext_resource type="FontFile" uid="uid://qlhmfs1ahw63" path="res://fonts/prstartk.ttf" id="5_ciusn"]
@@ -411,7 +411,7 @@ original_position = NodePath("../DiceSlot4")
 id = 4
 
 [node name="Dice5" parent="." node_paths=PackedStringArray("DiceMan", "original_position") instance=ExtResource("2_tcovt")]
-position = Vector2(1666, 100)
+position = Vector2(1526, 349)
 ttl_shot = 0.3
 DiceMan = NodePath("..")
 original_position = NodePath("../DiceSlot5")
@@ -900,30 +900,30 @@ text = "0"
 metadata/_edit_use_anchors_ = true
 
 [node name="ColorRect5" type="ColorRect" parent="Shop"]
-offset_left = 870.0
-offset_top = 377.0
-offset_right = 1145.0
-offset_bottom = 554.0
+offset_left = 822.0
+offset_top = 243.0
+offset_right = 1206.0
+offset_bottom = 473.0
 mouse_filter = 2
 color = Color(0.0862745, 0.0901961, 0.117647, 0.670588)
 
 [node name="lbl_dicecurrent2" type="Label" parent="Shop"]
-offset_left = 875.0
-offset_top = 383.0
-offset_right = 1052.0
-offset_bottom = 409.0
+offset_left = 831.0
+offset_top = 254.0
+offset_right = 1016.0
+offset_bottom = 290.0
 theme_override_fonts/font = ExtResource("7_jk6n3")
-theme_override_font_sizes/font_size = 35
+theme_override_font_sizes/font_size = 50
 text = "Subir nivel"
 
 [node name="items" type="ItemList" parent="Shop"]
-offset_left = 873.0
-offset_top = 410.0
-offset_right = 986.0
-offset_bottom = 550.0
+offset_left = 823.0
+offset_top = 291.0
+offset_right = 990.0
+offset_bottom = 467.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("7_jk6n3")
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 34
 allow_reselect = true
 allow_search = false
 auto_height = true
@@ -942,13 +942,13 @@ item_5/text = "GENERALAx2"
 item_5/disabled = true
 
 [node name="items4" type="ItemList" parent="Shop"]
-offset_left = 987.0
-offset_top = 410.0
-offset_right = 1026.0
-offset_bottom = 550.0
+offset_left = 991.0
+offset_top = 291.0
+offset_right = 1048.0
+offset_bottom = 467.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("7_jk6n3")
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 34
 allow_search = false
 auto_height = true
 item_count = 6
@@ -961,13 +961,13 @@ item_5/disabled = true
 
 [node name="items2" type="ItemList" parent="Shop"]
 layout_direction = 3
-offset_left = -1089.0
-offset_top = 410.0
-offset_right = -1027.0
-offset_bottom = 550.0
+offset_left = -1126.0
+offset_top = 291.0
+offset_right = -1051.0
+offset_bottom = 466.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("7_jk6n3")
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 34
 theme_override_styles/panel = SubResource("StyleBoxFlat_63jac")
 allow_reselect = true
 allow_search = false
@@ -981,13 +981,13 @@ item_5/text = "-"
 
 [node name="items3" type="ItemList" parent="Shop"]
 layout_direction = 3
-offset_left = -1142.0
-offset_top = 410.0
-offset_right = -1091.0
-offset_bottom = 550.0
+offset_left = -1195.0
+offset_top = 291.0
+offset_right = -1127.0
+offset_bottom = 467.0
 theme_override_colors/font_color = Color(0.894118, 0.788235, 0, 1)
 theme_override_fonts/font = ExtResource("7_jk6n3")
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 34
 allow_search = false
 item_count = 6
 item_0/text = "-"

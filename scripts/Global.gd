@@ -83,7 +83,7 @@ var DiceTypes = {
 	OneMoreChance = {"id": DiceIDs.OneMoreChance, "price": 10, "texture": preload("res://sprites/dices/onemore.png"), "title": "El ensayo", "description": "No consume la jugada al usarlo. Al usarse se [color=red] agota[/color]."},
 	Cheese = {"id": DiceIDs.Cheese, "price": 15, "texture": preload("res://sprites/dices/cheese.png"), "title": "Quesito", "description": "Es un dado extra por fuera del [color=blue]cubilete[/color]. El dado extra se [color=red]agota[/color] siempre despues de la tirada."},
 	Hologram = {"id": DiceIDs.Cheese, "price": 10, "texture": preload("res://sprites/dices/hologram.png"), "title": "Holo-Dado", "description": "El dado proyecta un holograma de si mismo con identico [color=red]valor[/color]."},
-	Fake = {"id": DiceIDs.Fake, "price": 0, "texture": preload("res://sprites/dices/fake.png"), "title": "Fake", "description": "Fake"},
+	Fake = {"id": DiceIDs.Fake, "price": 0, "texture": preload("res://sprites/dices/fake.png"), "title": "Dado de Papel", "description": "Dado trampa de [color=red] 1[/color] uso."},
 }
 
 var DiceChances = [
@@ -125,13 +125,16 @@ var BeatTheGame = false
 var Beaker = null
 
 func init_vars():
+	Status = Statuses.IDLE
+	RerollCost = 2
+	dices_used = 0
 	DiceChancesTmp = []
 	Level = 1
 	LevelMax = 8
 	Turn = 1
 	InternarlTurn = 1
 	TurnMax = 7
-	Points = 0
+	Points = 90
 	VisualPoints = 0
 	VisualPointsSign = ""
 	Goals = [0, 45, 90, 180, 250, 500, 800, 1000, 2000]
@@ -139,6 +142,13 @@ func init_vars():
 	GameOver = false
 	BeatTheGame = false
 	Beaker = null
+	LastTurn = false
+	TurnUsed = false
+	Levels = [ 1, 1, 1, 1, 1, 1]
+	LevelPrices = [5, 5, 5, 5, 5, 5]
+	point_list = null
+	points_normal = [null, null, null, null, null, null, 10, 20, 30, 40, 50, 100] 
+	points_serve = [null, null, null, null, null, null, 15, 25, 35, 45, 55, 200] 
 
 func _ready():
 	Global.Temardo = preload("res://music/dados.wav")
@@ -203,6 +213,7 @@ func NextLevel():
 		Goal = Goals[Level]
 		Music.resume()
 		PointsShow.hideme()
+		Global.DiceMan.arrange2()
 		
 func RentCalculate(loser = false):
 	var local_points = 0

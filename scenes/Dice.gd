@@ -23,8 +23,8 @@ var copied = false
 var selected = false
 @export var id = -1
 
-var rotation_speed : float = 20.0 # Velocidad de la oscilación
-var max_rotation : float = 10.0 # Máxima rotación en grados
+var rotation_speed : float = 5.0 # Velocidad de la oscilación
+var max_rotation : float = 5.0 # Máxima rotación en grados
 var _movement_tween : Tween
 var _growing_tween : Tween
 var current_angle = 0.0
@@ -65,6 +65,7 @@ func disolve():
 	return _disolve_tween
 
 func _ready():
+	$Sign.visible = false
 	add_to_group("dices")
 	what_ami()
 	
@@ -166,6 +167,8 @@ func _physics_process(delta):
 		# Aplica la rotación al nodo hijo
 		rotation_degrees = current_angle
 		$lbl_add.rotation_degrees = current_angle
+		
+	$Sign.rotation_degrees = -current_angle
 		
 	what_ami()
 	
@@ -275,6 +278,9 @@ func local_flip():
 
 func _on_control_mouse_entered():
 	if !rolling:
+		$Sign.visible = true
+		$Sign/lbl_item_desc.text = "\n" + DiceType.title + ":\n" + DiceType.description
+		
 		shaking = true
 		Global.emit(get_global_mouse_position(), 1)
 	if DiceType == Global.DiceTypes.Rubber:
@@ -283,6 +289,7 @@ func _on_control_mouse_entered():
 
 func _on_control_mouse_exited():
 	if !dragged:
+		$Sign.visible = false
 		Global.preventSelect = false
 		Global.emit(get_global_mouse_position(), 1)
 		grow_to(Vector2(1, 1))
