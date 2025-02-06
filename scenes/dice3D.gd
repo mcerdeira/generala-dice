@@ -17,6 +17,9 @@ func _ready():
 	if DiceType == Global.DiceTypes.Loaded:
 		x_pos = 90.0
 		y_pos = 180.0
+	if DiceType == Global.DiceTypes.Teseracto:
+		x_pos = 0.0
+		y_pos = 90.0
 
 	#z_pos = Global.pick_random([0.0, 90.0, 180.0, 270.0])
 	rotation.x = deg_to_rad(x_pos)
@@ -125,6 +128,8 @@ func align_to_nearest(_forcedvalue = null):
 		num_dest = Global.pick_random([1, 2, 3])
 	elif DiceType == Global.DiceTypes.Loaded:
 		num_dest = 6
+	elif DiceType == Global.DiceTypes.Teseracto:
+		num_dest= 4
 	else:
 		num_dest = Global.pick_random([1, 2, 3, 4, 5, 6])
 

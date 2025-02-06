@@ -66,6 +66,7 @@ enum DiceIDs {
 	Cheese,
 	Hologram,
 	Fake,
+	Teseracto,
 }
 
 var DiceTypes = {
@@ -84,6 +85,7 @@ var DiceTypes = {
 	Cheese = {"id": DiceIDs.Cheese, "price": 15, "texture": preload("res://sprites/dices/cheese.png"), "title": "Quesito", "description": "Es un dado extra por fuera del [color=blue]cubilete[/color]. El dado extra se [color=red]agota[/color] siempre despues de la tirada."},
 	Hologram = {"id": DiceIDs.Cheese, "price": 10, "texture": preload("res://sprites/dices/hologram.png"), "title": "Holo-Dado", "description": "El dado proyecta un holograma de si mismo con identico [color=red]valor[/color]."},
 	Fake = {"id": DiceIDs.Fake, "price": 0, "texture": preload("res://sprites/dices/fake.png"), "title": "Dado de Papel", "description": "Dado trampa de [color=red] 1[/color] uso."},
+	Teseracto = {"id": DiceIDs.Teseracto, "price": 15, "texture": preload("res://sprites/dices/teseracto.png"), "title": "Teseracto", "description": "Dado de la 4ta dimension. [color=red]Multiplica[/color] el puntaje por [color=red] 4[/color] y todas sus cara son un [color=red] 4[/color]."},
 }
 
 var DiceChances = [
@@ -99,6 +101,7 @@ var DiceChances = [
 	DiceTypes.OneMoreChance,
 	DiceTypes.Cheese,
 	DiceTypes.Hologram,
+	DiceTypes.Teseracto,
 ]
 
 var DiceChancesTmp = []
@@ -301,6 +304,8 @@ func getDiceExtraText(DiceType, currentvalue):
 		return "+" + str(currentvalue)
 	elif DiceType == Global.DiceTypes.MultDice2:
 		return "X" + str(2)
+	elif DiceType == Global.DiceTypes.Teseracto:
+		return "X" + str(4)
 	else:
 		return ""
 		

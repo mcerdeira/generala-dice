@@ -22,8 +22,9 @@ func _on_items_2_item_selected(index):
 	if canBuy(Global.LevelPrices[index]):
 		Global.play_sound(Global.BuySFX)
 		Global.Levels[index] += 1
+		Global.points_serve[index + 6] += 5
 		Global.points_normal[index + 6] += 5
-		Global.LevelPrices[index] += 5
+		Global.LevelPrices[index] += 15
 		showlevels()
 	else:
 		Global.play_sound(Global.GlassSFX)

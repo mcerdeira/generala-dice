@@ -378,6 +378,8 @@ func _on_button_pressed(): #ANOTAR
 						mult += d.currentvalue
 					if d.DiceType == Global.DiceTypes.MultDice2:
 						mult += 2
+					if d.DiceType == Global.DiceTypes.Teseracto:
+						mult += 4
 				
 				if mult > 0:
 					current_points *= mult 

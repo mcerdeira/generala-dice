@@ -141,17 +141,21 @@ func botonito(noclick = false):
 			Global.play_sound(Global.RollSFX)
 			await get_tree().create_timer(0.5).timeout
 			$beakerbounce/collider.set_deferred("disabled", false) 
-
-func _on_area_2d_area_entered(area):
+			
+func dice_entered(_dice):
 	if Global.Status == Global.Statuses.IDLE or Global.Status == Global.Statuses.WARPING:
-		if area.is_in_group("dices"):
-			if area.DiceType == Global.DiceTypes.Fake:
-				area.destruir()
+		if _dice.is_in_group("dices"):
+			if _dice.DiceType == Global.DiceTypes.Fake:
+				_dice.destruir()
 			else:
-				area.select(false)
-				DiceMan.add_me(area)
+				_dice.select(false)
+				if _dice not in DiceMan.dices:
+					DiceMan.add_me(_dice)
 			
 			shake(0.05)
+				
+func _on_area_2d_area_entered(area):
+	dice_entered(area)
 
 func _on_area_2d_area_exited(area):
 	if Global.Status == Global.Statuses.IDLE:

@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://djocrijh1ceom" path="res://scenes/Beaker.tscn" id="1_7se6j"]
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_wbabm"]
 [ext_resource type="PackedScene" uid="uid://dufepst0w8rkr" path="res://scenes/Dice.tscn" id="2_tcovt"]
-[ext_resource type="PackedScene" path="res://scenes/shaker.tscn" id="2_wtsft"]
+[ext_resource type="PackedScene" uid="uid://ba2tdpbkss4pb" path="res://scenes/shaker.tscn" id="2_wtsft"]
 [ext_resource type="Texture2D" uid="uid://3s8wbw4jv3gl" path="res://sprites/wall.png" id="4_36hgn"]
 [ext_resource type="PackedScene" uid="uid://c1178aepiu4hq" path="res://scenes/wall_1.tscn" id="4_rgh4a"]
 [ext_resource type="FontFile" uid="uid://qlhmfs1ahw63" path="res://fonts/prstartk.ttf" id="5_ciusn"]
@@ -500,14 +500,15 @@ offset_right = 234.0
 offset_bottom = 24.0
 theme_override_fonts/font = ExtResource("7_jk6n3")
 theme_override_font_sizes/font_size = 60
-text = "0"
+text = "$90"
 metadata/_edit_use_anchors_ = true
 
 [node name="lbl_points3" type="RichTextLabel" parent="lbl_points"]
 layout_mode = 1
 anchors_preset = -1
+anchor_left = 0.154762
 anchor_top = 0.0909091
-anchor_right = 0.571429
+anchor_right = 0.726191
 anchor_bottom = 1.59091
 offset_left = 168.0
 offset_right = 234.0
@@ -520,9 +521,9 @@ metadata/_edit_use_anchors_ = true
 [node name="lbl_points4" type="RichTextLabel" parent="lbl_points"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = -0.184524
+anchor_left = -0.0297621
 anchor_top = 1.02273
-anchor_right = -0.0357143
+anchor_right = 0.119048
 anchor_bottom = 1.63636
 offset_left = 168.0
 offset_right = 234.0
