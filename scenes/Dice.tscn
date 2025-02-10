@@ -66,8 +66,8 @@ shader_parameter/burn_size = 0.1
 shader_parameter/burn_color = Color(0.866667, 0.690196, 0, 1)
 shader_parameter/dissolve_texture = SubResource("NoiseTexture2D_iahen")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_x1lnw"]
-size = Vector2(76, 69)
+[sub_resource type="CircleShape2D" id="CircleShape2D_npmqb"]
+radius = 36.0312
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ootyv"]
 shader = ExtResource("3_fr77i")
@@ -140,9 +140,8 @@ material = SubResource("ShaderMaterial_s03cj")
 texture = SubResource("ViewportTexture_hmu5q")
 
 [node name="collider" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2(0, 0.5)
-shape = SubResource("RectangleShape2D_x1lnw")
+shape = SubResource("CircleShape2D_npmqb")
 
 [node name="SubViewport" type="SubViewport" parent="."]
 own_world_3d = true

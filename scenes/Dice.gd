@@ -86,11 +86,11 @@ func initialize():
 	dir = 1
 	rolling = false
 	stoped = false
-	stop = Global.pick_random([10, 30, 20, 15])
+	stop = 10 + Global.pick_random([1, 2, 3, 4 ,5])# Global.pick_random([10, 30, 20, 15])
 	# Lanza el dado desde el ángulo fijo (45 grados)
-	force_magnitude = randi_range(600, 1000)
+	force_magnitude = 1000#randi_range(600, 1000)
 	initial_force = Vector2.RIGHT.rotated(launch_angle) * force_magnitude
-	initial_rotation = randi_range(-10, 10)
+	initial_rotation = 0#randi_range(-10, 10)
 	$SubViewport/Node3D.initialize()
 	
 func agotar():
@@ -207,18 +207,28 @@ func what_ami():
 	
 func _on_area_entered(area):
 	if area is Area2D and area.is_in_group("dices") and ttl_bounce <= 0:
-		var normal = (position - area.position).normalized()
-		dir *= -1
-		velocity = velocity.bounce(normal) * -1  # Rebote con pérdida de energía
-		angular_velocity *= -0.5  # Invertir la rotación para dar realismo
-		position += normal * 5  # Mueve el dado ligeramente fuera del otro
-		ttl_bounce = 0.3
+		if velocity.normalized().dot(area.velocity.normalized()) < 0:
+			var normal = (position - area.position).normalized()
+			dir *= -1
+			var calc_normal = Vector2.LEFT
+			if global_position.x > area.global_position.x:
+				calc_normal = Vector2.RIGHT
+			else:
+				calc_normal = Vector2.LEFT
+				
+			Global.emit(global_position, Global.pick_random([1, 2, 3]))
+			
+			velocity = velocity.bounce(calc_normal) * 1.1  # Rebote con pérdida de energía
+			angular_velocity *= -0.5  # Invertir la rotación para dar realismo
+			position += normal * 5  # Mueve el dado ligeramente fuera del otro
+			#ttl_bounce = 0.3
 		
 func _on_body_entered(body):
 	if body is StaticBody2D:
-		var normal = (position - body.position).normalized()
+		#var normal = (position - body.position).normalized()
+		Global.emit(global_position, Global.pick_random([3, 4]))
 		dir *= -1
-		velocity = velocity.bounce(normal) * -1 # Rebote con pérdida de energía
+		velocity = velocity.bounce(Vector2.DOWN)  # Rebote con pérdida de energía
 		angular_velocity *= -0.5  # Invertir la rotación para dar realismo
 		
 func unCopyMe():
