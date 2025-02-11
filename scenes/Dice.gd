@@ -125,10 +125,25 @@ func select(val):
 	$selected.visible = val
 	selected = val
 
-func show_enfasis(value):
+func show_enfasis(value, dice_value = -1):
 	$enfasis.visible = value
 	$lbl_add.visible = value
-	$lbl_add.text = Global.getDiceExtraText(DiceType, currentvalue)
+	$lbl_add.text = Global.getDiceExtraText(DiceType, currentvalue, self)
+	if DiceType == Global.DiceTypes.Shrodinger:
+		if value:
+			await shrodingereala(0.0, 1.0).finished
+			$shrodinger.animation = str(dice_value)
+			$shrodinger.visible = true
+			await shrodingereala(1.0, 2.0).finished
+			
+func shrodingereala(val, time):
+	var _disolve_tween: Tween
+	_disolve_tween = create_tween()
+	_disolve_tween.set_trans(Tween.TRANS_QUINT)
+	_disolve_tween.set_ease(Tween.EASE_IN_OUT)
+	_disolve_tween.tween_property($shrodinger.material, "shader_parameter/dissolve_value", val, time)
+
+	return _disolve_tween
 	
 func holohide():
 	$holosprite.visible = false
@@ -221,7 +236,7 @@ func _on_area_entered(area):
 			velocity = velocity.bounce(calc_normal) * 1.1  # Rebote con pérdida de energía
 			angular_velocity *= -0.5  # Invertir la rotación para dar realismo
 			position += normal * 5  # Mueve el dado ligeramente fuera del otro
-			#ttl_bounce = 0.3
+			ttl_bounce = 0.1
 		
 func _on_body_entered(body):
 	if body is StaticBody2D:

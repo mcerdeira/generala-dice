@@ -67,6 +67,9 @@ enum DiceIDs {
 	Hologram,
 	Fake,
 	Teseracto,
+	Shrodinger,
+	Oscilante,
+	Sinergia,
 }
 
 var DiceTypes = {
@@ -81,11 +84,14 @@ var DiceTypes = {
 	D3 = {"id": DiceIDs.D3, "price": 5, "texture": preload("res://sprites/dices/dx3.png"), "title": "Dado D3", "description": "Solo tiene [color=red] 3[/color] valores ([color=red]1, 2, 3[/color])."},
 	TurnPlus = {"id": DiceIDs.TurnPlus, "price": 3, "texture": preload("res://sprites/dices/turnplus.png"), "title": "La vida", "description": "Tener este dado suma [color=red] 1[/color] tirada a la partida."},
 	Rubber = {"id": DiceIDs.Rubber, "price": 5, "texture": preload("res://sprites/dices/rubber.png"), "title": "Panqueque", "description": "Al tirarlo permite hacer [color=red] flip[/color] a su lado opuesto."},
-	OneMoreChance = {"id": DiceIDs.OneMoreChance, "price": 10, "texture": preload("res://sprites/dices/onemore.png"), "title": "El ensayo", "description": "No consume la jugada al usarlo. Al usarse se [color=red] agota[/color]."},
+	OneMoreChance = {"id": DiceIDs.OneMoreChance, "price": 10, "texture": preload("res://sprites/dices/onemore.png"), "title": "Doble y nada", "description": "Cuenta la jugada [color=red] x2[/color], bloquea la jugada por el nivel al usarlo y se [color=red] agota[/color]."},
 	Cheese = {"id": DiceIDs.Cheese, "price": 15, "texture": preload("res://sprites/dices/cheese.png"), "title": "Quesito", "description": "Es un dado extra por fuera del [color=blue]cubilete[/color]. El dado extra se [color=red]agota[/color] siempre despues de la tirada."},
 	Hologram = {"id": DiceIDs.Cheese, "price": 10, "texture": preload("res://sprites/dices/hologram.png"), "title": "Holo-Dado", "description": "El dado proyecta un holograma de si mismo con identico [color=red]valor[/color]."},
 	Fake = {"id": DiceIDs.Fake, "price": 0, "texture": preload("res://sprites/dices/fake.png"), "title": "Dado de Papel", "description": "Dado trampa de [color=red] 1[/color] uso."},
 	Teseracto = {"id": DiceIDs.Teseracto, "price": 15, "texture": preload("res://sprites/dices/teseracto.png"), "title": "Teseracto", "description": "Dado de la 4ta dimension. [color=red]Multiplica[/color] el puntaje por [color=red] 4[/color] y todas sus cara son un [color=red] 4[/color]."},
+	Shrodinger = {"id": DiceIDs.Shrodinger, "price": 10, "texture": preload("res://sprites/dices/shrodinger.png"), "title": "El dado de Schrödinger", "description": "Todas sus caras están indefinidas hasta que se selecciona una [color=red]jugada[/color]."},
+	Oscilante = {"id": DiceIDs.Oscilante, "price": 5, "texture": preload("res://sprites/dices/oscilante.png"), "title": "Dados-cilante", "description": "En los turnos pares sale un valor par, en los impares un valor impar."},
+	Sinergia = {"id": DiceIDs.Sinergia, "price": 10, "texture": preload("res://sprites/dices/sinergia.png"), "title": "Dado sinergia", "description": "Multiplica por el valor total de los dados del su mismo [color=red]valor[/color]"},
 }
 
 var DiceChances = [
@@ -102,6 +108,9 @@ var DiceChances = [
 	DiceTypes.Cheese,
 	DiceTypes.Hologram,
 	DiceTypes.Teseracto,
+	DiceTypes.Shrodinger,
+	DiceTypes.Oscilante,
+	DiceTypes.Sinergia
 ]
 
 var DiceChancesTmp = []
@@ -137,7 +146,7 @@ func init_vars():
 	Turn = 1
 	InternarlTurn = 1
 	TurnMax = 7
-	Points = 0
+	Points = 900
 	VisualPoints = 0
 	VisualPointsSign = ""
 	Goals = [0, 45, 90, 180, 250, 500, 800, 1000, 2000]
@@ -259,7 +268,7 @@ func getRandomDiceToCopy(me, DiceMan_dices):
 	var dices_list = [] + DiceMan_dices
 	dices_list.shuffle()
 	for d in dices_list:
-		if d != me and d.DiceType != Global.DiceTypes.Copy:
+		if d != me and d.DiceType != Global.DiceTypes.Copy and d.DiceType != Global.DiceTypes.Shrodinger:
 			return d
 			
 	return null
@@ -297,7 +306,7 @@ func minforTurn():
 	else:
 		return 1
 		
-func getDiceExtraText(DiceType, currentvalue):
+func getDiceExtraText(DiceType, currentvalue, me):
 	if DiceType == Global.DiceTypes.MultDice:
 		return "X" + str(currentvalue)
 	elif DiceType == Global.DiceTypes.PlusDice:
@@ -306,8 +315,23 @@ func getDiceExtraText(DiceType, currentvalue):
 		return "X" + str(2)
 	elif DiceType == Global.DiceTypes.Teseracto:
 		return "X" + str(4)
+	elif DiceType == Global.DiceTypes.Sinergia:
+		var mult = Global.findDicesWithaValue(currentvalue, me)
+		if mult > 1:
+			return "X" + str(mult)
+		else:
+			return ""
 	else:
 		return ""
+		
+func findDicesWithaValue(val, me):
+	var value = 0
+	var dices = get_tree().get_nodes_in_group("dices")
+	for d in dices:
+		if (d.currentvalue == val or d.currentvalue == -1):
+			value += 1
+			
+	return value
 		
 func emit(_global_position, count, particle_obj = null, size = 1):
 	var part = particle

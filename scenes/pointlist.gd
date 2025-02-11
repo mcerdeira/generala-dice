@@ -110,6 +110,13 @@ func calc_posible_points():
 	
 	for dice in dices:
 		if dice.currentvalue != null:
+			if dice.currentvalue == -1:
+				one.append(dice)
+				two.append(dice)
+				three.append(dice)
+				four.append(dice)
+				five.append(dice)
+				six.append(dice)
 			if dice.currentvalue == 1:
 				one.append(dice)
 			if dice.currentvalue == 2:
@@ -359,14 +366,14 @@ func _on_button_pressed(): #ANOTAR
 		Global.play_sound(Global.VictorySFX)
 		var add = 0
 		var mult = 0
-		var block = true
+		var block = false
 		var blocker_dice = null
 		if current_dices and current_dices.size() > 0:
 			#Calculos de puntos
 			if current_dices.size() > 0:
 				for d in current_dices:
 					if d.DiceType == Global.DiceTypes.OneMoreChance:
-						block = false
+						block = true
 						blocker_dice = d
 					
 					if d.DiceType == Global.DiceTypes.PlusDice:
@@ -380,7 +387,12 @@ func _on_button_pressed(): #ANOTAR
 						mult += 2
 					if d.DiceType == Global.DiceTypes.Teseracto:
 						mult += 4
+					if d.DiceType == Global.DiceTypes.Sinergia:
+						var multer = Global.findDicesWithaValue(d.currentvalue, d)
+						if multer > 1:
+							mult += multer
 				
+			
 				if mult > 0:
 					current_points *= mult 
 			
@@ -433,7 +445,6 @@ func _on_button_pressed(): #ANOTAR
 			#Bloquear jugada que ya se hizo
 			if block:
 				blocked_games.append(current_index)
-			else:
 				blocker_dice.agotar()
 			
 			PitchScale = OriginalPitchScale
@@ -512,22 +523,22 @@ func _on_items_item_selected(index):
 	match index:
 		Global.Games.ONE:
 			current_dices = [] + one_game
-			show_enfasis(one_game, true)
+			show_enfasis(one_game, true, 1)
 		Global.Games.TWO:
 			current_dices = [] + two_game
-			show_enfasis(two_game, true)
+			show_enfasis(two_game, true, 2)
 		Global.Games.THREE:
 			current_dices = [] + three_game
-			show_enfasis(three_game, true)
+			show_enfasis(three_game, true, 3)
 		Global.Games.FOUR:
 			current_dices = [] + four_game
-			show_enfasis(four_game, true)
+			show_enfasis(four_game, true, 4)
 		Global.Games.FIVE:
 			current_dices = [] + five_game
-			show_enfasis(five_game, true)
+			show_enfasis(five_game, true, 5)
 		Global.Games.SIX:
 			current_dices = [] + six_game
-			show_enfasis(six_game, true)
+			show_enfasis(six_game, true, 6)
 		Global.Games.DOUBLE:
 			current_dices = [] + double_game
 			show_enfasis(double_game, true)
@@ -551,9 +562,9 @@ func _on_items_item_selected(index):
 
 	$"../lbl_points/lbl_points2".text = str(current_points)
 
-func show_enfasis(dices, value):
+func show_enfasis(dices, value, dice_value = -1):
 	for d in dices:
-		d.show_enfasis(value)
+		d.show_enfasis(value, dice_value)
 
 func _on_input_event(viewport, event, shape_idx):
 	if visible:

@@ -1,13 +1,19 @@
-[gd_scene load_steps=30 format=3 uid="uid://dufepst0w8rkr"]
+[gd_scene load_steps=40 format=3 uid="uid://dufepst0w8rkr"]
 
 [ext_resource type="Script" path="res://scenes/Dice.gd" id="1_r70iu"]
 [ext_resource type="Shader" path="res://scenes/disolve.gdshader" id="2_3mtty"]
 [ext_resource type="Script" path="res://scenes/sign.gd" id="2_7gb4l"]
+[ext_resource type="Texture2D" uid="uid://dbjs5dxfdy42x" path="res://sprites/dices/shrodinger_extra1.png" id="2_fcvic"]
 [ext_resource type="PackedScene" uid="uid://berhcc7novg7b" path="res://scenes/node_3d.tscn" id="2_lt8j6"]
 [ext_resource type="Texture2D" uid="uid://dn5ybcewikek6" path="res://sprites/dices/enfasis.png" id="3_8jf7x"]
 [ext_resource type="Shader" path="res://scenes/enfasis.gdshader" id="3_fr77i"]
 [ext_resource type="Shader" path="res://scenes/video.gdshader" id="3_fswfd"]
+[ext_resource type="Texture2D" uid="uid://cwhu8una675pd" path="res://sprites/dices/shrodinger_extra2.png" id="3_lx1w3"]
 [ext_resource type="FontFile" uid="uid://bke1xm65inmdl" path="res://fonts/Thin sans.ttf" id="3_xq7bm"]
+[ext_resource type="Texture2D" uid="uid://nrq1kmyxifki" path="res://sprites/dices/shrodinger_extra3.png" id="4_gllda"]
+[ext_resource type="Texture2D" uid="uid://csw0oagf684ni" path="res://sprites/dices/shrodinger_extra4.png" id="5_5umfd"]
+[ext_resource type="Texture2D" uid="uid://c2i4hke68jtwc" path="res://sprites/dices/shrodinger_extra5.png" id="6_myt87"]
+[ext_resource type="Texture2D" uid="uid://cgidtdn14ah8n" path="res://sprites/dices/shrodinger_extra6.png" id="7_61yhq"]
 [ext_resource type="Texture2D" uid="uid://cvjufkponefkr" path="res://sprites/smoke.png" id="8_00hkv"]
 [ext_resource type="Texture2D" uid="uid://c2h7pr788bsc4" path="res://sprites/dices/holo.png" id="9_qtrmc"]
 [ext_resource type="Texture2D" uid="uid://clidro25u5wls" path="res://sprites/cosito1.png" id="10_8w7cn"]
@@ -65,6 +71,70 @@ shader_parameter/dissolve_value = 1.0
 shader_parameter/burn_size = 0.1
 shader_parameter/burn_color = Color(0.866667, 0.690196, 0, 1)
 shader_parameter/dissolve_texture = SubResource("NoiseTexture2D_iahen")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_8h35e"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_fddci"]
+noise = SubResource("FastNoiseLite_8h35e")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2feb1"]
+resource_local_to_scene = true
+shader = ExtResource("2_3mtty")
+shader_parameter/dissolve_value = 1.0
+shader_parameter/burn_size = 0.39
+shader_parameter/burn_color = Color(0.356863, 0, 0.678431, 1)
+shader_parameter/dissolve_texture = SubResource("NoiseTexture2D_fddci")
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4hbp1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_fcvic")
+}],
+"loop": true,
+"name": &"1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_lx1w3")
+}],
+"loop": true,
+"name": &"2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_gllda")
+}],
+"loop": true,
+"name": &"3",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_5umfd")
+}],
+"loop": true,
+"name": &"4",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_myt87")
+}],
+"loop": true,
+"name": &"5",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_61yhq")
+}],
+"loop": true,
+"name": &"6",
+"speed": 5.0
+}]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_npmqb"]
 radius = 36.0312
@@ -139,6 +209,14 @@ texture = ExtResource("9_qtrmc")
 material = SubResource("ShaderMaterial_s03cj")
 texture = SubResource("ViewportTexture_hmu5q")
 
+[node name="shrodinger" type="AnimatedSprite2D" parent="."]
+visible = false
+material = SubResource("ShaderMaterial_2feb1")
+position = Vector2(0.249999, 0.357607)
+scale = Vector2(0.18913, 0.194355)
+sprite_frames = SubResource("SpriteFrames_4hbp1")
+animation = &"6"
+
 [node name="collider" type="CollisionShape2D" parent="."]
 position = Vector2(0, 0.5)
 shape = SubResource("CircleShape2D_npmqb")
@@ -162,9 +240,9 @@ offset_bottom = 60.0
 [node name="lbl_add" type="Label" parent="."]
 visible = false
 offset_left = -23.0
-offset_top = 32.0
+offset_top = -43.0
 offset_right = 25.0
-offset_bottom = 55.0
+offset_bottom = -20.0
 pivot_offset = Vector2(23, 9)
 theme_override_colors/font_color = Color(0.745098, 0.14902, 0.2, 1)
 theme_override_fonts/font = ExtResource("3_xq7bm")

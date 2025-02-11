@@ -20,7 +20,9 @@ func _ready():
 	if DiceType == Global.DiceTypes.Teseracto:
 		x_pos = 0.0
 		y_pos = 90.0
-
+	if DiceType == Global.DiceTypes.Shrodinger:
+		x_pos = 0.0
+		y_pos = 0.0
 	#z_pos = Global.pick_random([0.0, 90.0, 180.0, 270.0])
 	rotation.x = deg_to_rad(x_pos)
 	rotation.y = deg_to_rad(y_pos)
@@ -58,41 +60,44 @@ func _physics_process(delta):
 		#rotation.z = lerp_angle(rotation.z, target_rotation.z, align_speed * delta)
 		
 func what_ami():
-	if x_pos == 0 and y_pos == 0:
-		return 1
-	if x_pos == 0 and y_pos == 90:
-		return 4
-	if x_pos == 0 and y_pos == 180:
-		return 3	
-	if x_pos == 0 and y_pos == 270:
-		return 2
-	
-	if x_pos == 90 and y_pos == 0:
-		return 5
-	if x_pos == 90 and y_pos == 90:
-		return 4
-	if x_pos == 90 and y_pos == 180:
-		return 6
-	if x_pos == 90 and y_pos == 270:
-		return 2	
+	if DiceType == Global.DiceTypes.Shrodinger:
+		return -1
+	else:
+		if x_pos == 0 and y_pos == 0:
+			return 1
+		if x_pos == 0 and y_pos == 90:
+			return 4
+		if x_pos == 0 and y_pos == 180:
+			return 3	
+		if x_pos == 0 and y_pos == 270:
+			return 2
 		
-	if x_pos == 180 and y_pos == 0:
-		return 3
-	if x_pos == 180 and y_pos == 90:
-		return 4
-	if x_pos == 180 and y_pos == 180:
-		return 1
-	if x_pos == 180 and y_pos == 270:
-		return 2
-		
-	if x_pos == 270 and y_pos == 0:
-		return 6
-	if x_pos == 270 and y_pos == 90:
-		return 4
-	if x_pos == 270 and y_pos == 180:
-		return 5
-	if x_pos == 270 and y_pos == 270:
-		return 2
+		if x_pos == 90 and y_pos == 0:
+			return 5
+		if x_pos == 90 and y_pos == 90:
+			return 4
+		if x_pos == 90 and y_pos == 180:
+			return 6
+		if x_pos == 90 and y_pos == 270:
+			return 2	
+			
+		if x_pos == 180 and y_pos == 0:
+			return 3
+		if x_pos == 180 and y_pos == 90:
+			return 4
+		if x_pos == 180 and y_pos == 180:
+			return 1
+		if x_pos == 180 and y_pos == 270:
+			return 2
+			
+		if x_pos == 270 and y_pos == 0:
+			return 6
+		if x_pos == 270 and y_pos == 90:
+			return 4
+		if x_pos == 270 and y_pos == 180:
+			return 5
+		if x_pos == 270 and y_pos == 270:
+			return 2
 			
 func broadcast_to(_dice):
 	broadcasted_dice = _dice
@@ -130,6 +135,13 @@ func align_to_nearest(_forcedvalue = null):
 		num_dest = 6
 	elif DiceType == Global.DiceTypes.Teseracto:
 		num_dest= 4
+	elif DiceType == Global.DiceTypes.Shrodinger:
+		num_dest = -1
+	elif DiceType == Global.DiceTypes.Oscilante:
+		if Global.Turn % 2 == 0:
+			num_dest = Global.pick_random([2, 4, 6])
+		else:
+			num_dest = Global.pick_random([1, 3, 5])
 	else:
 		num_dest = Global.pick_random([1, 2, 3, 4, 5, 6])
 
@@ -138,6 +150,10 @@ func align_to_nearest(_forcedvalue = null):
 		
 	var resu = null
 	match num_dest:
+		-1:
+			resu = Global.pick_random([
+				[0.0, 0.0],
+			])
 		1:
 			resu = Global.pick_random([
 				[0.0, 0.0],
