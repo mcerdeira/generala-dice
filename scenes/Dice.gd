@@ -304,7 +304,25 @@ func local_flip():
 func _on_control_mouse_entered():
 	if !rolling and !Global.preventSelect:
 		$Sign.visible = true
-		$Sign/lbl_item_desc.text = "\n" + DiceType.title + ":\n" + DiceType.description
+		var desc = "\n" + DiceType.title + ":\n" + DiceType.description
+		if DiceType == Global.DiceTypes.CuboLudoFake:
+			var actual = ""
+			if currentvalue == 1:
+				actual = "+2 al puntaje"
+			if currentvalue == 2:
+				actual = "+5 al puntaje"
+			if currentvalue == 3:
+				actual = "Sin efectos."
+			if currentvalue == 4:
+				actual = "-5 al puntaje"
+			if currentvalue == 5:
+				actual = "Pierde el turno"
+			if currentvalue == 6:
+				actual = "x3 al puntaje"
+			
+			desc += "\n\nActual: " + actual
+			
+		$Sign/lbl_item_desc.text = desc
 		
 		shaking = true
 		Global.emit(get_global_mouse_position(), 1)

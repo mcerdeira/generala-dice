@@ -76,6 +76,9 @@ func initial_shake():
 func arrange(_emit = true):
 	var e = 1
 	var speeds = [0, 0.1, 0.1, 0.2, 0.3, 0.3]
+	
+	Global.destroymodifiers()
+	
 	for d in dices:
 		if d.DiceType == Global.DiceTypes.Fake:
 			d.destruir()
@@ -97,6 +100,8 @@ func arrange2():
 	var _dices = get_tree().get_nodes_in_group("dices")
 	
 	_dices.sort_custom(func(a, b): return a.currentvalue > b.currentvalue)
+	
+	Global.destroymodifiers()
 	
 	for d in _dices:
 		var move = false
@@ -143,6 +148,27 @@ func throw():
 		extra.DiceMan = self
 		add_child(extra)
 		extra.add_to_group("dices")
+		extra.throw()
+		extra.force_emit()
+		
+		
+	var ludos = 0
+	_dices = get_tree().get_nodes_in_group("dices")
+	for d in _dices:
+		if d.DiceType == Global.DiceTypes.CuboLudo:
+			ludos += 1
+	
+	for i in range(ludos):
+		var extra = dice_obj.instantiate()
+		#add_me(extra)
+		extra.global_position = $Beaker/dicemark1.global_position
+		extra.ChangeType(Global.DiceTypes.CuboLudoFake)
+		extra.ttl_shot = 0.1
+		extra.initialize()
+		extra.DiceMan = self
+		add_child(extra)
+		extra.remove_from_group("dices")
+		extra.add_to_group("dices_modifiers")
 		extra.throw()
 		extra.force_emit()
 

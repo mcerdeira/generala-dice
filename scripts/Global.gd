@@ -48,8 +48,9 @@ enum Games {
 	FULL = 8,
 	POKER = 9,
 	GENERALA = 10,
-	GENERALA2 = 11,
 }
+
+var GamesPlayed = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
 enum DiceIDs {
 	Normal,
@@ -70,6 +71,9 @@ enum DiceIDs {
 	Shrodinger,
 	Oscilante,
 	Sinergia,
+	Repetidor,
+	CuboLudo,
+	CuboLudoFake,
 }
 
 var DiceTypes = {
@@ -86,12 +90,15 @@ var DiceTypes = {
 	Rubber = {"id": DiceIDs.Rubber, "price": 5, "texture": preload("res://sprites/dices/rubber.png"), "title": "Panqueque", "description": "Al tirarlo permite hacer [color=red] flip[/color] a su lado opuesto."},
 	OneMoreChance = {"id": DiceIDs.OneMoreChance, "price": 10, "texture": preload("res://sprites/dices/onemore.png"), "title": "Doble y nada", "description": "Cuenta la jugada [color=red] x2[/color], bloquea la jugada por el nivel al usarlo y se [color=red] agota[/color]."},
 	Cheese = {"id": DiceIDs.Cheese, "price": 15, "texture": preload("res://sprites/dices/cheese.png"), "title": "Quesito", "description": "Es un dado extra por fuera del [color=blue]cubilete[/color]. El dado extra se [color=red]agota[/color] siempre despues de la tirada."},
-	Hologram = {"id": DiceIDs.Cheese, "price": 10, "texture": preload("res://sprites/dices/hologram.png"), "title": "Holo-Dado", "description": "El dado proyecta un holograma de si mismo con identico [color=red]valor[/color]."},
+	Hologram = {"id": DiceIDs.Hologram, "price": 10, "texture": preload("res://sprites/dices/hologram.png"), "title": "Holo-Dado", "description": "El dado proyecta un holograma de si mismo con identico [color=red]valor[/color]."},
 	Fake = {"id": DiceIDs.Fake, "price": 0, "texture": preload("res://sprites/dices/fake.png"), "title": "Dado de Papel", "description": "Dado trampa de [color=red] 1[/color] uso."},
 	Teseracto = {"id": DiceIDs.Teseracto, "price": 15, "texture": preload("res://sprites/dices/teseracto.png"), "title": "Teseracto", "description": "Dado de la 4ta dimension. [color=red]Multiplica[/color] el puntaje por [color=red] 4[/color] y todas sus cara son un [color=red] 4[/color]."},
 	Shrodinger = {"id": DiceIDs.Shrodinger, "price": 10, "texture": preload("res://sprites/dices/shrodinger.png"), "title": "El dado de Schrödinger", "description": "Todas sus caras están indefinidas hasta que se selecciona una [color=red]jugada[/color]."},
 	Oscilante = {"id": DiceIDs.Oscilante, "price": 5, "texture": preload("res://sprites/dices/oscilante.png"), "title": "Dados-cilante", "description": "En los turnos pares sale un valor par, en los impares un valor impar."},
 	Sinergia = {"id": DiceIDs.Sinergia, "price": 10, "texture": preload("res://sprites/dices/sinergia.png"), "title": "Dado sinergia", "description": "Multiplica por el valor total de los dados del su mismo [color=red]valor[/color]"},
+	Repetidor = {"id": DiceIDs.Repetidor, "price": 10, "texture": preload("res://sprites/dices/repetidor.png"), "title": "Dado repetidor", "description": "Si se usa este dado en una jugada ya usada anteriormente nos da [color=red]2 x numero[/color] de veces que jugamos esa jugada."},
+	CuboLudo = {"id": DiceIDs.CuboLudo, "price": 10, "texture": preload("res://sprites/dices/cuboludoinicial.png"), "title": "Cubo-ludo", "description": "Es un dado extra por fuera del [color=blue]cubilete[/color]. Contiene cosas [color=blue]buenas[/color] y cosas [color=red]malas[/color], a riesgo del consumidor."},
+	CuboLudoFake = {"id": DiceIDs.CuboLudoFake, "price": 10, "texture": preload("res://sprites/dices/cuboludo.png"), "title": "Dado modificador", "description": "Contiene cosas [color=blue]buenas[/color] y cosas [color=red]malas[/color]."},
 }
 
 var DiceChances = [
@@ -110,7 +117,9 @@ var DiceChances = [
 	DiceTypes.Teseracto,
 	DiceTypes.Shrodinger,
 	DiceTypes.Oscilante,
-	DiceTypes.Sinergia
+	DiceTypes.Sinergia,
+	DiceTypes.Repetidor,
+	DiceTypes.CuboLudo,
 ]
 
 var DiceChancesTmp = []
@@ -161,6 +170,7 @@ func init_vars():
 	point_list = null
 	points_normal = [null, null, null, null, null, null, 10, 20, 30, 40, 50, 100] 
 	points_serve = [null, null, null, null, null, null, 15, 25, 35, 45, 55, 200] 
+	GamesPlayed = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
 func _ready():
 	Global.Temardo = preload("res://music/dados.wav")
@@ -263,6 +273,11 @@ func uncopyAll():
 	var dices = get_tree().get_nodes_in_group("dices")
 	for d in dices:
 		d.unCopyMe()
+		
+func destroymodifiers():
+	var dices_modifiers = get_tree().get_nodes_in_group("dices_modifiers")
+	for d in dices_modifiers:
+		d.destruir()
 		
 func getRandomDiceToCopy(me, DiceMan_dices):
 	var dices_list = [] + DiceMan_dices
