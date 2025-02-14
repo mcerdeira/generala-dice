@@ -30,6 +30,11 @@ var _growing_tween : Tween
 var current_angle = 0.0
 var direction : int = 1 # Dirección de la oscilación (1 o -1)
 
+var shrodinger_dimensions = [1, 2, 3, 4, 5, 6, 0, 0, 0, 0, 0]
+
+func set_shrodinger_dimensions(idx, val):
+	shrodinger_dimensions[idx] = val
+
 func move_to(new_position : Vector2, _speed = 0.1) -> Tween:
 	#if new_position.is_equal_approx(global_position):
 		#return
@@ -94,6 +99,7 @@ func initialize():
 	$SubViewport/Node3D.initialize()
 	
 func agotar():
+	Global.DiceChances.append(DiceType)
 	$shadow.visible = false
 	Global.play_sound(Global.FlameSfx, {}, null, 2.0)
 	await disolve().finished
@@ -125,12 +131,13 @@ func select(val):
 	$selected.visible = val
 	selected = val
 
-func show_enfasis(value, dice_value = -1):
+func show_enfasis(value, gameidx = -1):
 	$enfasis.visible = value
 	$lbl_add.visible = value
 	$lbl_add.text = Global.getDiceExtraText(DiceType, currentvalue, self)
 	if DiceType == Global.DiceTypes.Shrodinger:
 		if value:
+			var dice_value = shrodinger_dimensions[gameidx - 1]
 			await shrodingereala(0.0, 1.0).finished
 			$shrodinger.animation = str(dice_value)
 			$shrodinger.visible = true

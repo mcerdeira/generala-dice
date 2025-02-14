@@ -94,6 +94,16 @@ func _on_button_5_pressed(): #Comprar
 	if canBuy(nuevo.price):
 		Global.play_sound(Global.BuySFX)
 		
+		#Quitar el dado comprado del pool de dados
+		for e in range(0, Global.DiceChances.size()):
+			if Global.DiceChances[e] == nuevo.DiceType:
+				Global.DiceChances.remove_at(e)
+				break
+				
+		#Sumar el dado reemplazado al pool de nuevo, si no es el dado normal
+		if reemplazo.DiceType != Global.DiceTypes.Normal:
+			Global.DiceChances.append(reemplazo.DiceType)
+		
 		if reemplazo.DiceType == Global.DiceTypes.TurnPlus:
 			Global.TurnMax -= 1
 		

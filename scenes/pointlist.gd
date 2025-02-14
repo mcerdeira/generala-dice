@@ -126,27 +126,27 @@ func calc_posible_points():
 				six.append(dice)
 	
 	if blocked_games.find(Global.Games.DOUBLE) == -1:
-		double_game = search_double()
+		double_game = search_double(undefined)
 	else:
 		$items.set_item_disabled(Global.Games.DOUBLE, true)
 		
 	if blocked_games.find(Global.Games.FLUSH) == -1:
-		flush_game = search_flush()
+		flush_game = search_flush(undefined)
 	else:
 		$items.set_item_disabled(Global.Games.FLUSH, true)
 		
 	if blocked_games.find(Global.Games.FULL) == -1:
-		full_game = search_full()
+		full_game = search_full(undefined)
 	else:
 		$items.set_item_disabled(Global.Games.FULL, true)
 		
 	if blocked_games.find(Global.Games.POKER) == -1:
-		poker_game = search_poker()
+		poker_game = search_poker(undefined)
 	else:
 		$items.set_item_disabled(Global.Games.POKER, true)
 		
 	if blocked_games.find(Global.Games.GENERALA) == -1:
-		generala_game = search_generala(Global.Games.GENERALA)
+		generala_game = search_generala(undefined)
 	else:
 		$items.set_item_disabled(Global.Games.GENERALA, true)
 	
@@ -202,12 +202,7 @@ func calc_posible_points():
 	if generala_game.size() > 0:
 		item_selected_fake(Global.Games.GENERALA)
 			
-func populateShrodingerPlays(game, play):
-	for d in game:
-			if d.currentvalue == -1:
-				Global.ShrodingerPlays.append([d, play])
-		
-func search_flush():
+func search_flush(undefined = null):
 	var result = []
 	if one.size() > 0 and two.size() > 0 and three.size() > 0 and four.size() > 0 and five.size() > 0:
 		result.append_array(one)
@@ -228,29 +223,47 @@ func search_flush():
 		result.append_array(six)
 		result.append_array(one)
 		
-	if result.size() > 0:
-		populateShrodingerPlays(result, Global.Games.FLUSH)
-		
 	return result
 
-func search_double():
+func search_double(undefined = null):
+	var break_all = false
 	var count = 0
 	var result = []
 	var todos = [one, two, three, four, five, six]
-	for t in todos:
-		if t.size() >= 2:
-			result.append_array(t)
-			count += 1
-			if count >= 2:
+	if undefined:
+		for i in range(5, 0, -1):
+			todos = [one, two, three, four, five, six]
+			todos[i] += undefined
+			for t in todos:
+				if t.size()>= 2:
+					result.append_array(t)
+					count += 1
+					if count >= 2:
+						break_all = true
+						break
+			
+			if break_all:
+				undefined[0].set_shrodinger_dimensions(Global.Games.DOUBLE, i + 1)
 				break
-	
-	if count >= 2:
-		populateShrodingerPlays(result, Global.Games.DOUBLE)
-		return result
+						
+		if count >= 2:
+			return result
+		else:
+			return []
 	else:
-		return []
+		for t in todos:
+			if t.size() >= 2:
+				result.append_array(t)
+				count += 1
+				if count >= 2:
+					break
+	
+		if count >= 2:
+			return result
+		else:
+			return []
 
-func search_full():
+func search_full(undefined = null):
 	var todos = [one, two, three, four, five, six]
 	var result = []
 	var count = 0
@@ -271,12 +284,11 @@ func search_full():
 			break
 	
 	if count >= 2:
-		populateShrodingerPlays(result, Global.Games.FULL)
 		return result
 	else:
 		return []
 	
-func search_poker():
+func search_poker(undefined = null):
 	var todos = [one, two, three, four, five, six]
 	var result = []
 	var count = 0
@@ -296,12 +308,11 @@ func search_poker():
 			break
 	
 	if count >= 2:
-		populateShrodingerPlays(result, Global.Games.POKER)
 		return result
 	else:
 		return []
 	
-func search_generala(play = Global.Games.GENERALA):
+func search_generala(undefined = null):
 	var todos = [one, two, three, four, five, six]
 	var result = []
 	var count = 0
@@ -312,7 +323,6 @@ func search_generala(play = Global.Games.GENERALA):
 			count += 1
 			break
 	if count >= 1:
-		populateShrodingerPlays(result, play)
 		return result
 	else:
 		return []
@@ -368,11 +378,16 @@ func _on_button_pressed(): #ANOTAR
 		var block = false
 		var repetir_extra = false
 		var blocker_dice = null
+		var turn_dice = null
 		if current_dices and current_dices.size() > 0:
 			#Calculos de puntos
 			for d in current_dices:
 				if d.DiceType == Global.DiceTypes.Repetidor:
 					repetir_extra = true
+					
+				if d.DiceType == Global.DiceTypes.TurnPlusPlus:
+					Global.TurnExtra = d.currentvalue
+					turn_dice = d  
 				
 				if d.DiceType == Global.DiceTypes.OneMoreChance:
 					block = true
@@ -418,6 +433,9 @@ func _on_button_pressed(): #ANOTAR
 					
 			if mult > 0:
 				current_points *= mult 
+				
+			if block: #Si usamos el dado de bloqueo de jugada, es X2   
+				current_points *= 2
 			
 			Global.play_sound(Global.ScoreSFX)
 			Global.PointsShow.showme()
@@ -469,6 +487,9 @@ func _on_button_pressed(): #ANOTAR
 			if block:
 				blocked_games.append(current_index)
 				blocker_dice.agotar()
+				
+			if turn_dice:
+				turn_dice.agotar()
 			
 			PitchScale = OriginalPitchScale
 			#Ocultar dialogo de puntos en 3 segundos y sumar puntos con tween
@@ -566,25 +587,25 @@ func _on_items_item_selected(index):
 			show_enfasis(six_game, true, 6)
 		Global.Games.DOUBLE:
 			current_dices = [] + double_game
-			show_enfasis(double_game, true)
+			show_enfasis(double_game, true, index)
 		Global.Games.FLUSH:
 			current_dices = [] + flush_game
-			show_enfasis(flush_game, true)
+			show_enfasis(flush_game, true, index)
 		Global.Games.FULL:
 			current_dices = [] + full_game
-			show_enfasis(full_game, true)
+			show_enfasis(full_game, true, index)
 		Global.Games.POKER:
 			current_dices = [] + poker_game
-			show_enfasis(poker_game, true)
+			show_enfasis(poker_game, true, index)
 		Global.Games.GENERALA:
 			current_dices = [] + generala_game
-			show_enfasis(generala_game, true)
+			show_enfasis(generala_game, true, index)
 
 	$"../lbl_points/lbl_points2".text = str(current_points)
 
-func show_enfasis(dices, value, dice_value = -1):
+func show_enfasis(dices, value, gameidx = -1):
 	for d in dices:
-		d.show_enfasis(value, dice_value)
+		d.show_enfasis(value, gameidx)
 
 func _on_input_event(viewport, event, shape_idx):
 	if visible:

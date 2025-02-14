@@ -168,7 +168,7 @@ script = ExtResource("1_r70iu")
 
 [node name="Sign" type="Node2D" parent="."]
 top_level = true
-z_index = 200
+z_index = 900
 position = Vector2(0, -116)
 script = ExtResource("2_7gb4l")
 

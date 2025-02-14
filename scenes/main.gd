@@ -56,7 +56,7 @@ func _physics_process(delta):
 		$lbl_points/lbl_points4.text = ""
 	
 	$lbl_level/lbl_points2.text = str(Global.Level) + "/" + str(Global.LevelMax)
-	$lbl_turn/lbl_points2.text = str(min(Global.Turn, Global.TurnMax)) + "/" + str(Global.TurnMax)
+	$lbl_turn/lbl_points2.text = str(min(Global.Turn, Global.TurnMax + Global.TurnExtra)) + "/" + str(Global.TurnMax + Global.TurnExtra)
 	
 	if !cant_throw:
 		var done = true
