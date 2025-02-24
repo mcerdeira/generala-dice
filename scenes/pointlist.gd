@@ -267,65 +267,130 @@ func search_full(undefined = null):
 	var todos = [one, two, three, four, five, six]
 	var result = []
 	var count = 0
-	var llo : Array
-	#Buscar 3 iguales
-	for t in todos:
-		if t.size() >= 3:
-			result.append_array(t)
-			todos.erase(t)
-			count += 1
-			break
-	
-	#Buscar 2 iguales en los restantes
-	for t in todos:
-		if t.size() >= 2:
-			result.append_array(t)
-			count += 1
-			break
-	
-	if count >= 2:
-		return result
-	else:
+	if undefined:
+		for i in range(5, 0, -1):
+			todos = [one, two, three, four, five, six]
+			todos[i] += undefined
+			#Buscar 3 iguales
+			for t in todos:
+				if t.size() >= 3:
+					result.append_array(t)
+					todos.erase(t)
+					count += 1
+					break
+			
+			#Buscar 2 iguales en los restantes
+			for t in todos:
+				if t.size() >= 2:
+					result.append_array(t)
+					count += 1
+					break
+			
+			if count >= 2:
+				undefined[0].set_shrodinger_dimensions(Global.Games.FULL, i + 1)
+				return result
+		
 		return []
+	else:
+		#Buscar 3 iguales
+		for t in todos:
+			if t.size() >= 3:
+				result.append_array(t)
+				todos.erase(t)
+				count += 1
+				break
+		
+		#Buscar 2 iguales en los restantes
+		for t in todos:
+			if t.size() >= 2:
+				result.append_array(t)
+				count += 1
+				break
+		
+		if count >= 2:
+			return result
+		else:
+			return []
 	
 func search_poker(undefined = null):
 	var todos = [one, two, three, four, five, six]
 	var result = []
 	var count = 0
-	#Buscar 4 iguales, se asume que entonces hay 1 mas
-	for t in todos:
-		if t.size() >= 4:
-			result.append_array(t)
-			todos.erase(t)
-			count += 1
-			break
+	if undefined:
+		for i in range(5, 0, -1):
+			todos = [one, two, three, four, five, six]
+			todos[i] += undefined
+			#Buscar 4 iguales, se asume que entonces hay 1 mas
+			for t in todos:
+				if t.size() >= 4:
+					result.append_array(t)
+					todos.erase(t)
+					count += 1
+					break
+					
+			#Buscar 1 iguales en los restantes
+			for t in todos:
+				if t.size() >= 1:
+					result.append_array(t)
+					count += 1
+					break
 			
-	#Buscar 1 iguales en los restantes
-	for t in todos:
-		if t.size() >= 1:
-			result.append_array(t)
-			count += 1
-			break
-	
-	if count >= 2:
-		return result
-	else:
+			if count >= 2:
+				undefined[0].set_shrodinger_dimensions(Global.Games.POKER, i + 1)
+				return result
+				
 		return []
+	else:
+		#Buscar 4 iguales, se asume que entonces hay 1 mas
+		for t in todos:
+			if t.size() >= 4:
+				result.append_array(t)
+				todos.erase(t)
+				count += 1
+				break
+				
+		#Buscar 1 iguales en los restantes
+		for t in todos:
+			if t.size() >= 1:
+				result.append_array(t)
+				count += 1
+				break
+		
+		if count >= 2:
+			return result
+		else:
+			return []
 	
 func search_generala(undefined = null):
 	var todos = [one, two, three, four, five, six]
 	var result = []
 	var count = 0
-	#Buscar 5 iguales, se asume que entonces hay 1 mas
-	for t in todos:
-		if t.size() >= 5:
-			result.append_array(t)
-			count += 1
-			break
-	if count >= 1:
-		return result
-	else:
+	if undefined:
+		for i in range(5, 0, -1):
+			todos = [one, two, three, four, five, six]
+			todos[i] += undefined
+			#Buscar 5 iguales, se asume que entonces hay 1 mas
+			for t in todos:
+				if t.size() >= 5:
+					result.append_array(t)
+					count += 1
+					break
+			if count >= 1:
+				undefined[0].set_shrodinger_dimensions(Global.Games.GENERALA, i + 1)
+				return result
+		
 		return []
+	else:
+		#Buscar 5 iguales, se asume que entonces hay 1 mas
+		for t in todos:
+			if t.size() >= 5:
+				result.append_array(t)
+				count += 1
+				break
+		if count >= 1:
+			return result
+		else:
+			return []
 
 func item_selected_fake(index):
 	var points_calc = Global.points_normal

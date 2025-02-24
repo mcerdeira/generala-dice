@@ -84,7 +84,7 @@ const DiceTypes = {
 	PlusDice = {"id": DiceIDs.PlusDice, "price": 6, "texture": preload("res://sprites/dices/plusdice.png"), "title": "Dado plus", "description": "[color=red]Suma[/color] su valor al puntaje."},
 	MultDice = {"id": DiceIDs.MultDice, "price": 15, "texture": preload("res://sprites/dices/muldice.png"), "title": "Dado multiplicador", "description": "[color=red]Multiplica[/color] el puntaje por su valor."},
 	MultDice2 = {"id": DiceIDs.MultDice2, "price": 10, "texture": preload("res://sprites/dices/muldice2.png"), "title": "Dado x2", "description": "[color=red]Multiplica[/color] el puntaje por [color=red] 2[/color]."},
-	Copy = {"id": DiceIDs.Copy, "price": 10, "texture": preload("res://sprites/dices/copy.png"), "title": "El Copion", "description": "[color=red]Copia[/color] el valor de otro dado al azar."},
+	Copy = {"id": DiceIDs.Copy, "price": 10, "texture": preload("res://sprites/dices/copy.png"), "title": "El copion", "description": "[color=red]Copia[/color] el valor de otro dado al azar."},
 	D2 = {"id": DiceIDs.D2, "price": 7, "texture": preload("res://sprites/dices/dx2.png"), "title": "Dado D2", "description": "Solo tiene [color=red] 2[/color] valores ([color=red]1, 2[/color])."},
 	D3 = {"id": DiceIDs.D3, "price": 5, "texture": preload("res://sprites/dices/dx3.png"), "title": "Dado D3", "description": "Solo tiene [color=red] 3[/color] valores ([color=red]1, 2, 3[/color])."},
 	TurnPlus = {"id": DiceIDs.TurnPlus, "price": 3, "texture": preload("res://sprites/dices/turnplus.png"), "title": "La vida", "description": "Mientras se tenga este dado suma [color=red] 1[/color] tirada a la partida para siempre."},
@@ -128,11 +128,11 @@ var DiceChances = [
 var DiceChancesTmp = []
 
 var point_list = null
-var points_normal = [null, null, null, null, null, null, 10, 20, 30, 40, 50, 100] 
-var points_serve = [null, null, null, null, null, null, 15, 25, 35, 45, 55, 200] 
+var points_normal = [null, null, null, null, null, null, 10, 20, 30, 40, 50] 
+var points_serve = [null, null, null, null, null, null, 15, 25, 35, 45, 55] 
 	
-var Levels = [ 1, 1, 1, 1, 1, 1]
-var LevelPrices = [5, 5, 5, 5, 5, 5]
+var Levels = [1, 1, 1, 1, 1]
+var LevelPrices = [5, 5, 5, 5, 5]
 	
 var Level = 1
 var LevelMax = 8
@@ -169,11 +169,11 @@ func init_vars():
 	Beaker = null
 	LastTurn = false
 	TurnUsed = false
-	Levels = [ 1, 1, 1, 1, 1, 1]
-	LevelPrices = [5, 5, 5, 5, 5, 5]
+	Levels = [1, 1, 1, 1, 1]
+	LevelPrices = [5, 5, 5, 5, 5]
 	point_list = null
-	points_normal = [null, null, null, null, null, null, 10, 20, 30, 40, 50, 100] 
-	points_serve = [null, null, null, null, null, null, 15, 25, 35, 45, 55, 200] 
+	points_normal = [null, null, null, null, null, null, 10, 20, 30, 40, 50] 
+	points_serve = [null, null, null, null, null, null, 15, 25, 35, 45, 55] 
 	GamesPlayed = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 	TurnExtra = 0
 
