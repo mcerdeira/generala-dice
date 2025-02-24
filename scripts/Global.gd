@@ -48,8 +48,9 @@ enum Games {
 	FULL = 8,
 	POKER = 9,
 	GENERALA = 10,
-	GENERALA2 = 11,
 }
+
+var GamesPlayed = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
 enum DiceIDs {
 	Normal,
@@ -67,25 +68,39 @@ enum DiceIDs {
 	Hologram,
 	Fake,
 	Teseracto,
+	Shrodinger,
+	Oscilante,
+	Sinergia,
+	Repetidor,
+	CuboLudo,
+	CuboLudoFake,
+	TurnPlusPlus,
 }
 
-var DiceTypes = {
+
+const DiceTypes = {
 	Normal = {"id": DiceIDs.Normal, "price": 0, "texture": preload("res://sprites/dices/cube1.png"), "title": "Dado normal", "description": "Confiable dado de [color=red] 6[/color] lados."},
 	Loaded = {"id": DiceIDs.Loaded, "price": 10, "texture": preload("res://sprites/dices/loaded.png"), "title": "Dado cargado", "description": "Siempre sale un [color=red] 6[/color]."},
 	PlusDice = {"id": DiceIDs.PlusDice, "price": 6, "texture": preload("res://sprites/dices/plusdice.png"), "title": "Dado plus", "description": "[color=red]Suma[/color] su valor al puntaje."},
-	MultDice = {"id": DiceIDs.MultDice, "price": 50, "texture": preload("res://sprites/dices/muldice.png"), "title": "Dado multiplicador", "description": "[color=red]Multiplica[/color] el puntaje por su valor."},
+	MultDice = {"id": DiceIDs.MultDice, "price": 15, "texture": preload("res://sprites/dices/muldice.png"), "title": "Dado multiplicador", "description": "[color=red]Multiplica[/color] el puntaje por su valor."},
 	MultDice2 = {"id": DiceIDs.MultDice2, "price": 10, "texture": preload("res://sprites/dices/muldice2.png"), "title": "Dado x2", "description": "[color=red]Multiplica[/color] el puntaje por [color=red] 2[/color]."},
-	
 	Copy = {"id": DiceIDs.Copy, "price": 10, "texture": preload("res://sprites/dices/copy.png"), "title": "El Copion", "description": "[color=red]Copia[/color] el valor de otro dado al azar."},
 	D2 = {"id": DiceIDs.D2, "price": 7, "texture": preload("res://sprites/dices/dx2.png"), "title": "Dado D2", "description": "Solo tiene [color=red] 2[/color] valores ([color=red]1, 2[/color])."},
 	D3 = {"id": DiceIDs.D3, "price": 5, "texture": preload("res://sprites/dices/dx3.png"), "title": "Dado D3", "description": "Solo tiene [color=red] 3[/color] valores ([color=red]1, 2, 3[/color])."},
-	TurnPlus = {"id": DiceIDs.TurnPlus, "price": 3, "texture": preload("res://sprites/dices/turnplus.png"), "title": "La vida", "description": "Tener este dado suma [color=red] 1[/color] tirada a la partida."},
+	TurnPlus = {"id": DiceIDs.TurnPlus, "price": 3, "texture": preload("res://sprites/dices/turnplus.png"), "title": "La vida", "description": "Mientras se tenga este dado suma [color=red] 1[/color] tirada a la partida para siempre."},
 	Rubber = {"id": DiceIDs.Rubber, "price": 5, "texture": preload("res://sprites/dices/rubber.png"), "title": "Panqueque", "description": "Al tirarlo permite hacer [color=red] flip[/color] a su lado opuesto."},
-	OneMoreChance = {"id": DiceIDs.OneMoreChance, "price": 10, "texture": preload("res://sprites/dices/onemore.png"), "title": "El ensayo", "description": "No consume la jugada al usarlo. Al usarse se [color=red] agota[/color]."},
+	OneMoreChance = {"id": DiceIDs.OneMoreChance, "price": 10, "texture": preload("res://sprites/dices/onemore.png"), "title": "Doble y nada", "description": "Cuenta la jugada [color=red] x2[/color], bloquea la jugada por el nivel al usarlo y se [color=red] agota[/color]."},
 	Cheese = {"id": DiceIDs.Cheese, "price": 15, "texture": preload("res://sprites/dices/cheese.png"), "title": "Quesito", "description": "Es un dado extra por fuera del [color=blue]cubilete[/color]. El dado extra se [color=red]agota[/color] siempre despues de la tirada."},
-	Hologram = {"id": DiceIDs.Cheese, "price": 10, "texture": preload("res://sprites/dices/hologram.png"), "title": "Holo-Dado", "description": "El dado proyecta un holograma de si mismo con identico [color=red]valor[/color]."},
+	Hologram = {"id": DiceIDs.Hologram, "price": 10, "texture": preload("res://sprites/dices/hologram.png"), "title": "Holo-Dado", "description": "El dado proyecta un holograma de si mismo con identico [color=red]valor[/color]."},
 	Fake = {"id": DiceIDs.Fake, "price": 0, "texture": preload("res://sprites/dices/fake.png"), "title": "Dado de Papel", "description": "Dado trampa de [color=red] 1[/color] uso."},
 	Teseracto = {"id": DiceIDs.Teseracto, "price": 15, "texture": preload("res://sprites/dices/teseracto.png"), "title": "Teseracto", "description": "Dado de la 4ta dimension. [color=red]Multiplica[/color] el puntaje por [color=red] 4[/color] y todas sus cara son un [color=red] 4[/color]."},
+	Shrodinger = {"id": DiceIDs.Shrodinger, "price": 10, "texture": preload("res://sprites/dices/shrodinger.png"), "title": "El dado de Schrödinger", "description": "Todas sus caras están indefinidas hasta que se selecciona una [color=red]jugada[/color]."},
+	Oscilante = {"id": DiceIDs.Oscilante, "price": 5, "texture": preload("res://sprites/dices/oscilante.png"), "title": "Dados-cilante", "description": "En las tiradas pares sale un valor par, en las impares un valor impar."},
+	Sinergia = {"id": DiceIDs.Sinergia, "price": 10, "texture": preload("res://sprites/dices/sinergia.png"), "title": "Dado sinergia", "description": "Multiplica por el valor total de los dados del su mismo [color=red]valor[/color]"},
+	Repetidor = {"id": DiceIDs.Repetidor, "price": 10, "texture": preload("res://sprites/dices/repetidor.png"), "title": "Dado repetidor", "description": "Si se usa este dado en una jugada ya usada anteriormente nos da [color=red]2 x numero[/color] de veces que jugamos esa jugada."},
+	CuboLudo = {"id": DiceIDs.CuboLudo, "price": 10, "texture": preload("res://sprites/dices/cuboludoinicial.png"), "title": "Cubo-ludo", "description": "Es un dado extra por fuera del [color=blue]cubilete[/color]. Contiene cosas [color=blue]buenas[/color] y cosas [color=red]malas[/color], a riesgo del consumidor."},
+	CuboLudoFake = {"id": DiceIDs.CuboLudoFake, "price": 10, "texture": preload("res://sprites/dices/cuboludo.png"), "title": "Dado modificador", "description": "Contiene cosas [color=blue]buenas[/color] y cosas [color=red]malas[/color]."},
+	TurnPlusPlus = {"id": DiceIDs.TurnPlusPlus, "price": 5, "texture": preload("res://sprites/dices/turnplusplus.png"), "title": "La vida loca", "description": "Al usarse en una jugada, suma su [color=red] valor[/color] a la cantidad total de tiradas del nivel. Se agota."},
 }
 
 var DiceChances = [
@@ -102,6 +117,12 @@ var DiceChances = [
 	DiceTypes.Cheese,
 	DiceTypes.Hologram,
 	DiceTypes.Teseracto,
+	DiceTypes.Shrodinger,
+	DiceTypes.Oscilante,
+	DiceTypes.Sinergia,
+	DiceTypes.Repetidor,
+	DiceTypes.CuboLudo,
+	DiceTypes.TurnPlusPlus
 ]
 
 var DiceChancesTmp = []
@@ -117,6 +138,7 @@ var Level = 1
 var LevelMax = 8
 var Turn = 1
 var InternarlTurn = 1
+var TurnExtra = 0
 var TurnMax = 7
 var Points = 0
 var VisualPoints = 0
@@ -137,7 +159,7 @@ func init_vars():
 	Turn = 1
 	InternarlTurn = 1
 	TurnMax = 7
-	Points = 0
+	Points = 900
 	VisualPoints = 0
 	VisualPointsSign = ""
 	Goals = [0, 45, 90, 180, 250, 500, 800, 1000, 2000]
@@ -152,6 +174,8 @@ func init_vars():
 	point_list = null
 	points_normal = [null, null, null, null, null, null, 10, 20, 30, 40, 50, 100] 
 	points_serve = [null, null, null, null, null, null, 15, 25, 35, 45, 55, 200] 
+	GamesPlayed = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+	TurnExtra = 0
 
 func _ready():
 	Global.Temardo = preload("res://music/dados.wav")
@@ -168,7 +192,7 @@ func _ready():
 	Global.VictorySFX = preload("res://sfx/victory.wav")
 	
 func _process(delta):
-	Global.LastTurn = (Turn == TurnMax)
+	Global.LastTurn = (Turn == TurnMax + TurnExtra)
 	
 func get_timer_value(score: int, max_time: float = 2.5, min_time: float = 0.05, scaling_factor: float = 5.0) -> float:
 	var timer_value = scaling_factor / (score + 1)
@@ -178,7 +202,7 @@ func Next(skiped = false):
 	Turn += 1
 	InternarlTurn += 1
 	Global.TurnUsed = false
-	if Turn > TurnMax:
+	if Turn > (TurnMax + TurnExtra):
 		if Points < Goal:
 			PointsShow.hideme()
 			gameover(false)
@@ -196,6 +220,7 @@ func Next(skiped = false):
 func NextLevel():
 	refreshPool(true, true)
 	Level += 1
+	TurnExtra = 0
 	if Level > LevelMax:
 		gameover(true)
 	else:
@@ -255,11 +280,16 @@ func uncopyAll():
 	for d in dices:
 		d.unCopyMe()
 		
+func destroymodifiers():
+	var dices_modifiers = get_tree().get_nodes_in_group("dices_modifiers")
+	for d in dices_modifiers:
+		d.destruir()
+		
 func getRandomDiceToCopy(me, DiceMan_dices):
 	var dices_list = [] + DiceMan_dices
 	dices_list.shuffle()
 	for d in dices_list:
-		if d != me and d.DiceType != Global.DiceTypes.Copy:
+		if d != me and d.DiceType != Global.DiceTypes.Copy and d.DiceType != Global.DiceTypes.Shrodinger:
 			return d
 			
 	return null
@@ -297,7 +327,7 @@ func minforTurn():
 	else:
 		return 1
 		
-func getDiceExtraText(DiceType, currentvalue):
+func getDiceExtraText(DiceType, currentvalue, me):
 	if DiceType == Global.DiceTypes.MultDice:
 		return "X" + str(currentvalue)
 	elif DiceType == Global.DiceTypes.PlusDice:
@@ -306,8 +336,23 @@ func getDiceExtraText(DiceType, currentvalue):
 		return "X" + str(2)
 	elif DiceType == Global.DiceTypes.Teseracto:
 		return "X" + str(4)
+	elif DiceType == Global.DiceTypes.Sinergia:
+		var mult = Global.findDicesWithaValue(currentvalue, me)
+		if mult > 1:
+			return "X" + str(mult)
+		else:
+			return ""
 	else:
 		return ""
+		
+func findDicesWithaValue(val, me):
+	var value = 0
+	var dices = get_tree().get_nodes_in_group("dices")
+	for d in dices:
+		if (d.currentvalue == val or d.currentvalue == -1):
+			value += 1
+			
+	return value
 		
 func emit(_global_position, count, particle_obj = null, size = 1):
 	var part = particle

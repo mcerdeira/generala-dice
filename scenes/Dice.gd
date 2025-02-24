@@ -30,6 +30,11 @@ var _growing_tween : Tween
 var current_angle = 0.0
 var direction : int = 1 # Dirección de la oscilación (1 o -1)
 
+var shrodinger_dimensions = [1, 2, 3, 4, 5, 6, 0, 0, 0, 0, 0]
+
+func set_shrodinger_dimensions(idx, val):
+	shrodinger_dimensions[idx] = val
+
 func move_to(new_position : Vector2, _speed = 0.1) -> Tween:
 	#if new_position.is_equal_approx(global_position):
 		#return
@@ -86,14 +91,15 @@ func initialize():
 	dir = 1
 	rolling = false
 	stoped = false
-	stop = Global.pick_random([10, 30, 20, 15])
+	stop = 10 + Global.pick_random([1, 2, 3, 4 ,5])# Global.pick_random([10, 30, 20, 15])
 	# Lanza el dado desde el ángulo fijo (45 grados)
-	force_magnitude = randi_range(600, 1000)
+	force_magnitude = 1000#randi_range(600, 1000)
 	initial_force = Vector2.RIGHT.rotated(launch_angle) * force_magnitude
-	initial_rotation = randi_range(-10, 10)
+	initial_rotation = 0#randi_range(-10, 10)
 	$SubViewport/Node3D.initialize()
 	
 func agotar():
+	Global.DiceChances.append(DiceType)
 	$shadow.visible = false
 	Global.play_sound(Global.FlameSfx, {}, null, 2.0)
 	await disolve().finished
@@ -125,10 +131,26 @@ func select(val):
 	$selected.visible = val
 	selected = val
 
-func show_enfasis(value):
+func show_enfasis(value, gameidx = -1):
 	$enfasis.visible = value
 	$lbl_add.visible = value
-	$lbl_add.text = Global.getDiceExtraText(DiceType, currentvalue)
+	$lbl_add.text = Global.getDiceExtraText(DiceType, currentvalue, self)
+	if DiceType == Global.DiceTypes.Shrodinger:
+		if value:
+			var dice_value = shrodinger_dimensions[gameidx - 1]
+			await shrodingereala(0.0, 1.0).finished
+			$shrodinger.animation = str(dice_value)
+			$shrodinger.visible = true
+			await shrodingereala(1.0, 2.0).finished
+			
+func shrodingereala(val, time):
+	var _disolve_tween: Tween
+	_disolve_tween = create_tween()
+	_disolve_tween.set_trans(Tween.TRANS_QUINT)
+	_disolve_tween.set_ease(Tween.EASE_IN_OUT)
+	_disolve_tween.tween_property($shrodinger.material, "shader_parameter/dissolve_value", val, time)
+
+	return _disolve_tween
 	
 func holohide():
 	$holosprite.visible = false
@@ -206,22 +228,29 @@ func what_ami():
 	$Label.text = str(currentvalue)
 	
 func _on_area_entered(area):
-	if area is Area2D and area.is_in_group("dices"):# and ttl_bounce <= 0:
-		if true:# velocity.normalized().dot(area.velocity.normalized()) < 0:
+	if area is Area2D and area.is_in_group("dices") and ttl_bounce <= 0:
+		if velocity.normalized().dot(area.velocity.normalized()) < 0:
 			var normal = (position - area.position).normalized()
 			dir *= -1
-			velocity = velocity.bounce(normal) * -1  # Rebote con pérdida de energía
+			var calc_normal = Vector2.LEFT
+			if global_position.x > area.global_position.x:
+				calc_normal = Vector2.RIGHT
+			else:
+				calc_normal = Vector2.LEFT
+				
+			Global.emit(global_position, Global.pick_random([1, 2, 3]))
+			
+			velocity = velocity.bounce(calc_normal) * 1.1  # Rebote con pérdida de energía
 			angular_velocity *= -0.5  # Invertir la rotación para dar realismo
 			position += normal * 5  # Mueve el dado ligeramente fuera del otro
-			ttl_bounce = 0.3
-		else:
-			print("safe")
+			ttl_bounce = 0.1
 		
 func _on_body_entered(body):
 	if body is StaticBody2D:
-		var normal = (position - body.position).normalized()
+		#var normal = (position - body.position).normalized()
+		Global.emit(global_position, Global.pick_random([3, 4]))
 		dir *= -1
-		velocity = velocity.bounce(normal) * -1 # Rebote con pérdida de energía
+		velocity = velocity.bounce(Vector2.DOWN)  # Rebote con pérdida de energía
 		angular_velocity *= -0.5  # Invertir la rotación para dar realismo
 		
 func unCopyMe():
@@ -282,7 +311,25 @@ func local_flip():
 func _on_control_mouse_entered():
 	if !rolling and !Global.preventSelect:
 		$Sign.visible = true
-		$Sign/lbl_item_desc.text = "\n" + DiceType.title + ":\n" + DiceType.description
+		var desc = "\n" + DiceType.title + ":\n" + DiceType.description
+		if DiceType == Global.DiceTypes.CuboLudoFake:
+			var actual = ""
+			if currentvalue == 1:
+				actual = "+2 al puntaje"
+			if currentvalue == 2:
+				actual = "+5 al puntaje"
+			if currentvalue == 3:
+				actual = "Sin efectos."
+			if currentvalue == 4:
+				actual = "-5 al puntaje"
+			if currentvalue == 5:
+				actual = "Pierde el turno"
+			if currentvalue == 6:
+				actual = "x3 al puntaje"
+			
+			desc += "\n\nActual: " + actual
+			
+		$Sign/lbl_item_desc.text = desc
 		
 		shaking = true
 		Global.emit(get_global_mouse_position(), 1)
