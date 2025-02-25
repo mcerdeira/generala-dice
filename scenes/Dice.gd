@@ -30,7 +30,7 @@ var _growing_tween : Tween
 var current_angle = 0.0
 var direction : int = 1 # Dirección de la oscilación (1 o -1)
 
-var shrodinger_dimensions = [1, 2, 3, 4, 5, 6, 0, 0, 0, 0, 0]
+var shrodinger_dimensions = [1, 2, 3, 4, 5, 6, 0, 0, 0, 0]
 
 func set_shrodinger_dimensions(idx, val):
 	shrodinger_dimensions[idx] = val
@@ -97,6 +97,7 @@ func initialize():
 	initial_force = Vector2.RIGHT.rotated(launch_angle) * force_magnitude
 	initial_rotation = 0#randi_range(-10, 10)
 	$SubViewport/Node3D.initialize()
+	$shrodinger.visible = false
 	
 func agotar():
 	Global.DiceChances.append(DiceType)
@@ -137,7 +138,7 @@ func show_enfasis(value, gameidx = -1):
 	$lbl_add.text = Global.getDiceExtraText(DiceType, currentvalue, self)
 	if DiceType == Global.DiceTypes.Shrodinger:
 		if value:
-			var dice_value = shrodinger_dimensions[gameidx - 1]
+			var dice_value = shrodinger_dimensions[gameidx]
 			await shrodingereala(0.0, 1.0).finished
 			$shrodinger.animation = str(dice_value)
 			$shrodinger.visible = true

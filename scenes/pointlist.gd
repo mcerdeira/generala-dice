@@ -204,26 +204,75 @@ func calc_posible_points():
 			
 func search_flush(undefined = null):
 	var result = []
-	if one.size() > 0 and two.size() > 0 and three.size() > 0 and four.size() > 0 and five.size() > 0:
-		result.append_array(one)
-		result.append_array(two)
-		result.append_array(three)
-		result.append_array(four)
-		result.append_array(five)
-	if two.size() > 0 and three.size() > 0 and four.size() > 0 and five.size() > 0 and six.size() > 0:
-		result.append_array(two)
-		result.append_array(three)
-		result.append_array(four)
-		result.append_array(five)
-		result.append_array(six)
-	if three.size() > 0 and four.size() > 0 and five.size() > 0 and six.size() > 0 and one.size() > 0:
-		result.append_array(three)
-		result.append_array(four)
-		result.append_array(five)
-		result.append_array(six)
-		result.append_array(one)
+	if undefined:
+		for i in range(5, 0, -1):
+			var _one = one
+			var _two = two
+			var _three = three
+			var _four = four
+			var _five = five
+			var _six = six
+			
+			if i == 5:
+				_six += undefined
+			elif i == 4:
+				_five += undefined
+			elif i == 3:
+				_four += undefined
+			elif i == 2:
+				_three += undefined
+			elif i == 1:
+				_two += undefined
+			elif i == 0:
+				_one += undefined
+			
+			if _one.size() > 0 and _two.size() > 0 and _three.size() > 0 and _four.size() > 0 and _five.size() > 0:
+				result.append_array(_one)
+				result.append_array(_two)
+				result.append_array(_three)
+				result.append_array(_four)
+				result.append_array(_five)
+			if _two.size() > 0 and _three.size() > 0 and _four.size() > 0 and _five.size() > 0 and _six.size() > 0:
+				result.append_array(_two)
+				result.append_array(_three)
+				result.append_array(_four)
+				result.append_array(_five)
+				result.append_array(_six)
+			if _three.size() > 0 and _four.size() > 0 and _five.size() > 0 and _six.size() > 0 and _one.size() > 0:
+				result.append_array(_three)
+				result.append_array(_four)
+				result.append_array(_five)
+				result.append_array(_six)
+				result.append_array(_one)
+				
+			if result.size() > 0:
+				print("flush found with: " + str(i + 1))
+				undefined[0].set_shrodinger_dimensions(Global.Games.FLUSH, i + 1)
+				return result
 		
-	return result
+		return result
+		
+	else:
+		if one.size() > 0 and two.size() > 0 and three.size() > 0 and four.size() > 0 and five.size() > 0:
+			result.append_array(one)
+			result.append_array(two)
+			result.append_array(three)
+			result.append_array(four)
+			result.append_array(five)
+		if two.size() > 0 and three.size() > 0 and four.size() > 0 and five.size() > 0 and six.size() > 0:
+			result.append_array(two)
+			result.append_array(three)
+			result.append_array(four)
+			result.append_array(five)
+			result.append_array(six)
+		if three.size() > 0 and four.size() > 0 and five.size() > 0 and six.size() > 0 and one.size() > 0:
+			result.append_array(three)
+			result.append_array(four)
+			result.append_array(five)
+			result.append_array(six)
+			result.append_array(one)
+			
+		return result
 
 func search_double(undefined = null):
 	var break_all = false
@@ -232,6 +281,7 @@ func search_double(undefined = null):
 	var todos = [one, two, three, four, five, six]
 	if undefined:
 		for i in range(5, 0, -1):
+			count = 0
 			todos = [one, two, three, four, five, six]
 			todos[i] += undefined
 			for t in todos:
@@ -243,6 +293,7 @@ func search_double(undefined = null):
 						break
 			
 			if break_all:
+				print("double found with: " + str(i + 1))
 				undefined[0].set_shrodinger_dimensions(Global.Games.DOUBLE, i + 1)
 				break
 						
@@ -269,6 +320,7 @@ func search_full(undefined = null):
 	var count = 0
 	if undefined:
 		for i in range(5, 0, -1):
+			count = 0
 			todos = [one, two, three, four, five, six]
 			todos[i] += undefined
 			#Buscar 3 iguales
@@ -287,6 +339,7 @@ func search_full(undefined = null):
 					break
 			
 			if count >= 2:
+				print("full found with: " + str(i + 1))
 				undefined[0].set_shrodinger_dimensions(Global.Games.FULL, i + 1)
 				return result
 		
@@ -318,6 +371,7 @@ func search_poker(undefined = null):
 	var count = 0
 	if undefined:
 		for i in range(5, 0, -1):
+			count = 0
 			todos = [one, two, three, four, five, six]
 			todos[i] += undefined
 			#Buscar 4 iguales, se asume que entonces hay 1 mas
@@ -336,6 +390,7 @@ func search_poker(undefined = null):
 					break
 			
 			if count >= 2:
+				print("poker found with: " + str(i + 1))
 				undefined[0].set_shrodinger_dimensions(Global.Games.POKER, i + 1)
 				return result
 				
@@ -367,6 +422,7 @@ func search_generala(undefined = null):
 	var count = 0
 	if undefined:
 		for i in range(5, 0, -1):
+			count = 0
 			todos = [one, two, three, four, five, six]
 			todos[i] += undefined
 			#Buscar 5 iguales, se asume que entonces hay 1 mas
@@ -376,6 +432,7 @@ func search_generala(undefined = null):
 					count += 1
 					break
 			if count >= 1:
+				print("generala found with: " + str(i + 1))
 				undefined[0].set_shrodinger_dimensions(Global.Games.GENERALA, i + 1)
 				return result
 		
