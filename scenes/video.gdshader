@@ -27,25 +27,25 @@ void fragment() {
 	float noise1x = texture(noise1, UV + scroll1 * TIME).r;
 	float noise2x = texture(noise2, UV + scroll2 * TIME).r * 0.6;
 	float depth = noise1x * noise2x;
-	
+
 	// pixel distortions
 	vec2 offset = texture(pixelposition, vec2(TIME * 0.2)).rg;
 	vec3 pixel_color = texture(hologrampixel, UV * 1.5 + offset + vec2(TIME * -0.07, 0.0)).rgb;
 	float has_pixel = 1.0 - rgb2v(pixel_color); // either 1 for a pixel or 0 for white background, use as a mask
-	
+
 	// put stuff together
 	float strong_distort = texture(hologrampixel, vec2(TIME * 0.02)).r; // either 1 or 0
 	float adj_dist_strength = distortion_strength * strong_distort + -0.5 * (1.0 - strong_distort);
-	
+
 	vec2 screen_uv = UV
 					+ (-0.05 * has_pixel)
 					+ adj_dist_strength * vec2(depth, 0) * (1.0 - has_pixel);
 	vec4 screen_color = texture(TEXTURE, screen_uv);
-	
+
 	// blue tint colorization
 	float screen_value = rgb2v(screen_color.rgb);
 	vec4 sampled_color = texture(gradient, vec2(screen_value, 0.0));
 	sampled_color.a = screen_color.a / 5.0;
-	
+
 	COLOR = sampled_color;
 }

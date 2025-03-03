@@ -55,7 +55,7 @@ var GamesPlayed = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 enum DiceIDs {
 	Normal,
 	Loaded,
-	PlusDice,
+	GoldenDice,
 	MultDice,
 	Copy,
 	D2,
@@ -75,13 +75,40 @@ enum DiceIDs {
 	CuboLudo,
 	CuboLudoFake,
 	TurnPlusPlus,
+	#TODO: ACA
+	UranaiDado,
+	DadoChangui,
+	ElContra,
+	Seasons,
+	Ponzi,
+	SugarDadi,
+	CarlosDadul,
+	DadaiLama,
+	DadarTagnan,
+	OvoDado,
+	DadoInversor,
+	Cursed,
+	Madado,
+	Daduigi,
+	Dadario,
+	Dadoquista,
+	Oferton,
+	LaPulga,
+	DadoProlijo,
+	Joker,
+	Dadifith,
+	Dadorean,
+	Companion,
+	Toxic,
+	Hielo,
+	Creeper,
 }
 
 
 const DiceTypes = {
 	Normal = {"id": DiceIDs.Normal, "price": 0, "texture": preload("res://sprites/dices/cube1.png"), "title": "Dado normal", "description": "Confiable dado de [color=red] 6[/color] lados."},
 	Loaded = {"id": DiceIDs.Loaded, "price": 10, "texture": preload("res://sprites/dices/loaded.png"), "title": "Dado cargado", "description": "Siempre sale un [color=red] 6[/color]."},
-	PlusDice = {"id": DiceIDs.PlusDice, "price": 6, "texture": preload("res://sprites/dices/plusdice.png"), "title": "Dado plus", "description": "[color=red]Suma[/color] su valor al puntaje."},
+	GoldenDice = {"id": DiceIDs.GoldenDice, "price": 6, "texture": preload("res://sprites/dices/plusdice.png"), "title": "Dado Dorado", "description": "[color=red]Suma[/color] su valor al puntaje."},
 	MultDice = {"id": DiceIDs.MultDice, "price": 15, "texture": preload("res://sprites/dices/muldice.png"), "title": "Dado multiplicador", "description": "[color=red]Multiplica[/color] el puntaje por su valor."},
 	MultDice2 = {"id": DiceIDs.MultDice2, "price": 10, "texture": preload("res://sprites/dices/muldice2.png"), "title": "Dado x2", "description": "[color=red]Multiplica[/color] el puntaje por [color=red] 2[/color]."},
 	Copy = {"id": DiceIDs.Copy, "price": 10, "texture": preload("res://sprites/dices/copy.png"), "title": "El copion", "description": "[color=red]Copia[/color] el valor de otro dado al azar."},
@@ -101,11 +128,14 @@ const DiceTypes = {
 	CuboLudo = {"id": DiceIDs.CuboLudo, "price": 10, "texture": preload("res://sprites/dices/cuboludoinicial.png"), "title": "Cubo-ludo", "description": "Es un dado extra por fuera del [color=blue]cubilete[/color]. Contiene cosas [color=blue]buenas[/color] y cosas [color=red]malas[/color], a riesgo del consumidor."},
 	CuboLudoFake = {"id": DiceIDs.CuboLudoFake, "price": 10, "texture": preload("res://sprites/dices/cuboludo.png"), "title": "Dado modificador", "description": "Contiene cosas [color=blue]buenas[/color] y cosas [color=red]malas[/color]."},
 	TurnPlusPlus = {"id": DiceIDs.TurnPlusPlus, "price": 5, "texture": preload("res://sprites/dices/turnplusplus.png"), "title": "La vida loca", "description": "Al usarse en una jugada, suma su [color=red] valor[/color] a la cantidad total de tiradas del nivel. Se agota."},
+	
+	
+	
 }
 
 var DiceChances = [
 	DiceTypes.Loaded, 
-	DiceTypes.PlusDice, 
+	DiceTypes.GoldenDice, 
 	DiceTypes.MultDice, 
 	DiceTypes.Copy, 
 	DiceTypes.D2, 
@@ -330,7 +360,7 @@ func minforTurn():
 func getDiceExtraText(DiceType, currentvalue, me):
 	if DiceType == Global.DiceTypes.MultDice:
 		return "X" + str(currentvalue)
-	elif DiceType == Global.DiceTypes.PlusDice:
+	elif DiceType == Global.DiceTypes.GoldenDice:
 		return "+" + str(currentvalue)
 	elif DiceType == Global.DiceTypes.MultDice2:
 		return "X" + str(2)

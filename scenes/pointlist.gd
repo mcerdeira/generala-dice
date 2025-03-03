@@ -515,7 +515,7 @@ func _on_button_pressed(): #ANOTAR
 					block = true
 					blocker_dice = d
 				
-				if d.DiceType == Global.DiceTypes.PlusDice:
+				if d.DiceType == Global.DiceTypes.GoldenDice:
 					add += d.currentvalue
 					
 			if repetir_extra:
